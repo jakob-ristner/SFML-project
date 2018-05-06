@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Settings.h"
 
 class Player {
 public:
@@ -16,5 +17,6 @@ private:
     sf::Vector2f vel;
     int speed;
     sf::RectangleShape body;
+    Settings settings;
 
 };

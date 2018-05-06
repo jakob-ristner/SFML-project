@@ -2,12 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "../headers/Player.h"
+#include "../headers/Settings.h"
 
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
-    speed = 5;
+    speed = 4;
     this->body = body;
     this->body.setFillColor(sf::Color::Blue);
+    settings = Settings();
 }
 
 Player::~Player() {
@@ -36,7 +38,7 @@ void Player::update(float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         vel.x = speed;
     }
-    pos += vel * (dt / 10);
+    pos += vel * (dt / settings.TIMESCALE);
     body.setPosition(pos);
 }
 
