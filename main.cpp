@@ -1,6 +1,9 @@
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "./settings.cpp"
+#include "headers/Player.h"
+
 
 int main() {
     // Initialization of important stuff
@@ -13,10 +16,16 @@ int main() {
     sf::Clock clock;
 
     bool isRunning = true;
+    Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
+    player.setPos(sf::Vector2f(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
     sf::Event event;
 
     // Main Game Loop
+    clock.restart();
+    float dt = 0;
     while (isRunning) {
+        dt = clock.restart().asMilliseconds();
+        
         // Event Loop
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -24,8 +33,11 @@ int main() {
                 window.close();
             }
         }
+        player.update(dt);
 
+        // Drawing
         window.clear(bgColor);
+        player.draw(window);
         window.display();
     }
 

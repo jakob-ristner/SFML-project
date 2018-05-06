@@ -1,3 +1,4 @@
+
 #include <SFML/Graphics.hpp>
 
 static const int WINDOW_WIDTH = 1200;
