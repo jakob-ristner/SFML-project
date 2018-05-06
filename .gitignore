@@ -1,0 +1,83 @@
+
+Skip to content
+This repository
+
+    Pull requests
+    Issues
+    Marketplace
+    Explore
+
+    @itggot-jakob-ristner
+
+2,532
+66,500
+
+    30,303
+
+github/gitignore
+Code
+Pull requests 182
+Projects 0
+Insights
+gitignore/C++.gitignore
+2c52d02 on Jun 29, 2016
+pmartinez added prerequisites for C and C++
+@malleor
+@peterfpeterson
+@rhysd
+@jlokimlin
+@bnoordhuis
+@d2s
+@mrtazz
+@starrify
+33 lines (26 sloc) 270 Bytes
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+sfml-app
+
+    © 2018 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    API
+    Training
+    Shop
+    Blog
+    About
+
+Press h to open a hovercard with more details.
