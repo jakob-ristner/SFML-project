@@ -5,10 +5,9 @@
 
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
-    speed = 1;
+    speed = 5;
     this->body = body;
     this->body.setFillColor(sf::Color::Blue);
-
 }
 
 Player::~Player() {
@@ -37,7 +36,7 @@ void Player::update(float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         vel.x = speed;
     }
-    pos += vel * dt;
+    pos += vel * (dt / 10);
     body.setPosition(pos);
 }
 
