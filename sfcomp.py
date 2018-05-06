@@ -11,7 +11,7 @@ if '-c' in argv:
     sysout = "g++ main.o "
     for classname in classes:
         sysout += classname + ".o "
-    sysout += "-o sfml-app -lsfml-graphics -lsfml-window -lsfml-system"
+    sysout += "-o sfml-app.out -lsfml-graphics -lsfml-window -lsfml-system"
     system(sysout)
     sysout = "mv main.o "
     for classname in classes:
@@ -19,6 +19,6 @@ if '-c' in argv:
     sysout += "./obj/"
     system(sysout)
 if '-r' in argv:
-    system("./sfml-app")
+    system("./sfml-app.out")
 
 
