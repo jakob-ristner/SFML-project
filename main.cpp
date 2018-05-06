@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "./settings.cpp"
+#include "./headers/TileMap.h"
 
 int main() {
     // Initialization of important stuff
@@ -11,6 +12,8 @@ int main() {
     window.setView(viewport);
 
     sf::Clock clock;
+
+    TileMap map = TileMap("");
 
     bool isRunning = true;
     sf::Event event;
