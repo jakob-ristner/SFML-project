@@ -7,11 +7,11 @@
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
     speed = 4;
-    this->body = body;
-    this->body.setFillColor(sf::Color::Blue);
     settings = Settings();
-    playeracc = 0.6;
-    fric = 1;
+    playeracc = 2;
+    fric = 1.2;
+    this->body = body;
+    this->body.setFillColor(sf::Color::Green);
 }
 
 Player::~Player() {
@@ -27,8 +27,6 @@ void Player::setPos(sf::Vector2f newPos) {
 }
 
 void Player::update(float dt) {
-    
-
     acc = sf::Vector2f(0, 0);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         acc.y = -playeracc;
@@ -47,7 +45,7 @@ void Player::update(float dt) {
 
     vel.x = acc.x;
     vel.y = acc.y;
-    std::cout << acc.x << std::endl;
+    //std::cout << acc.x << std::endl;
 
     pos += vel * (dt / settings.TIMESCALE);
 

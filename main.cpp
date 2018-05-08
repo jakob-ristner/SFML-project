@@ -12,13 +12,13 @@ int main() {
     Settings settings = Settings();
 
     sf::RenderWindow window(sf::VideoMode(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT), "SFML Dungeon Crawler", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
 
     sf::Clock clock;
-
+    
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));

@@ -19,7 +19,7 @@ private:
     sf::RectangleShape body;
     Settings settings;
     int speed;
-    float playeracc;
-    float fric;
+    float playeracc = 2;
+    float fric = 1.2;
 
 };
