@@ -7,9 +7,20 @@
 
 TileMap::TileMap(std::string path) {
     this->path = path;
+    tileSize = 32;
+    tileMargin = 1;
     tmx.load("./resources/testMap1.tmx");
 
-    std::cout << "Map Version: " << tmx.mapInfo.version << std::endl;
+    // TODO: Add dynamic tileSets
+    std::string tileSetPath = "./resources/tile-set1.png"; //+ tmx.tilesetList[0].source;
+    sf::Texture tileSetTexture;
+    tileSetTexture.loadFromFile(tileSetPath);
+
+    sf::Vector2u size = tileSetTexture.getSize();
+    int xAmount = (size.x - tileMargin) / (tileSize + tileMargin);
+    int yAmount = (size.y - tileMargin) / (tileSize + tileMargin);
+
+    generateMap();
 }
 
 TileMap::~TileMap() {
@@ -39,15 +50,10 @@ void TileMap::printData() {
     }
     std::cout << "Image Layer Source: " << tmx.imageLayer[it->first].image.source << std::endl;
     std::cout << "Image Layer Transparent Color: " << tmx.imageLayer[it->first].image.transparencyColor << std::endl;
-    }
-    // TSX-Parsing
-    for (int i = 0; i < tmx.tilesetList.size(); i++) {
-        std::cout << "Tileset[ First GID: " << tmx.tilesetList[i].firstGID << " Source: " << tmx.tilesetList[i].source << " ]" << std::endl;
-        TSX::Parser tsx;
-        const char *c = ("./resources/" + tmx.tilesetList[i].source).c_str();
-        tsx.load(c);
 
-
-        std::cout << "Name: " << tsx.tileset.name << std::endl;
     }
+}
+
+sf::Texture TileMap::generateMap() {
+    std::cout << tmx.tileLayer[0].data.contents << std::endl;
 }

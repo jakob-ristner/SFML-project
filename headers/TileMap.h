@@ -12,6 +12,9 @@ public:
     void printData();
 
 private:
+    sf::Texture generateMap();
     TMX::Parser tmx;
     std::string path;
+    int tileSize;
+    int tileMargin;
 };
