@@ -4,7 +4,6 @@
 #include "headers/Player.h"
 #include "headers/Settings.h"
 
-
 int main() {
 
     const sf::Color bgColor(51, 51, 51);         
@@ -39,7 +38,7 @@ int main() {
             }
         }
         player.update(dt);
-
+        
         // Drawing
         window.clear(bgColor);
         player.draw(window);

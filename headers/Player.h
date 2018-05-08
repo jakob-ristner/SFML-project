@@ -9,14 +9,17 @@ public:
     ~Player();
     sf::Vector2f getPos();
     void setPos(sf::Vector2f);
-    void update(float dt);
     void draw(sf::RenderWindow &window);
+    void update(float dt);
 
 private:
     sf::Vector2f pos;   
     sf::Vector2f vel;
-    int speed;
+    sf::Vector2f acc;
     sf::RectangleShape body;
     Settings settings;
+    int speed;
+    float playeracc;
+    float fric;
 
 };
