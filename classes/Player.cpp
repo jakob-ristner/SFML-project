@@ -27,6 +27,7 @@ void Player::setPos(sf::Vector2f newPos) {
 }
 
 void Player::update(float dt) {
+    body.setOrigin(sf::Vector2f(16, 16));
     acc = sf::Vector2f(0, 0);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         acc.y = -playeracc;
@@ -40,11 +41,19 @@ void Player::update(float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         acc.x = playeracc;
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+        body.rotate(-1);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+        body.rotate(1);
+    }
+
     acc.x += vel.x / fric;
     acc.y += vel.y / fric;
 
     vel.x = acc.x;
     vel.y = acc.y;
+    //body.rotate(1);
     //std::cout << acc.x << std::endl;
 
     pos += vel * (dt / settings.TIMESCALE);

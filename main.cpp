@@ -6,7 +6,14 @@
 
 int main() {
 
-    const sf::Color bgColor(51, 51, 51);         
+    const sf::Color bgColor(51, 51, 51);      
+    sf::Font font;
+    font.loadFromFile("font.ttf");  
+    sf::Text text;
+    text.setString("W: Forward\nA: Left\nS: Down\nD: Right\nQ: Rotate left\nE: Rotate right");
+    text.setFont(font);
+    text.setPosition(sf::Vector2f(20, 20));
+    text.setColor(sf::Color::White);
 
     // Initialization of important stuff
     Settings settings = Settings();
@@ -42,6 +49,7 @@ int main() {
         // Drawing
         window.clear(bgColor);
         player.draw(window);
+        window.draw(text);
         window.display();
     }
 
