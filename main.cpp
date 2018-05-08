@@ -14,6 +14,7 @@ int main() {
     sf::Clock clock;
 
     TileMap map = TileMap("");
+    map.printData();
 
     bool isRunning = true;
     sf::Event event;

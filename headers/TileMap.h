@@ -9,6 +9,8 @@ public:
     TileMap(std::string path);
     ~TileMap();
 
+    void printData();
+
 private:
     TMX::Parser tmx;
     std::string path;
