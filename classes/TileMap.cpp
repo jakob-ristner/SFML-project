@@ -21,7 +21,7 @@ TileMap::TileMap(std::string path) {
     xAmount = (size.x - tileMargin) / (tileSize + tileMargin);
     yAmount = (size.y - tileMargin) / (tileSize + tileMargin);
 
-    sf::Texture mapTexture = generateMap();
+    mapTexture = generateMap();
 }
 
 TileMap::~TileMap() {
@@ -62,12 +62,14 @@ sf::Texture TileMap::generateMap() {
         // std::cout << c << std::endl;
         layers.push_back(c);
     }
+    // TODO: Allow multiple layers in tileMap
     std::vector< std::vector<int> > imgIndexes;
     std::vector<int> currentLayer;
     std::string buffer;
+    // Conversion to matrix of matrices of ints
     for (int l = 0; l < layers.size(); l++) {
         currentLayer.clear();        
-        for(int x = 0; x < layers[l].size(); x++) {
+        for(int x = 1; x < layers[l].size(); x++) {
             if (layers[l][x] == '\n') {
                 imgIndexes.push_back(currentLayer);
                 currentLayer.clear();
@@ -79,8 +81,19 @@ sf::Texture TileMap::generateMap() {
             }
         }
     }
-    printVec(imgIndexes);
-    return sf::Texture();
+    imgIndexes[imgIndexes.size() - 1].push_back(std::stoi(buffer));
+    width = imgIndexes[imgIndexes.size() - 1].size();
+    height = imgIndexes[0].size();
+    std::cout << "(" << width << "," << height << ")" <<  std::endl;
+    // Image for copy and pasting tiles
+    sf::Image mapImg;
+    mapImg.create(width * tileSize, height * tileSize, sf::Color(0, 0, 0));
+    // TODO: Put in loop
+    mapImg.copy(tileSetTexture, 0, 0, sf::IntRect(1*(tileSize + tileMargin), 2*(tileSize + tileMargin), 32, 32));
+
+    sf::Texture txt;
+    txt.loadFromImage(mapImg);
+    return txt;
 }
 
 void printVec(std::vector< std::vector<int> > vec) {

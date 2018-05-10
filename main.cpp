@@ -15,6 +15,10 @@ int main() {
 
     TileMap map = TileMap("./resources/testMap1.tmx");
     //map.printData();
+    std::cout << map.mapTexture.getSize().x << "," << map.mapTexture.getSize().y << std::endl;
+    sf::Sprite someSprite;
+    someSprite.setTexture(map.mapTexture);
+    someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
 
     bool isRunning = true;
     sf::Event event;
@@ -30,6 +34,7 @@ int main() {
         }
 
         window.clear(bgColor);
+        window.draw(someSprite);
         window.display();
     }
 

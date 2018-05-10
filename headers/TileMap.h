@@ -4,18 +4,21 @@
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
 
+// WARNING: Will only read first tileLayer right now
+// Will be fixed
+
 class TileMap {
 public:
     TileMap(std::string path);
     ~TileMap();
 
+    sf::Texture mapTexture;
     void printData();
 
 private:
     TMX::Parser tmx;
     
     sf::Texture generateMap();
-    sf::Texture mapTexture;
     
     sf::Image tileSetTexture;
     
@@ -27,6 +30,9 @@ private:
 
     int xAmount;
     int yAmount;
+
+    int width;
+    int height;
 
 };
 
