@@ -1,6 +1,7 @@
 #include "../headers/TileMap.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
@@ -9,18 +10,18 @@ TileMap::TileMap(std::string path) {
     this->path = path;
     tileSize = 32;
     tileMargin = 1;
-    tmx.load("./resources/testMap1.tmx");
+    tmx.load(path.c_str());
 
     // TODO: Add dynamic tileSets
-    std::string tileSetPath = "./resources/tile-set1.png"; //+ tmx.tilesetList[0].source;
-    sf::Texture tileSetTexture;
+    tileSetPath = "./resources/tile-set1.png"; //+ tmx.tilesetList[0].source;
+    tileSetTexture;
     tileSetTexture.loadFromFile(tileSetPath);
 
     sf::Vector2u size = tileSetTexture.getSize();
-    int xAmount = (size.x - tileMargin) / (tileSize + tileMargin);
-    int yAmount = (size.y - tileMargin) / (tileSize + tileMargin);
+    xAmount = (size.x - tileMargin) / (tileSize + tileMargin);
+    yAmount = (size.y - tileMargin) / (tileSize + tileMargin);
 
-    generateMap();
+    sf::Texture mapTexture = generateMap();
 }
 
 TileMap::~TileMap() {
@@ -55,5 +56,41 @@ void TileMap::printData() {
 }
 
 sf::Texture TileMap::generateMap() {
-    std::cout << tmx.tileLayer[0].data.contents << std::endl;
+    std::vector<std::string> layers;
+    for (std::map<std::string, TMX::Parser::TileLayer>::iterator it = tmx.tileLayer.begin(); it != tmx.tileLayer.end(); it++) {
+        std::string c = tmx.tileLayer[it->first].data.contents;
+        // std::cout << c << std::endl;
+        layers.push_back(c);
+    }
+    std::vector< std::vector<int> > imgIndexes;
+    std::vector<int> currentLayer;
+    std::string buffer;
+    for (int l = 0; l < layers.size(); l++) {
+        currentLayer.clear();        
+        for(int x = 0; x < layers[l].size(); x++) {
+            if (layers[l][x] == '\n') {
+                imgIndexes.push_back(currentLayer);
+                currentLayer.clear();
+            } else if (layers[l][x] == ',') {
+                currentLayer.push_back(std::stoi(buffer));
+                buffer = "";
+            } else {
+                buffer += layers[l][x];
+            }
+        }
+    }
+    printVec(imgIndexes);
+    return sf::Texture();
+}
+
+void printVec(std::vector< std::vector<int> > vec) {
+    std::string lineBuffer = "";
+    for (int y = 0; y < vec.size(); y++) {
+        lineBuffer = "[";
+        for (int x = 0; x < vec[y].size(); x++) {
+            lineBuffer += std::to_string(vec[y][x]) + ",";
+        }
+        lineBuffer += "]";
+        std::cout << lineBuffer << std::endl;
+    }
 }

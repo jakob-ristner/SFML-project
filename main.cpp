@@ -13,8 +13,8 @@ int main() {
 
     sf::Clock clock;
 
-    TileMap map = TileMap("");
-    map.printData();
+    TileMap map = TileMap("./resources/testMap1.tmx");
+    //map.printData();
 
     bool isRunning = true;
     sf::Event event;

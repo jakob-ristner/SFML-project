@@ -12,9 +12,22 @@ public:
     void printData();
 
 private:
-    sf::Texture generateMap();
     TMX::Parser tmx;
+    
+    sf::Texture generateMap();
+    sf::Texture mapTexture;
+    
+    sf::Image tileSetTexture;
+    
     std::string path;
+    std::string tileSetPath;
+
     int tileSize;
     int tileMargin;
+
+    int xAmount;
+    int yAmount;
+
 };
+
+void printVec(std::vector< std::vector<int> > vec);
