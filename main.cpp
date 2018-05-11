@@ -2,10 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "./settings.cpp"
+#include "./headers/Settings.h"
 #include "./headers/TileMap.h"
-#include "headers/Player.h"
-#include "headers/Settings.h"
+#include "./headers/Player.h"
+#include "./headers/Settings.h"
 
 int main() {
 
