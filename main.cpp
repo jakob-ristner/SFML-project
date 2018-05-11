@@ -1,6 +1,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
+#include "./settings.cpp"
+#include "./headers/TileMap.h"
 #include "headers/Player.h"
 #include "headers/Settings.h"
 
@@ -25,7 +28,12 @@ int main() {
     window.setView(viewport);
 
     sf::Clock clock;
-    
+    TileMap map = TileMap("./resources/testmap1.tmx");
+    sf::Sprite someSprite;
+    someSprite.setTexture(map.mapTexture);
+    someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
+ 
+
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
@@ -48,8 +56,12 @@ int main() {
         
         // Drawing
         window.clear(bgColor);
+
+        window.draw(someSprite);
+
         player.draw(window);
         window.draw(text);
+
         window.display();
     }
 
