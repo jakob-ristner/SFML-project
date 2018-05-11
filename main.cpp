@@ -53,6 +53,8 @@ int main() {
             }
         }
         player.update(dt);
+        viewport.setCenter(player.getPos());
+        window.setView(viewport);
         
         // Drawing
         window.clear(bgColor);
