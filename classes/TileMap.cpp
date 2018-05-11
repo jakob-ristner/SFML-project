@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
@@ -9,17 +10,17 @@
 TileMap::TileMap(std::string path) {
     this->path = path;
     tileSize = 32;
-    tileMargin = 1;
+    tileMargin = 0;
     tmx.load(path.c_str());
 
     // TODO: Add dynamic tileSets
-    tileSetPath = "./resources/tile-set1.png"; //+ tmx.tilesetList[0].source;
+    tileSetPath = "./resources/terrain_atlas.png"; //+ tmx.tilesetList[0].source;
     tileSetTexture;
     tileSetTexture.loadFromFile(tileSetPath);
 
     sf::Vector2u size = tileSetTexture.getSize();
-    xAmount = (size.x - tileMargin) / (tileSize + tileMargin);
-    yAmount = (size.y - tileMargin) / (tileSize + tileMargin);
+    tileSetWidth = (size.x - tileMargin) / (tileSize + tileMargin);
+    tileSetHeight = (size.y - tileMargin) / (tileSize + tileMargin);
 
     mapTexture = generateMap();
 }
@@ -80,20 +81,41 @@ sf::Texture TileMap::generateMap() {
                 buffer += layers[l][x];
             }
         }
+        imgIndexes[imgIndexes.size() - 1].push_back(std::stoi(buffer));
+        buffer = "";
     }
-    imgIndexes[imgIndexes.size() - 1].push_back(std::stoi(buffer));
+    // Width + height in tiles
     width = imgIndexes[imgIndexes.size() - 1].size();
-    height = imgIndexes[0].size();
-    std::cout << "(" << width << "," << height << ")" <<  std::endl;
+    height = imgIndexes.size() / layers.size();
     // Image for copy and pasting tiles
     sf::Image mapImg;
     mapImg.create(width * tileSize, height * tileSize, sf::Color(0, 0, 0));
-    // TODO: Put in loop
-    mapImg.copy(tileSetTexture, 0, 0, sf::IntRect(1*(tileSize + tileMargin), 2*(tileSize + tileMargin), 32, 32));
+    // Copy-pasting all tiles from all layers to correct position
+    for (int l = 0; l < layers.size(); l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (imgIndexes[y + l * height][x]) {
+                    // std::cout << "XFLAG: " << x << " " << y << " " << l << std::endl;
+                    mapImg.copy(tileSetTexture, 
+                    x * tileSize, y * tileSize, 
+                    sf::IntRect(((imgIndexes[y + l * height][x] - 1) % (tileSetWidth)) * (tileMargin + tileSize) - tileMargin, 
+                    (imgIndexes[y + l * height][x] / tileSetWidth) * (tileSize + tileMargin) - tileMargin, 
+                    tileSize, 
+                    tileSize
+                    ), true);
+                    // std::cout << "DONE COPYING: " << x << " " << y << " " << l << std::endl;            
+                }
+            }
+        }
+    }
 
     sf::Texture txt;
     txt.loadFromImage(mapImg);
     return txt;
+}
+
+sf::Vector2i TileMap::getSize() {
+    return sf::Vector2i(width, height);
 }
 
 void printVec(std::vector< std::vector<int> > vec) {

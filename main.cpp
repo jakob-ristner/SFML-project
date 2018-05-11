@@ -13,9 +13,7 @@ int main() {
 
     sf::Clock clock;
 
-    TileMap map = TileMap("./resources/testMap1.tmx");
-    //map.printData();
-    std::cout << map.mapTexture.getSize().x << "," << map.mapTexture.getSize().y << std::endl;
+    TileMap map = TileMap("./resources/testmap1.tmx");
     sf::Sprite someSprite;
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));

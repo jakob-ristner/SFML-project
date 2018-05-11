@@ -4,16 +4,17 @@
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
 
-// WARNING: Will only read first tileLayer right now
-// Will be fixed
-
 class TileMap {
 public:
     TileMap(std::string path);
     ~TileMap();
 
-    sf::Texture mapTexture;
     void printData();
+    // Size in tiles, size in pixels can be aquired
+    // Through mapTexture.getSize()
+    sf::Vector2i getSize();
+    // Texture for sprite that will be used as beckground
+    sf::Texture mapTexture;
 
 private:
     TMX::Parser tmx;
@@ -28,8 +29,8 @@ private:
     int tileSize;
     int tileMargin;
 
-    int xAmount;
-    int yAmount;
+    int tileSetWidth;
+    int tileSetHeight;
 
     int width;
     int height;
