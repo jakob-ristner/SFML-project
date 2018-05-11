@@ -3,6 +3,7 @@
 #include <iostream>
 #include "../headers/Player.h"
 #include "../headers/Settings.h"
+#include "../headers/Utils.h"
 
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
@@ -48,11 +49,14 @@ void Player::update(float dt) {
         body.rotate(1);
     }
 
-    acc.x += vel.x / fric;
-    acc.y += vel.y / fric;
+    // if(!(acc.x == 0.0f || acc.y == 0.0f)) {
+    //     std::cout << acc.x << "," << acc.y << std::endl;
+    //     acc = normalizedVec(acc) * playeracc;
+    // }
 
-    vel.x = acc.x;
-    vel.y = acc.y;
+    acc += vel / fric;
+
+    vel = acc;
     //body.rotate(1);
     //std::cout << acc.x << std::endl;
 
