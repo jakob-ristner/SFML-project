@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Settings.h"
+#include "Collider.h"
 
 class Player {
 public:
@@ -11,6 +12,8 @@ public:
     void setPos(sf::Vector2f);
     void draw(sf::RenderWindow &window);
     void update(float dt);
+    void onCollision(sf::Vector2f direction);
+    Collider getCollider();
 
 private:
     sf::Vector2f pos;   

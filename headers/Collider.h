@@ -3,7 +3,7 @@
 
 class Collider {
 public:
-    Collider(sf::RectangleShape body, sf::Vector2f velocity);
+    Collider(sf::RectangleShape &body, sf::Vector2f velocity);
     ~Collider();
 
     // Maybe not needed
@@ -14,6 +14,6 @@ public:
     sf::Vector2f getHalfSize();
 
 private:
-    sf::RectangleShape body;
+    sf::RectangleShape &body;
     sf::Vector2f velocity;
 };

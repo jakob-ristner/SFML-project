@@ -46,6 +46,7 @@ int main() {
     Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
     sf::Event event;
+    Collider playerCol = player.getCollider();
 
     // Main Game Loop
     clock.restart();
@@ -61,8 +62,19 @@ int main() {
             }
         }
         player.update(dt);
+        sf::Vector2f direction;
+
+        // Collision detection
+        for (Obstacle &obstacle : obstacles) {
+            if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
+                player.onCollision(direction);
+                //std::cout << player.getPos().x << "," << player.getPos().y << std::endl;
+            }
+        }
+
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
+
         
         // Drawing
         window.clear(bgColor);

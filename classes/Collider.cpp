@@ -1,7 +1,8 @@
 #include "../headers/Collider.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
-Collider::Collider(sf::RectangleShape body, sf::Vector2f velocity) :
+Collider::Collider(sf::RectangleShape &body, sf::Vector2f velocity) :
     body(body){
     this->velocity = velocity;
 }
@@ -37,6 +38,7 @@ bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float pu
                 direction.x = 1.0f;
                 direction.y = 0.0f;
             } else {
+                std::cout << intersectX << std::endl;
                 move(-intersectX * (1.0f - push), 0.0f);
                 other.move(intersectX  * push, 0.0f);
 

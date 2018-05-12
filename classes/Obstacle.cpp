@@ -4,6 +4,7 @@
 
 Obstacle::Obstacle(sf::Vector2f pos, sf::Vector2f size) {
     body = sf::RectangleShape(size);
+    body.setOrigin(sf::Vector2f(16.0f, 16.0f));
     body.setPosition(pos);
 }
 
