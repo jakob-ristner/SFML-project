@@ -6,7 +6,7 @@ directory = "./map1/"
 with open(directory + "collData.txt", "w") as f:
     output = ""
     for tile_object in tmxdata.objects:
-        output += f"{tile_object.name}-{tile_object.x}-{tile_object.y}-{tile_object.width}-{tile_object.height}\n"
+        output += f"{tile_object.name} {tile_object.x} {tile_object.y} {tile_object.width} {tile_object.height} \n"
         #Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
 
 
@@ -21,5 +21,5 @@ with open("testmap1.tmx", "r") as f:
         if not ("<object" in line or "</object" in line):
             actual_data += line + "\n"
 
-with open(directory + "testmap1.tmx", "w") as f:
+with open(directory + "tileData.tmx", "w") as f:
     f.write(actual_data)

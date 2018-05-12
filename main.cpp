@@ -44,7 +44,7 @@ int main() {
 
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
-    player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
+    player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
 
