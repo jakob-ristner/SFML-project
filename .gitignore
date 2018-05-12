@@ -66,6 +66,7 @@ pmartinez added prerequisites for C and C++
 
 sfml-app
 .vscode
+*.swp
 
     © 2018 GitHub, Inc.
     Terms

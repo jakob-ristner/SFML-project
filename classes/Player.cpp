@@ -49,10 +49,9 @@ void Player::update(float dt) {
         body.rotate(1);
     }
 
-    // if(!(acc.x == 0.0f || acc.y == 0.0f)) {
-    //     std::cout << acc.x << "," << acc.y << std::endl;
-    //     acc = normalizedVec(acc) * playeracc;
-    // }
+    if(!(acc.x == 0.0f || acc.y == 0.0f)) {
+        acc = normalizedVec(acc) * playeracc;
+    }
 
     acc += vel / fric;
 

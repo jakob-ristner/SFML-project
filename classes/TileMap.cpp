@@ -1,17 +1,21 @@
 #include "../headers/TileMap.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include <vector>
 #include <cmath>
+#include <string>
 
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
+#include "../headers/Obstacle.h"
 
-TileMap::TileMap(std::string path) {
+TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles) {
     this->path = path;
     tileSize = 32;
     tileMargin = 0;
-    tmx.load(path.c_str());
+    tmx.load((path + "/tileData.tmx").c_str());
 
     // TODO: Add dynamic tileSets
     tileSetPath = "./resources/terrain_atlas.png"; //+ tmx.tilesetList[0].source;
@@ -23,6 +27,20 @@ TileMap::TileMap(std::string path) {
     tileSetHeight = (size.y - tileMargin) / (tileSize + tileMargin);
 
     mapTexture = generateMap();
+    
+    // Generating objects
+    std::string line;
+    std::ifstream myfile(path + "/collData.txt");
+    while (std::getline(myfile, line)) {
+        std::istringstream iss(line);
+        float x, y, w, h;
+        std::string t;
+        if (!(iss >> t >> x >> y >> w >> h)) {
+            break;
+        }
+        obstacles.push_back(Obstacle(sf::Vector2f(x, y), sf::Vector2f(w, h)));
+    }
+
 }
 
 TileMap::~TileMap() {
@@ -58,8 +76,9 @@ void TileMap::printData() {
 
 sf::Texture TileMap::generateMap() {
     std::vector<std::string> layers;
+    std::string c;
     for (std::map<std::string, TMX::Parser::TileLayer>::iterator it = tmx.tileLayer.begin(); it != tmx.tileLayer.end(); it++) {
-        std::string c = tmx.tileLayer[it->first].data.contents;
+        c = tmx.tileLayer[it->first].data.contents;
         // std::cout << c << std::endl;
         layers.push_back(c);
     }

@@ -6,6 +6,9 @@
 #include "./headers/TileMap.h"
 #include "./headers/Player.h"
 #include "./headers/Settings.h"
+#include "./headers/Utils.h"
+#include "./headers/Collider.h"
+#include "./headers/Obstacle.h"
 
 int main() {
 
@@ -27,12 +30,17 @@ int main() {
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
 
+    // Vector with all obstacles - kind of like a sprite group
+    std::vector<Obstacle> obstacles;
+
     sf::Clock clock;
-    TileMap map = TileMap("./resources/testmap1.tmx");
+    TileMap map = TileMap("./resources/map1", obstacles);
     sf::Sprite someSprite;
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
- 
+    sf::Vector2f lowerBound(settings.WINDOW_WIDTH / 2.0f, settings.WINDOW_HEIGHT / 2.0f);
+    sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f), 
+                            map.mapTexture.getSize().y - (settings.WINDOW_HEIGHT / 2.0f));
 
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
@@ -53,7 +61,7 @@ int main() {
             }
         }
         player.update(dt);
-        viewport.setCenter(player.getPos());
+        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
         
         // Drawing
