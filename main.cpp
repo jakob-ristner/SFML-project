@@ -9,10 +9,12 @@
 #include "./headers/Utils.h"
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
+#include "./headers/Spell.h"
 
 int main() {
 
-    const sf::Color bgColor(51, 51, 51);      
+    const sf::Color bgColor(51, 51, 51);   
+    Spell:Spell spell = Fireball();   
     sf::Font font;
     font.loadFromFile("font.ttf");  
     sf::Text text;
