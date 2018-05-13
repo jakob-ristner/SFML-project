@@ -4,17 +4,16 @@
 
 #include "./headers/Settings.h"
 #include "./headers/TileMap.h"
+#include "./headers/Spell.h"
 #include "./headers/Player.h"
 #include "./headers/Settings.h"
 #include "./headers/Utils.h"
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
-#include "./headers/Spell.h"
 
 int main() {
 
     const sf::Color bgColor(51, 51, 51);   
-    Spell:Spell spell = Fireball();   
     sf::Font font;
     font.loadFromFile("font.ttf");  
     sf::Text text;
@@ -49,6 +48,7 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
+    Spell:Spell spell = Fireball();   
 
     // Main Game Loop
     clock.restart();

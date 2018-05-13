@@ -12,6 +12,7 @@ Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
     speed = 4;
     settings = Settings();
+    std::vector<sf::Sprite> projectiles = std::vector<sf::Sprite> {};
     playeracc = 2;
     fric = 1.2;
     this->body = body;
@@ -19,8 +20,16 @@ Player::Player(sf::RectangleShape body) {
     this->body.setOrigin(sf::Vector2f(16, 16));
 }
 
+Player::Player() {
+
+}
+
 Player::~Player() {
 
+}
+
+void Player::addProjectile(Projectile &projectile) {
+    projectiles.push_back(projectile);
 }
 
 sf::Vector2f Player::getPos() {
