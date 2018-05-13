@@ -1,19 +1,25 @@
 # pragma once
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include <string>
 
 #include "Player.h"
+#include "Settings.h"
 
 class DevConsole {
 public:
-    DevConsole(Player &player);
+    DevConsole(Settings &settings);
     ~DevConsole();
 
-    void open(sf::RenderWindow window);
+    void open(sf::RenderWindow &window, Player &player);
 
 private:
+    void parseCommand(Player &player);
+
     sf::Font fontFace;
     std::string currLine;
+    std::vector<std::string> history;
+    Settings &settings;
 
-    Player &player;
+    unsigned short int index = 0;
 };

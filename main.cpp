@@ -9,6 +9,7 @@
 #include "./headers/Utils.h"
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
+#include "./headers/DevConsole.h"
 
 int main() {
 
@@ -48,6 +49,9 @@ int main() {
     sf::Event event;
     Collider playerCol = player.getCollider();
 
+    // Dev Console
+    DevConsole console = DevConsole(settings);
+
     // Main Game Loop
     clock.restart();
     float dt = 0;
@@ -59,16 +63,21 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 isRunning = false;
                 window.close();
+            } else if (event.key.code == sf::Keyboard::Key::F1) {
+                console.open(window, player);
+                clock.restart();
             }
         }
         player.update(dt);
         sf::Vector2f direction;
 
         // Collision detection
-        for (Obstacle &obstacle : obstacles) {
-            if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
-                player.onCollision(direction);
-                //std::cout << player.getPos().x << "," << player.getPos().y << std::endl;
+        if (settings.playerColliding) {
+            for (Obstacle &obstacle : obstacles) {
+                if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
+                    player.onCollision(direction);
+                    //std::cout << player.getPos().x << "," << player.getPos().y << std::endl;
+                }
             }
         }
 

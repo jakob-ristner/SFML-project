@@ -38,7 +38,6 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles) {
         if (!(iss >> t >> x >> y >> w >> h)) {
             break;
         }
-        std::cout << x << " " << y << " " << w << " " << h << std::endl;
         obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
     }
 
