@@ -15,3 +15,7 @@ Obstacle::~Obstacle() {
 Collider Obstacle::getCollider() {
     return Collider(body, sf::Vector2f(0.0f, 0.0f));
 }
+
+sf::Vector2f Obstacle::getPos() {
+    return body.getPosition();
+}

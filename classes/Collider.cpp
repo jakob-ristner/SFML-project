@@ -1,6 +1,7 @@
 #include "../headers/Collider.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
 
 Collider::Collider(sf::RectangleShape &body, sf::Vector2f velocity) :
     body(body){
@@ -24,8 +25,8 @@ bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float pu
     float deltaX = otherPosition.x - thisPosition.x;
     float deltaY = otherPosition.y - thisPosition.y;
 
-    float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
-    float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
+    float intersectX = std::abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
+    float intersectY = std::abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
 
     if (intersectX < 0.0f && intersectY < 0.0f) {
         push = std::min(std::max(push, 0.0f), 1.0f);
