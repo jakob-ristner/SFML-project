@@ -23,9 +23,11 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
 
     bool isOpen = true;
     sf::Event event;
-    sf::RectangleShape rectangle(sf::Vector2f(window.getSize().x, 125.0f));
-    rectangle.setPosition(window.mapPixelToCoords(sf::Vector2i(0, 0)));
-    rectangle.setFillColor(sf::Color(70, 70, 70, 150));
+    sf::RectangleShape rectangle(sf::Vector2f(window.getSize().x - 40, 125.0f));
+    rectangle.setPosition(window.mapPixelToCoords(sf::Vector2i(20, 10)));
+    rectangle.setFillColor(sf::Color(70, 70, 70, 200));
+    rectangle.setOutlineColor(sf::Color(50, 50, 50, 200));
+    rectangle.setOutlineThickness(5.0f);
 
     sf::Texture oldWindow;
     oldWindow.create(window.getSize().x, window.getSize().y);
@@ -39,7 +41,7 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
     text.setString("");
     text.setScale(sf::Vector2f(0.75f, 0.75f));
     text.setFont(fontFace);
-    text.setPosition(window.mapPixelToCoords(sf::Vector2i(20, 20)));
+    text.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 20)));
     text.setColor(sf::Color::White);
 
     while (isOpen) {
@@ -48,17 +50,26 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
                 isOpen = false;
                 window.close();
             } else if (event.type == sf::Event::TextEntered) {
-                if ((event.text.unicode <= 122 && event.text.unicode >= 97) || (event.text.unicode == 32) || (event.text.unicode >= 48 && event.text.unicode <= 57)) {
+                if (event.text.unicode <= 122 && event.text.unicode >= 97) {
+                    // Letters
+                    currLine += (char) event.text.unicode;
+                } else if (event.text.unicode == 32) {
+                    // Space
+                    currLine += (char) event.text.unicode;
+                } else if (event.text.unicode >= 48 && event.text.unicode <= 57) {
+                    // Numbers
                     currLine += (char) event.text.unicode;
                 } else if (event.text.unicode == 8) {
+                    // Backspace
                     if (currLine.size() > 0) {
                         currLine.pop_back();
                     }
                 }
+                
             } else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code)
                 {
-                    case sf::Keyboard::Key::F2:
+                    case sf::Keyboard::Key::F1:
                         isOpen = false;
                         break;
                         case sf::Keyboard::Key::Return:

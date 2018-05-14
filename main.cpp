@@ -63,9 +63,16 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 isRunning = false;
                 window.close();
-            } else if (event.key.code == sf::Keyboard::Key::F1) {
-                console.open(window, player);
-                clock.restart();
+            } else if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                    case sf::Keyboard::Key::F1:
+                        console.open(window, player);
+                        clock.restart();
+                        break;
+                    default:
+                        break;
+ 
+                }
             }
         }
         player.update(dt);
