@@ -83,11 +83,9 @@ int main() {
             for (Obstacle &obstacle : obstacles) {
                 if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
                     player.onCollision(direction);
-                    //std::cout << player.getPos().x << "," << player.getPos().y << std::endl;
                 }
             }
         }
-
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 

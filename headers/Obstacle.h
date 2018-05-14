@@ -8,6 +8,7 @@ public:
     ~Obstacle();
 
     Collider getCollider();
+    sf::Vector2f getPos();
 
 private:
     sf::RectangleShape body;

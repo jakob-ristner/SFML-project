@@ -88,5 +88,6 @@ void Player::onCollision(sf::Vector2f direction) {
 
 
     sf::Vector2f oldPos = body.getPosition();
-    body.setPosition(std::round(oldPos.x), std::round(oldPos.y));
+    //body.setPosition(std::round(oldPos.x), std::round(oldPos.y));
+    body.setPosition(oldPos.x, oldPos.y);
 }
