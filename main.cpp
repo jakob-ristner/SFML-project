@@ -20,7 +20,7 @@ int main() {
     text.setString("W: Forward\nA: Left\nS: Down\nD: Right\nQ: Rotate left\nE: Rotate right");
     text.setFont(font);
     text.setPosition(sf::Vector2f(20, 20));
-    text.setColor(sf::Color::White);
+    text.setFillColor(sf::Color::White);
 
     // Initialization of important stuff
     Settings settings = Settings();

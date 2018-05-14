@@ -42,7 +42,7 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
     text.setScale(sf::Vector2f(0.75f, 0.75f));
     text.setFont(fontFace);
     text.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 20)));
-    text.setColor(sf::Color::White);
+    text.setFillColor(sf::Color::White);
 
     while (isOpen) {
         while (window.pollEvent(event)) {
