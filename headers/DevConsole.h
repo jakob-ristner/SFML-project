@@ -11,7 +11,7 @@ public:
     DevConsole(Settings &settings);
     ~DevConsole();
 
-    void open(sf::RenderWindow &window, Player &player);
+    bool open(sf::RenderWindow &window, Player &player);
 
 private:
     void parseCommand(Player &player);

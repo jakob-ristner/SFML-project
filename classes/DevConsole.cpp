@@ -19,7 +19,7 @@ DevConsole::~DevConsole() {
 
 }
 
-void DevConsole::open(sf::RenderWindow &window, Player &player) {
+bool DevConsole::open(sf::RenderWindow &window, Player &player) {
 
     bool isOpen = true;
     sf::Event event;
@@ -48,7 +48,7 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 isOpen = false;
-                window.close();
+                return false;
             } else if (event.type == sf::Event::TextEntered) {
                 if (event.text.unicode <= 122 && event.text.unicode >= 97) {
                     // Letters
@@ -69,7 +69,7 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
             } else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code)
                 {
-                    case sf::Keyboard::Key::F1:
+                    case 54:
                         isOpen = false;
                         break;
                         case sf::Keyboard::Key::Return:
@@ -109,7 +109,7 @@ void DevConsole::open(sf::RenderWindow &window, Player &player) {
         window.draw(text);
         window.display();
     }
-
+    return true;
 }
 
 void DevConsole::parseCommand(Player &player) {

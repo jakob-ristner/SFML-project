@@ -65,8 +65,8 @@ int main() {
                 window.close();
             } else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
-                    case sf::Keyboard::Key::F1:
-                        console.open(window, player);
+                    case 54:
+                        isRunning = console.open(window, player);
                         clock.restart();
                         break;
                     default:
