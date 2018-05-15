@@ -19,6 +19,10 @@ DevConsole::~DevConsole() {
 
 }
 
+// Opens the dev console and renders it over the current screen of the game, pausing it.
+// Args:
+// window - reference to the game window
+// player - reference to the player object
 bool DevConsole::open(sf::RenderWindow &window, Player &player) {
 
     bool isOpen = true;
@@ -112,6 +116,9 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
     return true;
 }
 
+// Parses an entered command and calls the apropriate function(s)
+// Args:
+// player - reference to the player object
 void DevConsole::parseCommand(Player &player) {
     std::vector<std::string> words;
     std::string buffer;

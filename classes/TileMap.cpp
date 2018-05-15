@@ -74,6 +74,9 @@ void TileMap::printData() {
     }
 }
 
+// Generates a map from the current state of the TMX parser.
+// Handles both object and tile layers, currently with static tile-sets and pathing
+// TODO: Make pathing and tilesets dynamic
 sf::Texture TileMap::generateMap() {
     std::vector<std::string> layers;
     std::string c;
@@ -82,7 +85,6 @@ sf::Texture TileMap::generateMap() {
         // std::cout << c << std::endl;
         layers.push_back(c);
     }
-    // TODO: Allow multiple layers in tileMap
     std::vector< std::vector<int> > imgIndexes;
     std::vector<int> currentLayer;
     std::string buffer;
@@ -137,6 +139,7 @@ sf::Vector2i TileMap::getSize() {
     return sf::Vector2i(width, height);
 }
 
+// Prints a vector of ints in a pretty format, used in printData
 void printVec(std::vector< std::vector<int> > vec) {
     std::string lineBuffer = "";
     for (int y = 0; y < vec.size(); y++) {
