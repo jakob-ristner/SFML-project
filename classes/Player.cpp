@@ -32,7 +32,6 @@ Player::~Player() {
 void Player::castSpell(int index) {
     Spell test = *spellInventory[index];
     test.use();
-    std::cout << test.name << std::endl;
 }
 
 void Player::addSpell(Spell *spell) {
@@ -41,7 +40,7 @@ void Player::addSpell(Spell *spell) {
 
 void Player::addProjectile(Projectile projectile) {
     projectiles.push_back(projectile);
-    std::cout << "hej" << std::endl;
+ 
 }
 
 Spell *Player::getSpell(int index) {
@@ -119,4 +118,16 @@ void Player::onCollision(sf::Vector2f direction) {
     sf::Vector2f oldPos = body.getPosition();
     //body.setPosition(std::round(oldPos.x), std::round(oldPos.y));
     body.setPosition(oldPos.x, oldPos.y);
+}
+
+void Player::setMouseAngle(float angle) {
+    mouseAngle = angle;
+}
+
+float Player::getMouseAngle() {
+    return mouseAngle;
+}
+
+float Player::getMouseAngleRad() {
+    return mouseAngle * (M_PI / 180);
 }

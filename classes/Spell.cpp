@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
 #include "../headers/Spell.h"
 #include "../headers/Settings.h"
 
@@ -26,10 +27,10 @@ void Spell::use() {
 }
 
 
-Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel, float speed, sf::Vector2f pos) {
-    this->vel = vel;
-    this->speed = speed;
+Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel, float speed, sf::Vector2f pos, float rotation) {
+    this->vel = vel * speed;
     setTexture(texture);
+    setRotation(rotation);
     setOrigin(sf::Vector2f(texture.getSize().x, texture.getSize().y) / 2.0f);
     setPosition(pos);
 }
@@ -50,7 +51,9 @@ void Projectile::draw(sf::RenderWindow &window) {
 }
 
 void Fireball::use()  {
-    player.addProjectile(Projectile(texture, sf::Vector2f(0, -2), 0.f, player.getPos()));
+    player.addProjectile(Projectile(texture, 
+                         sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad())), 
+                         4, player.getPos(), 360 - player.getMouseAngle()));
 }
 
 Fireball::Fireball(Player &player):

@@ -18,6 +18,9 @@ public:
     void draw(sf::RenderWindow &window);
     void castSpell(int index);
     void update(float dt);
+    void setMouseAngle(float angle);
+    float getMouseAngle();
+    float getMouseAngleRad();
     void addSpell(Spell *spell);
     Spell *getSpell(int index);
     void onCollision(sf::Vector2f direction);
@@ -37,5 +40,6 @@ private:
     float playeracc = 2;
     float fric = 1.2;
     std::vector<Projectile> projectiles;
+    float mouseAngle;
 
 };
