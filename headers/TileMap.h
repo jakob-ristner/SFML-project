@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
@@ -21,6 +22,8 @@ public:
     sf::Vector2i getSize();
     // Texture for sprite that will be used as background
     sf::Texture mapTexture;
+    // Texture for sprite that bill be used as foreground
+    sf::Texture foreGroundTexture;
 
 private:
     TMX::Parser tmx;

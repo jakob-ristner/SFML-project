@@ -1,4 +1,3 @@
-#include "../headers/TileMap.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
@@ -10,6 +9,7 @@
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
 #include "../headers/Obstacle.h"
+#include "../headers/TileMap.h"
 
 TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles) {
     this->path = path;
@@ -40,7 +40,6 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles) {
         }
         obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
     }
-
 }
 
 TileMap::~TileMap() {
@@ -53,6 +52,11 @@ void TileMap::printData() {
         std::cout << std::endl;
         std::cout << "Tile Layer Name: " << it->first << std::endl;
         std::cout << "Layer Size: " << tmx.tileLayer[it->first].property.size() << std::endl;
+        if (tmx.tileLayer[it->first].property.size() > 0) {
+            for (std::map<std::string, std::string>::iterator it2 = tmx.tileLayer[it->first].property.begin(); it2 != tmx.tileLayer[it->first].property.end(); ++it2) {
+                std::cout << "-> " << it2->first << ":" << it2->second << std::endl;
+            }
+        }
 
         //std::cout << tmx.tileLayer[it->first].data.contents << std::endl; 
     }
@@ -79,11 +83,25 @@ void TileMap::printData() {
 // TODO: Make pathing and tilesets dynamic
 sf::Texture TileMap::generateMap() {
     std::vector<std::string> layers;
+    std::vector<std::string> fgLayers;
     std::string c;
     for (std::map<std::string, TMX::Parser::TileLayer>::iterator it = tmx.tileLayer.begin(); it != tmx.tileLayer.end(); it++) {
+        bool isFG = false;
         c = tmx.tileLayer[it->first].data.contents;
-        // std::cout << c << std::endl;
-        layers.push_back(c);
+        if (tmx.tileLayer[it->first].property.size() > 0) {
+            for (std::map<std::string, std::string>::iterator it2 = tmx.tileLayer[it->first].property.begin(); 
+                    it2 != tmx.tileLayer[it->first].property.end(); 
+                    it2++ ) {
+                if (it2->first == "z-index") {
+                    isFG = true;
+                }
+            }
+        }
+        if (isFG) {
+            fgLayers.push_back(c);
+        } else {
+            layers.push_back(c);
+        }
     }
     std::vector< std::vector<int> > imgIndexes;
     std::vector<int> currentLayer;
@@ -105,18 +123,40 @@ sf::Texture TileMap::generateMap() {
         imgIndexes[imgIndexes.size() - 1].push_back(std::stoi(buffer));
         buffer = "";
     }
+    buffer = "";
+    std::vector< std::vector<int> > fgIndexes;
+    for (int l = 0; l < fgLayers.size(); l++) {
+        currentLayer.clear();        
+        for(int x = 1; x < fgLayers[l].size(); x++) {
+            if (fgLayers[l][x] == '\n') {
+                fgIndexes.push_back(currentLayer);
+                currentLayer.clear();
+            } else if (fgLayers[l][x] == ',') {
+                currentLayer.push_back(std::stoi(buffer));
+                buffer = "";
+            } else {
+                buffer += fgLayers[l][x];
+            }
+        }
+        fgIndexes[fgIndexes.size() - 1].push_back(std::stoi(buffer));
+        buffer = "";
+    }
     // Width + height in tiles
     width = imgIndexes[imgIndexes.size() - 1].size();
     height = imgIndexes.size() / layers.size();
     // Image for copy and pasting tiles
     sf::Image mapImg;
     mapImg.create(width * tileSize, height * tileSize, sf::Color(0, 0, 0));
+    // Foreground image
+    sf::Image foreGround;
+    foreGround.create(width * tileSize, 
+            height * tileSize, 
+            sf::Color(0, 0, 0, 0));
     // Copy-pasting all tiles from all layers to correct position
     for (int l = 0; l < layers.size(); l++) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (imgIndexes[y + l * height][x]) {
-                    // std::cout << "XFLAG: " << x << " " << y << " " << l << std::endl;
                     mapImg.copy(tileSetTexture, 
                     x * tileSize, y * tileSize, 
                     sf::IntRect(((imgIndexes[y + l * height][x] - 1) % (tileSetWidth)) * (tileMargin + tileSize) - tileMargin, 
@@ -124,12 +164,27 @@ sf::Texture TileMap::generateMap() {
                     tileSize, 
                     tileSize
                     ), true);
-                    // std::cout << "DONE COPYING: " << x << " " << y << " " << l << std::endl;            
+                }
+            }
+        }
+    }
+    for (int l = 0; l < fgLayers.size(); l++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (fgIndexes[y + l * height][x]) {
+                    foreGround.copy(tileSetTexture,
+                        x * tileSize, y * tileSize,
+                        sf::IntRect(((fgIndexes[y + l * height][x] - 1) % (tileSetWidth)) * (tileMargin + tileSize) - tileMargin,
+                        (fgIndexes[y + l * height][x] / tileSetWidth) * (tileSize + tileMargin) - tileMargin,
+                        tileSize,
+                        tileSize),
+                        true);
                 }
             }
         }
     }
 
+    foreGroundTexture.loadFromImage(foreGround);
     sf::Texture txt;
     txt.loadFromImage(mapImg);
     return txt;

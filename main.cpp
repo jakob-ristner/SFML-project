@@ -42,6 +42,9 @@ int main() {
     sf::Vector2f lowerBound(settings.WINDOW_WIDTH / 2.0f, settings.WINDOW_HEIGHT / 2.0f);
     sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f), 
                             map.mapTexture.getSize().y - (settings.WINDOW_HEIGHT / 2.0f));
+    sf::Sprite foreGround;
+    foreGround.setTexture(map.foreGroundTexture);
+    foreGround.setPosition(sf::Vector2f(0.0f, 0.0f));
 
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
@@ -96,6 +99,7 @@ int main() {
         window.draw(someSprite);
 
         player.draw(window);
+        window.draw(foreGround);
         window.draw(text);
 
         window.display();
