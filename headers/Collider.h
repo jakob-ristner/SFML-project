@@ -1,6 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+// Objects used for detecting collisions
+// Args:
+// body - the body of the object which will have collision detection (will be modified in place)
+// velocity - the velocity of the body bound to the collider
 class Collider {
 public:
     Collider(sf::RectangleShape &body, sf::Vector2f velocity);

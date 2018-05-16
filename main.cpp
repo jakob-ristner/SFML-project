@@ -10,6 +10,7 @@
 #include "./headers/Utils.h"
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
+#include "./headers/DevConsole.h"
 
 int main() {
 
@@ -20,7 +21,7 @@ int main() {
     text.setString("W: Forward\nA: Left\nS: Down\nD: Right\nQ: Rotate left\nE: Rotate right");
     text.setFont(font);
     text.setPosition(sf::Vector2f(20, 20));
-    text.setColor(sf::Color::White);
+    text.setFillColor(sf::Color::White);
 
     // Initialization of important stuff
     Settings settings = Settings();
@@ -51,6 +52,9 @@ int main() {
     Fireball spell = Fireball(player);
     player.addSpell(&spell);
 
+    // Dev Console
+    DevConsole console = DevConsole(settings);
+
     // Main Game Loop
     clock.restart();
     float dt = 0;
@@ -64,10 +68,16 @@ int main() {
                 window.close();
             } else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
+                    case 54:
+                        isRunning = console.open(window, player);
+                        clock.restart();
+                        break;
                     case sf::Keyboard::Key::Space: {
                         Spell *spell = player.getSpell(0);
                         (*spell).use();
-                    }
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -78,13 +88,13 @@ int main() {
         sf::Vector2f direction;
 
         // Collision detection
-        for (Obstacle &obstacle : obstacles) {
-            if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
-                player.onCollision(direction);
-                //std::cout << player.getPos().x << "," << player.getPos().y << std::endl;
+        if (settings.playerColliding) {
+            for (Obstacle &obstacle : obstacles) {
+                if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
+                    player.onCollision(direction);
+                }
             }
         }
-
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 
