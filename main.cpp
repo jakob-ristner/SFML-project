@@ -55,6 +55,9 @@ int main() {
     // Dev Console
     DevConsole console = DevConsole(settings);
 
+    // Spell
+    Spell *currspell;
+
     // Main Game Loop
     clock.restart();
     float dt = 0;
@@ -72,9 +75,9 @@ int main() {
                         isRunning = console.open(window, player);
                         clock.restart();
                         break;
-                    case sf::Keyboard::Key::Space: {
-                        Spell *spell = player.getSpell(0);
-                        (*spell).use();
+                    case sf::Keyboard::Key::Space:
+                        currspell = player.getSpell(0);
+                        (*currspell).use();
                         break;
                     default:
                         break;
