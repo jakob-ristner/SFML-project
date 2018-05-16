@@ -4,6 +4,7 @@
 
 #include "./headers/Settings.h"
 #include "./headers/TileMap.h"
+#include "./headers/Spell.h"
 #include "./headers/Player.h"
 #include "./headers/Settings.h"
 #include "./headers/Utils.h"
@@ -13,7 +14,7 @@
 
 int main() {
 
-    const sf::Color bgColor(51, 51, 51);      
+    const sf::Color bgColor(51, 51, 51);   
     sf::Font font;
     font.loadFromFile("font.ttf");  
     sf::Text text;
@@ -51,9 +52,14 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
+    Fireball spell = Fireball(player);
+    player.addSpell(&spell);
 
     // Dev Console
     DevConsole console = DevConsole(settings);
+
+    // Spell
+    Spell *currspell;
 
     // Main Game Loop
     clock.restart();
@@ -72,11 +78,17 @@ int main() {
                         isRunning = console.open(window, player);
                         clock.restart();
                         break;
+                    case sf::Keyboard::Key::Space:
+                        currspell = player.getSpell(0);
+                        (*currspell).use();
+                        break;
                     default:
                         break;
- 
                 }
             }
+        }
+        for (int i = 0; i < player.getProjectiles().size(); i++) {
+            player.getProjectiles()[i].update(dt);
         }
         player.update(dt);
         sf::Vector2f direction;
@@ -96,11 +108,15 @@ int main() {
         // Drawing
         window.clear(bgColor);
 
+
         window.draw(someSprite);
 
         player.draw(window);
         window.draw(foreGround);
         window.draw(text);
+        for (int i = 0; i < player.getProjectiles().size(); i++) {
+            player.getProjectiles()[i].draw(window);
+        }
 
         window.display();
     }

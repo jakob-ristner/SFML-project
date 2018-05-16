@@ -12,6 +12,8 @@ Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
     speed = 4;
     settings = Settings();
+    std::vector<sf::Sprite> projectiles = std::vector<sf::Sprite> {};
+    spellInventory = std::vector<Spell *> {};
     playeracc = 2;
     fric = 1.2;
     this->body = body;
@@ -19,12 +21,39 @@ Player::Player(sf::RectangleShape body) {
     this->body.setOrigin(sf::Vector2f(16, 16));
 }
 
+Player::Player() {
+
+}
+
 Player::~Player() {
 
 }
 
+void Player::castSpell(int index) {
+    Spell test = *spellInventory[index];
+    test.use();
+    std::cout << test.name << std::endl;
+}
+
+void Player::addSpell(Spell *spell) {
+    spellInventory.push_back(spell);
+}
+
+void Player::addProjectile(Projectile projectile) {
+    projectiles.push_back(projectile);
+    std::cout << "hej" << std::endl;
+}
+
+Spell *Player::getSpell(int index) {
+    return spellInventory[index];
+}
+
 sf::Vector2f Player::getPos() {
     return body.getPosition();
+}
+
+std::vector<Projectile> &Player::getProjectiles() {
+    return projectiles;
 }
 
 void Player::setPos(sf::Vector2f newPos) {
