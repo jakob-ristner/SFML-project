@@ -21,3 +21,9 @@ sf::Vector2f clampVec(sf::Vector2f vec, sf::Vector2f lower, sf::Vector2f upper) 
     output.y = std::min(std::max(vec.y, lower.y), upper.y);
     return output;
 }
+
+float getAngle(sf::Vector2f pos1, sf::Vector2f pos2) {
+    sf::Vector2f diffPos = pos1 - pos2;
+    sf::Vector2f normal = normalizedVec(diffPos);
+    return atan2(normal.x, normal.y) * (180 / M_PI);
+}

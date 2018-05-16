@@ -84,6 +84,9 @@ int main() {
                 }
             }
         }
+        player.setMouseAngle(getAngle(player.getPos(), 
+                             sf::Vector2f(sf::Mouse::getPosition(window).x,
+                             sf::Mouse::getPosition(window).y)));
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].update(dt);
         }

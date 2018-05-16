@@ -17,7 +17,7 @@ public:
 
 class Projectile: public sf::Sprite{
 public:
-    Projectile(sf::Texture &texture, sf::Vector2f vel, float speed, sf::Vector2f pos);
+    Projectile(sf::Texture &texture, sf::Vector2f vel, float speed, sf::Vector2f pos, float rotation);
     ~Projectile();
     Projectile();
     void update(float dt);
