@@ -38,7 +38,7 @@ bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float pu
                 direction.x = 1.0f;
                 direction.y = 0.0f;
             } else {
-                std::cout << intersectX << std::endl;
+                // std::cout << intersectX << std::endl;
                 move(-intersectX * (1.0f - push), 0.0f);
                 other.move(intersectX  * push, 0.0f);
 

@@ -7,28 +7,34 @@ class Spell {
 public:
     Spell();
     ~Spell();
+    virtual void use();
     void setParams(std::string name, std::string spellType, 
-                   int manaCost, sf::Texture texture);
+                   int manaCost);
     std::string name;
     std::string spellType;
     int manacost;
-    sf::Texture texture;
 };
 
 class Projectile: public sf::Sprite{
 public:
-    Projectile(sf::Texture &texture, sf::Vector2f vel, float speed);
+    Projectile(sf::Texture &texture, sf::Vector2f vel, float speed, sf::Vector2f pos);
     ~Projectile();
+    Projectile();
     void update(float dt);
-    void draw(sf::RenderWindow window);
-    sf::Texture texture;
+    void draw(sf::RenderWindow &window);
     sf::Vector2f vel;
     float speed;
 };
 
 class Fireball: public Spell {
 public:
-    Fireball();
+    Fireball(Player &player);
     ~Fireball();
-    void use(sf::Vector2f origin);
+    void use() override;
+    void check();
+
+private:
+    Player &player;
+    sf::Texture texture;
+
 };

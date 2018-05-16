@@ -48,7 +48,8 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
-    Spell:Spell spell = Fireball();   
+    Fireball spell = Fireball(player);
+    player.addSpell(&spell);
 
     // Main Game Loop
     clock.restart();
@@ -61,7 +62,17 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 isRunning = false;
                 window.close();
+            } else if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                    case sf::Keyboard::Key::Space: {
+                        Spell *spell = player.getSpell(0);
+                        (*spell).use();
+                    }
+                }
             }
+        }
+        for (int i = 0; i < player.getProjectiles().size(); i++) {
+            player.getProjectiles()[i].update(dt);
         }
         player.update(dt);
         sf::Vector2f direction;
@@ -81,10 +92,14 @@ int main() {
         // Drawing
         window.clear(bgColor);
 
+
         window.draw(someSprite);
 
         player.draw(window);
         window.draw(text);
+        for (int i = 0; i < player.getProjectiles().size(); i++) {
+            player.getProjectiles()[i].draw(window);
+        }
 
         window.display();
     }
