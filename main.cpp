@@ -31,6 +31,7 @@ int main() {
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
+    window.setKeyRepeatEnabled(false);
 
     // Vector with all obstacles - kind of like a sprite group
     std::vector<Obstacle> obstacles;
