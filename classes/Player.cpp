@@ -10,15 +10,15 @@
 
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
-    speed = 4;
+    speed = 1;
     settings = Settings();
     std::vector<sf::Sprite> projectiles = std::vector<sf::Sprite> {};
     spellInventory = std::vector<Spell *> {};
-    playeracc = 2;
+    playeracc = 0.5;
     fric = 1.2;
     this->body = body;
     this->body.setFillColor(sf::Color::Green);
-    this->body.setOrigin(sf::Vector2f(16, 16));
+    this->body.setOrigin(sf::Vector2f(body.getSize().x / 2, body.getSize().y / 2));
 }
 
 Player::Player() {

@@ -32,7 +32,8 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float scale, void (*callback)(Projectile &projectile, float dt)) {
     this->vel = vel * speed;
     this->func = callback;
-    //(*func)(*this);
+    this->rotation = rotation;
+    counter = 0;
 
     
     setScale(scale, scale);
@@ -49,17 +50,15 @@ Projectile::~Projectile() {
 
 }
 
-void Projectile::fireball() {
-    std::cout << "hej" << std::endl;
-} 
-
 void Projectile::update(float dt) {
     (*func)(*this, dt);
 }
 
+
 void fireball(Projectile &projectile, float dt) {
     projectile.move(projectile.vel * (dt / Settings::TIMESCALE));
 }
+
 
 void Projectile::draw(sf::RenderWindow &window) {
     window.draw(*this);
@@ -73,7 +72,7 @@ void Fireball::use()  {
 
 Fireball::Fireball(Player &player):
     player(player) {
-    texture.loadFromFile("./resources/fireball.png");
+    texture.loadFromFile("./resources/spell_textures/fireball.png");
     setParams("Fireball", "Damage", 20);
     this->player = player;
 }

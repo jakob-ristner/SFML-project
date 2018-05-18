@@ -27,3 +27,7 @@ float getAngle(sf::Vector2f pos1, sf::Vector2f pos2) {
     sf::Vector2f normal = normalizedVec(diffPos);
     return atan2(normal.x, normal.y) * (180 / M_PI);
 }
+
+sf::Vector2f rotateNormalVect(sf::Vector2f vector, float degrees) {
+    
+}

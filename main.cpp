@@ -51,7 +51,7 @@ int main() {
     foreGround.setPosition(sf::Vector2f(0.0f, 0.0f));
 
     bool isRunning = true;
-    Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
+    Player player = Player(sf::RectangleShape(sf::Vector2f(28.f, 28.f)));
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
@@ -90,7 +90,6 @@ int main() {
                 }
             }
         }
-        
 
         mousePos = sf::Mouse::getPosition(window);
         mousePos.y -= std::min(0, (int)(Settings::WINDOW_HEIGHT  / 2 - player.getPos().y));
