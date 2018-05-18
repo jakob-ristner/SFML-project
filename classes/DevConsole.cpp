@@ -45,8 +45,15 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
     text.setString("");
     text.setScale(sf::Vector2f(0.75f, 0.75f));
     text.setFont(fontFace);
-    text.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 20)));
+    text.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 100)));
     text.setFillColor(sf::Color::White);
+
+    sf::Text historyPlaceHolder;
+    historyPlaceHolder.setString("");
+    historyPlaceHolder.setScale(sf::Vector2f(0.75f, 0.75f));
+    historyPlaceHolder.setFont(fontFace);
+    historyPlaceHolder.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 80)));
+    historyPlaceHolder.setFillColor(sf::Color(210, 210, 210));
 
     while (isOpen) {
         while (window.pollEvent(event)) {
@@ -105,12 +112,22 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                 }
             }
         }
-        text.setString(currLine);
+
+        
+
+
+        text.setString(currLine + "_");
 
         // blit menu and text
         window.draw(oldTextHolder);
         window.draw(rectangle);
         window.draw(text);
+        // Drawing console history
+        for (int i = 1; i < 5 && i <= history.size(); i++) {
+            historyPlaceHolder.setString(history[history.size() - i]);
+            historyPlaceHolder.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 100 - 20 * i)));
+            window.draw(historyPlaceHolder);
+        }
         window.display();
     }
     return true;
