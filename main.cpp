@@ -1,4 +1,4 @@
-
+#pragma region include
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -11,11 +11,13 @@
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
 #include "./headers/DevConsole.h"
-
+#pragma endregion
 int main() {
 
-    const sf::Color bgColor(51, 51, 51);   
+    const sf::Color bgColor(51, 51, 51); 
     sf::Font font;
+    sf::Vector2i mousePos;
+    sf::Vector2i mousePosRelative;
     font.loadFromFile("font.ttf");  
     sf::Text text;
     text.setString("W: Forward\nA: Left\nS: Down\nD: Right\nQ: Rotate left\nE: Rotate right");
@@ -49,7 +51,7 @@ int main() {
     foreGround.setPosition(sf::Vector2f(0.0f, 0.0f));
 
     bool isRunning = true;
-    Player player = Player(sf::RectangleShape(sf::Vector2f(32.f, 32.f)));
+    Player player = Player(sf::RectangleShape(sf::Vector2f(28.f, 28.f)));
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
@@ -88,9 +90,27 @@ int main() {
                 }
             }
         }
+
+        mousePos = sf::Mouse::getPosition(window);
+        mousePos.y -= std::min(0, (int)(Settings::WINDOW_HEIGHT  / 2 - player.getPos().y));
+        mousePos.x -= std::min(0, (int)(Settings::WINDOW_WIDTH / 2 - player.getPos().x));
+        mousePos.y += std::min(0, (int)((map.getSize().y * Settings::TILESIZE - Settings::WINDOW_HEIGHT / 2) - player.getPos().y));
+        mousePos.x += std::min(0, (int)((map.getSize().x * Settings::TILESIZE - Settings::WINDOW_WIDTH / 2) - player.getPos().x));
+
+
+
+
+
+
         player.setMouseAngle(getAngle(player.getPos(), 
-                             sf::Vector2f(sf::Mouse::getPosition(window).x,
-                             sf::Mouse::getPosition(window).y)));
+                             sf::Vector2f(mousePos.x,
+                             mousePos.y)));
+
+
+
+
+
+
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].update(dt);
         }
@@ -115,12 +135,12 @@ int main() {
 
         window.draw(someSprite);
 
-        player.draw(window);
-        window.draw(foreGround);
-        window.draw(text);
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].draw(window);
         }
+        player.draw(window);
+        window.draw(foreGround);
+        window.draw(text);
 
         window.display();
     }
