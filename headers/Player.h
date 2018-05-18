@@ -21,6 +21,7 @@ public:
     void setMouseAngle(float angle);
     float getMouseAngle();
     float getMouseAngleRad();
+    void setRotation(float rotation);
     void addSpell(Spell *spell);
     Spell *getSpell(int index);
     void onCollision(sf::Vector2f direction);

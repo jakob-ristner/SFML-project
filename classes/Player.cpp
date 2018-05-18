@@ -60,6 +60,10 @@ void Player::setPos(sf::Vector2f newPos) {
     body.setPosition(newPos);
 }
 
+void Player::setRotation(float rotation) {
+    body.setRotation(rotation);
+}
+
 void Player::update(float dt) {
     acc = sf::Vector2f(0, 0);
     pos = body.getPosition();
@@ -75,12 +79,14 @@ void Player::update(float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         acc.x = playeracc;
     }
+    /*
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
         body.rotate(-1);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
         body.rotate(1);
     }
+    */
 
     if(!(acc.x == 0.0f || acc.y == 0.0f)) {
         acc = normalizedVec(acc) * playeracc;

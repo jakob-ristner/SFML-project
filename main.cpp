@@ -34,6 +34,7 @@ int main() {
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
     window.setKeyRepeatEnabled(false);
+    
 
     // Vector with all obstacles - kind of like a sprite group
     std::vector<Obstacle> obstacles;
@@ -98,8 +99,8 @@ int main() {
         mousePos.x += std::min(0, (int)((map.getSize().x * Settings::TILESIZE - Settings::WINDOW_WIDTH / 2) - player.getPos().x));
 
 
-
-
+        player.setRotation(360 - getAngle(player.getPos(),sf::Vector2f(mousePos.x, mousePos.y)));
+    
 
 
         player.setMouseAngle(getAngle(player.getPos(), 
