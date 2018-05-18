@@ -29,7 +29,7 @@ void Spell::use() {
 
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel, 
                        float speed, sf::Vector2f pos, float rotation,
-                       float scale, void (*callback)(Projectile &projectile)) {
+                       float scale, void (*callback)(Projectile &projectile, float dt)) {
     this->vel = vel * speed;
     this->func = callback;
     //(*func)(*this);
@@ -54,12 +54,11 @@ void Projectile::fireball() {
 } 
 
 void Projectile::update(float dt) {
-    //move(vel * (dt / Settings::TIMESCALE));
-    (*func)(*this);
+    (*func)(*this, dt);
 }
 
-void fireball(Projectile &projectile) {
-    projectile.move(projectile.vel);
+void fireball(Projectile &projectile, float dt) {
+    projectile.move(projectile.vel * (dt / Settings::TIMESCALE));
 }
 
 void Projectile::draw(sf::RenderWindow &window) {
@@ -69,7 +68,7 @@ void Projectile::draw(sf::RenderWindow &window) {
 void Fireball::use()  {
     player.addProjectile(Projectile(texture, 
                          sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad())), 
-                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5,&fireball));
+                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &fireball));
 }
 
 Fireball::Fireball(Player &player):

@@ -19,14 +19,14 @@ class Projectile: public sf::Sprite{
 public:
     Projectile(sf::Texture &texture, sf::Vector2f vel, 
                float speed, sf::Vector2f pos, 
-               float rotation, float scale, void (*callback)(Projectile &projectile));
+               float rotation, float scale, void (*callback)(Projectile &projectile, float dt));
     ~Projectile();
     Projectile();
     void update(float dt);
     void draw(sf::RenderWindow &window);
     sf::Vector2f vel;
     float speed;
-    void (*func)(Projectile &projectile);
+    void (*func)(Projectile &projectile, float dt);
     void fireball();
 };
 
