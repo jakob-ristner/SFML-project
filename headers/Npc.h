@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <memory>
+#include <string>
 
 #include "./Settings.h"
 
@@ -53,8 +55,23 @@ protected:
 class Slime: public Enemy {
 public:
     Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel);
+    Slime(sf::Texture &texture, sf::Vector2f pos);
     ~Slime();
 
     void update(float dt) override;
     void draw(sf::RenderWindow &window) override;
+};
+
+class EnemyFactory {
+public:
+    EnemyFactory();
+    ~EnemyFactory();
+
+    void spawnEnemy(std::string enemyType, sf::Vector2f pos);
+    void update(float dt);
+    void draw(sf::RenderWindow &window);
+
+private:
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<sf::Texture> enemyTextures;
 };

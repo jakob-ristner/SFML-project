@@ -63,13 +63,8 @@ int main() {
     player.addSpell(&spell);
 
     // Enemies
-    // TODO: Move this texture elsewhere
-    sf::Texture slimeTexture;
-    slimeTexture.loadFromFile("./resources/enemy_textures/slime.png");
-    std::cout << slimeTexture.getSize().x << slimeTexture.getSize().y << std::endl;
-    typedef std::vector<std::unique_ptr<Enemy>> EnemyVector;
-    EnemyVector enemies;
-    enemies.push_back(std::unique_ptr<Enemy>(new Slime(slimeTexture, sf::Vector2f(300.0f, 300.0f), sf::Vector2f(0.0f, 0.0f))));
+    EnemyFactory enemyFactory;
+    enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
     DevConsole console = DevConsole(settings);
@@ -131,6 +126,7 @@ int main() {
                 }
             }
         }
+        enemyFactory.update(dt);
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 
@@ -147,11 +143,7 @@ int main() {
         player.draw(window);
         window.draw(foreGround);
         window.draw(text);
-        std::vector<Enemy*>::iterator i;
-        for (auto i = enemies.begin(); i != enemies.end(); ++i) {
-            (*i)->draw(window);
-        }
-
+        enemyFactory.draw(window);
         window.display();
     }
 
