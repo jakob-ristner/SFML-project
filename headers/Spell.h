@@ -19,9 +19,12 @@ class Projectile: public sf::Sprite{
 public:
     Projectile(sf::Texture &texture, sf::Vector2f vel, 
                float speed, sf::Vector2f pos, 
-               float rotation, float scale, void (*callback)(Projectile &projectile, float dt));
+               float rotation, float scale, 
+               void (*callback)(Projectile &projectile, 
+               float dt), Spell *spell);
     ~Projectile();
     Projectile();
+    Spell *spell;
     void update(float dt);
     void draw(sf::RenderWindow &window);
     sf::Vector2f vel;

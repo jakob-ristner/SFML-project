@@ -29,7 +29,8 @@ void Spell::use() {
 
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel, 
                        float speed, sf::Vector2f pos, float rotation,
-                       float scale, void (*callback)(Projectile &projectile, float dt)) {
+                       float scale, void (*callback)(Projectile &projectile, 
+                       float dt), Spell *spell) {
     this->vel = vel * speed;
     this->func = callback;
     this->rotation = rotation;
@@ -59,15 +60,19 @@ void fireball(Projectile &projectile, float dt) {
     projectile.move(projectile.vel * (dt / Settings::TIMESCALE));
 }
 
+void magicMissile(Projectile &projectile, float dt) {
+    projectile.move(projectile.vel * (dt / Settings::TIMESCALE));
+}
+
 
 void Projectile::draw(sf::RenderWindow &window) {
     window.draw(*this);
 }
 
-void Fireball::use()  {
+void Fireball::use() {
     player.addProjectile(Projectile(texture, 
                          sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad())), 
-                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &fireball));
+                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &fireball, this));
 }
 
 Fireball::Fireball(Player &player):
@@ -78,7 +83,28 @@ Fireball::Fireball(Player &player):
 }
 
 Fireball::~Fireball() {
-   
+}
+
+MagicMissile::MagicMissile(Player &player):
+    player(player) {
+    this->player = player;
+    texture.loadFromFile("./resources/spell_textures/magicmissile.png");
+    setParams("Magic Missile", "Damage", 8);
+}
+
+MagicMissile::~MagicMissile() {
+}
+
+void MagicMissile::use() {
+    player.addProjectile(Projectile(texture, 
+                         sf::Vector2f(-sin(player.getMouseAngleRad() + M_PI / 2), -cos(player.getMouseAngleRad() + M_PI / 2))), 
+                         2, player.getPos(), 270 - player.getMouseAngle(), 0.5, &magicMissile, *this));
+    player.addProjectile(Projectile(texture, 
+                         sf::Vector2f(-sin(player.getMouseAngleRad() - M_PI / 2), -cos(player.getMouseAngleRad() - M_PI / 2))), 
+                         2, player.getPos(), 450 - player.getMouseAngle(), 0.5, &magicMissile, *this));
+    player.addProjectile(Projectile(texture, 
+                         sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad())), 
+                         2, player.getPos(), 360 - player.getMouseAngle(), 0.5, &magicMissile, *this));
 }
 
 
