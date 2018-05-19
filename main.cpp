@@ -1,6 +1,8 @@
 #pragma region include
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <memory>
+#include <vector>
 
 #include "./headers/Settings.h"
 #include "./headers/TileMap.h"
@@ -11,6 +13,7 @@
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
 #include "./headers/DevConsole.h"
+#include "./headers/Npc.h"
 #pragma endregion
 int main() {
 
@@ -59,6 +62,15 @@ int main() {
     Fireball spell = Fireball(player);
     player.addSpell(&spell);
 
+    // Enemies
+    // TODO: Move this texture elsewhere
+    sf::Texture slimeTexture;
+    slimeTexture.loadFromFile("./resources/enemy_textures/slime.png");
+    std::cout << slimeTexture.getSize().x << slimeTexture.getSize().y << std::endl;
+    typedef std::vector<std::unique_ptr<Enemy>> EnemyVector;
+    EnemyVector enemies;
+    enemies.push_back(std::unique_ptr<Enemy>(new Slime(slimeTexture, sf::Vector2f(300.0f, 300.0f), sf::Vector2f(0.0f, 0.0f))));
+
     // Dev Console
     DevConsole console = DevConsole(settings);
 
@@ -100,17 +112,10 @@ int main() {
 
 
         player.setRotation(360 - getAngle(player.getPos(),sf::Vector2f(mousePos.x, mousePos.y)));
-    
-
 
         player.setMouseAngle(getAngle(player.getPos(), 
                              sf::Vector2f(mousePos.x,
                              mousePos.y)));
-
-
-
-
-
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].update(dt);
@@ -142,6 +147,10 @@ int main() {
         player.draw(window);
         window.draw(foreGround);
         window.draw(text);
+        std::vector<Enemy*>::iterator i;
+        for (auto i = enemies.begin(); i != enemies.end(); ++i) {
+            (*i)->draw(window);
+        }
 
         window.display();
     }
