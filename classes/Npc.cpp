@@ -7,12 +7,16 @@
 #include "../headers/Npc.h"
 #include "../headers/Utils.h"
 #include "../headers/Settings.h"
+#include "../headers/Obstacle.h"
+#include "../headers/Player.h"
 
 Enemy::Enemy(sf::Texture &texture, sf::Vector2f pos, 
           sf::Vector2f vel, float moveSpeed, 
           float maxHp, float hitpoints, 
           float attackStrength, 
-          float attackSpeed, unsigned int level) {
+          float attackSpeed, unsigned int level,
+          Player &player):
+    player(player) {
     this->vel = vel;
     this->moveSpeed = moveSpeed;
     this->maxHp = maxHp;
@@ -44,13 +48,21 @@ float Enemy::getMaxHitpoints() {
     return maxHp;
 }
 
-
-Slime::Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel) :
-    Enemy(texture, pos, vel, 1.0f, 10.0f, 10.0f, 2.0f, 500.0f, 1) {
+sf::Vector2f Enemy::getVel() {
+    return vel;
 }
 
-Slime::Slime(sf::Texture &texture, sf::Vector2f pos) :
-    Enemy(texture, pos, sf::Vector2f(0.0f, 0.0f), 1.0f, 10.0f, 10.0f, 2.0f, 500.0f, 1) {
+SpriteCollider Enemy::getCollider() {
+    return SpriteCollider(*this, getVel());
+}
+
+Slime::Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player) :
+    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player) {
+}
+
+Slime::Slime(sf::Texture &texture, sf::Vector2f pos, Player &player) :
+    Enemy(texture, pos, sf::Vector2f(0.0f, 0.0f), 0.1f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player){
+
 }
 
 Slime::~Slime() {
@@ -61,8 +73,8 @@ void Slime::update(float dt) {
     acc = sf::Vector2f(0.0f, 0.0f);
 
     // Here some thinking will be executed (TODO)
-    //
-    //
+    sf::Vector2f direction = player.getPos() - getPosition();
+    acc = direction;
     // -----------------------------------
 
     if(!(acc.x == 0.0f || acc.y == 0.0f)) {
@@ -83,9 +95,11 @@ void Slime::draw(sf::RenderWindow &window) {
     window.draw(*this);
 }
 
-EnemyFactory::EnemyFactory() {
+EnemyFactory::EnemyFactory(Player &player):
+    player(player) {
     sf::Texture slimeTexture;
     slimeTexture.loadFromFile("./resources/enemy_textures/slime.png");
+    slimeTexture.setSmooth(true);
     enemyTextures.push_back(slimeTexture);
 }
 
@@ -94,7 +108,7 @@ EnemyFactory::~EnemyFactory() {
 
 void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
     if (enemyType == "slime") {
-        enemies.push_back(std::unique_ptr<Enemy>(new Slime(enemyTextures[0], pos)));
+        enemies.push_back(std::unique_ptr<Enemy>(new Slime(enemyTextures[0], pos, player)));
     }
 }
 
@@ -107,5 +121,15 @@ void EnemyFactory::update(float dt) {
 void EnemyFactory::draw(sf::RenderWindow &window) {
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
         (*itr)->draw(window);
+    }
+}
+
+void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
+    sf::Vector2f direction;
+    for (Obstacle &obstacle : obstacles) {
+        Collider obstacleColl = obstacle.getCollider();
+        for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
+            (*itr)->getCollider().checkCollision(obstacleColl, direction, 0.0f);
+        }
     }
 }

@@ -6,6 +6,9 @@
 
 #include "./Settings.h"
 #include "./Npc.h"
+#include "./Obstacle.h"
+#include "./Collider.h"
+#include "./Player.h"
 
 // Abstract class serving as superclass for all enemies.
 // Different types of enemies will have their own classes.
@@ -22,7 +25,8 @@ public:
           sf::Vector2f vel, float moveSpeed, 
           float maxHp, float hitpoints, 
           float attackStrength,
-          float attackSpeed, unsigned int level);
+          float attackSpeed, unsigned int level, 
+          Player &player);
     ~Enemy();
 
     virtual void update(float dt){};
@@ -34,6 +38,8 @@ public:
     float getMaxHitpoints();
 
     unsigned int getLevel();
+
+    SpriteCollider getCollider();
 
 protected:
     float maxHp;
@@ -51,12 +57,14 @@ protected:
 
     sf::Vector2f vel;
     sf::Vector2f acc;
+
+    Player &player;
 };
 
 class Slime: public Enemy {
 public:
-    Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel);
-    Slime(sf::Texture &texture, sf::Vector2f pos);
+    Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player);
+    Slime(sf::Texture &texture, sf::Vector2f pos, Player &player);
     ~Slime();
 
     void update(float dt) override;
@@ -65,14 +73,18 @@ public:
 
 class EnemyFactory {
 public:
-    EnemyFactory();
+    EnemyFactory(Player &player);
     ~EnemyFactory();
 
     void spawnEnemy(std::string enemyType, sf::Vector2f pos);
     void update(float dt);
     void draw(sf::RenderWindow &window);
 
+    void wallCollide(std::vector<Obstacle> obstacles);
+
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<sf::Texture> enemyTextures;
+
+    Player &player;
 };

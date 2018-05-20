@@ -63,7 +63,7 @@ int main() {
     player.addSpell(&spell);
 
     // Enemies
-    EnemyFactory enemyFactory;
+    EnemyFactory enemyFactory(player);
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
@@ -127,6 +127,7 @@ int main() {
             }
         }
         enemyFactory.update(dt);
+        enemyFactory.wallCollide(obstacles);
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 
