@@ -8,7 +8,7 @@ public:
     Spell();
     ~Spell();
     virtual void use();
-    void setParams(std::string name, std::string spellType, 
+    void setParams(std::string name, std::string spellType,
                    int manaCost);
     std::string name;
     std::string spellType;
@@ -17,10 +17,10 @@ public:
 
 class Projectile: public sf::Sprite{
 public:
-    Projectile(sf::Texture &texture, sf::Vector2f vel, 
-               float speed, sf::Vector2f pos, 
-               float rotation, float scale, 
-               void (*callback)(Projectile &projectile, 
+    Projectile(sf::Texture &texture, sf::Vector2f vel,
+               float speed, sf::Vector2f pos,
+               float rotation, float scale,
+               void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos));
     ~Projectile();
     Projectile();
@@ -40,6 +40,7 @@ public:
     Fireball(Player &player);
     ~Fireball();
     void use() override;
+    int castTime;
 
 private:
     Player &player;
@@ -52,6 +53,7 @@ public:
     MagicMissile(Player &player);
     ~MagicMissile();
     void use() override;
+    int castTime;
 
 private:
     Player &player;

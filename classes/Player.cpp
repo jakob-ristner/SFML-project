@@ -20,6 +20,16 @@ Player::Player(sf::RectangleShape body) {
     this->body = body;
     this->body.setFillColor(sf::Color::Green);
     this->body.setOrigin(sf::Vector2f(body.getSize().x / 2, body.getSize().y / 2));
+
+
+    castBarBackground = sf::RectangleShape(sf::Vector2f(200, 15));
+    castBarBackground.setOrigin(sf::Vector2f(castBarBackground.getSize().x / 2,
+                                             castBarBackground.getSize().y / 2));
+    castBarBackground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
+                                               600));
+    castBarBackground.setFillColor(sf::Color(51, 51, 51));
+
+
 }
 
 Player::Player() {
@@ -40,7 +50,7 @@ void Player::addSpell(Spell *spell) {
 
 void Player::addProjectile(Projectile projectile) {
     projectiles.push_back(projectile);
- 
+
 }
 
 Spell *Player::getSpell(int index) {
@@ -78,10 +88,10 @@ void Player::update(float dt) {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         acc.x = playeracc;
-    } 
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && selectedSpell != 0) {
         selectedSpell = 0;
-    } 
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2) && selectedSpell != 1) {
         selectedSpell = 1;
     }
@@ -107,6 +117,7 @@ void Player::update(float dt) {
 
 void Player::draw(sf::RenderWindow &window) {
     window.draw(body);
+    window.draw(castBarBackground);
 }
 
 Collider Player::getCollider() {

@@ -30,10 +30,12 @@ public:
     std::vector<Projectile> &getProjectiles();
     sf::Vector2f getMousePos();
     void setMousePos(sf::Vector2f pos);
-    
+    sf::RectangleShape castBarBackground;
+    sf::RectangleShape castBar;
+
 
 private:
-    sf::Vector2f pos;  
+    sf::Vector2f pos;
     std::vector<Spell *> spellInventory;
     sf::Vector2f vel;
     sf::Vector2f acc;
