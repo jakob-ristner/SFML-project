@@ -5,6 +5,7 @@
 #include <string>
 
 #include "./Settings.h"
+#include "./Npc.h"
 
 // Abstract class serving as superclass for all enemies.
 // Different types of enemies will have their own classes.

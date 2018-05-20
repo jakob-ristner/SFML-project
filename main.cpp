@@ -67,7 +67,7 @@ int main() {
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
-    DevConsole console = DevConsole(settings);
+    DevConsole console = DevConsole(settings, enemyFactory);
 
     // Spell
     Spell *currspell;
