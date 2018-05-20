@@ -28,9 +28,11 @@ public:
     void draw(sf::RenderWindow &window);
     sf::Vector2f vel;
     float speed;
-    int counter;
+    float counter;
     float rotation;
     void (*func)(Projectile &projectile, float dt, sf::Vector2f mousePos);
+    bool kill;
+
 };
 
 class Fireball: public Spell {

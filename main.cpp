@@ -13,7 +13,6 @@
 #include "./headers/DevConsole.h"
 #pragma endregion
 int main() {
-
     const sf::Color bgColor(51, 51, 51); 
     sf::Font font;
     sf::Vector2i mousePos;
@@ -73,7 +72,6 @@ int main() {
     float dt = 0;
     while (isRunning) {
         dt = clock.restart().asMilliseconds();
-        
         // Event Loop
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -86,8 +84,9 @@ int main() {
                         clock.restart();
                         break;
                     case sf::Keyboard::Key::Space:
-                        currspell = player.getSpell(0);
-                        (*currspell).use();
+                        player.castSpell();
+                        //currspell = player.getSpell(0);
+                        //(*currspell).use();
                         break;
                     default:
                         break;
@@ -105,16 +104,9 @@ int main() {
         
         player.setRotation(360 - getAngle(player.getPos(),sf::Vector2f(mousePos.x, mousePos.y)));
     
-
-
         player.setMouseAngle(getAngle(player.getPos(), 
                              sf::Vector2f(mousePos.x,
                              mousePos.y)));
-
-
-
-
-
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
