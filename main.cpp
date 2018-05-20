@@ -96,12 +96,13 @@ int main() {
         }
 
         mousePos = sf::Mouse::getPosition(window);
+        
         mousePos.y -= std::min(0, (int)(Settings::WINDOW_HEIGHT  / 2 - player.getPos().y));
         mousePos.x -= std::min(0, (int)(Settings::WINDOW_WIDTH / 2 - player.getPos().x));
         mousePos.y += std::min(0, (int)((map.getSize().y * Settings::TILESIZE - Settings::WINDOW_HEIGHT / 2) - player.getPos().y));
         mousePos.x += std::min(0, (int)((map.getSize().x * Settings::TILESIZE - Settings::WINDOW_WIDTH / 2) - player.getPos().x));
+        player.setMousePos(sf::Vector2f(mousePos.x, mousePos.y));
         
-
         player.setRotation(360 - getAngle(player.getPos(),sf::Vector2f(mousePos.x, mousePos.y)));
     
 
@@ -116,7 +117,7 @@ int main() {
 
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
-            player.getProjectiles()[i].update(dt);
+            player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
         }
         player.update(dt);
         sf::Vector2f direction;
