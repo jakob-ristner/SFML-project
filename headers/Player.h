@@ -16,7 +16,7 @@ public:
     sf::Vector2f getPos();
     void setPos(sf::Vector2f);
     void draw(sf::RenderWindow &window);
-    void castSpell(int index);
+    void castSpell();
     void update(float dt);
     void setMouseAngle(float angle);
     float getMouseAngle();
@@ -40,6 +40,7 @@ private:
     sf::RectangleShape body;
     Settings settings;
     int speed;
+    int selectedSpell;
     float playeracc = 2;
     float fric = 1.2;
     std::vector<Projectile> projectiles;

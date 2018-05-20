@@ -36,6 +36,7 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
     this->speed = speed;
     this->func = callback;
     this->rotation = rotation;
+    kill = false;
     counter = 0;
 
     
@@ -54,22 +55,22 @@ Projectile::~Projectile() {
 }
 
 void Projectile::update(float dt, sf::Vector2f mousePos) {
+    counter += 1 * (dt / Settings::TIMESCALE);
     (*func)(*this, dt, mousePos);
 }
 
 void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
-    projectile.move(projectile.vel * (dt / Settings::TIMESCALE));
+    projectile.move(projectile.vel * projectile.speed * (dt / Settings::TIMESCALE));
 }
 
 void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
-    
-    //projectile.vel = rotateNormalVect(projectile.vel, (degrees * (M_PI / 180)));
-    
+    if (projectile.counter > 1500) {
+        projectile.kill = true;
+    }
     float angle = getAngle(projectile.getPosition(), mousePos);
     projectile.vel = normalizedVec((sf::Vector2f(-sin(angle * (M_PI / 180)), -cos(angle * (M_PI / 180))) / 18.f + projectile.vel) / 2.f);
     projectile.setRotation(180 - atan2(projectile.vel.x, projectile.vel.y) * (180 / M_PI));
     projectile.move(projectile.vel * projectile.speed * (dt / Settings::TIMESCALE));
-   
 }
 
 
@@ -80,7 +81,7 @@ void Projectile::draw(sf::RenderWindow &window) {
 void Fireball::use() {
     player.addProjectile(Projectile(texture, 
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))), 
-                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &fireball));
+                         10, player.getPos(), 360 - player.getMouseAngle(), 0.5, &fireball));
 }
 
 Fireball::Fireball(Player &player):

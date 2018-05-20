@@ -11,6 +11,7 @@
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
     speed = 1;
+    selectedSpell = 0;
     settings = Settings();
     std::vector<sf::Sprite> projectiles = std::vector<sf::Sprite> {};
     spellInventory = std::vector<Spell *> {};
@@ -29,9 +30,8 @@ Player::~Player() {
 
 }
 
-void Player::castSpell(int index) {
-    Spell test = *spellInventory[index];
-    test.use();
+void Player::castSpell() {
+   (*spellInventory[selectedSpell]).use();
 }
 
 void Player::addSpell(Spell *spell) {
@@ -78,15 +78,13 @@ void Player::update(float dt) {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         acc.x = playeracc;
+    } 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && selectedSpell != 0) {
+        selectedSpell = 0;
+    } 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2) && selectedSpell != 1) {
+        selectedSpell = 1;
     }
-    /*
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        body.rotate(-1);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-        body.rotate(1);
-    }
-    */
 
     if(!(acc.x == 0.0f || acc.y == 0.0f)) {
         acc = normalizedVec(acc) * playeracc;
@@ -95,12 +93,16 @@ void Player::update(float dt) {
     acc += vel / fric;
 
     vel = acc;
-    //body.rotate(1);
-    //std::cout << acc.x << std::endl;
 
     pos += vel * (dt / settings.TIMESCALE);
 
     body.setPosition(pos);
+
+    for (int i = 0; i < projectiles.size(); i++) {
+        if (projectiles[i].kill) {
+            projectiles.erase(projectiles.begin() + i);
+        }
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
