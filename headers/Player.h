@@ -28,6 +28,8 @@ public:
     Collider getCollider();
     void addProjectile(Projectile projectile);
     std::vector<Projectile> &getProjectiles();
+    sf::Vector2f getMousePos();
+    void setMousePos(sf::Vector2f pos);
     
 
 private:
@@ -42,5 +44,6 @@ private:
     float fric = 1.2;
     std::vector<Projectile> projectiles;
     float mouseAngle;
+    sf::Vector2f mousePos;
 
 };

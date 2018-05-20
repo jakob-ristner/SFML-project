@@ -19,17 +19,18 @@ class Projectile: public sf::Sprite{
 public:
     Projectile(sf::Texture &texture, sf::Vector2f vel, 
                float speed, sf::Vector2f pos, 
-               float rotation, float scale, void (*callback)(Projectile &projectile, float dt));
+               float rotation, float scale, 
+               void (*callback)(Projectile &projectile, 
+               float dt, sf::Vector2f mousePos));
     ~Projectile();
     Projectile();
-    void update(float dt);
+    void update(float dt, sf::Vector2f mousePos);
     void draw(sf::RenderWindow &window);
     sf::Vector2f vel;
     float speed;
     int counter;
     float rotation;
-    void (*func)(Projectile &projectile, float dt);
-    void fireball();
+    void (*func)(Projectile &projectile, float dt, sf::Vector2f mousePos);
 };
 
 class Fireball: public Spell {

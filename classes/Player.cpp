@@ -137,3 +137,11 @@ float Player::getMouseAngle() {
 float Player::getMouseAngleRad() {
     return mouseAngle * (M_PI / 180);
 }
+
+
+sf::Vector2f Player::getMousePos() {
+    return mousePos;
+}
+void Player::setMousePos(sf::Vector2f pos) {
+    mousePos = pos;
+}
