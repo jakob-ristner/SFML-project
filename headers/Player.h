@@ -32,7 +32,8 @@ public:
     void setMousePos(sf::Vector2f pos);
     sf::RectangleShape castBarBackground;
     sf::RectangleShape castBar;
-
+    float castProgress;
+    bool casting;
 
 private:
     sf::Vector2f pos;
@@ -48,5 +49,6 @@ private:
     std::vector<Projectile> projectiles;
     float mouseAngle;
     sf::Vector2f mousePos;
+    bool switchedSpells;
 
 };

@@ -13,6 +13,8 @@ public:
     std::string name;
     std::string spellType;
     int manacost;
+    virtual int getCastTime();
+    int castTime;
 };
 
 class Projectile: public sf::Sprite{
@@ -41,6 +43,7 @@ public:
     ~Fireball();
     void use() override;
     int castTime;
+    int getCastTime() override;
 
 private:
     Player &player;
@@ -54,6 +57,7 @@ public:
     ~MagicMissile();
     void use() override;
     int castTime;
+    int getCastTime() override;
 
 private:
     Player &player;

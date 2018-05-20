@@ -32,7 +32,7 @@ int main() {
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
-    //window.setKeyRepeatEnabled(false);
+    window.setKeyRepeatEnabled(false);
 
 
     // Vector with all obstacles - kind of like a sprite group
@@ -57,8 +57,8 @@ int main() {
     Collider playerCol = player.getCollider();
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
-    player.addSpell(&magicMissile);
     player.addSpell(&fireball);
+    player.addSpell(&magicMissile);
 
 
     // Dev Console
@@ -82,9 +82,6 @@ int main() {
                     case 54:
                         isRunning = console.open(window, player);
                         clock.restart();
-                        break;
-                    case sf::Keyboard::Key::Space:
-                        player.castSpell();
                         break;
                     default:
                         break;
