@@ -5,10 +5,13 @@
 #include <string>
 
 #include "./Settings.h"
-#include "./Npc.h"
 #include "./Obstacle.h"
 #include "./Collider.h"
 #include "./Player.h"
+#include "./Spell.h"
+
+class Player;
+class Projectile;
 
 // Abstract class serving as superclass for all enemies.
 // Different types of enemies will have their own classes.
@@ -87,6 +90,7 @@ public:
     void hurtEnemy(int i, int amount);
 
     void wallCollide(std::vector<Obstacle> obstacles);
+    void spellCollide(std::vector<Projectile> &projs);
 
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;

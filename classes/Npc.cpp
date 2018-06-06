@@ -32,7 +32,7 @@ Enemy::Enemy(sf::Texture &texture, sf::Vector2f pos,
     setTexture(texture);
     setOrigin(sf::Vector2f(texture.getSize().x, texture.getSize().y) / 2.0f);
     setPosition(pos);
-
+    hurtTime = 0;
 
 }
 
@@ -160,4 +160,17 @@ void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
 
 void EnemyFactory::hurtEnemy(int i, int amount) {
     (*enemies[i]).hurt(amount);
+}
+
+void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
+    sf::Vector2f direction;
+    for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
+        SpriteCollider currentSprite = (*itr)->getCollider();
+        for (Projectile &projectile : projs) {
+            SpriteCollider currentSpell = projectile.getCollider();
+            if (currentSprite.checkCollision(currentSpell, direction, 0.0f)) {
+                projectile.onCollision(*(itr->get()));
+            }
+        }
+    }
 }

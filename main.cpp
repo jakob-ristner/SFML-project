@@ -130,6 +130,7 @@ int main() {
         }
         enemyFactory.update(dt);
         enemyFactory.wallCollide(obstacles);
+        enemyFactory.spellCollide(player.getProjectiles());
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 

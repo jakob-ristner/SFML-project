@@ -30,6 +30,7 @@ public:
     void move(float dx, float dy);
 
     bool checkCollision(Collider &other, sf::Vector2f &direction, float push);
+    bool checkCollision(SpriteCollider &other, sf::Vector2f &direction, float push);
     sf::Vector2f getPosition();
     sf::Vector2f getHalfSize();
 

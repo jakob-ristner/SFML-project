@@ -1,8 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../headers/Player.h"
+#include "./Player.h"
+#include "./Npc.h"
+#include "./Collider.h"
 
 class Player;
+class Enemy;
 class Spell {
 public:
     Spell();
@@ -24,16 +27,27 @@ public:
                float rotation, float scale,
                void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos));
+    Projectile(sf::Texture &texture, sf::Vector2f vel,
+               float speed, sf::Vector2f pos,
+               float rotation, float scale,
+               void (*callback)(Projectile &projectile,
+               float dt, sf::Vector2f mousePos),
+               bool (*onCollide)(Enemy &enemy));
     ~Projectile();
     Projectile();
     void update(float dt, sf::Vector2f mousePos);
     void draw(sf::RenderWindow &window);
+    void onCollision(Enemy &enemy);
     sf::Vector2f vel;
     float speed;
     float counter;
     float rotation;
     void (*func)(Projectile &projectile, float dt, sf::Vector2f mousePos);
+    // Will be overloaded for different types of collisions
+    bool (*onCollide)(Enemy &enemy);
     bool kill;
+
+    SpriteCollider getCollider();
 
 };
 

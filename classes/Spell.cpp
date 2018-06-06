@@ -4,10 +4,10 @@
 #include "../headers/Spell.h"
 #include "../headers/Settings.h"
 #include "../headers/Utils.h"
+#include "../headers/Npc.h"
 
 
 class Player;
-
 
 Spell::Spell() {
 
@@ -51,10 +51,35 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
     setPosition(pos);
 }
 
+Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
+                       float speed, sf::Vector2f pos, float rotation,
+                       float scale, void (*callback)(Projectile &projectile,
+                       float dt, sf::Vector2f mousePos),
+                       bool (*onCollide)(Enemy &enemy)) {
+    this->vel = vel;
+    this->speed = speed;
+    this->func = callback;
+    this->rotation = rotation;
+    this->onCollide = onCollide;
+    kill = false;
+    counter = 0;
+
+
+    setScale(scale, scale);
+    setTexture(texture);
+    setRotation(rotation);
+    setOrigin(sf::Vector2f(texture.getSize().x, texture.getSize().y) / 2.0f);
+    setPosition(pos);
+}
+
 Projectile::Projectile() {;
 }
 
 Projectile::~Projectile() {
+}
+
+void Projectile::onCollision(Enemy &enemy) {
+    kill = onCollide(enemy);
 }
 
 void Projectile::update(float dt, sf::Vector2f mousePos) {
@@ -62,8 +87,17 @@ void Projectile::update(float dt, sf::Vector2f mousePos) {
     (*func)(*this, dt, mousePos);
 }
 
+SpriteCollider Projectile::getCollider() {
+    return SpriteCollider(*this, vel);
+}
+
 void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
     projectile.move(projectile.vel * projectile.speed * (dt / Settings::TIMESCALE));
+}
+
+bool fireballDamage(Enemy &enemy) {
+    enemy.hurt(2);
+    return true;
 }
 
 void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
@@ -83,7 +117,12 @@ void Projectile::draw(sf::RenderWindow &window) {
 void Fireball::use() {
     player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
-                         10, player.getPos(), 360 - player.getMouseAngle(), 0.5, &fireball));
+                         10,
+                         player.getPos(),
+                         360 - player.getMouseAngle(),
+                         0.5,
+                         &fireball,
+                         &fireballDamage));
 }
 
 int Fireball::getCastTime() {
