@@ -3,12 +3,13 @@
 #include <vector>
 #include <string>
 
-#include "Player.h"
-#include "Settings.h"
+#include "./Player.h"
+#include "./Settings.h"
+#include "./Npc.h"
 
 class DevConsole {
 public:
-    DevConsole(Settings &settings);
+    DevConsole(Settings &settings, EnemyFactory &enemyFactory);
     ~DevConsole();
 
     bool open(sf::RenderWindow &window, Player &player);
@@ -20,6 +21,7 @@ private:
     std::string currLine;
     std::vector<std::string> history;
     Settings &settings;
+    EnemyFactory &enemyFactory;
 
     unsigned short int index = 0;
 };

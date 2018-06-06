@@ -1,6 +1,8 @@
 #pragma region include
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <memory>
+#include <vector>
 
 #include "./headers/Settings.h"
 #include "./headers/TileMap.h"
@@ -11,6 +13,7 @@
 #include "./headers/Collider.h"
 #include "./headers/Obstacle.h"
 #include "./headers/DevConsole.h"
+#include "./headers/Npc.h"
 #pragma endregion
 int main() {
     const sf::Color bgColor(51, 51, 51);
@@ -61,8 +64,12 @@ int main() {
     player.addSpell(&magicMissile);
 
 
+    // Enemies
+    EnemyFactory enemyFactory(player);
+    enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
+
     // Dev Console
-    DevConsole console = DevConsole(settings);
+    DevConsole console = DevConsole(settings, enemyFactory);
 
     // Spell
     Spell *currspell;
@@ -82,6 +89,10 @@ int main() {
                     case 54:
                         isRunning = console.open(window, player);
                         clock.restart();
+                        break;
+                    // Only for testing
+                    case sf::Keyboard::Key::B:
+                        enemyFactory.hurtEnemy(0, 1);
                         break;
                     default:
                         break;
@@ -117,6 +128,8 @@ int main() {
                 }
             }
         }
+        enemyFactory.update(dt);
+        enemyFactory.wallCollide(obstacles);
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 
@@ -133,7 +146,7 @@ int main() {
         player.draw(window);
         window.draw(foreGround);
         window.draw(text);
-
+        enemyFactory.draw(window);
         window.display();
     }
 

@@ -5,10 +5,11 @@
 #include "../headers/DevConsole.h"
 #include "../headers/Player.h"
 #include "../headers/Settings.h"
+#include "../headers/Npc.h"
 
 
-DevConsole::DevConsole(Settings &settings):
-settings(settings) {
+DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory):
+settings(settings), enemyFactory(enemyFactory) {
     // DevConsole.window kanske behöver lagra en referens
     // Samma med player
 
@@ -75,6 +76,9 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                     if (currLine.size() > 0) {
                         currLine.pop_back();
                     }
+                } else if (event.text.unicode == 46) {
+                    // Period
+                    currLine += (char) event.text.unicode;
                 }
                 
             } else if (event.type == sf::Event::KeyPressed) {
@@ -163,6 +167,21 @@ void DevConsole::parseCommand(Player &player) {
                 player.setPos(sf::Vector2f(std::stof(words[2]), std::stof(words[3])));
                 
             }
+        } else if (words[0] == "spawn") {
+            float x;
+            float y;
+            if (words[2] == ".") {
+                x = player.getPos().x;
+            } else {
+                x = std::stof(words[2]);
+            }
+            if (words[3] == ".") {
+                y = player.getPos().y;
+            } else {
+                y = std::stof(words[3]);
+            }
+            enemyFactory.spawnEnemy(words[1], sf::Vector2f(x, y));
+
         }
     }
 }
