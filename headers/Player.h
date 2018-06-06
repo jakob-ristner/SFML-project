@@ -16,7 +16,7 @@ public:
     sf::Vector2f getPos();
     void setPos(sf::Vector2f);
     void draw(sf::RenderWindow &window);
-    void castSpell(int index);
+    void castSpell();
     void update(float dt);
     void setMouseAngle(float angle);
     float getMouseAngle();
@@ -28,19 +28,27 @@ public:
     Collider getCollider();
     void addProjectile(Projectile projectile);
     std::vector<Projectile> &getProjectiles();
-    
+    sf::Vector2f getMousePos();
+    void setMousePos(sf::Vector2f pos);
+    sf::RectangleShape castBarBackground;
+    sf::RectangleShape castBar;
+    float castProgress;
+    bool casting;
 
 private:
-    sf::Vector2f pos;  
+    sf::Vector2f pos;
     std::vector<Spell *> spellInventory;
     sf::Vector2f vel;
     sf::Vector2f acc;
     sf::RectangleShape body;
     Settings settings;
     int speed;
+    int selectedSpell;
     float playeracc = 2;
     float fric = 1.2;
     std::vector<Projectile> projectiles;
     float mouseAngle;
+    sf::Vector2f mousePos;
+    bool switchedSpells;
 
 };

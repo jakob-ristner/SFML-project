@@ -16,12 +16,11 @@
 #include "./headers/Npc.h"
 #pragma endregion
 int main() {
-
-    const sf::Color bgColor(51, 51, 51); 
+    const sf::Color bgColor(51, 51, 51);
     sf::Font font;
     sf::Vector2i mousePos;
     sf::Vector2i mousePosRelative;
-    font.loadFromFile("font.ttf");  
+    font.loadFromFile("font.ttf");
     sf::Text text;
     text.setString("W: Forward\nA: Left\nS: Down\nD: Right\nQ: Rotate left\nE: Rotate right");
     text.setFont(font);
@@ -37,7 +36,7 @@ int main() {
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
     window.setKeyRepeatEnabled(false);
-    
+
 
     // Vector with all obstacles - kind of like a sprite group
     std::vector<Obstacle> obstacles;
@@ -48,7 +47,7 @@ int main() {
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
     sf::Vector2f lowerBound(settings.WINDOW_WIDTH / 2.0f, settings.WINDOW_HEIGHT / 2.0f);
-    sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f), 
+    sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f),
                             map.mapTexture.getSize().y - (settings.WINDOW_HEIGHT / 2.0f));
     sf::Sprite foreGround;
     foreGround.setTexture(map.foreGroundTexture);
@@ -59,8 +58,11 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
     sf::Event event;
     Collider playerCol = player.getCollider();
-    Fireball spell = Fireball(player);
-    player.addSpell(&spell);
+    Fireball fireball = Fireball(player);
+    MagicMissile magicMissile = MagicMissile(player);
+    player.addSpell(&fireball);
+    player.addSpell(&magicMissile);
+
 
     // Enemies
     EnemyFactory enemyFactory(player);
@@ -77,7 +79,6 @@ int main() {
     float dt = 0;
     while (isRunning) {
         dt = clock.restart().asMilliseconds();
-        
         // Event Loop
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -89,10 +90,7 @@ int main() {
                         isRunning = console.open(window, player);
                         clock.restart();
                         break;
-                    case sf::Keyboard::Key::Space:
-                        currspell = player.getSpell(0);
-                        (*currspell).use();
-                        break;
+                    // Only for testing
                     case sf::Keyboard::Key::B:
                         enemyFactory.hurtEnemy(0, 1);
                         break;
@@ -103,20 +101,21 @@ int main() {
         }
 
         mousePos = sf::Mouse::getPosition(window);
+
         mousePos.y -= std::min(0, (int)(Settings::WINDOW_HEIGHT  / 2 - player.getPos().y));
         mousePos.x -= std::min(0, (int)(Settings::WINDOW_WIDTH / 2 - player.getPos().x));
         mousePos.y += std::min(0, (int)((map.getSize().y * Settings::TILESIZE - Settings::WINDOW_HEIGHT / 2) - player.getPos().y));
         mousePos.x += std::min(0, (int)((map.getSize().x * Settings::TILESIZE - Settings::WINDOW_WIDTH / 2) - player.getPos().x));
-
+        player.setMousePos(sf::Vector2f(mousePos.x, mousePos.y));
 
         player.setRotation(360 - getAngle(player.getPos(),sf::Vector2f(mousePos.x, mousePos.y)));
 
-        player.setMouseAngle(getAngle(player.getPos(), 
+        player.setMouseAngle(getAngle(player.getPos(),
                              sf::Vector2f(mousePos.x,
                              mousePos.y)));
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
-            player.getProjectiles()[i].update(dt);
+            player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
         }
         player.update(dt);
         sf::Vector2f direction;
@@ -134,7 +133,7 @@ int main() {
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
 
-        
+
         // Drawing
         window.clear(bgColor);
 
