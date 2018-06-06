@@ -93,6 +93,9 @@ int main() {
                         currspell = player.getSpell(0);
                         (*currspell).use();
                         break;
+                    case sf::Keyboard::Key::B:
+                        enemyFactory.hurtEnemy(0, 1);
+                        break;
                     default:
                         break;
                 }

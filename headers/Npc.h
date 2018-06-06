@@ -36,8 +36,11 @@ public:
 
     float getHitpoints();
     float getMaxHitpoints();
+    float hurt(float amount);
 
     unsigned int getLevel();
+
+    bool isAlive();
 
     SpriteCollider getCollider();
 
@@ -50,6 +53,8 @@ protected:
 
     float attackStrength;
     float attackSpeed;
+
+    float hurtTime;
 
     Settings settings;
 
@@ -79,6 +84,7 @@ public:
     void spawnEnemy(std::string enemyType, sf::Vector2f pos);
     void update(float dt);
     void draw(sf::RenderWindow &window);
+    void hurtEnemy(int i, int amount);
 
     void wallCollide(std::vector<Obstacle> obstacles);
 

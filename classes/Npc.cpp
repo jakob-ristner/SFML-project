@@ -48,6 +48,15 @@ float Enemy::getMaxHitpoints() {
     return maxHp;
 }
 
+float Enemy::hurt(float amount) {
+    hitpoints -= amount;
+    hurtTime = 100.0f;
+}
+
+bool Enemy::isAlive() {
+    return hitpoints > 0;
+}
+
 sf::Vector2f Enemy::getVel() {
     return vel;
 }
@@ -88,6 +97,12 @@ void Slime::update(float dt) {
     pos += vel * (dt / settings.TIMESCALE);
 
     setPosition(pos);
+    if (hurtTime > 0) {
+        setColor(sf::Color(255, 0, 0));
+        hurtTime -= dt;
+    } else {
+        setColor(sf::Color(255, 255, 255));
+    }
 
 }
 
@@ -113,8 +128,17 @@ void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
 }
 
 void EnemyFactory::update(float dt) {
-    for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
+    std::vector<int> deadEnemies;
+    int i = 0;
+    for (auto itr = enemies.begin(); itr != enemies.end(); ++itr, i++) {
         (*itr)->update(dt);
+        if (!(*itr)->isAlive()) {
+            deadEnemies.push_back(i);
+        }
+    }
+    // Remove dead enemies
+    for (i = deadEnemies.size() - 1; i >= 0; i--) {
+        enemies.erase(enemies.begin() + deadEnemies[i]);
     }
 }
 
@@ -132,4 +156,8 @@ void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
             (*itr)->getCollider().checkCollision(obstacleColl, direction, 0.0f);
         }
     }
+}
+
+void EnemyFactory::hurtEnemy(int i, int amount) {
+    (*enemies[i]).hurt(amount);
 }
