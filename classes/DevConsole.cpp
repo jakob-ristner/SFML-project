@@ -56,6 +56,7 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
     historyPlaceHolder.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 80)));
     historyPlaceHolder.setFillColor(sf::Color(210, 210, 210));
 
+    index = 0;
     while (isOpen) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {

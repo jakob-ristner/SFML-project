@@ -155,14 +155,19 @@ int MagicMissile::getCastTime() {
   return castTime;
 }
 
+bool magicMissileDamage(Enemy &enemy) {
+    enemy.hurt(0.5);
+    return true;
+}
+
 void MagicMissile::use() {
     player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad() + M_PI / 2), -cos(player.getMouseAngleRad() + M_PI / 2))),
-                         4, player.getPos(), 270 - player.getMouseAngle(), 0.5, &magicMissile));
+                         4, player.getPos(), 270 - player.getMouseAngle(), 0.5, &magicMissile, &magicMissileDamage));
     player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad() - M_PI / 2), -cos(player.getMouseAngleRad() - M_PI / 2))),
-                         4, player.getPos(), 450 - player.getMouseAngle(), 0.5, &magicMissile));
+                         4, player.getPos(), 450 - player.getMouseAngle(), 0.5, &magicMissile, &magicMissileDamage));
     player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
-                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &magicMissile));
+                         4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &magicMissile, &magicMissileDamage));
 }
