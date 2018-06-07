@@ -14,6 +14,7 @@
 #include "./headers/Obstacle.h"
 #include "./headers/DevConsole.h"
 #include "./headers/Npc.h"
+#include "./headers/RenderLayer.h"
 #pragma endregion
 int main() {
     const sf::Color bgColor(51, 51, 51);
@@ -73,6 +74,10 @@ int main() {
 
     // Spell
     Spell *currspell;
+
+    // Test render layer
+    RenderLayer layer1;
+    layer1.add(&text);
 
     // Main Game Loop
     clock.restart();
@@ -146,10 +151,12 @@ int main() {
         }
         player.draw(window);
         window.draw(foreGround);
-        window.draw(text);
+        //window.draw(text);
+        window.draw(layer1);
         enemyFactory.draw(window);
         window.display();
     }
 
     return 0;
 }
+
