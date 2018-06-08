@@ -2,9 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "Settings.h"
-#include "Collider.h"
-#include "Spell.h"
+#include "./Settings.h"
+#include "./Collider.h"
+#include "./Spell.h"
+#include "./PlayerInterface.h"
 
 class Projectile;
 class Spell;
@@ -30,10 +31,9 @@ public:
     std::vector<Projectile> &getProjectiles();
     sf::Vector2f getMousePos();
     void setMousePos(sf::Vector2f pos);
-    sf::RectangleShape castBarBackground;
-    sf::RectangleShape castBar;
     float castProgress;
     bool casting;
+    CastBar uiCastBar;
 
 private:
     sf::Vector2f pos;

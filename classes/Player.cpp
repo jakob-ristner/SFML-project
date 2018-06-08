@@ -24,26 +24,6 @@ Player::Player(sf::RectangleShape body) {
     castProgress = 0;
     casting = false;
 
-    castBarBackground = sf::RectangleShape(sf::Vector2f(200, 15));
-    castBarBackground.setOrigin(sf::Vector2f(castBarBackground.getSize().x / 2,
-                                             castBarBackground.getSize().y / 2));
-    castBarBackground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
-                                               600));
-    castBarBackground.setFillColor(sf::Color(51, 51, 51));
-
-    castBar = sf::RectangleShape(sf::Vector2f(0, 15));
-    castBar.setOrigin(sf::Vector2f(castBarBackground.getSize().x / 2,
-                                   castBarBackground.getSize().y / 2));
-    castBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
-                                              600));
-    castBar.setFillColor(sf::Color::Green);
-
-    // castBar.setSize(sf::Vector2f(0, 15));
-
-
-
-
-
 }
 
 Player::Player() {
@@ -92,7 +72,6 @@ void Player::update(float dt) {
     acc = sf::Vector2f(0, 0);
     casting = false;
     switchedSpells = false;
-    castBar.setSize(sf::Vector2f());
     pos = body.getPosition();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         acc.y = -playeracc;
@@ -126,7 +105,6 @@ void Player::update(float dt) {
       castProgress = 0;
     }
 
-    castBar.setSize(sf::Vector2f((castProgress / (*spellInventory[selectedSpell]).getCastTime()) * 200, 15));
     if(!(acc.x == 0.0f || acc.y == 0.0f)) {
         acc = normalizedVec(acc) * playeracc;
     }
@@ -144,14 +122,12 @@ void Player::update(float dt) {
             projectiles.erase(projectiles.begin() + i);
         }
     }
+    uiCastBar.update(castProgress, (*spellInventory[selectedSpell]).getCastTime(), casting);
 }
 
 void Player::draw(sf::RenderWindow &window) {
     window.draw(body);
-    if (casting) {
-      window.draw(castBarBackground);
-      window.draw(castBar);
-    }
+   window.draw(uiCastBar);
 }
 
 Collider Player::getCollider() {
