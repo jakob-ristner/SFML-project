@@ -127,6 +127,7 @@ void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
     }
 }
 
+// Updates itself and all belonging enemies
 void EnemyFactory::update(float dt) {
     std::vector<int> deadEnemies;
     int i = 0;
@@ -148,6 +149,7 @@ void EnemyFactory::draw(sf::RenderWindow &window) {
     }
 }
 
+// Checks all containing enemies for collision with walls
 void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
     sf::Vector2f direction;
     for (Obstacle &obstacle : obstacles) {
@@ -162,6 +164,8 @@ void EnemyFactory::hurtEnemy(int i, int amount) {
     (*enemies[i]).hurt(amount);
 }
 
+// Checks all belonging enemies for collisions with spells
+// and calls the apropriate functions
 void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
     sf::Vector2f direction;
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {

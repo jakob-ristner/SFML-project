@@ -79,6 +79,8 @@ public:
     void draw(sf::RenderWindow &window) override;
 };
 
+// Factory class producing all enemies.
+// Handles collision, updating and drawing for all enemies
 class EnemyFactory {
 public:
     EnemyFactory(Player &player);
