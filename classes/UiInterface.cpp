@@ -1,6 +1,16 @@
 #include <SFML/Graphics.hpp>
-#include "../headers/PlayerInterface.h"
+#include <iostream>
+
+#include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
+
+UiElement::UiElement() {
+    position = sf::Vector2f(0, 0);
+}
+
+UiElement::~UiElement() {
+
+}
 
 CastBar::CastBar() {
     progress = 0;
@@ -33,10 +43,55 @@ void CastBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     }
 }
 
+void CastBar::move(sf::Vector2f distance) {
+    background.move(distance);
+    foreground.move(distance);
+}
+
+void CastBar::setPosition(sf::Vector2f pos) {
+    position = pos;
+}
+
 void CastBar::update(float newProgress, float castTime, bool isCasting) {
     progress = newProgress;
     casting = isCasting;
     this->castTime = castTime;
 
     foreground.setSize(sf::Vector2f((progress / castTime) * 200, 15));
+}
+
+UiText::UiText() {
+    text = sf::Text();
+}
+
+UiText::UiText(sf::Text text) {
+    this->text = text;
+}
+
+UiText::~UiText() {
+
+}
+
+void UiText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(text);
+}
+
+void UiText::move(sf::Vector2f distance) {
+    text.move(distance);
+}
+
+void UiText::setPosition(sf::Vector2f pos) {
+    text.setPosition(pos);
+}
+
+void UiText::setString(std::string str) {
+    text.setString(str);
+}
+
+void UiText::setFillColor(sf::Color color) {
+    text.setFillColor(color);
+}
+
+void UiText::setFont(sf::Font font) {
+    text.setFont(font);
 }

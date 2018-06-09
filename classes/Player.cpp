@@ -127,7 +127,7 @@ void Player::update(float dt) {
 
 void Player::draw(sf::RenderWindow &window) {
     window.draw(body);
-   window.draw(uiCastBar);
+//   window.draw(uiCastBar);
 }
 
 Collider Player::getCollider() {

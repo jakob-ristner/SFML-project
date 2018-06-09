@@ -5,7 +5,7 @@
 #include "./Settings.h"
 #include "./Collider.h"
 #include "./Spell.h"
-#include "./PlayerInterface.h"
+#include "./UiInterface.h"
 
 class Projectile;
 class Spell;

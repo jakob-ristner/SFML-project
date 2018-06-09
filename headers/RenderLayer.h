@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include "./UiInterface.h"
 
 // Class that serves as a layer to draw other drawables
 // on. Then draws to screen with window.draw(this)
@@ -12,15 +13,17 @@
 class RenderLayer: public sf::Drawable {
 public:
     RenderLayer();
-    RenderLayer(std::vector<sf::Drawable *> drawables);
+    RenderLayer(std::vector<UiElement *> elements);
     ~RenderLayer();
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-    void add(sf::Drawable *drawable);
+    void add(UiElement *element);
+    void setPosition(sf::Vector2f pos);
 
 protected:
-    typedef std::vector<sf::Drawable *> DrawableList;
+    typedef std::vector<UiElement *> ElementList;
 
 private:
-    DrawableList drawables;
+    ElementList elements;
+    sf::Vector2f position;
 };
 
