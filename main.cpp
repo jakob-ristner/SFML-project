@@ -143,13 +143,14 @@ int main() {
         enemyFactory.spellCollide(player.getProjectiles());
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
+        // Moving the ui layer to ensure that it follows the screen
         layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
 
 
         // Drawing
         window.clear(bgColor);
 
-
+        // Landscape background
         window.draw(someSprite);
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
@@ -157,7 +158,6 @@ int main() {
         }
         player.draw(window);
         window.draw(foreGround);
-        //window.draw(text);
         window.draw(layer1);
         enemyFactory.draw(window);
         window.display();

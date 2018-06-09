@@ -52,6 +52,14 @@ void CastBar::setPosition(sf::Vector2f pos) {
     position = pos;
 }
 
+// Updates the casting bars current progress and therefore size
+// of the foreground.
+// Args:
+// newProgress - Float representing how many seconds the spell has been
+//               casted for
+// castTime    - Float representing the total casting time of a spell
+// isCasting   - Boolean coming from player, tells the bar if the spell
+//               has been canceled or not
 void CastBar::update(float newProgress, float castTime, bool isCasting) {
     progress = newProgress;
     casting = isCasting;

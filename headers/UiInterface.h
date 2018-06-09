@@ -2,11 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include "./Settings.h"
 
+// Abstract class representing a ui interface
 class UiElement: public sf::Drawable {
 public:
     UiElement();
     ~UiElement();
-    //virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     virtual void move(sf::Vector2f distance)=0;
     virtual void setPosition(sf::Vector2f pos)=0;
 
@@ -14,6 +14,8 @@ protected:
     sf::Vector2f position;
 };
 
+// Class representing and implementing the players spell
+// casting progress bar
 class CastBar: public UiElement {
 public:
     CastBar();
@@ -33,6 +35,8 @@ private:
     bool casting;
 };
 
+// Class representing a ui text
+// Works as a wrapper for sf::Text with some added functionality
 class UiText: public UiElement {
 public:
     UiText();
