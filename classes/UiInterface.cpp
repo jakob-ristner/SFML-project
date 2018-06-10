@@ -114,6 +114,7 @@ SpellBarIcon::SpellBarIcon() {
     background.setPosition(sf::Vector2f(0, 0));
     background.setSize(sf::Vector2f(30, 30));
     background.setFillColor(sf::Color(51, 51, 51));
+    background.setOutlineColor(sf::Color::Green);
 
     slotIdText.setString("1");
     slotIdText.setFont(mainFont);
@@ -143,6 +144,7 @@ void SpellBarIcon::draw(sf::RenderTarget &target, sf::RenderStates states) const
 void SpellBarIcon::move(sf::Vector2f distance) {
     background.move(distance);
     slotIdText.move(distance);
+    position += distance;
 }
 
 void SpellBarIcon::setPosition(sf::Vector2f pos) {
@@ -150,4 +152,56 @@ void SpellBarIcon::setPosition(sf::Vector2f pos) {
     // Maybe change the addition
     slotIdText.setPosition(pos + sf::Vector2f(2, 2)); 
     position = pos;
+}
+
+void SpellBarIcon::setSelected(bool isSelected) {
+    selected = isSelected;
+    if (selected) {
+        background.setOutlineThickness(3);
+    } else {
+        background.setOutlineThickness(0);
+    }
+}
+
+SpellBar::SpellBar() {
+    selected = 0;
+    size = sf::Vector2f(800, 30);
+}
+
+SpellBar::~SpellBar() {
+
+}
+
+void SpellBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    for (int i = 0; i < icons.size(); i++) {
+        target.draw(*icons[i]);
+    }
+}
+
+void SpellBar::move(sf::Vector2f distance) {
+    position += distance;
+    for (int i = 0; i < icons.size(); i++) {
+        (*icons[i]).move(distance);
+    }
+}
+
+void SpellBar::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void SpellBar::changeSelection(unsigned short int id) {
+    selected = id;
+    for (int i = 0; i < icons.size(); i++) {
+       (*icons[i]).setSelected(false);
+    }
+    (*icons[id]).setSelected(true);
+
+}
+
+void SpellBar::setSpellIcons(std::vector<SpellBarIcon *> newIcons) {
+    icons = newIcons;
+}
+
+void SpellBar::update() {
+
 }

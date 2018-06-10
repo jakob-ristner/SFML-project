@@ -65,6 +65,7 @@ public:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
+    void setSelected(bool isSelected);
 
 private: // Some of these are temporary
     UiText slotIdText;
@@ -74,3 +75,22 @@ private: // Some of these are temporary
     sf::RectangleShape background;
 };
 
+class SpellBar: public UiElement {
+public:
+    SpellBar();
+    ~SpellBar();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+
+    void setSize(sf::Vector2f size);
+    void changeSelection(unsigned short int id);
+    void setSpellIcons(std::vector<SpellBarIcon *> newIcons);
+    void update();
+
+private:
+    std::vector<SpellBarIcon *> icons;
+    sf::Vector2f size;
+    unsigned short int selected;
+};
