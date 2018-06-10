@@ -12,6 +12,7 @@ public:
 
 protected:
     sf::Vector2f position;
+    sf::Font mainFont;
 };
 
 // Class representing and implementing the players spell
@@ -49,7 +50,27 @@ public:
     void setString(std::string str);
     void setFillColor(sf::Color color);
     void setFont(sf::Font font);
+    void setFontSize(unsigned int size);
 
 private:
     sf::Text text;
 };
+
+class SpellBarIcon: public UiElement {
+public:
+    SpellBarIcon();
+    SpellBarIcon(int id);
+    ~SpellBarIcon();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+
+private: // Some of these are temporary
+    UiText slotIdText;
+    bool selected;
+    int slotId;
+
+    sf::RectangleShape background;
+};
+

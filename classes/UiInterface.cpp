@@ -4,8 +4,10 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
 
+
 UiElement::UiElement() {
     position = sf::Vector2f(0, 0);
+    mainFont.loadFromFile("font.ttf");
 }
 
 UiElement::~UiElement() {
@@ -17,11 +19,11 @@ CastBar::CastBar() {
     casting = false;
 
 
-    background.setSize(sf::Vector2f(200, 15));
+    background.setSize(sf::Vector2f(204, 19));
     background.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
-                                        600));
+    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 2,
+                                        598));
     background.setFillColor(sf::Color(51, 51, 51));
 
     foreground.setSize(sf::Vector2f(0, 15));
@@ -29,7 +31,7 @@ CastBar::CastBar() {
                                       background.getSize().y / 2));
     foreground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
                                         600));
-    foreground.setFillColor(sf::Color::Green);
+    foreground.setFillColor(sf::Color(0, 200, 255));
 }
 
 CastBar::~CastBar() {
@@ -102,4 +104,50 @@ void UiText::setFillColor(sf::Color color) {
 
 void UiText::setFont(sf::Font font) {
     text.setFont(font);
+}
+
+void UiText::setFontSize(unsigned int size) {
+    text.setCharacterSize(size);
+}
+
+SpellBarIcon::SpellBarIcon() {
+    background.setPosition(sf::Vector2f(0, 0));
+    background.setSize(sf::Vector2f(30, 30));
+    background.setFillColor(sf::Color(51, 51, 51));
+
+    slotIdText.setString("1");
+    slotIdText.setFont(mainFont);
+    slotIdText.setFontSize(28);
+    slotIdText.setFillColor(sf::Color::White);
+    slotIdText.setPosition(sf::Vector2f(2, 2));
+
+    selected = false;
+    slotId = 1;
+}
+
+SpellBarIcon::SpellBarIcon(int id) {
+    SpellBarIcon();
+    slotIdText.setString(std::to_string(id));
+    slotId = id;
+}
+
+SpellBarIcon::~SpellBarIcon() {
+
+}
+
+void SpellBarIcon::draw(sf::RenderTarget &target, sf::RenderStates states) const{
+    target.draw(background);
+    target.draw(slotIdText);
+}
+
+void SpellBarIcon::move(sf::Vector2f distance) {
+    background.move(distance);
+    slotIdText.move(distance);
+}
+
+void SpellBarIcon::setPosition(sf::Vector2f pos) {
+    background.setPosition(pos);
+    // Maybe change the addition
+    slotIdText.setPosition(pos + sf::Vector2f(2, 2)); 
+    position = pos;
 }
