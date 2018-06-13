@@ -86,10 +86,6 @@ int main() {
     
     SpellBarIcon icon1 = SpellBarIcon(1);
     SpellBarIcon icon2 = SpellBarIcon(2);
-    std::cout << "ICON 1" << std::endl;
-    icon1.printSize();
-    std::cout << "ICON 2" << std::endl;
-    icon2.printSize();
 
     std::vector<SpellBarIcon *> spellIcons;
     spellIcons.push_back(&icon1);

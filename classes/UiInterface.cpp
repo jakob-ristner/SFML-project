@@ -110,6 +110,11 @@ void UiText::setFontSize(unsigned int size) {
     text.setCharacterSize(size);
 }
 
+sf::Vector2f UiText::getDims() {
+    sf::FloatRect dims = text.getLocalBounds();
+    return sf::Vector2f(dims.width, dims.height);
+}
+
 SpellBarIcon::SpellBarIcon() {
     background.setPosition(sf::Vector2f(0, 0));
     background.setSize(sf::Vector2f(30, 30));
@@ -120,7 +125,7 @@ SpellBarIcon::SpellBarIcon() {
     slotIdText.setString("1");
     slotIdText.setFontSize(28);
     slotIdText.setFillColor(sf::Color::White);
-    slotIdText.setPosition(sf::Vector2f(2, -10));
+    slotIdText.setPosition(sf::Vector2f(0, -10) + (background.getSize() - slotIdText.getDims()) / 2.0f); 
 
     selected = false;
     slotId = 1;
@@ -149,7 +154,7 @@ void SpellBarIcon::move(sf::Vector2f distance) {
 void SpellBarIcon::setPosition(sf::Vector2f pos) {
     background.setPosition(pos);
     // Maybe change the addition
-    slotIdText.setPosition(pos + sf::Vector2f(6, -4)); 
+    slotIdText.setPosition(sf::Vector2f(0, -10) + pos + (background.getSize() - slotIdText.getDims()) / 2.0f); 
     position = pos;
 }
 

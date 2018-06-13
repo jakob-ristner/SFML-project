@@ -53,6 +53,8 @@ public:
     void setFont(sf::Font &font);
     void setFontSize(unsigned int size);
 
+    sf::Vector2f getDims();
+
 private:
     sf::Text text;
 };
