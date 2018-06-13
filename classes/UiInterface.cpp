@@ -102,7 +102,7 @@ void UiText::setFillColor(sf::Color color) {
     text.setFillColor(color);
 }
 
-void UiText::setFont(sf::Font font) {
+void UiText::setFont(sf::Font &font) {
     text.setFont(font);
 }
 
@@ -116,18 +116,17 @@ SpellBarIcon::SpellBarIcon() {
     background.setFillColor(sf::Color(51, 51, 51));
     background.setOutlineColor(sf::Color::Green);
 
-    slotIdText.setString("1");
     slotIdText.setFont(mainFont);
+    slotIdText.setString("1");
     slotIdText.setFontSize(28);
     slotIdText.setFillColor(sf::Color::White);
-    slotIdText.setPosition(sf::Vector2f(2, 2));
+    slotIdText.setPosition(sf::Vector2f(2, -10));
 
     selected = false;
     slotId = 1;
 }
 
-SpellBarIcon::SpellBarIcon(int id) {
-    SpellBarIcon();
+SpellBarIcon::SpellBarIcon(int id): SpellBarIcon() {
     slotIdText.setString(std::to_string(id));
     slotId = id;
 }
@@ -150,8 +149,12 @@ void SpellBarIcon::move(sf::Vector2f distance) {
 void SpellBarIcon::setPosition(sf::Vector2f pos) {
     background.setPosition(pos);
     // Maybe change the addition
-    slotIdText.setPosition(pos + sf::Vector2f(2, 2)); 
+    slotIdText.setPosition(pos + sf::Vector2f(6, -4)); 
     position = pos;
+}
+
+sf::Vector2f SpellBarIcon::getPosition() {
+    return background.getPosition();
 }
 
 void SpellBarIcon::setSelected(bool isSelected) {
@@ -189,17 +192,24 @@ void SpellBar::setPosition(sf::Vector2f pos) {
     move(pos - position);
 }
 
+void SpellBar::setSize(sf::Vector2f size) {
+    this->size = size;
+}
+
 void SpellBar::changeSelection(unsigned short int id) {
-    selected = id;
+    selected = id - 1;
     for (int i = 0; i < icons.size(); i++) {
        (*icons[i]).setSelected(false);
     }
-    (*icons[id]).setSelected(true);
+    (*icons[selected]).setSelected(true);
 
 }
 
 void SpellBar::setSpellIcons(std::vector<SpellBarIcon *> newIcons) {
     icons = newIcons;
+    for (int i = 0; i < icons.size(); i++) {
+        (*icons[i]).setPosition(position + sf::Vector2f((size.x / icons.size()) * i, 0));
+    }
 }
 
 void SpellBar::update() {

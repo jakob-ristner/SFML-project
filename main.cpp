@@ -83,6 +83,25 @@ int main() {
     RenderLayer layer1;
     layer1.add(&uitext);
     layer1.add(&(player.uiCastBar));
+    
+    SpellBarIcon icon1 = SpellBarIcon(1);
+    SpellBarIcon icon2 = SpellBarIcon(2);
+    std::cout << "ICON 1" << std::endl;
+    icon1.printSize();
+    std::cout << "ICON 2" << std::endl;
+    icon2.printSize();
+
+    std::vector<SpellBarIcon *> spellIcons;
+    spellIcons.push_back(&icon1);
+    spellIcons.push_back(&icon2);
+    SpellBar mainSpellBar = SpellBar();
+    mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 40, Settings::WINDOW_HEIGHT - 100));
+    mainSpellBar.setSize(sf::Vector2f(80, 30));
+    mainSpellBar.setSpellIcons(spellIcons);
+    mainSpellBar.changeSelection(1);
+
+    layer1.add(&mainSpellBar);
+    player.spellBar = &mainSpellBar;
 
     // Main Game Loop
     clock.restart();
@@ -160,6 +179,7 @@ int main() {
         window.draw(foreGround);
         window.draw(layer1);
         enemyFactory.draw(window);
+        window.draw(icon1);
         window.display();
     }
 

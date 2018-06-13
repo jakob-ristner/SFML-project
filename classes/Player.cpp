@@ -23,7 +23,6 @@ Player::Player(sf::RectangleShape body) {
     this->body.setOrigin(sf::Vector2f(body.getSize().x / 2, body.getSize().y / 2));
     castProgress = 0;
     casting = false;
-
 }
 
 Player::Player() {
@@ -123,6 +122,9 @@ void Player::update(float dt) {
         }
     }
     uiCastBar.update(castProgress, (*spellInventory[selectedSpell]).getCastTime(), casting);
+    if (switchedSpells) {
+        (*spellBar).changeSelection(selectedSpell + 1);
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
