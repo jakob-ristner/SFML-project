@@ -4,8 +4,10 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
 
+
 UiElement::UiElement() {
     position = sf::Vector2f(0, 0);
+    mainFont.loadFromFile("font.ttf");
 }
 
 UiElement::~UiElement() {
@@ -17,11 +19,11 @@ CastBar::CastBar() {
     casting = false;
 
 
-    background.setSize(sf::Vector2f(200, 15));
+    background.setSize(sf::Vector2f(204, 19));
     background.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
-                                        600));
+    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 2,
+                                        598));
     background.setFillColor(sf::Color(51, 51, 51));
 
     foreground.setSize(sf::Vector2f(0, 15));
@@ -29,7 +31,7 @@ CastBar::CastBar() {
                                       background.getSize().y / 2));
     foreground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
                                         600));
-    foreground.setFillColor(sf::Color::Green);
+    foreground.setFillColor(sf::Color(0, 200, 255));
 }
 
 CastBar::~CastBar() {
@@ -100,6 +102,121 @@ void UiText::setFillColor(sf::Color color) {
     text.setFillColor(color);
 }
 
-void UiText::setFont(sf::Font font) {
+void UiText::setFont(sf::Font &font) {
     text.setFont(font);
+}
+
+void UiText::setFontSize(unsigned int size) {
+    text.setCharacterSize(size);
+}
+
+sf::Vector2f UiText::getDims() {
+    sf::FloatRect dims = text.getLocalBounds();
+    return sf::Vector2f(dims.width, dims.height);
+}
+
+SpellBarIcon::SpellBarIcon() {
+    background.setPosition(sf::Vector2f(0, 0));
+    background.setSize(sf::Vector2f(30, 30));
+    background.setFillColor(sf::Color(51, 51, 51));
+    background.setOutlineColor(sf::Color::Green);
+
+    slotIdText.setFont(mainFont);
+    slotIdText.setString("1");
+    slotIdText.setFontSize(28);
+    slotIdText.setFillColor(sf::Color::White);
+    slotIdText.setPosition(sf::Vector2f(0, -10) + (background.getSize() - slotIdText.getDims()) / 2.0f); 
+
+    selected = false;
+    slotId = 1;
+}
+
+SpellBarIcon::SpellBarIcon(int id): SpellBarIcon() {
+    slotIdText.setString(std::to_string(id));
+    slotId = id;
+}
+
+SpellBarIcon::~SpellBarIcon() {
+
+}
+
+void SpellBarIcon::draw(sf::RenderTarget &target, sf::RenderStates states) const{
+    target.draw(background);
+    target.draw(slotIdText);
+}
+
+void SpellBarIcon::move(sf::Vector2f distance) {
+    background.move(distance);
+    slotIdText.move(distance);
+    position += distance;
+}
+
+void SpellBarIcon::setPosition(sf::Vector2f pos) {
+    background.setPosition(pos);
+    // Maybe change the addition
+    slotIdText.setPosition(sf::Vector2f(0, -10) + pos + (background.getSize() - slotIdText.getDims()) / 2.0f); 
+    position = pos;
+}
+
+sf::Vector2f SpellBarIcon::getPosition() {
+    return background.getPosition();
+}
+
+void SpellBarIcon::setSelected(bool isSelected) {
+    selected = isSelected;
+    if (selected) {
+        background.setOutlineThickness(3);
+    } else {
+        background.setOutlineThickness(0);
+    }
+}
+
+SpellBar::SpellBar() {
+    selected = 0;
+    size = sf::Vector2f(800, 30);
+}
+
+SpellBar::~SpellBar() {
+
+}
+
+void SpellBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    for (int i = 0; i < icons.size(); i++) {
+        target.draw(*icons[i]);
+    }
+}
+
+void SpellBar::move(sf::Vector2f distance) {
+    position += distance;
+    for (int i = 0; i < icons.size(); i++) {
+        (*icons[i]).move(distance);
+    }
+}
+
+void SpellBar::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void SpellBar::setSize(sf::Vector2f size) {
+    this->size = size;
+}
+
+void SpellBar::changeSelection(unsigned short int id) {
+    selected = id - 1;
+    for (int i = 0; i < icons.size(); i++) {
+       (*icons[i]).setSelected(false);
+    }
+    (*icons[selected]).setSelected(true);
+
+}
+
+void SpellBar::setSpellIcons(std::vector<SpellBarIcon *> newIcons) {
+    icons = newIcons;
+    for (int i = 0; i < icons.size(); i++) {
+        (*icons[i]).setPosition(position + sf::Vector2f((size.x / icons.size()) * i, 0));
+    }
+}
+
+void SpellBar::update() {
+
 }

@@ -34,6 +34,7 @@ public:
     float castProgress;
     bool casting;
     CastBar uiCastBar;
+    SpellBar *spellBar;
 
 private:
     sf::Vector2f pos;

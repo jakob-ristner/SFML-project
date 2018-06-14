@@ -11,3 +11,5 @@ sf::Vector2f clampVec(sf::Vector2f vec, sf::Vector2f lower, sf::Vector2f upper);
 float getAngle(sf::Vector2f pos1, sf::Vector2f pos2);
 
 sf::Vector2f rotateNormalVect(sf::Vector2f vector, float degrees);
+
+void printVec(sf::Vector2f vec);

@@ -32,3 +32,7 @@ sf::Vector2f rotateNormalVect(sf::Vector2f vector, float radians) {
     float originalAngle = atan2(vector.x, vector.y);
     return sf::Vector2f(sin((originalAngle + radians)), cos(originalAngle + radians));
 }
+
+void printVec(sf::Vector2f vec) {
+    std::cout << vec.x << " " << vec.y << std::endl;
+}
