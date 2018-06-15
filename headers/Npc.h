@@ -93,6 +93,7 @@ public:
 
     void wallCollide(std::vector<Obstacle> obstacles);
     void spellCollide(std::vector<Projectile> &projs);
+    void playerCollide(Player &player);
 
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;

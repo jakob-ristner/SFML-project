@@ -7,7 +7,9 @@ public:
     CollisionBox();
     ~CollisionBox();
 
-    virtual bool checkCollision(CollisionBox *other, sf::Vector2f &direction, float push)=0;
+    bool checkCollision(CollisionBox *other, sf::Vector2f &direction, float push);
+    // Same thing but doesn't move the collision boxes
+    bool isColliding(CollisionBox *other);
     virtual void move(float dx, float dy)=0;
 
     virtual sf::Vector2f getPosition()=0;
@@ -27,7 +29,6 @@ public:
     // Maybe not needed
     void move(float dx, float dy);
 
-    bool checkCollision(CollisionBox *other, sf::Vector2f &direction, float push);
     sf::Vector2f getPosition();
     sf::Vector2f getHalfSize();
 
@@ -42,8 +43,6 @@ public:
     ~SpriteCollider();
 
     void move(float dx, float dy);
-
-    bool checkCollision(CollisionBox *other, sf::Vector2f &direction, float push);
 
     sf::Vector2f getPosition();
     sf::Vector2f getHalfSize();

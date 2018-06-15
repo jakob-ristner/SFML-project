@@ -178,3 +178,7 @@ void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
         }
     }
 }
+
+void EnemyFactory::playerCollide(Player &player) {
+    
+}
