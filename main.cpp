@@ -148,7 +148,7 @@ int main() {
         // Collision detection
         if (settings.playerColliding) {
             for (Obstacle &obstacle : obstacles) {
-                if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
+                if (obstacle.getCollider().checkCollision(&playerCol, direction, 1.0f)) {
                     player.onCollision(direction);
                 }
             }

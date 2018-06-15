@@ -155,7 +155,7 @@ void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
     for (Obstacle &obstacle : obstacles) {
         Collider obstacleColl = obstacle.getCollider();
         for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
-            (*itr)->getCollider().checkCollision(obstacleColl, direction, 0.0f);
+            (*itr)->getCollider().checkCollision(&obstacleColl, direction, 0.0f);
         }
     }
 }
@@ -172,7 +172,7 @@ void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
         SpriteCollider currentSprite = (*itr)->getCollider();
         for (Projectile &projectile : projs) {
             SpriteCollider currentSpell = projectile.getCollider();
-            if (currentSprite.checkCollision(currentSpell, direction, 0.0f)) {
+            if (currentSprite.checkCollision(&currentSpell, direction, 0.0f)) {
                 projectile.onCollision(*(itr->get()));
             }
         }
