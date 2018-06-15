@@ -19,22 +19,29 @@ public:
     void draw(sf::RenderWindow &window);
     void castSpell();
     void update(float dt);
+
     void setMouseAngle(float angle);
     float getMouseAngle();
     float getMouseAngleRad();
     void setRotation(float rotation);
+    sf::Vector2f getMousePos();
+    void setMousePos(sf::Vector2f pos);
+    
     void addSpell(Spell *spell);
     Spell *getSpell(int index);
+
     void onCollision(sf::Vector2f direction);
     Collider getCollider();
     void addProjectile(Projectile projectile);
     std::vector<Projectile> &getProjectiles();
-    sf::Vector2f getMousePos();
-    void setMousePos(sf::Vector2f pos);
+
     float castProgress;
     bool casting;
     CastBar uiCastBar;
     SpellBar *spellBar;
+
+    void hurt(float amount);
+    void heal(float amount);
 
 private:
     sf::Vector2f pos;
@@ -52,4 +59,7 @@ private:
     sf::Vector2f mousePos;
     bool switchedSpells;
 
+    float hitpoints;
+    float maxHp;
+    float timeSinceHurt;
 };

@@ -167,12 +167,11 @@ void EnemyFactory::hurtEnemy(int i, int amount) {
 // Checks all belonging enemies for collisions with spells
 // and calls the apropriate functions
 void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
-    sf::Vector2f direction;
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
         SpriteCollider currentSprite = (*itr)->getCollider();
         for (Projectile &projectile : projs) {
             SpriteCollider currentSpell = projectile.getCollider();
-            if (currentSprite.checkCollision(&currentSpell, direction, 0.0f)) {
+            if (currentSprite.isColliding(&currentSpell)) {
                 projectile.onCollision(*(itr->get()));
             }
         }
@@ -180,5 +179,12 @@ void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
 }
 
 void EnemyFactory::playerCollide(Player &player) {
-    
+    sf::Vector2f direction;
+    for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
+        SpriteCollider currentSprite = (*itr)->getCollider();
+        Collider playerCol = player.getCollider();
+        if (currentSprite.checkCollision(&playerCol, direction, 0.0f)) {
+            player.hurt(1);
+        }
+    }
 }
