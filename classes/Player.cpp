@@ -129,10 +129,10 @@ void Player::update(float dt) {
         (*spellBar).changeSelection(selectedSpell + 1);
     }
 
-    std::cout << hitpoints << std::endl;
     if (timeSinceHurt > 0) {
         timeSinceHurt -= dt;
     }
+
 }
 
 void Player::draw(sf::RenderWindow &window) {
@@ -182,8 +182,18 @@ void Player::hurt(float amount) {
         hitpoints -= amount;
         timeSinceHurt = 1000;
     }
+    (*hpBar).update(hitpoints);
 }
 
 void Player::heal(float amount) {
     hitpoints += amount;
+    (*hpBar).update(hitpoints);
+}
+
+float Player::getMaxHp() {
+    return maxHp;
+}
+
+void Player::setHpBar(PlayerHpBar *bar) {
+    hpBar = bar;
 }

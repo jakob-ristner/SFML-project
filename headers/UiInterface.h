@@ -54,6 +54,7 @@ public:
     void setFontSize(unsigned int size);
 
     sf::Vector2f getDims();
+    sf::Text getText() {return text;}
 
 private:
     sf::Text text;
@@ -110,9 +111,15 @@ public:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
+
+    void update(float newHp);
+    void setMaxHp(float newMaxHp);
     
 private:
-    sf::RectangleShape background;
     sf::RectangleShape redShape;
     sf::RectangleShape greenShape;
+    UiText hpText;
+    
+    float hp;
+    float maxHp;
 };

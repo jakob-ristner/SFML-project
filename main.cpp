@@ -100,6 +100,8 @@ int main() {
     player.spellBar = &mainSpellBar;
 
     PlayerHpBar playerHpBar;
+    playerHpBar.setMaxHp(player.getMaxHp());
+    player.setHpBar(&playerHpBar);
     layer1.add(&playerHpBar);
 
     // Main Game Loop

@@ -43,6 +43,10 @@ public:
     void hurt(float amount);
     void heal(float amount);
 
+    float getMaxHp();
+
+    void setHpBar(PlayerHpBar *bar);
+
 private:
     sf::Vector2f pos;
     std::vector<Spell *> spellInventory;
@@ -62,4 +66,6 @@ private:
     float hitpoints;
     float maxHp;
     float timeSinceHurt;
+
+    PlayerHpBar *hpBar;
 };
