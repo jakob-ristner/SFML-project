@@ -99,6 +99,9 @@ int main() {
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
+    PlayerHpBar playerHpBar;
+    layer1.add(&playerHpBar);
+
     // Main Game Loop
     clock.restart();
     float dt = 0;

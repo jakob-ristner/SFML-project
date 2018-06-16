@@ -220,3 +220,25 @@ void SpellBar::setSpellIcons(std::vector<SpellBarIcon *> newIcons) {
 void SpellBar::update() {
 
 }
+
+PlayerHpBar::PlayerHpBar() {
+    background.setSize(sf::Vector2f(200.0f, 32.0f));
+    background.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - background.getSize().x) / 2, Settings::WINDOW_HEIGHT - 62.0f));
+    background.setFillColor(sf::Color(51, 51, 51));
+}
+
+PlayerHpBar::~PlayerHpBar() {
+
+}
+
+void PlayerHpBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(background);
+}
+
+void PlayerHpBar::move(sf::Vector2f distance) {
+
+}
+
+void PlayerHpBar::setPosition(sf::Vector2f pos) {
+
+}

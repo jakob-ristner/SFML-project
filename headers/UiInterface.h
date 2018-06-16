@@ -101,3 +101,18 @@ private:
     sf::Vector2f size;
     unsigned short int selected;
 };
+
+class PlayerHpBar: public UiElement {
+public:
+    PlayerHpBar();
+    ~PlayerHpBar();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    
+private:
+    sf::RectangleShape background;
+    sf::RectangleShape redShape;
+    sf::RectangleShape greenShape;
+};
