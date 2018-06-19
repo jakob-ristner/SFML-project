@@ -178,10 +178,7 @@ void Player::setMousePos(sf::Vector2f pos) {
 }
 
 void Player::hurt(float amount) {
-    if (timeSinceHurt <= 0) {
-        hitpoints -= amount;
-        timeSinceHurt = 1000;
-    }
+    hitpoints -= amount;
     (*hpBar).update(hitpoints);
 }
 

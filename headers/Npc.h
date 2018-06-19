@@ -40,10 +40,15 @@ public:
     float getHitpoints();
     float getMaxHitpoints();
     float hurt(float amount);
+    float getAttackStr();
 
     unsigned int getLevel();
 
     bool isAlive();
+    bool canAttack();
+
+    void resetAttackTimer();
+    float getAttackTime() {return timeToAttack;}
 
     SpriteCollider getCollider();
 
@@ -56,6 +61,7 @@ protected:
 
     float attackStrength;
     float attackSpeed;
+    float timeToAttack; // Updating is done by subclasses
 
     float hurtTime;
 

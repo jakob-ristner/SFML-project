@@ -53,8 +53,20 @@ float Enemy::hurt(float amount) {
     hurtTime = 100.0f;
 }
 
+float Enemy::getAttackStr() {
+    return attackStrength;
+}
+
 bool Enemy::isAlive() {
     return hitpoints > 0;
+}
+
+bool Enemy::canAttack() {
+    return timeToAttack <= 0;
+}
+
+void Enemy::resetAttackTimer() {
+    timeToAttack = attackSpeed;
 }
 
 sf::Vector2f Enemy::getVel() {
@@ -66,7 +78,7 @@ SpriteCollider Enemy::getCollider() {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player) :
-    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player) {
+    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 100.0f, 1, player) {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, Player &player) :
@@ -79,6 +91,9 @@ Slime::~Slime() {
 }
 
 void Slime::update(float dt) {
+    if (timeToAttack > 0) {
+        timeToAttack -= dt;
+    }
     acc = sf::Vector2f(0.0f, 0.0f);
 
     // Here some thinking will be executed (TODO)
@@ -184,7 +199,11 @@ void EnemyFactory::playerCollide(Player &player) {
         SpriteCollider currentSprite = (*itr)->getCollider();
         Collider playerCol = player.getCollider();
         if (currentSprite.checkCollision(&playerCol, direction, 0.0f)) {
-            player.hurt(1);
+            std::cout << (*itr)->getAttackTime() << std::endl;
+            if ((*itr)->canAttack()) {
+                player.hurt((*itr)->getAttackStr());
+                (*itr)->resetAttackTimer();
+            }
         }
     }
 }
