@@ -48,7 +48,6 @@ public:
     bool canAttack();
 
     void resetAttackTimer();
-    float getAttackTime() {return timeToAttack;}
 
     SpriteCollider getCollider();
 

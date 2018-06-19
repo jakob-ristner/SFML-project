@@ -199,7 +199,6 @@ void EnemyFactory::playerCollide(Player &player) {
         SpriteCollider currentSprite = (*itr)->getCollider();
         Collider playerCol = player.getCollider();
         if (currentSprite.checkCollision(&playerCol, direction, 0.0f)) {
-            std::cout << (*itr)->getAttackTime() << std::endl;
             if ((*itr)->canAttack()) {
                 player.hurt((*itr)->getAttackStr());
                 (*itr)->resetAttackTimer();
