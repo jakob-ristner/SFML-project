@@ -237,6 +237,7 @@ PlayerHpBar::PlayerHpBar() {
 
     hpText.setFillColor(sf::Color::Black);
     hpText.setFontSize(14);
+    position = redShape.getPosition();
 }
 
 PlayerHpBar::~PlayerHpBar() {
@@ -252,6 +253,7 @@ void PlayerHpBar::draw(sf::RenderTarget &target, sf::RenderStates states) const 
 void PlayerHpBar::move(sf::Vector2f distance) {
     redShape.move(distance);
     greenShape.move(distance);
+    hpText.move(distance);
     position = redShape.getPosition();
 }
 
@@ -264,14 +266,10 @@ void PlayerHpBar::update(float newHp) {
     hp = std::max(newHp, 0.0f);
     greenShape.setSize(sf::Vector2f((hp / maxHp) * redShape.getSize().x, greenShape.getSize().y));
     hpText.setString(std::to_string(int(hp)) + "/" + std::to_string(int(maxHp)));
-    hpText.setPosition(sf::Vector2f(0, -5) + position + (redShape.getSize() - hpText.getDims()) / 2.0f);
-    std::cout << hpText.getText().getPosition().x << " " << hpText.getText().getPosition().y << std::endl;
-    std::string m = hpText.getText().getString();
-    std::cout << m << std::endl;
+    hpText.setPosition(sf::Vector2f(0, -3) + position + (redShape.getSize() - hpText.getDims()) / 2.0f);
 }
 
 void PlayerHpBar::setMaxHp(float newMaxHp) {
     maxHp = newMaxHp;
-    hp = maxHp;
-    hpText.setString(std::to_string(hp) + "/" + std::to_string(maxHp));
+    update(maxHp);
 }
