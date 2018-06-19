@@ -45,7 +45,7 @@ int main() {
     std::vector<Obstacle> obstacles;
 
     sf::Clock clock;
-    TileMap map = TileMap("./resources/map1", obstacles);
+    TileMap map = TileMap("./resources/map2", obstacles);
     sf::Sprite someSprite;
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
