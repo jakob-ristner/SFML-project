@@ -99,6 +99,11 @@ int main() {
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
+    PlayerHpBar playerHpBar;
+    playerHpBar.setMaxHp(player.getMaxHp());
+    player.setHpBar(&playerHpBar);
+    layer1.add(&playerHpBar);
+
     // Main Game Loop
     clock.restart();
     float dt = 0;
@@ -148,7 +153,7 @@ int main() {
         // Collision detection
         if (settings.playerColliding) {
             for (Obstacle &obstacle : obstacles) {
-                if (obstacle.getCollider().checkCollision(playerCol, direction, 1.0f)) {
+                if (obstacle.getCollider().checkCollision(&playerCol, direction, 1.0f)) {
                     player.onCollision(direction);
                 }
             }
@@ -156,11 +161,11 @@ int main() {
         enemyFactory.update(dt);
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
+        enemyFactory.playerCollide(player);
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
         layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
-
 
         // Drawing
         window.clear(bgColor);
@@ -171,6 +176,7 @@ int main() {
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].draw(window);
         }
+
         player.draw(window);
         window.draw(foreGround);
         window.draw(layer1);

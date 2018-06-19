@@ -40,10 +40,14 @@ public:
     float getHitpoints();
     float getMaxHitpoints();
     float hurt(float amount);
+    float getAttackStr();
 
     unsigned int getLevel();
 
     bool isAlive();
+    bool canAttack();
+
+    void resetAttackTimer();
 
     SpriteCollider getCollider();
 
@@ -56,6 +60,7 @@ protected:
 
     float attackStrength;
     float attackSpeed;
+    float timeToAttack; // Updating is done by subclasses
 
     float hurtTime;
 
@@ -93,6 +98,7 @@ public:
 
     void wallCollide(std::vector<Obstacle> obstacles);
     void spellCollide(std::vector<Projectile> &projs);
+    void playerCollide(Player &player);
 
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;

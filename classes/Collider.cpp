@@ -3,19 +3,26 @@
 #include <iostream>
 #include <cmath>
 
-Collider::Collider(sf::RectangleShape &body, sf::Vector2f velocity) :
-    body(body){
-    this->velocity = velocity;
-}
-
-Collider::~Collider() {
+CollisionBox::CollisionBox() {
 
 }
 
-void Collider::move(float dx, float dy) {
-    body.move(dx, dy);
+CollisionBox::~CollisionBox() {
+
 }
 
+bool CollisionBox::isColliding(CollisionBox *other) {
+    sf::Vector2f thisPosition = getPosition();
+    sf::Vector2f otherPosition = (*other).getPosition();
+    sf::Vector2f thisHalfSize = getHalfSize();
+    sf::Vector2f otherHalfSize = (*other).getHalfSize();
+
+    float intersectX = std::abs(otherPosition.x - thisPosition.x) - (otherHalfSize.x + thisHalfSize.x);
+    float intersectY = std::abs(otherPosition.y - thisPosition.y) - (otherHalfSize.y + thisHalfSize.y);
+
+    return (intersectX < 0.0f && intersectY < 0.0f);
+
+}
 
 // Returns whether this collider and another intersect each other and 
 // pushes them out of each other. The amount the other collider moves 
@@ -27,9 +34,9 @@ void Collider::move(float dx, float dy) {
 //             onCollision method if special behaviour occurs on collision
 // push - scale factor for how much the other collider should move, this collider
 //        moves according to 1 - push
-bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float push) {
-    sf::Vector2f otherPosition = other.getPosition();
-    sf::Vector2f otherHalfSize = other.getHalfSize();
+bool CollisionBox::checkCollision(CollisionBox *other, sf::Vector2f& direction, float push) {
+    sf::Vector2f otherPosition = (*other).getPosition();
+    sf::Vector2f otherHalfSize = (*other).getHalfSize();
     sf::Vector2f thisPosition = getPosition();
     sf::Vector2f thisHalfSize = getHalfSize();
 
@@ -45,13 +52,13 @@ bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float pu
         if (intersectX > intersectY) {
             if (deltaX > 0.0f) {
                 move(intersectX * (1.0f - push), 0.0f);
-                other.move(-intersectX  * push, 0.0f);
+                (*other).move(-intersectX  * push, 0.0f);
 
                 direction.x = 1.0f;
                 direction.y = 0.0f;
             } else {
                 move(-intersectX * (1.0f - push), 0.0f);
-                other.move(intersectX  * push, 0.0f);
+                (*other).move(intersectX  * push, 0.0f);
 
                 direction.x = -1.0f;
                 direction.y = 0.0f;
@@ -59,13 +66,13 @@ bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float pu
         } else {
             if (deltaY < 0.0f) {
                 move(0.0f, -intersectY * (1.0f - push));
-                other.move(0.0f, intersectY * push);
+                (*other).move(0.0f, intersectY * push);
 
                 direction.x = 0.0f;
                 direction.y = 1.0f;
             } else {
                 move(0.0f, intersectY * (1.0f - push));
-                other.move(0.0f, -intersectY * push);
+                (*other).move(0.0f, -intersectY * push);
 
                 direction.x = 0.0f;
                 direction.y = -1.0f;
@@ -75,6 +82,22 @@ bool Collider::checkCollision(Collider& other, sf::Vector2f& direction, float pu
     }
     return false;
 }
+
+Collider::Collider(sf::RectangleShape &body, sf::Vector2f velocity) :
+    body(body){
+    this->velocity = velocity;
+}
+
+Collider::~Collider() {
+
+}
+
+void Collider::move(float dx, float dy) {
+    body.move(dx, dy);
+}
+
+
+
 
 sf::Vector2f Collider::getPosition() {
     return body.getPosition();
@@ -97,103 +120,8 @@ void SpriteCollider::move(float dx, float dy) {
     body.move(dx, dy);
 }
 
-bool SpriteCollider::checkCollision(Collider& other, sf::Vector2f& direction, float push) {
-    sf::Vector2f otherPosition = other.getPosition();
-    sf::Vector2f otherHalfSize = other.getHalfSize();
-    sf::Vector2f thisPosition = getPosition();
-    sf::Vector2f thisHalfSize = getHalfSize();
 
-    float deltaX = otherPosition.x - thisPosition.x;
-    float deltaY = otherPosition.y - thisPosition.y;
 
-    float intersectX = std::abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
-    float intersectY = std::abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
-
-    if (intersectX < 0.0f && intersectY < 0.0f) {
-        push = std::min(std::max(push, 0.0f), 1.0f);
-
-        if (intersectX > intersectY) {
-            if (deltaX > 0.0f) {
-                move(intersectX * (1.0f - push), 0.0f);
-                other.move(-intersectX  * push, 0.0f);
-
-                direction.x = 1.0f;
-                direction.y = 0.0f;
-            } else {
-                move(-intersectX * (1.0f - push), 0.0f);
-                other.move(intersectX  * push, 0.0f);
-
-                direction.x = -1.0f;
-                direction.y = 0.0f;
-            }
-        } else {
-            if (deltaY < 0.0f) {
-                move(0.0f, -intersectY * (1.0f - push));
-                other.move(0.0f, intersectY * push);
-
-                direction.x = 0.0f;
-                direction.y = 1.0f;
-            } else {
-                move(0.0f, intersectY * (1.0f - push));
-                other.move(0.0f, -intersectY * push);
-
-                direction.x = 0.0f;
-                direction.y = -1.0f;
-            }
-        }
-        return true;
-    }
-    return false;
-}
-
-bool SpriteCollider::checkCollision(SpriteCollider& other, sf::Vector2f& direction, float push) {
-    sf::Vector2f otherPosition = other.getPosition();
-    sf::Vector2f otherHalfSize = other.getHalfSize();
-    sf::Vector2f thisPosition = getPosition();
-    sf::Vector2f thisHalfSize = getHalfSize();
-
-    float deltaX = otherPosition.x - thisPosition.x;
-    float deltaY = otherPosition.y - thisPosition.y;
-
-    float intersectX = std::abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
-    float intersectY = std::abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
-
-    if (intersectX < 0.0f && intersectY < 0.0f) {
-        push = std::min(std::max(push, 0.0f), 1.0f);
-
-        if (intersectX > intersectY) {
-            if (deltaX > 0.0f) {
-                move(intersectX * (1.0f - push), 0.0f);
-                other.move(-intersectX  * push, 0.0f);
-
-                direction.x = 1.0f;
-                direction.y = 0.0f;
-            } else {
-                move(-intersectX * (1.0f - push), 0.0f);
-                other.move(intersectX  * push, 0.0f);
-
-                direction.x = -1.0f;
-                direction.y = 0.0f;
-            }
-        } else {
-            if (deltaY < 0.0f) {
-                move(0.0f, -intersectY * (1.0f - push));
-                other.move(0.0f, intersectY * push);
-
-                direction.x = 0.0f;
-                direction.y = 1.0f;
-            } else {
-                move(0.0f, intersectY * (1.0f - push));
-                other.move(0.0f, -intersectY * push);
-
-                direction.x = 0.0f;
-                direction.y = -1.0f;
-            }
-        }
-        return true;
-    }
-    return false;
-}
 
 sf::Vector2f SpriteCollider::getPosition() {
     return body.getPosition();

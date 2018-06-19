@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
+#include <string>
 
 #include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
@@ -72,6 +74,7 @@ void CastBar::update(float newProgress, float castTime, bool isCasting) {
 
 UiText::UiText() {
     text = sf::Text();
+    setFont(mainFont);
 }
 
 UiText::UiText(sf::Text text) {
@@ -219,4 +222,54 @@ void SpellBar::setSpellIcons(std::vector<SpellBarIcon *> newIcons) {
 
 void SpellBar::update() {
 
+}
+
+PlayerHpBar::PlayerHpBar() {
+    redShape.setSize(sf::Vector2f(200.0f, 15.0f));
+    redShape.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - redShape.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    redShape.setFillColor(sf::Color::Red);
+    redShape.setOutlineColor(sf::Color(51, 51, 51));
+    redShape.setOutlineThickness(2);
+
+    greenShape.setSize(sf::Vector2f(200.0f, 15.0f));
+    greenShape.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - greenShape.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    greenShape.setFillColor(sf::Color::Green);
+
+    hpText.setFillColor(sf::Color::Black);
+    hpText.setFontSize(14);
+    position = redShape.getPosition();
+}
+
+PlayerHpBar::~PlayerHpBar() {
+
+}
+
+void PlayerHpBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(redShape);
+    target.draw(greenShape);
+    target.draw(hpText);
+}
+
+void PlayerHpBar::move(sf::Vector2f distance) {
+    redShape.move(distance);
+    greenShape.move(distance);
+    hpText.move(distance);
+    position = redShape.getPosition();
+}
+
+void PlayerHpBar::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+    position = redShape.getPosition();
+}
+
+void PlayerHpBar::update(float newHp) {
+    hp = std::max(newHp, 0.0f);
+    greenShape.setSize(sf::Vector2f((hp / maxHp) * redShape.getSize().x, greenShape.getSize().y));
+    hpText.setString(std::to_string(int(hp)) + "/" + std::to_string(int(maxHp)));
+    hpText.setPosition(sf::Vector2f(0, -3) + position + (redShape.getSize() - hpText.getDims()) / 2.0f);
+}
+
+void PlayerHpBar::setMaxHp(float newMaxHp) {
+    maxHp = newMaxHp;
+    update(maxHp);
 }

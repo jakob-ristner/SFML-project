@@ -23,6 +23,9 @@ Player::Player(sf::RectangleShape body) {
     this->body.setOrigin(sf::Vector2f(body.getSize().x / 2, body.getSize().y / 2));
     castProgress = 0;
     casting = false;
+    maxHp = 20;
+    hitpoints = maxHp;
+    timeSinceHurt = 0;
 }
 
 Player::Player() {
@@ -125,11 +128,15 @@ void Player::update(float dt) {
     if (switchedSpells) {
         (*spellBar).changeSelection(selectedSpell + 1);
     }
+
+    if (timeSinceHurt > 0) {
+        timeSinceHurt -= dt;
+    }
+
 }
 
 void Player::draw(sf::RenderWindow &window) {
     window.draw(body);
-//   window.draw(uiCastBar);
 }
 
 Collider Player::getCollider() {
@@ -163,10 +170,27 @@ float Player::getMouseAngleRad() {
     return mouseAngle * (M_PI / 180);
 }
 
-
 sf::Vector2f Player::getMousePos() {
     return mousePos;
 }
 void Player::setMousePos(sf::Vector2f pos) {
     mousePos = pos;
+}
+
+void Player::hurt(float amount) {
+    hitpoints -= amount;
+    (*hpBar).update(hitpoints);
+}
+
+void Player::heal(float amount) {
+    hitpoints += amount;
+    (*hpBar).update(hitpoints);
+}
+
+float Player::getMaxHp() {
+    return maxHp;
+}
+
+void Player::setHpBar(PlayerHpBar *bar) {
+    hpBar = bar;
 }

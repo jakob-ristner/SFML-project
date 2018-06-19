@@ -53,8 +53,20 @@ float Enemy::hurt(float amount) {
     hurtTime = 100.0f;
 }
 
+float Enemy::getAttackStr() {
+    return attackStrength;
+}
+
 bool Enemy::isAlive() {
     return hitpoints > 0;
+}
+
+bool Enemy::canAttack() {
+    return timeToAttack <= 0;
+}
+
+void Enemy::resetAttackTimer() {
+    timeToAttack = attackSpeed;
 }
 
 sf::Vector2f Enemy::getVel() {
@@ -66,7 +78,7 @@ SpriteCollider Enemy::getCollider() {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player) :
-    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player) {
+    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 100.0f, 1, player) {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, Player &player) :
@@ -79,6 +91,9 @@ Slime::~Slime() {
 }
 
 void Slime::update(float dt) {
+    if (timeToAttack > 0) {
+        timeToAttack -= dt;
+    }
     acc = sf::Vector2f(0.0f, 0.0f);
 
     // Here some thinking will be executed (TODO)
@@ -155,7 +170,7 @@ void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
     for (Obstacle &obstacle : obstacles) {
         Collider obstacleColl = obstacle.getCollider();
         for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
-            (*itr)->getCollider().checkCollision(obstacleColl, direction, 0.0f);
+            (*itr)->getCollider().checkCollision(&obstacleColl, direction, 0.0f);
         }
     }
 }
@@ -167,13 +182,26 @@ void EnemyFactory::hurtEnemy(int i, int amount) {
 // Checks all belonging enemies for collisions with spells
 // and calls the apropriate functions
 void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
-    sf::Vector2f direction;
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
         SpriteCollider currentSprite = (*itr)->getCollider();
         for (Projectile &projectile : projs) {
             SpriteCollider currentSpell = projectile.getCollider();
-            if (currentSprite.checkCollision(currentSpell, direction, 0.0f)) {
+            if (currentSprite.isColliding(&currentSpell)) {
                 projectile.onCollision(*(itr->get()));
+            }
+        }
+    }
+}
+
+void EnemyFactory::playerCollide(Player &player) {
+    sf::Vector2f direction;
+    for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
+        SpriteCollider currentSprite = (*itr)->getCollider();
+        Collider playerCol = player.getCollider();
+        if (currentSprite.checkCollision(&playerCol, direction, 0.0f)) {
+            if ((*itr)->canAttack()) {
+                player.hurt((*itr)->getAttackStr());
+                (*itr)->resetAttackTimer();
             }
         }
     }
