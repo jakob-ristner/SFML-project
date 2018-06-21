@@ -24,11 +24,6 @@ int main() {
     sf::Vector2i mousePos;
     sf::Vector2i mousePosRelative;
     font.loadFromFile("font.ttf");
-    sf::Text text;
-    text.setString("W: Forward\nA: Left\nS: Down\nD: Right\nQ: Rotate left\nE: Rotate right");
-    text.setFont(font);
-    text.setPosition(sf::Vector2f(20, 20));
-    text.setFillColor(sf::Color::White);
 
     // Initialization of important stuff
     Settings settings = Settings();
@@ -79,9 +74,7 @@ int main() {
 
 
     // Test render layer
-    UiText uitext = UiText(text);
     RenderLayer layer1;
-    layer1.add(&uitext);
     layer1.add(&(player.uiCastBar));
     
     SpellBarIcon icon1 = SpellBarIcon(1);
@@ -103,6 +96,12 @@ int main() {
     playerHpBar.setMaxHp(player.getMaxHp());
     player.setHpBar(&playerHpBar);
     layer1.add(&playerHpBar);
+
+    // Player interface layer 1
+    RenderLayer playerInterfaces;
+    playerInterfaces.add(&(player.uiCastBar));
+    PlayerLevelIcon levelIcon;
+    playerInterfaces.add(&levelIcon);
 
     // Main Game Loop
     clock.restart();
@@ -165,7 +164,8 @@ int main() {
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
-        layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
+        //layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
+        playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
 
         // Drawing
         window.clear(bgColor);
@@ -179,9 +179,9 @@ int main() {
 
         player.draw(window);
         window.draw(foreGround);
-        window.draw(layer1);
+        //window.draw(layer1);
+        window.draw(playerInterfaces);
         enemyFactory.draw(window);
-        window.draw(icon1);
         window.display();
     }
 

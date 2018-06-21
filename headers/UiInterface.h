@@ -123,3 +123,22 @@ private:
     float hp;
     float maxHp;
 };
+
+class PlayerLevelIcon: public UiElement {
+public:
+    PlayerLevelIcon();
+    ~PlayerLevelIcon();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+
+    void update(float newLevel);
+
+private:
+    int level;
+    sf::CircleShape background;
+    sf::RenderTexture bgTexture;
+    sf::Sprite bgSprite;
+    UiText levelText;
+};

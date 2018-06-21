@@ -66,6 +66,7 @@ private:
     float hitpoints;
     float maxHp;
     float timeSinceHurt;
+    int level;
 
     PlayerHpBar *hpBar;
 };

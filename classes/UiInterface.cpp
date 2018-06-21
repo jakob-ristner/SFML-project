@@ -273,3 +273,49 @@ void PlayerHpBar::setMaxHp(float newMaxHp) {
     maxHp = newMaxHp;
     update(maxHp);
 }
+
+PlayerLevelIcon::PlayerLevelIcon() {
+    level = 0;
+    bgTexture.create(170, 170, false);
+    bgTexture.setSmooth(true);
+
+    background.setRadius(80);
+    background.setFillColor(sf::Color(100, 100, 100));
+    background.setOutlineThickness(5);
+    background.setOutlineColor(sf::Color(51, 51, 51));
+    background.setPosition(sf::Vector2f(background.getOutlineThickness(), background.getOutlineThickness()));
+
+    bgTexture.draw(background);
+    bgTexture.display();
+    bgSprite.setTexture(bgTexture.getTexture());
+    bgSprite.setScale(sf::Vector2f(0.5f, 0.5f));
+        
+    levelText.setString(std::to_string(level));
+    levelText.setPosition(sf::Vector2f(-1 + 2, -9 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
+    levelText.setFillColor(sf::Color::White);
+    setPosition(sf::Vector2f(10, (float) Settings::WINDOW_HEIGHT - background.getRadius() - 5));
+
+}
+
+PlayerLevelIcon::~PlayerLevelIcon() {
+
+}
+
+void PlayerLevelIcon::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(bgSprite);
+    target.draw(levelText);
+}
+
+void PlayerLevelIcon::move(sf::Vector2f distance) {
+    bgSprite.move(distance);
+    levelText.move(distance);
+    position += distance;
+}
+
+void PlayerLevelIcon::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void PlayerLevelIcon::update(float newLevel) {
+    level = newLevel;
+}

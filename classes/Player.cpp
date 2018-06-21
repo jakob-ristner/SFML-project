@@ -26,6 +26,7 @@ Player::Player(sf::RectangleShape body) {
     maxHp = 20;
     hitpoints = maxHp;
     timeSinceHurt = 0;
+    level = 1;
 }
 
 Player::Player() {
