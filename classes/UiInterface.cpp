@@ -291,7 +291,8 @@ PlayerLevelIcon::PlayerLevelIcon() {
     bgSprite.setScale(sf::Vector2f(0.5f, 0.5f));
         
     levelText.setString(std::to_string(level));
-    levelText.setPosition(sf::Vector2f(-1 + 2, -9 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
+    levelText.setFontSize(40);
+    levelText.setPosition(sf::Vector2f(-1 + 2, -14 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
     levelText.setFillColor(sf::Color::White);
     setPosition(sf::Vector2f(10, (float) Settings::WINDOW_HEIGHT - background.getRadius() - 10));
 
