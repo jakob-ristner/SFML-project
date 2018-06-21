@@ -44,6 +44,7 @@ public:
     void heal(float amount);
 
     float getMaxHp();
+    int getLevel();
 
     void setHpBar(PlayerHpBar *bar);
 

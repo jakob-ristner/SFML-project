@@ -195,3 +195,7 @@ float Player::getMaxHp() {
 void Player::setHpBar(PlayerHpBar *bar) {
     hpBar = bar;
 }
+
+int Player::getLevel() {
+    return level;
+}

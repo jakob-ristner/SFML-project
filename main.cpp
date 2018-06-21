@@ -101,7 +101,10 @@ int main() {
     RenderLayer playerInterfaces;
     playerInterfaces.add(&(player.uiCastBar));
     PlayerLevelIcon levelIcon;
+    levelIcon.update(player.getLevel());
     playerInterfaces.add(&levelIcon);
+    playerInterfaces.add(&playerHpBar);
+    playerHpBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 80));
 
     // Main Game Loop
     clock.restart();

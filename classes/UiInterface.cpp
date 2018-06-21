@@ -293,7 +293,7 @@ PlayerLevelIcon::PlayerLevelIcon() {
     levelText.setString(std::to_string(level));
     levelText.setPosition(sf::Vector2f(-1 + 2, -9 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
     levelText.setFillColor(sf::Color::White);
-    setPosition(sf::Vector2f(10, (float) Settings::WINDOW_HEIGHT - background.getRadius() - 5));
+    setPosition(sf::Vector2f(10, (float) Settings::WINDOW_HEIGHT - background.getRadius() - 10));
 
 }
 
@@ -318,4 +318,5 @@ void PlayerLevelIcon::setPosition(sf::Vector2f pos) {
 
 void PlayerLevelIcon::update(float newLevel) {
     level = newLevel;
+    levelText.setString(std::to_string(level));
 }
