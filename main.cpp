@@ -93,18 +93,29 @@ int main() {
     player.spellBar = &mainSpellBar;
 
     PlayerHpBar playerHpBar;
-    playerHpBar.setMaxHp(player.getMaxHp());
+    playerHpBar.setMaxStat(player.getMaxHp());
     player.setHpBar(&playerHpBar);
     layer1.add(&playerHpBar);
 
     // Player interface layer 1
     RenderLayer playerInterfaces;
     playerInterfaces.add(&(player.uiCastBar));
+    player.uiCastBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2, Settings::WINDOW_HEIGHT - 72));
     PlayerLevelIcon levelIcon;
     levelIcon.update(player.getLevel());
     playerInterfaces.add(&levelIcon);
     playerInterfaces.add(&playerHpBar);
-    playerHpBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 80));
+    playerHpBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 75));
+
+    PlayerStaminaBar staminaBar;
+    staminaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 31));
+    staminaBar.setMaxStat(100);
+    playerInterfaces.add(&staminaBar);
+    
+    PlayerManaBar manaBar;
+    manaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 53));
+    manaBar.setMaxStat(100);
+    playerInterfaces.add(&manaBar);
 
     // Main Game Loop
     clock.restart();

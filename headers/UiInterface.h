@@ -103,25 +103,43 @@ private:
     unsigned short int selected;
 };
 
-class PlayerHpBar: public UiElement {
+class PlayerStatBar: public UiElement {
 public:
-    PlayerHpBar();
-    ~PlayerHpBar();
+    PlayerStatBar();
+    ~PlayerStatBar();
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
 
-    void update(float newHp);
-    void setMaxHp(float newMaxHp);
+    void update(float newStat);
+    void setMaxStat(float newStat);
     
-private:
-    sf::RectangleShape redShape;
-    sf::RectangleShape greenShape;
-    UiText hpText;
+protected:
+    sf::RectangleShape background;
+    sf::RectangleShape foreground;
+    UiText statText;
     
-    float hp;
-    float maxHp;
+    float stat;
+    float maxStat;
+};
+
+class PlayerHpBar: public PlayerStatBar {
+public:
+    PlayerHpBar();
+    ~PlayerHpBar();
+};
+
+class PlayerManaBar: public PlayerStatBar {
+public:
+    PlayerManaBar();
+    ~PlayerManaBar();
+};
+
+class PlayerStaminaBar: public PlayerStatBar {
+public:
+    PlayerStaminaBar();
+    ~PlayerStaminaBar();
 };
 
 class PlayerLevelIcon: public UiElement {

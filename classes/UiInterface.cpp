@@ -26,7 +26,7 @@ CastBar::CastBar() {
                                       background.getSize().y / 2));
     background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 2,
                                         598));
-    background.setFillColor(sf::Color(51, 51, 51));
+    background.setFillColor(sf::Color(31, 31, 31));
 
     foreground.setSize(sf::Vector2f(0, 15));
     foreground.setOrigin(sf::Vector2f(background.getSize().x / 2,
@@ -34,6 +34,7 @@ CastBar::CastBar() {
     foreground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
                                         600));
     foreground.setFillColor(sf::Color(0, 200, 255));
+    position = background.getPosition();
 }
 
 CastBar::~CastBar() {
@@ -50,10 +51,11 @@ void CastBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 void CastBar::move(sf::Vector2f distance) {
     background.move(distance);
     foreground.move(distance);
+    position += distance;
 }
 
 void CastBar::setPosition(sf::Vector2f pos) {
-    position = pos;
+    move(pos - position);
 }
 
 // Updates the casting bars current progress and therefore size
@@ -224,64 +226,87 @@ void SpellBar::update() {
 
 }
 
+PlayerStatBar::PlayerStatBar() {
+    background.setSize(sf::Vector2f(200.0f, 15.0f));
+    background.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - background.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    background.setFillColor(sf::Color(31, 31, 31));
+    background.setOutlineColor(sf::Color(51, 51, 51));
+    background.setOutlineThickness(2);
+
+    foreground.setSize(sf::Vector2f(200.0f, 15.0f));
+    foreground.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - foreground.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    foreground.setFillColor(sf::Color(200, 0, 0));
+
+    statText.setFillColor(sf::Color::White);
+    statText.setFontSize(14);
+    position = background.getPosition();
+}
+
+PlayerStatBar::~PlayerStatBar() {
+
+}
+
+void PlayerStatBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(background);
+    target.draw(foreground);
+    target.draw(statText);
+}
+
+void PlayerStatBar::move(sf::Vector2f distance) {
+    background.move(distance);
+    foreground.move(distance);
+    statText.move(distance);
+    position = background.getPosition();
+}
+
+void PlayerStatBar::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void PlayerStatBar::update(float newStat) {
+    stat = std::max(newStat, 0.0f);
+    foreground.setSize(sf::Vector2f((stat / maxStat) * background.getSize().x, foreground.getSize().y));
+    statText.setString(std::to_string(int(stat)) + "/" + std::to_string(int(maxStat)));
+    statText.setPosition(sf::Vector2f(0, -3) + position + (background.getSize() - statText.getDims()) / 2.0f);
+}
+
+void PlayerStatBar::setMaxStat(float newStat) {
+    maxStat = newStat;
+    update(maxStat);
+}
+
 PlayerHpBar::PlayerHpBar() {
-    redShape.setSize(sf::Vector2f(200.0f, 15.0f));
-    redShape.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - redShape.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
-    redShape.setFillColor(sf::Color::Red);
-    redShape.setOutlineColor(sf::Color(51, 51, 51));
-    redShape.setOutlineThickness(2);
 
-    greenShape.setSize(sf::Vector2f(200.0f, 15.0f));
-    greenShape.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - greenShape.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
-    greenShape.setFillColor(sf::Color::Green);
-
-    hpText.setFillColor(sf::Color::Black);
-    hpText.setFontSize(14);
-    position = redShape.getPosition();
 }
 
 PlayerHpBar::~PlayerHpBar() {
 
 }
 
-void PlayerHpBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(redShape);
-    target.draw(greenShape);
-    target.draw(hpText);
+PlayerManaBar::PlayerManaBar() {
+    foreground.setFillColor(sf::Color(0, 0, 220));
 }
 
-void PlayerHpBar::move(sf::Vector2f distance) {
-    redShape.move(distance);
-    greenShape.move(distance);
-    hpText.move(distance);
-    position = redShape.getPosition();
+PlayerManaBar::~PlayerManaBar() {
+
 }
 
-void PlayerHpBar::setPosition(sf::Vector2f pos) {
-    move(pos - position);
-    position = redShape.getPosition();
+PlayerStaminaBar::PlayerStaminaBar() {
+    foreground.setFillColor(sf::Color(0, 180, 0));
 }
 
-void PlayerHpBar::update(float newHp) {
-    hp = std::max(newHp, 0.0f);
-    greenShape.setSize(sf::Vector2f((hp / maxHp) * redShape.getSize().x, greenShape.getSize().y));
-    hpText.setString(std::to_string(int(hp)) + "/" + std::to_string(int(maxHp)));
-    hpText.setPosition(sf::Vector2f(0, -3) + position + (redShape.getSize() - hpText.getDims()) / 2.0f);
-}
+PlayerStaminaBar::~PlayerStaminaBar() {
 
-void PlayerHpBar::setMaxHp(float newMaxHp) {
-    maxHp = newMaxHp;
-    update(maxHp);
 }
 
 PlayerLevelIcon::PlayerLevelIcon() {
     level = 0;
-    bgTexture.create(170, 170, false);
+    bgTexture.create(172, 172, false);
     bgTexture.setSmooth(true);
 
     background.setRadius(80);
     background.setFillColor(sf::Color(100, 100, 100));
-    background.setOutlineThickness(5);
+    background.setOutlineThickness(6);
     background.setOutlineColor(sf::Color(51, 51, 51));
     background.setPosition(sf::Vector2f(background.getOutlineThickness(), background.getOutlineThickness()));
 
