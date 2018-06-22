@@ -61,13 +61,14 @@ int main() {
     player.addSpell(&fireball);
     player.addSpell(&magicMissile);
 
+    UiGrid interfaceGrid;
 
     // Enemies
     EnemyFactory enemyFactory(player);
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
-    DevConsole console = DevConsole(settings, enemyFactory);
+    DevConsole console = DevConsole(settings, enemyFactory, &interfaceGrid);
 
     // Spell
     Spell *currspell;
@@ -119,6 +120,10 @@ int main() {
     playerInterfaces.add(&manaBar);
     playerInterfaces.add(&mainSpellBar);
     mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 35, Settings::WINDOW_HEIGHT - 50));
+
+    // Debug Layer
+    RenderLayer debugLayer;
+    debugLayer.add(&interfaceGrid);
 
     // Main Game Loop
     clock.restart();
@@ -183,6 +188,7 @@ int main() {
         // Moving the ui layer to ensure that it follows the screen
         //layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
+        debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
 
         // Drawing
         window.clear(bgColor);
@@ -199,6 +205,7 @@ int main() {
         //window.draw(layer1);
         window.draw(playerInterfaces);
         enemyFactory.draw(window);
+        window.draw(debugLayer);
         window.display();
     }
 

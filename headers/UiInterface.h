@@ -160,3 +160,29 @@ private:
     sf::Sprite bgSprite;
     UiText levelText;
 };
+
+class UiGrid: public UiElement {
+public:
+    UiGrid();
+    ~UiGrid();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void setVisibility(bool newVisible);
+    void setXLines(int amount);
+    void setYLines(int amount);
+    void render();
+    void setColor(sf::Color color);
+
+    bool isVisible();
+
+private:
+    sf::RenderTexture text;
+    sf::Sprite sprite;
+    sf::Color lineColor;
+
+    bool visible;
+    int xAmount;
+    int yAmount;
+};

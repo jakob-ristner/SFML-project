@@ -349,3 +349,73 @@ void PlayerLevelIcon::update(float newLevel) {
     levelText.setString(std::to_string(level));
     levelText.setPosition(sf::Vector2f(-1 + 2, -14 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
 }
+
+UiGrid::UiGrid() {
+    text.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT, false);
+        visible = false;
+    xAmount = 8;
+    yAmount = 8;
+    lineColor = sf::Color::Red;
+    render();
+}
+
+UiGrid::~UiGrid() {
+
+}
+
+void UiGrid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if (visible) {
+        target.draw(sprite);
+    }
+}
+
+void UiGrid::move(sf::Vector2f distance) {
+    sprite.move(distance);
+    position += distance;
+}
+
+void UiGrid::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void UiGrid::setVisibility(bool newVisible) {
+    visible = newVisible;
+}
+
+void UiGrid::setXLines(int amount) {
+    xAmount = amount;
+    render();
+}
+
+void UiGrid::setYLines(int amount) {
+    yAmount = amount;
+    render();
+}
+
+void UiGrid::render() {
+    sf::RectangleShape line;
+    line.setFillColor(lineColor);
+    line.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, 1));
+    text.clear(sf::Color::Transparent);
+    for (float y = 0; y < yAmount; y++) {
+        line.setPosition(sf::Vector2f(0, y * Settings::WINDOW_HEIGHT / yAmount));
+        text.draw(line);
+    }
+    line.setSize(sf::Vector2f(1, Settings::WINDOW_HEIGHT));
+    for (float x = 0; x < xAmount; x++) {
+        line.setPosition(sf::Vector2f(x * Settings::WINDOW_WIDTH / xAmount, 0));
+        text.draw(line);
+    }
+
+    text.display();
+    sprite.setTexture(text.getTexture());
+}
+
+void UiGrid::setColor(sf::Color color) {
+    lineColor = color;
+    render();
+}
+
+bool UiGrid::isVisible() {
+    return visible;
+}
