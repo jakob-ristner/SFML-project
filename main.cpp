@@ -104,6 +104,7 @@ int main() {
     PlayerLevelIcon levelIcon;
     levelIcon.update(player.getLevel());
     playerInterfaces.add(&levelIcon);
+    player.setLevelIcon(&levelIcon);
     playerInterfaces.add(&playerHpBar);
     playerHpBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 75));
 
@@ -116,6 +117,8 @@ int main() {
     manaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 53));
     manaBar.setMaxStat(100);
     playerInterfaces.add(&manaBar);
+    playerInterfaces.add(&mainSpellBar);
+    mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 35, Settings::WINDOW_HEIGHT - 50));
 
     // Main Game Loop
     clock.restart();

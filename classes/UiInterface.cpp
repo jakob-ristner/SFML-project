@@ -21,12 +21,14 @@ CastBar::CastBar() {
     casting = false;
 
 
-    background.setSize(sf::Vector2f(204, 19));
+    background.setSize(sf::Vector2f(200, 15));
     background.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 2,
-                                        598));
+    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
+                                        600));
     background.setFillColor(sf::Color(31, 31, 31));
+    background.setOutlineColor(sf::Color(51, 51, 51));
+    background.setOutlineThickness(2);
 
     foreground.setSize(sf::Vector2f(0, 15));
     foreground.setOrigin(sf::Vector2f(background.getSize().x / 2,
@@ -345,4 +347,5 @@ void PlayerLevelIcon::setPosition(sf::Vector2f pos) {
 void PlayerLevelIcon::update(float newLevel) {
     level = newLevel;
     levelText.setString(std::to_string(level));
+    levelText.setPosition(sf::Vector2f(-1 + 2, -14 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
 }

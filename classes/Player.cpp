@@ -199,3 +199,12 @@ void Player::setHpBar(PlayerHpBar *bar) {
 int Player::getLevel() {
     return level;
 }
+
+void Player::setLevel(int newLevel) {
+    level = newLevel;
+    (*levelIcon).update(level);
+}
+
+void Player::setLevelIcon(PlayerLevelIcon *icon) {
+    levelIcon = icon;
+}

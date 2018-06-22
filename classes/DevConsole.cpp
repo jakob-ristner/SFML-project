@@ -160,9 +160,23 @@ void DevConsole::parseCommand(Player &player) {
         if (words[0] == "noclip") {
             settings.playerColliding = !settings.playerColliding;
         }
+    } else if (words.size() == 3) {
+        if (words[0] == "setlevel") {
+            if (words[1] == "player") {
+                int newLevel;
+                try {
+                    newLevel = std::stoi(words[2]);
+                } catch (std::invalid_argument e) {
+                    newLevel = player.getLevel();
+                }
+                player.setLevel(newLevel);
+            }
+        }
     }
-    
-    if (words.size() == 4) {
+
+    // Implement this part as a binary search
+    // Improves runtime efficiency and looks prettier
+    else if (words.size() == 4) {
         if (words[0] == "tp") {
             if (words[1] == "player") {
                 player.setPos(sf::Vector2f(std::stof(words[2]), std::stof(words[3])));
