@@ -8,12 +8,13 @@
 #include "../headers/Npc.h"
 
 
-DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory):
+DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid):
 settings(settings), enemyFactory(enemyFactory) {
     // DevConsole.window kanske behöver lagra en referens
     // Samma med player
 
     fontFace.loadFromFile("./font.ttf");
+    uiGrid = grid;
 }
 
 DevConsole::~DevConsole() {
@@ -160,9 +161,47 @@ void DevConsole::parseCommand(Player &player) {
         if (words[0] == "noclip") {
             settings.playerColliding = !settings.playerColliding;
         }
+    } else if (words.size() == 3) {
+        if (words[0] == "setlevel") {
+            if (words[1] == "player") {
+                int newLevel;
+                try {
+                    newLevel = std::stoi(words[2]);
+                } catch (std::invalid_argument e) {
+                    newLevel = player.getLevel();
+                }
+                player.setLevel(newLevel);
+            }
+        } else if (words[0] == "setvisible") {
+            if (words[1] == "uigrid") {
+                if (words[2] == "true") {
+                    (*uiGrid).setVisibility(true);
+                } else if (words[2] == "false") {
+                    (*uiGrid).setVisibility(false);
+                }
+            }
+        } else if (words[0] == "setxlines") {
+            if (words[1] == "uigrid") {
+                try {
+                    (*uiGrid).setXLines(std::stoi(words[2]));
+                } catch (std::invalid_argument e) {
+                    print("Invalid number");
+                }
+            }
+        } else if (words[0] == "setylines") {
+            if (words[1] == "uigrid") {
+                try {
+                    (*uiGrid).setYLines(std::stoi(words[2]));
+                } catch (std::invalid_argument e) {
+                    print("Invalid number");
+                }
+            }
+        }
     }
-    
-    if (words.size() == 4) {
+
+    // Implement this part as a binary search
+    // Improves runtime efficiency and looks prettier
+    else if (words.size() == 4) {
         if (words[0] == "tp") {
             if (words[1] == "player") {
                 player.setPos(sf::Vector2f(std::stof(words[2]), std::stof(words[3])));
@@ -184,5 +223,19 @@ void DevConsole::parseCommand(Player &player) {
             enemyFactory.spawnEnemy(words[1], sf::Vector2f(x, y));
 
         }
+    } else if (words.size() == 5) {
+        if (words[0] == "setcolor") {
+            if (words[1] == "uigrid") {
+                try {
+                    (*uiGrid).setColor(sf::Color(std::stoi(words[2]), std::stoi(words[3]), std::stoi(words[4])));
+                } catch (std::invalid_argument e) {
+                    print("Invalid color argument");
+                }
+            }
+        }
     }
+}
+
+void DevConsole::print(std::string message) {
+
 }

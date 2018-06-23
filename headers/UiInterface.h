@@ -103,23 +103,86 @@ private:
     unsigned short int selected;
 };
 
-class PlayerHpBar: public UiElement {
+class PlayerStatBar: public UiElement {
 public:
-    PlayerHpBar();
-    ~PlayerHpBar();
+    PlayerStatBar();
+    ~PlayerStatBar();
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
 
-    void update(float newHp);
-    void setMaxHp(float newMaxHp);
+    void update(float newStat);
+    void setMaxStat(float newStat);
     
+protected:
+    sf::RectangleShape background;
+    sf::RectangleShape foreground;
+    UiText statText;
+    
+    float stat;
+    float maxStat;
+};
+
+class PlayerHpBar: public PlayerStatBar {
+public:
+    PlayerHpBar();
+    ~PlayerHpBar();
+};
+
+class PlayerManaBar: public PlayerStatBar {
+public:
+    PlayerManaBar();
+    ~PlayerManaBar();
+};
+
+class PlayerStaminaBar: public PlayerStatBar {
+public:
+    PlayerStaminaBar();
+    ~PlayerStaminaBar();
+};
+
+class PlayerLevelIcon: public UiElement {
+public:
+    PlayerLevelIcon();
+    ~PlayerLevelIcon();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+
+    void update(float newLevel);
+
 private:
-    sf::RectangleShape redShape;
-    sf::RectangleShape greenShape;
-    UiText hpText;
-    
-    float hp;
-    float maxHp;
+    int level;
+    sf::CircleShape background;
+    sf::RenderTexture bgTexture;
+    sf::Sprite bgSprite;
+    UiText levelText;
+};
+
+class UiGrid: public UiElement {
+public:
+    UiGrid();
+    ~UiGrid();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void setVisibility(bool newVisible);
+    void setXLines(int amount);
+    void setYLines(int amount);
+    void render();
+    void setColor(sf::Color color);
+
+    bool isVisible();
+
+private:
+    sf::RenderTexture text;
+    sf::Sprite sprite;
+    sf::Color lineColor;
+
+    bool visible;
+    int xAmount;
+    int yAmount;
 };

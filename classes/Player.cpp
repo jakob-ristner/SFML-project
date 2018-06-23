@@ -26,6 +26,7 @@ Player::Player(sf::RectangleShape body) {
     maxHp = 20;
     hitpoints = maxHp;
     timeSinceHurt = 0;
+    level = 1;
 }
 
 Player::Player() {
@@ -193,4 +194,17 @@ float Player::getMaxHp() {
 
 void Player::setHpBar(PlayerHpBar *bar) {
     hpBar = bar;
+}
+
+int Player::getLevel() {
+    return level;
+}
+
+void Player::setLevel(int newLevel) {
+    level = newLevel;
+    (*levelIcon).update(level);
+}
+
+void Player::setLevelIcon(PlayerLevelIcon *icon) {
+    levelIcon = icon;
 }

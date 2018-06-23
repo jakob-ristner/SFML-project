@@ -42,10 +42,13 @@ public:
 
     void hurt(float amount);
     void heal(float amount);
+    void setLevel(int newLevel);
 
     float getMaxHp();
+    int getLevel();
 
     void setHpBar(PlayerHpBar *bar);
+    void setLevelIcon(PlayerLevelIcon *icon);
 
 private:
     sf::Vector2f pos;
@@ -66,6 +69,8 @@ private:
     float hitpoints;
     float maxHp;
     float timeSinceHurt;
+    int level;
 
     PlayerHpBar *hpBar;
+    PlayerLevelIcon *levelIcon;
 };
