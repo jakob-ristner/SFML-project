@@ -49,6 +49,7 @@ public:
 
     void setHpBar(PlayerHpBar *bar);
     void setLevelIcon(PlayerLevelIcon *icon);
+    void setMoveSpeed(float newSpeed);
 
 private:
     sf::Vector2f pos;
@@ -59,8 +60,8 @@ private:
     Settings settings;
     int speed;
     int selectedSpell;
-    float playeracc = 2;
-    float fric = 1.2;
+    float playeracc;
+    float fric;
     std::vector<Projectile> projectiles;
     float mouseAngle;
     sf::Vector2f mousePos;

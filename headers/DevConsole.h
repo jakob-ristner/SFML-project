@@ -16,12 +16,12 @@ public:
     bool open(sf::RenderWindow &window, Player &player);
 
 private:
-    void parseCommand(Player &player);
     void newParseCommand();
     void print(std::string message);
 
     void noclip();
     void setlevel();
+    void setmovespeed();
     void setvisible();
     void setxlines();
     void setylines();
@@ -39,6 +39,7 @@ private:
     std::vector<std::string> commands = { "noclip",
     "setcolor",
     "setlevel",
+    "setmovespeed",
     "setvisible",
     "setxlines",
     "setylines",

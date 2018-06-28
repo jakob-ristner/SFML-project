@@ -208,3 +208,7 @@ void Player::setLevel(int newLevel) {
 void Player::setLevelIcon(PlayerLevelIcon *icon) {
     levelIcon = icon;
 }
+
+void Player::setMoveSpeed(float newSpeed) {
+    playeracc = newSpeed;
+}
