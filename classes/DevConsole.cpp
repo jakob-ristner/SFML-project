@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 
 #include "../headers/DevConsole.h"
 #include "../headers/Player.h"
@@ -8,13 +10,22 @@
 #include "../headers/Npc.h"
 
 
-DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid):
+DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid, Player *player):
 settings(settings), enemyFactory(enemyFactory) {
     // DevConsole.window kanske behöver lagra en referens
     // Samma med player
 
     fontFace.loadFromFile("./font.ttf");
     uiGrid = grid;
+    this->player = player;
+    commandPointers.push_back(&DevConsole::noclip);
+    commandPointers.push_back(&DevConsole::setcolor);
+    commandPointers.push_back(&DevConsole::setlevel);
+    commandPointers.push_back(&DevConsole::setvisible);
+    commandPointers.push_back(&DevConsole::setxlines);
+    commandPointers.push_back(&DevConsole::setylines);
+    commandPointers.push_back(&DevConsole::spawn);
+    commandPointers.push_back(&DevConsole::tp);
 }
 
 DevConsole::~DevConsole() {
@@ -90,7 +101,7 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                         isOpen = false;
                         break;
                         case sf::Keyboard::Key::Return:
-                        parseCommand(player);
+                        newParseCommand();
                         if (currLine != "") {
                             history.push_back(currLine);
                         }
@@ -236,6 +247,127 @@ void DevConsole::parseCommand(Player &player) {
     }
 }
 
-void DevConsole::print(std::string message) {
+void DevConsole::newParseCommand() {
+    words.clear();
+    std::string buffer;
 
+    for (int i = 0; i < currLine.length(); i++) {
+        if (currLine[i] == ' ') {
+            words.push_back(buffer);
+            buffer = "";
+        } else {
+            buffer += currLine[i];
+        }
+    }
+    words.push_back(buffer);
+    buffer = "";
+    
+    int commandIndex;
+    try {
+        commandIndex = searchCommands(words[0]);
+    } catch (std::invalid_argument e) {
+        print(e.what());
+        return;
+    }
+    (this->*commandPointers[commandIndex])();
+}
+
+void DevConsole::print(std::string message) {
+    std::cout << message << std::endl;
+}
+
+int DevConsole::searchCommands(std::string command) {
+    // Inclusive start, non-inclusive end
+    int start = 0;
+    int end = commands.size();
+    int middle = (start + end) / 2;
+    int prev = -1;
+    while (middle != prev) {
+        if (commands[middle] > command) {
+            end = middle;
+        } else {
+            start = middle;
+        }
+        prev = middle;
+        middle = (start + end) / 2;
+    }
+    if (commands[middle] != command) {
+        throw std::invalid_argument("Could not find command: " + command);
+    } else {
+        return middle;
+    }
+}
+
+void DevConsole::noclip() {
+    settings.playerColliding = !settings.playerColliding;
+}
+void DevConsole::setlevel() {
+    if (words[1] == "player") {
+        int newLevel;
+        try {
+            newLevel = std::stoi(words[2]);
+        } catch (std::invalid_argument e) {
+            newLevel = (*player).getLevel();
+        }
+        (*player).setLevel(newLevel);
+    }
+}
+void DevConsole::setvisible() {
+    if (words[1] == "uigrid") {
+        if (words[2] == "true") {
+            (*uiGrid).setVisibility(true);
+        } else if (words[2] == "false") {
+            (*uiGrid).setVisibility(false);
+        }
+    }
+}
+void DevConsole::setxlines() {
+    if (words[1] == "uigrid") {
+        try {
+            (*uiGrid).setXLines(std::stoi(words[2]));
+        } catch (std::invalid_argument e) {
+            print("Invalid number");
+        }
+    }
+}
+void DevConsole::setylines() {
+    if (words[1] == "uigrid") {
+        try {
+            (*uiGrid).setYLines(std::stoi(words[2]));
+        } catch (std::invalid_argument e) {
+            print("Invalid number");
+        }
+    }
+}
+void DevConsole::spawn() {
+    if (words[1] == "uigrid") {
+        try {
+            (*uiGrid).setColor(sf::Color(std::stoi(words[2]), std::stoi(words[3]), std::stoi(words[4])));
+        } catch (std::invalid_argument e) {
+            print("Invalid color argument");
+        }
+    }   
+}
+void DevConsole::setcolor() {
+    if (words[1] == "uigrid") {
+        try {
+            (*uiGrid).setColor(sf::Color(std::stoi(words[2]), std::stoi(words[3]), std::stoi(words[4])));
+        } catch (std::invalid_argument e) {
+            print("Invalid color argument");
+        }
+    }
+}
+void DevConsole::tp() {
+    if (words[0] == "tp") {
+        if (words[1] == "player") {
+            float x, y;
+            try {
+                x = std::stof(words[2]);
+                y = std::stof(words[3]);
+                (*player).setPos(sf::Vector2f(x, y));
+            } catch (std::invalid_argument e) {
+                print("The x or y provided could not be parsed");
+            }
+        }
+    }
 }
