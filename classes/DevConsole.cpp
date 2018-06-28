@@ -40,12 +40,17 @@ DevConsole::~DevConsole() {
 bool DevConsole::open(sf::RenderWindow &window, Player &player) {
 
     bool isOpen = true;
+    window.setKeyRepeatEnabled(true);
     sf::Event event;
     sf::RectangleShape rectangle(sf::Vector2f(window.getSize().x - 40, 125.0f));
     rectangle.setPosition(window.mapPixelToCoords(sf::Vector2i(20, 10)));
     rectangle.setFillColor(sf::Color(70, 70, 70, 200));
     rectangle.setOutlineColor(sf::Color(50, 50, 50, 200));
     rectangle.setOutlineThickness(5.0f);
+
+    sf::RectangleShape cursor(sf::Vector2f(1, 30));
+    cursor.setPosition(window.mapPixelToCoords(sf::Vector2i(30, 100)));
+    cursor.setFillColor(sf::Color::White);
 
     sf::Texture oldWindow;
     oldWindow.create(window.getSize().x, window.getSize().y);
@@ -75,38 +80,48 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
             if (event.type == sf::Event::Closed) {
                 isOpen = false;
                 return false;
-            } else if (event.type == sf::Event::TextEntered) {
+            } else if (event.type == sf::Event::TextEntered) { // Writing
+                bool typed = true;
                 if (event.text.unicode <= 122 && event.text.unicode >= 97) {
                     // Letters
-                    currLine += (char) event.text.unicode;
+                    currLine = currLine.substr(0, cursorPos) + std::string(1, (char) event.text.unicode) + currLine.substr(cursorPos);
                 } else if (event.text.unicode == 32) {
                     // Space
-                    currLine += (char) event.text.unicode;
+                    currLine = currLine.substr(0, cursorPos) + std::string(1, (char) event.text.unicode) + currLine.substr(cursorPos);
                 } else if (event.text.unicode >= 48 && event.text.unicode <= 57) {
                     // Numbers
-                    currLine += (char) event.text.unicode;
+                    currLine = currLine.substr(0, cursorPos) + std::string(1, (char) event.text.unicode) + currLine.substr(cursorPos);
                 } else if (event.text.unicode == 8) {
                     // Backspace
+                    typed = false;
                     if (currLine.size() > 0) {
-                        currLine.pop_back();
+                        currLine = currLine.substr(0, cursorPos - 1) + currLine.substr(cursorPos);
+                        cursorPos--;
                     }
                 } else if (event.text.unicode == 46) {
                     // Period
-                    currLine += (char) event.text.unicode;
+                    currLine = currLine.substr(0, cursorPos) + std::string(1, (char) event.text.unicode) + currLine.substr(cursorPos);
+                } else {
+                    typed = false;
                 }
                 
-            } else if (event.type == sf::Event::KeyPressed) {
+                if (typed) {
+                    cursorPos++;
+                }
+                
+            } else if (event.type == sf::Event::KeyPressed) { // Movement
                 switch (event.key.code)
                 {
                     case 54:
                         isOpen = false;
                         break;
-                        case sf::Keyboard::Key::Return:
+                    case sf::Keyboard::Key::Return:
                         newParseCommand();
                         if (currLine != "") {
                             history.push_back(currLine);
                         }
                         currLine = "";
+                        cursorPos = 0;
                         break;
                     case sf::Keyboard::Key::Up:
                         if (index >= history.size()) {
@@ -115,6 +130,7 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                             index++;
                             currLine = history[history.size() - index];
                         }
+                        cursorPos = currLine.size();
                         break;
                     case sf::Keyboard::Key::Down:
                         if (index <= 1) {
@@ -124,22 +140,32 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                             index--;
                             currLine = history[history.size() - index];
                         }
+                        cursorPos = currLine.size();
                         break;
+                    case sf::Keyboard::Key::Left:
+                        if (cursorPos > 0) {
+                            cursorPos--;
+                        }
+                        break;
+                    case sf::Keyboard::Key::Right:
+                        if (cursorPos < currLine.size()) {
+                            cursorPos++;
+                        }
                     default:
                         break;
                 }
             }
         }
 
-        
+        text.setString(currLine);
+        sf::Vector2f cursorCoord = text.findCharacterPos(cursorPos);
+        cursor.setPosition(cursorCoord);
 
-
-        text.setString(currLine + "_");
-
-        // blit menu and text
+        // Blit menu and text
         window.draw(oldTextHolder);
         window.draw(rectangle);
         window.draw(text);
+        window.draw(cursor);
         // Drawing console history
         for (int i = 1; i < 5 && i <= history.size(); i++) {
             historyPlaceHolder.setString(history[history.size() - i]);
@@ -148,6 +174,7 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
         }
         window.display();
     }
+    window.setKeyRepeatEnabled(false);
     return true;
 }
 

@@ -46,6 +46,7 @@ private:
     "spawn",
     "tp" };
     std::vector<void (DevConsole::*)()> commandPointers;
+    int cursorPos;
     Settings &settings;
     EnemyFactory &enemyFactory;
     UiGrid *uiGrid;
