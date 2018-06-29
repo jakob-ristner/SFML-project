@@ -91,7 +91,7 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                 } else if (event.text.unicode == 8) {
                     // Backspace
                     typed = false;
-                    if (currLine.size() > 0) {
+                    if (currLine.size() > 0 && cursorPos > 0) {
                         currLine = currLine.substr(0, cursorPos - 1) + currLine.substr(cursorPos);
                         cursorPos--;
                     }
@@ -192,12 +192,16 @@ void DevConsole::newParseCommand() {
     
     int commandIndex;
     try {
-        commandIndex = searchCommands(words[0]);
+        commandIndex = searchCommands(getWord(0));
     } catch (std::invalid_argument e) {
         print(e.what());
         return;
     }
-    (this->*commandPointers[commandIndex])();
+    try {
+        (this->*commandPointers[commandIndex])();
+    } catch (std::out_of_range e) {
+        print(e.what());
+    }
 }
 
 void DevConsole::print(std::string message) {
@@ -226,14 +230,22 @@ int DevConsole::searchCommands(std::string command) {
     }
 }
 
+std::string DevConsole::getWord(int index) {
+    if (index >= words.size() || index < 0) {
+        throw std::out_of_range("Too few arguments provided");
+    } else {
+        return words[index];
+    }
+}
+
 void DevConsole::noclip() {
     settings.playerColliding = !settings.playerColliding;
 }
 void DevConsole::setlevel() {
-    if (words[1] == "player") {
+    if (getWord(1) == "player") {
         int newLevel;
         try {
-            newLevel = std::stoi(words[2]);
+            newLevel = std::stoi(getWord(2));
         } catch (std::invalid_argument e) {
             newLevel = (*player).getLevel();
         }
@@ -242,10 +254,10 @@ void DevConsole::setlevel() {
 }
 
 void DevConsole::setmovespeed() {
-    if (words[1] == "player") {
+    if (getWord(1) == "player") {
         float moveSpeed;
         try {
-            moveSpeed = std::stof(words[2]);
+            moveSpeed = std::stof(getWord(2));
             (*player).setMoveSpeed(moveSpeed);
         } catch (std::invalid_argument e) {
             print("Invalid speed");
@@ -254,57 +266,70 @@ void DevConsole::setmovespeed() {
 }
 
 void DevConsole::setvisible() {
-    if (words[1] == "uigrid") {
-        if (words[2] == "true") {
+    if (getWord(1) == "uigrid") {
+        if (getWord(2) == "true") {
             (*uiGrid).setVisibility(true);
-        } else if (words[2] == "false") {
+        } else if (getWord(2) == "false") {
             (*uiGrid).setVisibility(false);
         }
     }
 }
 void DevConsole::setxlines() {
-    if (words[1] == "uigrid") {
+    if (getWord(1) == "uigrid") {
         try {
-            (*uiGrid).setXLines(std::stoi(words[2]));
+            (*uiGrid).setXLines(std::stoi(getWord(2)));
         } catch (std::invalid_argument e) {
             print("Invalid number");
         }
     }
 }
 void DevConsole::setylines() {
-    if (words[1] == "uigrid") {
+    if (getWord(1) == "uigrid") {
         try {
-            (*uiGrid).setYLines(std::stoi(words[2]));
+            (*uiGrid).setYLines(std::stoi(getWord(2)));
         } catch (std::invalid_argument e) {
             print("Invalid number");
         }
     }
 }
 void DevConsole::spawn() {
-    if (words[1] == "uigrid") {
+    float x, y;
+    if (getWord(2) == ".") {
+        x = player->getPos().x;
+    } else {
         try {
-            (*uiGrid).setColor(sf::Color(std::stoi(words[2]), std::stoi(words[3]), std::stoi(words[4])));
+            x = std::stof(getWord(2));
         } catch (std::invalid_argument e) {
-            print("Invalid color argument");
+            print("Coordinate x could not be parsed");
         }
-    }   
+    }
+    if (getWord(3) == ".") {
+        y = player->getPos().y;
+    } else {
+        try {
+            y = std::stof(getWord(3));
+        } catch (std::invalid_argument e) {
+            print("Coordinate y could not be parsed");
+        }
+    }
+    enemyFactory.spawnEnemy(getWord(1), sf::Vector2f(x, y));
 }
 void DevConsole::setcolor() {
-    if (words[1] == "uigrid") {
+    if (getWord(1) == "uigrid") {
         try {
-            (*uiGrid).setColor(sf::Color(std::stoi(words[2]), std::stoi(words[3]), std::stoi(words[4])));
+            (*uiGrid).setColor(sf::Color(std::stoi(getWord(2)), std::stoi(getWord(3)), std::stoi(getWord(4))));
         } catch (std::invalid_argument e) {
             print("Invalid color argument");
         }
     }
 }
 void DevConsole::tp() {
-    if (words[0] == "tp") {
-        if (words[1] == "player") {
+    if (getWord(0) == "tp") {
+        if (getWord(1) == "player") {
             float x, y;
             try {
-                x = std::stof(words[2]);
-                y = std::stof(words[3]);
+                x = std::stof(getWord(2));
+                y = std::stof(getWord(3));
                 (*player).setPos(sf::Vector2f(x, y));
             } catch (std::invalid_argument e) {
                 print("The x or y provided could not be parsed");

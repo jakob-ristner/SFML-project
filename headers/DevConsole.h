@@ -18,6 +18,7 @@ public:
 private:
     void newParseCommand();
     void print(std::string message);
+    std::string getWord(int index);
 
     void noclip();
     void setlevel();

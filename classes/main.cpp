@@ -62,7 +62,6 @@ int main() {
     player.addSpell(&magicMissile);
 
     UiGrid interfaceGrid;
-    std::cout << 0 << std::endl;
 
     // Enemies
     EnemyFactory enemyFactory(player);
@@ -73,7 +72,6 @@ int main() {
 
     // Spell
     Spell *currspell;
-
 
     // Test render layer
     RenderLayer layer1;
