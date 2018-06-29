@@ -12,9 +12,6 @@
 
 DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid, Player *player):
 settings(settings), enemyFactory(enemyFactory) {
-    // DevConsole.window kanske behöver lagra en referens
-    // Samma med player
-
     fontFace.loadFromFile("./font.ttf");
     uiGrid = grid;
     this->player = player;
