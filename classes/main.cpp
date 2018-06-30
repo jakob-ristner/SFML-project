@@ -4,18 +4,18 @@
 #include <memory>
 #include <vector>
 
-#include "./headers/Settings.h"
-#include "./headers/TileMap.h"
-#include "./headers/Spell.h"
-#include "./headers/Player.h"
-#include "./headers/Settings.h"
-#include "./headers/Utils.h"
-#include "./headers/Collider.h"
-#include "./headers/Obstacle.h"
-#include "./headers/DevConsole.h"
-#include "./headers/Npc.h"
-#include "./headers/RenderLayer.h"
-#include "./headers/UiInterface.h"
+#include "../headers/Settings.h"
+#include "../headers/TileMap.h"
+#include "../headers/Spell.h"
+#include "../headers/Player.h"
+#include "../headers/Settings.h"
+#include "../headers/Utils.h"
+#include "../headers/Collider.h"
+#include "../headers/Obstacle.h"
+#include "../headers/DevConsole.h"
+#include "../headers/Npc.h"
+#include "../headers/RenderLayer.h"
+#include "../headers/UiInterface.h"
 #pragma endregion
 
 int main() {
@@ -68,11 +68,10 @@ int main() {
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
-    DevConsole console = DevConsole(settings, enemyFactory, &interfaceGrid);
+    DevConsole console = DevConsole(settings, enemyFactory, &interfaceGrid, &player);
 
     // Spell
     Spell *currspell;
-
 
     // Test render layer
     RenderLayer layer1;
