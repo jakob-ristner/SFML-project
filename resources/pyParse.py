@@ -12,10 +12,11 @@ tmxdata = pytmx.TiledMap(path)
 with open(outPath + "collData.txt", "w") as f:
     output = ""
     for tile_object in tmxdata.objects:
-        output += f"{tile_object.name} {tile_object.x} {tile_object.y} {tile_object.width} {tile_object.height} \n"
-        #Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-
-
+        output += f"{tile_object.name} {tile_object.x} {tile_object.y} {tile_object.width} {tile_object.height} "
+        for key in tile_object.properties:
+            output += key + "|" + tile_object.properties[key] + " "
+        output += "\n"
+        print(output)
     f.write(output)
 
 actual_data = ""

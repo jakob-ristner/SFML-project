@@ -6,6 +6,8 @@
 #include "../libs/include/TSXParser.h"
 #include "./Obstacle.h"
 
+class Obstacle;
+class CellDoor;
 // Object that contains and generates all map data such as tiles,
 // map objects and tile sets
 // Args:
@@ -13,7 +15,7 @@
 // obstacles - reference to the obstacle list from main.cpp where all obstacles will be added
 class TileMap {
 public:
-    TileMap(std::string path, std::vector<Obstacle> &obstacles);
+    TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector<CellDoor> &cellDoors);
     ~TileMap();
 
     void printData();

@@ -10,8 +10,10 @@
 #include "../libs/include/TSXParser.h"
 #include "../headers/Obstacle.h"
 #include "../headers/TileMap.h"
+#include "../headers/Utils.h"
+#include "../headers/Obstacle.h"
 
-TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles) {
+TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector<CellDoor> &cellDoors) {
     this->path = path;
     tileSize = 32;
     tileMargin = 0;
@@ -32,13 +34,32 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles) {
     std::string line;
     std::ifstream myfile(path + "/collData.txt");
     while (std::getline(myfile, line)) {
+        std::vector<std::string> words;
         std::istringstream iss(line);
+        do {
+            std::string buffer;
+            iss >> buffer;
+            words.push_back(buffer);
+        } while (iss);
         float x, y, w, h;
+        x = std::stof(words[1]);
+        y = std::stof(words[2]);
+        w = std::stof(words[3]);
+        h = std::stof(words[4]);
         std::string t;
-        if (!(iss >> t >> x >> y >> w >> h)) {
-            break;
+        t = words[0];
+        // Custom properties
+        if (t == "cellDoor") {
+            // TODO: Create current map variable etc.
+            auto link = strSplit(words[5], '|');
+            auto linkPos = strSplit(words[6], '|');
+            auto lxy = strSplit(linkPos[1], ',');
+            float lX = std::stof(lxy[0]);
+            float lY = std::stof(lxy[1]);
+            cellDoors.push_back(CellDoor(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h), "./resources/" + link[1], sf::Vector2f(lX, lY)));
+        } else if (t == "wall") {
+            obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
         }
-        obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
     }
 }
 

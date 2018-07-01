@@ -19,3 +19,22 @@ Collider Obstacle::getCollider() {
 sf::Vector2f Obstacle::getPos() {
     return body.getPosition();
 }
+
+CellDoor::CellDoor(sf::Vector2f pos, sf::Vector2f size, std::string link, sf::Vector2f linkPos) {
+    body = sf::RectangleShape(size);
+    body.setOrigin(body.getSize() / 2.0f);
+    body.setPosition(pos);
+    this->linkPos = linkPos;
+}
+
+CellDoor::~CellDoor () {
+
+}
+
+Collider CellDoor::getCollider() {
+    return Collider(body, sf::Vector2f(0.0f, 0.0f));
+}
+
+std::string CellDoor::getLinkedMap() {
+    return link;
+}

@@ -38,9 +38,10 @@ int main() {
 
     // Vector with all obstacles - kind of like a sprite group
     std::vector<Obstacle> obstacles;
+    std::vector<CellDoor> cellDoors;
 
     sf::Clock clock;
-    TileMap map = TileMap("./resources/map2", obstacles);
+    TileMap map = TileMap("./resources/tmap2", obstacles, cellDoors);
     sf::Sprite someSprite;
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));

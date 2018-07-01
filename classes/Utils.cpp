@@ -36,3 +36,18 @@ sf::Vector2f rotateNormalVect(sf::Vector2f vector, float radians) {
 void printVec(sf::Vector2f vec) {
     std::cout << vec.x << " " << vec.y << std::endl;
 }
+
+std::vector<std::string> strSplit(std::string str, char c) {
+    std::vector<std::string> output;
+    std::string buffer;
+    for (int i = 0; i < str.size(); i++) {
+        if (str[i] == c) {
+            output.push_back(buffer);
+            buffer = "";
+        } else {
+            buffer += str[i];
+        }
+    }
+    output.push_back(buffer);
+    return output;
+}

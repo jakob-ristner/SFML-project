@@ -90,7 +90,7 @@ namespace TMX {
         //std::cout << "Properties: " << std::endl;
 
         for( std::map<std::string, std::string>::iterator it = mapInfo.property.begin(); it != mapInfo.property.end(); ++it ) {
-          std::cout << "-> " << it->first << " : " << it->second << std::endl;
+          //std::cout << "-> " << it->first << " : " << it->second << std::endl;
         }
       }
 
