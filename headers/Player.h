@@ -23,7 +23,6 @@ public:
     void setMouseAngle(float angle);
     float getMouseAngle();
     float getMouseAngleRad();
-    void setRotation(float rotation);
     sf::Vector2f getMousePos();
     void setMousePos(sf::Vector2f pos);
     

@@ -8,6 +8,12 @@
 #include "./Npc.h"
 #include "./UiInterface.h"
 
+
+// The ingame console used for spawn enemies, teleporting etc.
+// Args:
+// settings - reference to the main Settings object
+// enemyFactory - reference to the main EnemyFactory object
+// grid - pointer to the grid from the player RenderLayer
 class DevConsole {
 public:
     DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid, Player *player);

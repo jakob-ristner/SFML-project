@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-
+// Abstract superclass for collision
 class CollisionBox {
 public:
     CollisionBox();

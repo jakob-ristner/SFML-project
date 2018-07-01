@@ -67,10 +67,6 @@ void Player::setPos(sf::Vector2f newPos) {
     body.setPosition(newPos);
 }
 
-void Player::setRotation(float rotation) {
-    body.setRotation(rotation);
-}
-
 void Player::update(float dt) {
     acc = sf::Vector2f(0, 0);
     casting = false;
