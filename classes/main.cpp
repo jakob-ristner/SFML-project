@@ -158,8 +158,6 @@ int main() {
         mousePos.x += std::min(0, (int)((map.getSize().x * Settings::TILESIZE - Settings::WINDOW_WIDTH / 2) - player.getPos().x));
         player.setMousePos(sf::Vector2f(mousePos.x, mousePos.y));
 
-        player.setRotation(360 - getAngle(player.getPos(),sf::Vector2f(mousePos.x, mousePos.y)));
-
         player.setMouseAngle(getAngle(player.getPos(),
                              sf::Vector2f(mousePos.x,
                              mousePos.y)));

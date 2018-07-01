@@ -96,9 +96,6 @@ void Collider::move(float dx, float dy) {
     body.move(dx, dy);
 }
 
-
-
-
 sf::Vector2f Collider::getPosition() {
     return body.getPosition();
 }
@@ -119,9 +116,6 @@ SpriteCollider::~SpriteCollider() {
 void SpriteCollider::move(float dx, float dy) {
     body.move(dx, dy);
 }
-
-
-
 
 sf::Vector2f SpriteCollider::getPosition() {
     return body.getPosition();

@@ -9,7 +9,6 @@
 #include "../headers/Settings.h"
 #include "../headers/Npc.h"
 
-
 DevConsole::DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid, Player *player):
 settings(settings), enemyFactory(enemyFactory) {
     fontFace.loadFromFile("./font.ttf");
@@ -35,7 +34,8 @@ DevConsole::~DevConsole() {
 // window - reference to the game window
 // player - reference to the player object
 bool DevConsole::open(sf::RenderWindow &window, Player &player) {
-
+    
+    // Setting up interface components
     bool isOpen = true;
     window.setKeyRepeatEnabled(true);
     sf::Event event;
@@ -175,6 +175,9 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
     return true;
 }
 
+// Private function called by open to process the players input.
+// Also handles potential exceptions and displays them to
+// the user.
 void DevConsole::newParseCommand() {
     words.clear();
     std::string buffer;
@@ -204,10 +207,12 @@ void DevConsole::newParseCommand() {
     }
 }
 
+// Logs a (error) message to the DevConsole for the user to see
 void DevConsole::print(std::string message) {
     history.push_back("### " + message + " ###");
 }
 
+// Binary search function for finding the index of a given command pointer
 int DevConsole::searchCommands(std::string command) {
     // Inclusive start, non-inclusive end
     int start = 0;
@@ -230,6 +235,8 @@ int DevConsole::searchCommands(std::string command) {
     }
 }
 
+// Wrapper for accessing the words vector. 
+// Prevents SegFaults
 std::string DevConsole::getWord(int index) {
     if (index >= words.size() || index < 0) {
         throw std::out_of_range("Too few arguments provided");
@@ -238,9 +245,11 @@ std::string DevConsole::getWord(int index) {
     }
 }
 
+// Toggles collision between player and walls
 void DevConsole::noclip() {
     settings.playerColliding = !settings.playerColliding;
 }
+
 void DevConsole::setlevel() {
     if (getWord(1) == "player") {
         int newLevel;
@@ -265,6 +274,7 @@ void DevConsole::setmovespeed() {
     }
 }
 
+// Sets the visibility of a given UI element
 void DevConsole::setvisible() {
     if (getWord(1) == "uigrid") {
         if (getWord(2) == "true") {
@@ -274,6 +284,8 @@ void DevConsole::setvisible() {
         }
     }
 }
+
+// Sets the amount of vertical lines in the uigrid
 void DevConsole::setxlines() {
     if (getWord(1) == "uigrid") {
         try {
@@ -283,6 +295,8 @@ void DevConsole::setxlines() {
         }
     }
 }
+
+// Sets the amount of horizontal lines in the uigrid
 void DevConsole::setylines() {
     if (getWord(1) == "uigrid") {
         try {
@@ -292,6 +306,8 @@ void DevConsole::setylines() {
         }
     }
 }
+
+// Spawns a given npc through the enemyFactory
 void DevConsole::spawn() {
     float x, y;
     if (getWord(2) == ".") {
@@ -314,6 +330,8 @@ void DevConsole::spawn() {
     }
     enemyFactory.spawnEnemy(getWord(1), sf::Vector2f(x, y));
 }
+
+// Sets the color of a given ui element
 void DevConsole::setcolor() {
     if (getWord(1) == "uigrid") {
         try {
@@ -323,6 +341,8 @@ void DevConsole::setcolor() {
         }
     }
 }
+
+// Teleports a given actor
 void DevConsole::tp() {
     if (getWord(0) == "tp") {
         if (getWord(1) == "player") {
