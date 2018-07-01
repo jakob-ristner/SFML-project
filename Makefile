@@ -41,3 +41,6 @@ clean:
 -include $(DEPS)
 
 MKDIR_P ?= mkdir -p
+
+run:
+	./build/a.out
