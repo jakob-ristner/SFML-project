@@ -25,6 +25,7 @@ CellDoor::CellDoor(sf::Vector2f pos, sf::Vector2f size, std::string link, sf::Ve
     body.setOrigin(body.getSize() / 2.0f);
     body.setPosition(pos);
     this->linkPos = linkPos;
+    this->link = link;
 }
 
 CellDoor::~CellDoor () {
@@ -37,4 +38,8 @@ Collider CellDoor::getCollider() {
 
 std::string CellDoor::getLinkedMap() {
     return link;
+}
+
+sf::Vector2f CellDoor::getLinkedPos() {
+    return linkPos;
 }

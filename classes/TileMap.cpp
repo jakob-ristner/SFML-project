@@ -29,6 +29,8 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
     tileSetHeight = (size.y - tileMargin) / (tileSize + tileMargin);
 
     mapTexture = generateMap();
+    obstacles.clear();
+    cellDoors.clear();
     
     // Generating objects
     std::string line;
@@ -56,7 +58,7 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
             auto lxy = strSplit(linkPos[1], ',');
             float lX = std::stof(lxy[0]);
             float lY = std::stof(lxy[1]);
-            cellDoors.push_back(CellDoor(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h), "./resources/" + link[1], sf::Vector2f(lX, lY)));
+             cellDoors.push_back(CellDoor(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h), "./resources/" + link[1], sf::Vector2f(lX, lY)));
         } else if (t == "wall") {
             obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
         }

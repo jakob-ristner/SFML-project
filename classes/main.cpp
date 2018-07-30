@@ -137,7 +137,10 @@ int main() {
                 window.close();
             } else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
+                    // Paragraph
                     case 54:
+                    // F1 as backup for devconsole
+                    case 85:
                         isRunning = console.open(window, player);
                         clock.restart();
                         break;
@@ -187,6 +190,24 @@ int main() {
         //layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
+        // Collision with cell linkers
+        for (CellDoor &door : cellDoors) {
+            if (door.getCollider().isColliding(&playerCol)) {
+                std::string newPath = door.getLinkedMap();
+                sf::Vector2f linkedPos = door.getLinkedPos();
+                map = TileMap(newPath, obstacles, cellDoors);
+                // Updating texture and texutre clamping
+                someSprite.setTexture(map.mapTexture);
+                someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
+                sf::Vector2f lowerBound(settings.WINDOW_WIDTH / 2.0f, settings.WINDOW_HEIGHT / 2.0f);
+                sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f),
+                                        map.mapTexture.getSize().y - (settings.WINDOW_HEIGHT / 2.0f));
+                sf::Sprite foreGround;
+                foreGround.setTexture(map.foreGroundTexture);
+                foreGround.setPosition(sf::Vector2f(0.0f, 0.0f));
+                player.setPos(linkedPos);
+            }
+        }
 
         // Drawing
         window.clear(bgColor);

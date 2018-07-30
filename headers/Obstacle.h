@@ -24,6 +24,7 @@ public:
 
     Collider getCollider();
     std::string getLinkedMap();
+    sf::Vector2f getLinkedPos();
 private:
     sf::RectangleShape body;
     sf::Vector2f linkPos;
