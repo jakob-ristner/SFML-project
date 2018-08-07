@@ -112,6 +112,9 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
                     case 54:
                         isOpen = false;
                         break;
+                    case 85:
+                        isOpen = false;
+                        break;
                     case sf::Keyboard::Key::Return:
                         newParseCommand();
                         if (currLine != "") {

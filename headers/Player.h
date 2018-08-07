@@ -16,6 +16,7 @@ public:
     ~Player();
     sf::Vector2f getPos();
     void setPos(sf::Vector2f);
+    void setVel(sf::Vector2f);
     void draw(sf::RenderWindow &window);
     void castSpell();
     void update(float dt);
@@ -32,6 +33,7 @@ public:
     void onCollision(sf::Vector2f direction);
     Collider getCollider();
     void addProjectile(Projectile projectile);
+    void clearProjectiles();
     std::vector<Projectile> &getProjectiles();
 
     float castProgress;

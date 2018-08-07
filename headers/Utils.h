@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
+#include <string>
 #include "cmath"
 #include "Settings.h"
 
@@ -13,3 +15,5 @@ float getAngle(sf::Vector2f pos1, sf::Vector2f pos2);
 sf::Vector2f rotateNormalVect(sf::Vector2f vector, float degrees);
 
 void printVec(sf::Vector2f vec);
+
+std::vector<std::string> strSplit(std::string, char c);

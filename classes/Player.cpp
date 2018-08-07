@@ -50,6 +50,14 @@ void Player::addProjectile(Projectile projectile) {
     projectiles.push_back(projectile);
 }
 
+void Player::clearProjectiles() {
+    projectiles.clear();
+}
+
+std::vector<Projectile> &Player::getProjectiles() {
+    return projectiles;
+}
+
 Spell *Player::getSpell(int index) {
     return spellInventory[index];
 }
@@ -58,13 +66,14 @@ sf::Vector2f Player::getPos() {
     return body.getPosition();
 }
 
-std::vector<Projectile> &Player::getProjectiles() {
-    return projectiles;
-}
 
 void Player::setPos(sf::Vector2f newPos) {
     pos = newPos;
     body.setPosition(newPos);
+}
+
+void Player::setVel(sf::Vector2f newVel) {
+    vel = newVel;
 }
 
 void Player::update(float dt) {
@@ -208,3 +217,4 @@ void Player::setLevelIcon(PlayerLevelIcon *icon) {
 void Player::setMoveSpeed(float newSpeed) {
     playeracc = newSpeed;
 }
+
