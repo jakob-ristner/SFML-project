@@ -7,6 +7,7 @@
 #include "./Obstacle.h"
 
 class Obstacle;
+// See Obstacle.h for details on cell linking
 class CellDoor;
 // Object that contains and generates all map data such as tiles,
 // map objects and tile sets

@@ -187,12 +187,12 @@ int main() {
         viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
-        //layer1.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         // Collision with cell linkers
         for (CellDoor &door : cellDoors) {
             if (door.getCollider().isColliding(&playerCol)) {
+                // Loading new map
                 std::string newPath = door.getLinkedMap();
                 sf::Vector2f linkedPos = door.getLinkedPos();
                 map = TileMap(newPath, obstacles, cellDoors);
@@ -206,6 +206,9 @@ int main() {
                 foreGround.setTexture(map.foreGroundTexture);
                 foreGround.setPosition(sf::Vector2f(0.0f, 0.0f));
                 player.setPos(linkedPos);
+                player.setVel(sf::Vector2f(0, 0));
+                player.clearProjectiles();
+                // In future the enemyFactory should also be reset and spawn new enemies
             }
         }
 
