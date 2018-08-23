@@ -4,16 +4,17 @@
 class Animation {
 public:
     Animation(sf::Texture &spriteSheet, sf::Vector2f size, 
-              float animLength, float time, float frames);
+              float animLength, float currTime, float frames, int currFrame);
     ~Animation();
 
     void update(float dt);
     sf::Texture *getFrame();
 
 private:
-    sf::Texture &spriteSheet;
+    sf::Texture *spriteSheet;
 
     float animLength;
-    float time;
+    float currTime;
     float frames;
-}
+    int currFrame;
+};

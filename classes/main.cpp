@@ -16,6 +16,7 @@
 #include "../headers/Npc.h"
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
+#include "../headers/Animation.h"
 #pragma endregion
 
 int main() {
@@ -125,6 +126,11 @@ int main() {
     RenderLayer debugLayer;
     debugLayer.add(&interfaceGrid);
 
+    // Test animation
+    sf::Texture animTest;
+    sf::Vector2f animSize;
+    Animation testAnim(animTest, animSize, 1000, 0, 60, 0);
+
     // Main Game Loop
     clock.restart();
     float dt = 0;
@@ -180,6 +186,7 @@ int main() {
                 }
             }
         }
+        testAnim.update(dt);
         enemyFactory.update(dt);
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
