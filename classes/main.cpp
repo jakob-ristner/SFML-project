@@ -128,6 +128,7 @@ int main() {
 
     // Test animation
     sf::Texture animTest;
+    animTest.loadFromFile("./resources/fish2.png");
     sf::Vector2f animSize;
     Animation testAnim(animTest, animSize, 1000, 0, 60, 0);
 

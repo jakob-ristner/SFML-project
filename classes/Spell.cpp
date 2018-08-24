@@ -25,12 +25,18 @@ void Spell::setParams(std::string name, std::string spellType,
     this->castTime = castTime;
 }
 
+void Spell::setAnimation(Animation anim) {
+    this->anim = anim;
+    bool isAnimated = true;
+}
+
 void Spell::use() {
 
 }
-int Spell::getCastTime() {
-}
 
+int Spell::getCastTime() {
+
+}
 
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float speed, sf::Vector2f pos, float rotation,
@@ -85,10 +91,24 @@ void Projectile::onCollision(Enemy &enemy) {
 void Projectile::update(float dt, sf::Vector2f mousePos) {
     counter += 1 * (dt / Settings::TIMESCALE);
     (*func)(*this, dt, mousePos);
+    if (isAnimated) {
+        anim.update(dt);
+        setTextureRect(anim.getTextureRect());
+    }
+}
+
+void Projectile::draw(sf::RenderWindow &window) {
+    window.draw(*this);
 }
 
 SpriteCollider Projectile::getCollider() {
     return SpriteCollider(*this, vel);
+}
+
+void Projectile::setAnimation(Animation anim) {
+    this->anim = anim;
+    isAnimated = true;
+    setTextureRect(anim.getTextureRect());
 }
 
 void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
@@ -110,11 +130,9 @@ void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
     projectile.move(projectile.vel * projectile.speed * (dt / Settings::TIMESCALE));
 }
 
-void Projectile::draw(sf::RenderWindow &window) {
-    window.draw(*this);
-}
 
 void Fireball::use() {
+    // TODO: Add animation spawning and scaling
     player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
                          10,
@@ -125,19 +143,21 @@ void Fireball::use() {
                          &fireballDamage));
 }
 
+
+
+Fireball::~Fireball() {
+}
+
 int Fireball::getCastTime() {
   return castTime;
 }
 
 Fireball::Fireball(Player &player):
     player(player) {
-      castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/fireball.png");
+    castTime = 10;
+    texture.loadFromFile("./resources/spell_textures/smolfirered.png");
     setParams("Fireball", "Damage", 20);
     this->player = player;
-}
-
-Fireball::~Fireball() {
 }
 
 MagicMissile::MagicMissile(Player &player):

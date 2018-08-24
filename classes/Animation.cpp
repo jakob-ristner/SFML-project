@@ -3,9 +3,14 @@
 
 #include "../headers/Animation.h"
 
+Animation::Animation() {
+
+}
+
 Animation::Animation(sf::Texture &spriteSheet, sf::Vector2f size,
         float animLength, float currTime, float frames, int currFrame) {
     this->spriteSheet = &spriteSheet;
+    this->size = size;
     this->animLength = animLength;
     this->currTime = currTime;
     this->frames = frames;
@@ -25,6 +30,10 @@ void Animation::update(float dt) {
     }
 }
 
-sf::Texture *Animation::getFrame() {
+sf::Texture *Animation::getSheet() {
     return spriteSheet;
+}
+
+sf::IntRect Animation::getTextureRect() {
+    return sf::IntRect(currFrame * size.x, 0, size.x, size.y);
 }
