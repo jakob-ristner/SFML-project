@@ -58,7 +58,7 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        bool (*onCollide)(Enemy &enemy)) {
     this->vel = vel;
     this->speed = speed;
-    this->func = callback;
+    this->func = callback; // TODO rename callback to update funcition or something
     this->rotation = rotation;
     this->onCollide = onCollide;
     kill = false;
@@ -78,6 +78,10 @@ Projectile::Projectile() {;
 Projectile::~Projectile() {
 }
 
+float Projectile::getSpeed() {
+    return speed;
+}
+
 void Projectile::onCollision(Enemy &enemy) {
     kill = onCollide(enemy);
 }
@@ -91,8 +95,23 @@ SpriteCollider Projectile::getCollider() {
     return SpriteCollider(*this, vel);
 }
 
-void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
-    projectile.move(projectile.vel * projectile.speed * (dt / Settings::TIMESCALE));
+
+
+
+void Projectile::draw(sf::RenderWindow &window) {
+    window.draw(*this);
+}
+
+//Fireball Spell Start//
+Fireball::Fireball(Player &player):
+    player(player) {
+      castTime = 10;
+    texture.loadFromFile("./resources/spell_textures/fireball.png");
+    setParams("Fireball", "Damage", 20);
+    this->player = player;
+}
+
+Fireball::~Fireball() {
 }
 
 bool fireballDamage(Enemy &enemy) {
@@ -100,18 +119,9 @@ bool fireballDamage(Enemy &enemy) {
     return true;
 }
 
-void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
-    if (projectile.counter > 1500) {
-        projectile.kill = true;
-    }
-    float angle = getAngle(projectile.getPosition(), mousePos);
-    projectile.vel = normalizedVec((sf::Vector2f(-sin(angle * (M_PI / 180)), -cos(angle * (M_PI / 180))) / 18.f + projectile.vel) / 2.f);
-    projectile.setRotation(180 - atan2(projectile.vel.x, projectile.vel.y) * (180 / M_PI));
-    projectile.move(projectile.vel * projectile.speed * (dt / Settings::TIMESCALE));
-}
-
-void Projectile::draw(sf::RenderWindow &window) {
-    window.draw(*this);
+void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
+    // The update function for the projectiles created with the fireball spell
+    projectile.move(projectile.vel * projectile.getSpeed() * (dt / Settings::TIMESCALE));
 }
 
 void Fireball::use() {
@@ -129,17 +139,9 @@ int Fireball::getCastTime() {
   return castTime;
 }
 
-Fireball::Fireball(Player &player):
-    player(player) {
-      castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/fireball.png");
-    setParams("Fireball", "Damage", 20);
-    this->player = player;
-}
+//FireBall Spell End//
 
-Fireball::~Fireball() {
-}
-
+//MagicMissile Spell Start//
 MagicMissile::MagicMissile(Player &player):
     player(player) {
     castTime = 4;
@@ -149,15 +151,25 @@ MagicMissile::MagicMissile(Player &player):
 }
 
 MagicMissile::~MagicMissile() {
-}
 
-int MagicMissile::getCastTime() {
-  return castTime;
 }
 
 bool magicMissileDamage(Enemy &enemy) {
     enemy.hurt(0.5);
     return true;
+}
+
+void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
+    // The update function for the projectiles created with the magicmissile spell
+    if (projectile.counter > 1500) {
+        projectile.kill = true;
+    }
+    float angle = getAngle(projectile.getPosition(), mousePos);
+
+    projectile.vel = normalizedVec((sf::Vector2f(-sin(angle * (M_PI / 180)), -cos(angle * (M_PI / 180))) / 18.f + projectile.vel) / 2.f);
+    projectile.setRotation(180 - atan2(projectile.vel.x, projectile.vel.y) * (180 / M_PI));
+    projectile.move(projectile.vel * projectile.getSpeed() * (dt / Settings::TIMESCALE));
+    // These lines of math basically make the projectile follow the mouse by rotating towards it
 }
 
 void MagicMissile::use() {
@@ -171,3 +183,11 @@ void MagicMissile::use() {
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
                          4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &magicMissile, &magicMissileDamage));
 }
+
+
+int MagicMissile::getCastTime() {
+  return castTime;
+}
+
+
+//MagicMissile Spell End//
