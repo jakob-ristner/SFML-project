@@ -26,7 +26,6 @@ void Animation::update(float dt) {
     if (currTime > animLength / frames) {
         currFrame++;
         currTime -= animLength / frames;
-        std::cout << "Reset: " << currFrame << std::endl;
     }
 }
 

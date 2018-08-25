@@ -21,7 +21,7 @@ public:
     virtual int getCastTime();
     int castTime;
 
-private:
+protected:
     Animation anim;
     bool isAnimated;
 };
@@ -34,6 +34,12 @@ public:
                void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos));
     Projectile(sf::Texture &texture, sf::Vector2f vel,
+               float speed, sf::Vector2f pos,
+               float rotation, float scale,
+               void (*callback)(Projectile &projectile,
+               float dt, sf::Vector2f mousePos),
+               bool (*onCollide)(Enemy &enemy));
+    Projectile(sf::Texture &texture, sf::IntRect textSize, sf::Vector2f vel,
                float speed, sf::Vector2f pos,
                float rotation, float scale,
                void (*callback)(Projectile &projectile,
@@ -56,6 +62,7 @@ public:
     SpriteCollider getCollider();
 
     void setAnimation(Animation anim);
+    void setTextureSize(sf::IntRect newSize);
 private:
     Animation anim;
     bool isAnimated;
