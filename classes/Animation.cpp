@@ -23,9 +23,13 @@ Animation::~Animation() {
 
 void Animation::update(float dt) {
     currTime += dt;
-    if (currTime > animLength / frames) {
-        currFrame++;
-        currTime -= animLength / frames;
+    if (currTime >= animLength / frames) {
+        int i = 0;
+        while (currTime >= animLength / frames) {
+            currFrame++;
+            currTime -= animLength / frames;
+            i++;
+        }
     }
 }
 

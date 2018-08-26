@@ -153,7 +153,6 @@ void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
 
 
 void Fireball::use() {
-    // TODO: Add animation spawning and scaling
     player.addProjectile(Projectile(texture, anim.getTextureRect(),
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
                          5,
@@ -182,7 +181,7 @@ Fireball::Fireball(Player &player):
     castTime = 10;
     texture.loadFromFile("./resources/spell_textures/smolfirered.png");
     texture.setRepeated(true);
-    anim = Animation(texture, sf::Vector2f(32, 32), 1000.0, 0.0, 4, 0);
+    anim = Animation(texture, sf::Vector2f(32, 32), 100.0, 0.0, 4, 0);
     setParams("Fireball", "Damage", 20);
     this->player = player;
 }

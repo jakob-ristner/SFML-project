@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <array>
 
 #include "../headers/Settings.h"
 #include "../headers/TileMap.h"
@@ -126,17 +127,27 @@ int main() {
     RenderLayer debugLayer;
     debugLayer.add(&interfaceGrid);
 
-    // Test animation
-    sf::Texture animTest;
-    animTest.loadFromFile("./resources/fish2.png");
-    sf::Vector2f animSize;
-    Animation testAnim(animTest, animSize, 1000, 0, 60, 0);
-
     // Main Game Loop
     clock.restart();
     float dt = 0;
+    // Frame rate display
+    bool showFPS = false;
+    std::array<int, 10> deltaTimes;
+    int frameCount = 0;
     while (isRunning) {
         dt = clock.restart().asMilliseconds();
+        if (showFPS) {
+            deltaTimes[frameCount] = dt;
+            frameCount++;
+            frameCount %= deltaTimes.size();
+            float sum = 0;
+            for (int i = 0; i < 10; i++) {
+                sum += deltaTimes[i];
+            }
+            if (frameCount % 10 == 0) {
+                std:: cout << 1000.0f / (sum / 10.0f) << std::endl;
+            }
+        }
         // Event Loop
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -187,7 +198,6 @@ int main() {
                 }
             }
         }
-        testAnim.update(dt);
         enemyFactory.update(dt);
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
