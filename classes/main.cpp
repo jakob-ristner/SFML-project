@@ -43,7 +43,7 @@ int main() {
     std::vector<CellDoor> cellDoors;
 
     sf::Clock clock;
-    TileMap map = TileMap("./resources/tmap2", obstacles, cellDoors);
+    TileMap map = TileMap("./resources/tmap3", obstacles, cellDoors);
     sf::Sprite someSprite;
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));

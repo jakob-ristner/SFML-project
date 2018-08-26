@@ -51,8 +51,8 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
         std::string t;
         t = words[0];
         // Custom properties
-        if (t == "cellDoor") {
-            // TODO: Create current map variable etc.
+        if (t == "cell_door") {
+            std::cout << "Cell Door" << std::endl;
             auto link = strSplit(words[5], '|');
             auto linkPos = strSplit(words[6], '|');
             auto lxy = strSplit(linkPos[1], ',');
@@ -60,6 +60,7 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
             float lY = std::stof(lxy[1]);
              cellDoors.push_back(CellDoor(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h), "./resources/" + link[1], sf::Vector2f(lX, lY)));
         } else if (t == "wall") {
+            std::cout << "Wall" << std::endl;
             obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
         }
     }

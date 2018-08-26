@@ -34,3 +34,9 @@ private:
     sf::Vector2f linkPos;
     std::string link;
 };
+
+class AnimatedTerrain: public Sprite {
+public:
+    AnimatedTerrain();
+    ~AnimatedTerrain();
+}
