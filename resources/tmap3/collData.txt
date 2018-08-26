@@ -20,7 +20,7 @@ wall 2152.0 1376.0 88.0 32.0
 wall 2216.0 1312.0 48.0 64.0 
 wall 2248.0 1248.0 40.0 64.0 
 wall 2280.0 1216.0 40.0 32.0 
-wall 2312.0 1128.0 24.0 88.0 
+wall 2312.0 1120.0 24.0 96.0 
 wall 2312.0 992.0 24.0 88.0 
 wall 2128.0 992.0 184.0 24.0 
 wall 2048.0 1016.0 96.0 32.0 
@@ -34,7 +34,7 @@ wall 1728.0 1240.0 56.0 32.0
 wall 1696.0 1272.0 56.0 32.0 
 wall 1664.0 1304.0 56.0 32.0 
 wall 2336.0 1056.0 216.0 24.0 
-wall 2336.0 1128.0 216.0 48.0 
+wall 2336.0 1120.0 216.0 56.0 
 wall 2512.0 896.0 40.0 160.0 
 wall 2480.0 768.0 40.0 128.0 
 wall 2448.0 672.0 40.0 96.0 
@@ -88,8 +88,7 @@ wall 0.0 184.0 56.0 160.0
 wall 2240.0 1160.0 32.0 24.0 
 wall 2248.0 1064.0 16.0 16.0 
 wall 2640.0 0.0 16.0 232.0 
-wall 2688.0 168.0 144.0 64.0 
-wall 2896.0 168.0 120.0 64.0 
+wall 2688.0 168.0 328.0 64.0 
 wall 3016.0 104.0 32.0 96.0 
 wall 3048.0 0.0 8.0 64.0 
 wall 3056.0 56.0 24.0 8.0 
@@ -102,5 +101,5 @@ wall 2816.0 144.0 96.0 24.0
 cell_door 1920.0 1256.0 32.0 24.0 link|map1 linkCoord|640,192 
 wall 2016.0 1560.0 32.0 32.0 
 wall 1944.0 1560.0 40.0 32.0 
-animated_terrain 2016.0 1528.0 32.0 32.0 animation_length|1000 frames|4 texture_source|smolfirered.png 
-animated_terrain 1952.0 1528.0 32.0 32.0 animation_length|1000 frames|4 texture_source|smolfirered.png 
+animated_terrain 2016.0 1528.0 32.0 32.0 animation_length|1000 frames|4 texture_source|0
+animated_terrain 1952.0 1528.0 32.0 32.0 animation_length|1000 frames|4 texture_source|0

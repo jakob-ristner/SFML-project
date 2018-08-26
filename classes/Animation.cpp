@@ -40,3 +40,8 @@ sf::Texture *Animation::getSheet() {
 sf::IntRect Animation::getTextureRect() {
     return sf::IntRect(currFrame * size.x, 0, size.x, size.y);
 }
+
+sf::Vector2f Animation::getOrigin() {
+    sf::IntRect r = getTextureRect();
+    return sf::Vector2f(r.left + (r.width / 2.0f), r.top + (r.height / 2.0f));
+}

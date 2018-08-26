@@ -13,6 +13,7 @@ public:
     void update(float dt);
     sf::Texture *getSheet();
     sf::IntRect getTextureRect();
+    sf::Vector2f getOrigin();
 
 private:
     sf::Texture *spriteSheet;

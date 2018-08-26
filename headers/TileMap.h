@@ -5,6 +5,7 @@
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
 #include "./Obstacle.h"
+#include "./Animation.h"
 
 class Obstacle;
 // See Obstacle.h for details on cell linking
@@ -32,6 +33,7 @@ private:
     TMX::Parser tmx;
     
     sf::Texture generateMap();
+    std::vector<Animation>;
     
     sf::Image tileSetTexture;
     

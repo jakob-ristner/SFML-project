@@ -43,3 +43,24 @@ std::string CellDoor::getLinkedMap() {
 sf::Vector2f CellDoor::getLinkedPos() {
     return linkPos;
 }
+
+AnimatedTerrain::AnimatedTerrain(Animation &anim): anim(anim) {
+    this->anim = anim;
+    sf::Texture &text = *(anim.getSheet());
+    setTexture(text);
+    setTextureRect(anim.getTextureRect());
+    setOrigin(anim.getOrigin());
+}
+
+AnimatedTerrain::~AnimatedTerrain() {
+
+}
+
+void AnimatedTerrain::update() {
+    setTextureRect(anim.getTextureRect());
+    setOrigin(anim.getOrigin());
+}
+
+void AnimatedTerrain::draw(sf::RenderWindow &window) {
+    window.draw(*this);
+}

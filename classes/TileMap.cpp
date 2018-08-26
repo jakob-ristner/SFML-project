@@ -32,8 +32,14 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
     obstacles.clear();
     cellDoors.clear();
     
-    // Generating objects
+    // Generating animations
     std::string line;
+    std::ifstream anims(path + "/animData.txt");
+    while (std::getline(anims, line)) {
+        // Read Animation data
+    }
+    // Generating objects
+    line = "";
     std::ifstream myfile(path + "/collData.txt");
     while (std::getline(myfile, line)) {
         std::vector<std::string> words;
