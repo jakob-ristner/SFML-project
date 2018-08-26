@@ -179,9 +179,9 @@ int Fireball::getCastTime() {
 Fireball::Fireball(Player &player):
     player(player) {
     castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/smolfirered.png");
+    texture.loadFromFile("./resources/spell_textures/altfire.png");
     texture.setRepeated(true);
-    anim = Animation(texture, sf::Vector2f(32, 32), 100.0, 0.0, 4, 0);
+    anim = Animation(texture, sf::Vector2f(32, 32), 400.0, 0.0, 7, 0);
     setParams("Fireball", "Damage", 20);
     this->player = player;
 }
