@@ -138,7 +138,6 @@ void Fireball::use() {
 int Fireball::getCastTime() {
   return castTime;
 }
-
 //FireBall Spell End//
 
 //MagicMissile Spell Start//
@@ -188,6 +187,5 @@ void MagicMissile::use() {
 int MagicMissile::getCastTime() {
   return castTime;
 }
-
 
 //MagicMissile Spell End//
