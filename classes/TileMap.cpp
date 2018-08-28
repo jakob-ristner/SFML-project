@@ -57,7 +57,6 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
                           animLength, 0, frameCount, 0)
         );
     }
-    std::cout << terrainAnimations.size() << std::endl;
     // Generating objects
     line = "";
     std::ifstream myfile(path + "/collData.txt");
