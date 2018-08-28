@@ -38,16 +38,22 @@ public:
     void update(float dt, sf::Vector2f mousePos);
     void draw(sf::RenderWindow &window);
     void onCollision(Enemy &enemy);
-    sf::Vector2f vel;
-    float speed;
-    float counter;
-    float rotation;
     void (*func)(Projectile &projectile, float dt, sf::Vector2f mousePos);
     // Will be overloaded for different types of collisions
     bool (*onCollide)(Enemy &enemy);
     bool kill;
 
+    float getSpeed();
+    float counter;
+    
+
+    sf::Vector2f vel;
     SpriteCollider getCollider();
+
+private:
+    float speed;
+    float rotation;
+
 
 };
 
