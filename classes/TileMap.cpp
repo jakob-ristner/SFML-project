@@ -33,11 +33,32 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
     cellDoors.clear();
     
     // Generating animations
-    std::string line;
+    std::string line = "";
     std::ifstream anims(path + "/animData.txt");
     while (std::getline(anims, line)) {
         // Read Animation data
+        std::vector<std::string> words;
+        std::istringstream iss(line);
+        do {
+            std::string buffer;
+            iss >> buffer;
+            words.push_back(buffer);
+        } while (iss);
+        std::string textSource = words[0];
+        float animLength, frameCount;
+        animLength = std::stof(strSplit(words[1], '|')[1]);
+        frameCount = std::stof(strSplit(words[2], '|')[1]);
+        sf::Texture tmp;
+        tmp.loadFromFile("./resources/terrain_textures/" + textSource);
+        terrainAnimationTexures.push_back(tmp);
+        sf::Vector2u txtSize = tmp.getSize();
+        sf::Vector2f flSize(txtSize.x, txtSize.y);
+        terrainAnimations.push_back(
+                Animation(terrainAnimationTexures.back(), flSize,
+                          animLength, 0, frameCount, 0)
+        );
     }
+    std::cout << terrainAnimations.size() << std::endl;
     // Generating objects
     line = "";
     std::ifstream myfile(path + "/collData.txt");
@@ -58,7 +79,6 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
         t = words[0];
         // Custom properties
         if (t == "cell_door") {
-            std::cout << "Cell Door" << std::endl;
             auto link = strSplit(words[5], '|');
             auto linkPos = strSplit(words[6], '|');
             auto lxy = strSplit(linkPos[1], ',');
@@ -66,7 +86,6 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
             float lY = std::stof(lxy[1]);
              cellDoors.push_back(CellDoor(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h), "./resources/" + link[1], sf::Vector2f(lX, lY)));
         } else if (t == "wall") {
-            std::cout << "Wall" << std::endl;
             obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
         }
     }

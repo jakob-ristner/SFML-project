@@ -18,22 +18,29 @@ with open(outPath + "collData.txt", "w") as f:
         if tile_object.type == "animated_terrain":
             if tile_object.properties["texture_source"] not in terrain_anims:
                 terrain_anims[tile_object.properties["texture_source"]] = len(terrain_anims)
-            for key in tile_object.properties:
-                if key == "texture_source":
-                    output += key + "|" + str(terrain_anims[tile_object.properties[key]])
-                else:
+                animation_data.append("")
+                for key in tile_object.properties:
+                    if key != "texture_source":
+                        animation_data[terrain_anims[tile_object.properties["texture_source"]]] += key + "|" + str(tile_object.properties[key] + " ")
+            #for key in tile_object.properties:
+                #if key == "texture_source":
+                    #output += key + "|" + str(terrain_anims[tile_object.properties[key]])
+                #else:
                     # TODO: Add animation data to anim file
-                    output += key + "|" + str(tile_object.properties[key]) + " "
+                    #output += key + "|" + str(tile_object.properties[key]) + " "
         else:
             for key in tile_object.properties:
                 output += key + "|" + tile_object.properties[key] + " "
         output += "\n"
     f.write(output)
 
+print(animation_data)
 with open(outPath + "animData.txt", "w") as f:
     output = ""
-    for key in terrain_anims.keys():
-        output += f"{key}\n"
+    for index, key in enumerate(terrain_anims.keys()):
+        output += f"{key} "
+        output += f"{animation_data[index]} "
+        output += "\n"
     f.write(output)
 
 actual_data = ""

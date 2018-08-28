@@ -24,3 +24,15 @@ private:
     float frames;
     int currFrame;
 };
+
+class TerrainAnimation: public sf::Sprite {
+public:
+    TerrainAnimation(Animation &anim);
+    ~TerrainAnimation();
+
+    void update(float dt);
+    void draw(sf::RenderWindow &window);
+
+private:
+    Animation &anim;
+}

@@ -7,6 +7,7 @@
 #include "./Obstacle.h"
 #include "./Animation.h"
 
+class Animation;
 class Obstacle;
 // See Obstacle.h for details on cell linking
 class CellDoor;
@@ -21,6 +22,7 @@ public:
     ~TileMap();
 
     void printData();
+    void update(dt);
     // Size in tiles, size in pixels can be aquired
     // Through mapTexture.getSize()
     sf::Vector2i getSize();
@@ -33,7 +35,8 @@ private:
     TMX::Parser tmx;
     
     sf::Texture generateMap();
-    std::vector<Animation>;
+    std::vector<sf::Texture> terrainAnimationTexures;
+    std::vector<Animation> terrainAnimations;
     
     sf::Image tileSetTexture;
     
