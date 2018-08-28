@@ -87,8 +87,10 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
             obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
         } else if (t == "animated_terrain") {
             int index = std::stoi(strSplit(words[5], '|')[1]);
+            float scale = std::stof(strSplit(words[6], '|')[1]);
             animSprites.push_back(TerrainAnimation(&(terrainAnimations[index])));
             animSprites.back().setPosition(sf::Vector2f(x + w / 2.0f, y + h / 2.0f));
+            animSprites.back().setScale(sf::Vector2f(scale, scale));
         }
     }
 }

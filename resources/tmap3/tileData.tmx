@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="110">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="110">
  <tileset firstgid="1" source="atlas.tsx"/>
  <layer name="Terrain" width="100" height="100">
   <data encoding="csv">
@@ -635,11 +635,13 @@
    <properties>
     <property name="animation_length" type="float" value="1000"/>
     <property name="frames" type="int" value="4"/>
+    <property name="scale" type="float" value="2"/>
     <property name="texture_source" value="smolfirered.png"/>
    </properties>
    <properties>
     <property name="animation_length" type="float" value="1000"/>
     <property name="frames" type="int" value="4"/>
+    <property name="scale" type="float" value="2"/>
     <property name="texture_source" value="smolfirered.png"/>
    </properties>
 </map>

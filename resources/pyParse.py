@@ -20,7 +20,7 @@ with open(outPath + "collData.txt", "w") as f:
                 terrain_anims[tile_object.properties["texture_source"]] = len(terrain_anims)
                 animation_data.append("")
                 for key in tile_object.properties:
-                    if key != "texture_source":
+                    if key != "texture_source" and key != "scale":
                         animation_data[terrain_anims[tile_object.properties["texture_source"]]] += key + "|" + str(tile_object.properties[key] + " ")
             #for key in tile_object.properties:
                 #if key == "texture_source":
@@ -29,6 +29,7 @@ with open(outPath + "collData.txt", "w") as f:
                     # TODO: Add animation data to anim file
                     #output += key + "|" + str(tile_object.properties[key]) + " "
             output += "animIndex|" + str(terrain_anims[tile_object.properties["texture_source"]])
+            output += " scale|" + str(tile_object.properties["scale"])
         else:
             for key in tile_object.properties:
                 output += key + "|" + tile_object.properties[key] + " "

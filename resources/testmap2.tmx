@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="110">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="110">
  <tileset firstgid="1" source="atlas.tsx"/>
  <layer name="Terrain" width="100" height="100">
   <data encoding="csv">
@@ -737,17 +737,19 @@
   </object>
   <object id="106" type="wall" x="2016" y="1560" width="32" height="32"/>
   <object id="107" type="wall" x="1944" y="1560" width="40" height="32"/>
-  <object id="108" type="animated_terrain" x="2016" y="1528" width="32" height="32">
+  <object id="108" type="animated_terrain" x="2016" y="1520" width="32" height="32">
    <properties>
     <property name="animation_length" type="float" value="1000"/>
     <property name="frames" type="int" value="4"/>
+    <property name="scale" type="float" value="2"/>
     <property name="texture_source" value="smolfirered.png"/>
    </properties>
   </object>
-  <object id="109" type="animated_terrain" x="1952" y="1528" width="32" height="32">
+  <object id="109" type="animated_terrain" x="1952" y="1520" width="32" height="32">
    <properties>
     <property name="animation_length" type="float" value="1000"/>
     <property name="frames" type="int" value="4"/>
+    <property name="scale" type="float" value="2"/>
     <property name="texture_source" value="smolfirered.png"/>
    </properties>
   </object>
