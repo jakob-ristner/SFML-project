@@ -121,19 +121,28 @@ void Projectile::draw(sf::RenderWindow &window) {
     window.draw(*this);
 }
 
-SpriteCollider Projectile::getCollider() {
-    return SpriteCollider(*this, vel);
+void Projectile::setAnimation(Animation anim) {
+    this->anim = anim;
+    isAnimated = true;
+    setTextureSize(anim.getTextureRect());
 }
 
-void Projectile::draw(sf::RenderWindow &window) {
-    window.draw(*this);
+void Projectile::setTextureSize(sf::IntRect newSize) {
+    setTextureRect(newSize);
+    setOrigin(sf::Vector2f(newSize.width, newSize.height) / 2.0f);
+}
+
+SpriteCollider Projectile::getCollider() {
+    return SpriteCollider(*this, vel);
 }
 
 //Fireball Spell Start//
 Fireball::Fireball(Player &player):
     player(player) {
       castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/fireball.png");
+    texture.loadFromFile("./resources/spell_textures/altfire.png");
+    texture.setRepeated(true);
+    anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
     setParams("Fireball", "Damage", 20);
     this->player = player;
 }
@@ -146,7 +155,6 @@ bool fireballDamage(Enemy &enemy) {
     enemy.hurt(2);
     return true;
 }
-
 void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
     // The update function for the projectiles created with the fireball spell
     projectile.move(projectile.vel * projectile.getSpeed() * (dt / Settings::TIMESCALE));
@@ -164,12 +172,6 @@ void Fireball::use() {
     Projectile &proj = player.getProjectiles().back();
     proj.setTextureRect(anim.getTextureRect());
     proj.setAnimation(anim);
-}
-
-
-
-
-Fireball::~Fireball() {
 }
 
 int Fireball::getCastTime() {

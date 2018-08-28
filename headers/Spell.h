@@ -23,7 +23,7 @@ public:
 
 protected:
     Animation anim;
-    bool isAnimated;
+    bool isAnimated = false;
 };
 
 class Projectile: public sf::Sprite{
@@ -66,7 +66,7 @@ public:
     void setTextureSize(sf::IntRect newSize);
 private:
     Animation anim;
-    bool isAnimated;
+    bool isAnimated = false;
     float speed;
     float rotation;
 };
