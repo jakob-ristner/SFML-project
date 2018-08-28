@@ -3,6 +3,7 @@
 #include "./Player.h"
 #include "./Npc.h"
 #include "./Collider.h"
+#include "./Animation.h"
 
 class Player;
 class Enemy;
@@ -13,11 +14,16 @@ public:
     virtual void use();
     void setParams(std::string name, std::string spellType,
                    int manaCost);
+    void setAnimation(Animation anim);
     std::string name;
     std::string spellType;
     int manacost;
     virtual int getCastTime();
     int castTime;
+
+protected:
+    Animation anim;
+    bool isAnimated;
 };
 
 class Projectile: public sf::Sprite{
@@ -28,6 +34,12 @@ public:
                void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos));
     Projectile(sf::Texture &texture, sf::Vector2f vel,
+               float speed, sf::Vector2f pos,
+               float rotation, float scale,
+               void (*callback)(Projectile &projectile,
+               float dt, sf::Vector2f mousePos),
+               bool (*onCollide)(Enemy &enemy));
+    Projectile(sf::Texture &texture, sf::IntRect textSize, sf::Vector2f vel,
                float speed, sf::Vector2f pos,
                float rotation, float scale,
                void (*callback)(Projectile &projectile,
@@ -50,11 +62,13 @@ public:
     sf::Vector2f vel;
     SpriteCollider getCollider();
 
+    void setAnimation(Animation anim);
+    void setTextureSize(sf::IntRect newSize);
 private:
+    Animation anim;
+    bool isAnimated;
     float speed;
     float rotation;
-
-
 };
 
 class Fireball: public Spell {

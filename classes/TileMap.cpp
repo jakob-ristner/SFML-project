@@ -32,8 +32,33 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
     obstacles.clear();
     cellDoors.clear();
     
+    // Generating animations
+    std::string line = "";
+    std::ifstream anims(path + "/animData.txt");
+    while (std::getline(anims, line)) {
+        // Read Animation data
+        std::vector<std::string> words;
+        std::istringstream iss(line);
+        do {
+            std::string buffer;
+            iss >> buffer;
+            words.push_back(buffer);
+        } while (iss);
+        std::string textSource = words[0];
+        float animLength, frameCount;
+        animLength = std::stof(strSplit(words[1], '|')[1]);
+        frameCount = std::stof(strSplit(words[2], '|')[1]);
+        terrainAnimationTexures.push_back(sf::Texture());
+        terrainAnimationTexures.back().loadFromFile("./resources/terrain_textures/" + textSource);
+        sf::Vector2u txtSize = terrainAnimationTexures.back().getSize();
+        sf::Vector2f flSize(txtSize.x / frameCount, txtSize.y);
+        terrainAnimations.push_back(
+                Animation(terrainAnimationTexures.back(), flSize,
+                          animLength, 0, frameCount, 0)
+        );
+    }
     // Generating objects
-    std::string line;
+    line = "";
     std::ifstream myfile(path + "/collData.txt");
     while (std::getline(myfile, line)) {
         std::vector<std::string> words;
@@ -51,8 +76,7 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
         std::string t;
         t = words[0];
         // Custom properties
-        if (t == "cellDoor") {
-            // TODO: Create current map variable etc.
+        if (t == "cell_door") {
             auto link = strSplit(words[5], '|');
             auto linkPos = strSplit(words[6], '|');
             auto lxy = strSplit(linkPos[1], ',');
@@ -61,6 +85,12 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
              cellDoors.push_back(CellDoor(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h), "./resources/" + link[1], sf::Vector2f(lX, lY)));
         } else if (t == "wall") {
             obstacles.push_back(Obstacle(sf::Vector2f(x + w / 2.0f, y + h / 2.0f), sf::Vector2f(w, h)));
+        } else if (t == "animated_terrain") {
+            int index = std::stoi(strSplit(words[5], '|')[1]);
+            float scale = std::stof(strSplit(words[6], '|')[1]);
+            animSprites.push_back(TerrainAnimation(&(terrainAnimations[index])));
+            animSprites.back().setPosition(sf::Vector2f(x + w / 2.0f, y + h / 2.0f));
+            animSprites.back().setScale(sf::Vector2f(scale, scale));
         }
     }
 }
@@ -98,6 +128,21 @@ void TileMap::printData() {
     std::cout << "Image Layer Source: " << tmx.imageLayer[it->first].image.source << std::endl;
     std::cout << "Image Layer Transparent Color: " << tmx.imageLayer[it->first].image.transparencyColor << std::endl;
 
+    }
+}
+
+void TileMap::update(float dt) {
+    for (int i = 0; i < terrainAnimations.size(); i++) {
+        terrainAnimations[i].update(dt);
+    }
+    for (int i = 0; i < animSprites.size(); i++) {
+        animSprites[i].update();
+    }
+}
+
+void TileMap::drawAnimatedTerrain(sf::RenderWindow &window) {
+    for (int i = 0; i < animSprites.size(); i++) {
+        animSprites[i].draw(window);
     }
 }
 
@@ -229,3 +274,4 @@ void printVec(std::vector< std::vector<int> > vec) {
         std::cout << lineBuffer << std::endl;
     }
 }
+

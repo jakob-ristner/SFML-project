@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "Collider.h"
+#include "./Collider.h"
+#include "./Animation.h"
 
 // Object representing hitboxes that the player will stop at, such as walls
 class Obstacle {
@@ -33,4 +34,20 @@ private:
     sf::RectangleShape body;
     sf::Vector2f linkPos;
     std::string link;
+};
+
+// Represents an animated sprite which is part of the terrain such as a
+// burning flame. It does not update its animation but shares it with all
+// other sprites of the same type. This is to save space and avoid animations
+// being offset by fractions of animation cycles.
+class AnimatedTerrain: public sf::Sprite {
+public:
+    AnimatedTerrain(Animation &anim);
+    ~AnimatedTerrain();
+
+    void update();
+    void draw(sf::RenderWindow &window);
+
+private:
+    Animation &anim;
 };

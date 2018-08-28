@@ -5,7 +5,9 @@
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
 #include "./Obstacle.h"
+#include "./Animation.h"
 
+class Animation;
 class Obstacle;
 // See Obstacle.h for details on cell linking
 class CellDoor;
@@ -20,6 +22,8 @@ public:
     ~TileMap();
 
     void printData();
+    void update(float dt);
+    void drawAnimatedTerrain(sf::RenderWindow &window);
     // Size in tiles, size in pixels can be aquired
     // Through mapTexture.getSize()
     sf::Vector2i getSize();
@@ -31,7 +35,11 @@ public:
 private:
     TMX::Parser tmx;
     
+    // Generates the background sprite
     sf::Texture generateMap();
+    std::vector<sf::Texture> terrainAnimationTexures;
+    std::vector<Animation> terrainAnimations;
+    std::vector<TerrainAnimation> animSprites;
     
     sf::Image tileSetTexture;
     

@@ -333,8 +333,8 @@
 </data>
  </layer>
    <properties>
-    <property name="link" value="map2"/>
-    <property name="linkCoord" value="1952,1248"/>
+    <property name="link" value="tmap3"/>
+    <property name="linkCoord" value="2000,1264"/>
    </properties>
 </map>
 

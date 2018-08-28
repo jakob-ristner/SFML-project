@@ -25,12 +25,21 @@ void Spell::setParams(std::string name, std::string spellType,
     this->castTime = castTime;
 }
 
+void Spell::setAnimation(Animation anim) {
+    this->anim = anim;
+    bool isAnimated = true;
+}
+
+void printIntRect(sf::IntRect r) {
+    std::cout << r.left << r.top << r.width << r.height << std::endl;
+}
 void Spell::use() {
 
 }
-int Spell::getCastTime() {
-}
 
+int Spell::getCastTime() {
+
+}
 
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float speed, sf::Vector2f pos, float rotation,
@@ -68,7 +77,19 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
     setScale(scale, scale);
     setTexture(texture);
     setRotation(rotation);
-    setOrigin(sf::Vector2f(texture.getSize().x, texture.getSize().y) / 2.0f);
+    setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height) / 2.0f);
+    setPosition(pos);
+}
+
+Projectile::Projectile(sf::Texture &texture, sf::IntRect textSize, 
+                       sf::Vector2f vel,
+                       float speed, sf::Vector2f pos, float rotation,
+                       float scale, void (*callback)(Projectile &projectile,
+                       float dt, sf::Vector2f mousePos),
+                       bool (*onCollide)(Enemy &enemy)) :
+                       Projectile(texture, vel, speed, pos, rotation, scale, callback, onCollide) {
+    
+    setTextureSize(textSize);
     setPosition(pos);
 }
 
@@ -89,14 +110,20 @@ void Projectile::onCollision(Enemy &enemy) {
 void Projectile::update(float dt, sf::Vector2f mousePos) {
     counter += 1 * (dt / Settings::TIMESCALE);
     (*func)(*this, dt, mousePos);
+    if (isAnimated) {
+        anim.update(dt);
+        setTextureRect(anim.getTextureRect());
+    }
+    sf::FloatRect fl = getGlobalBounds();
+}
+
+void Projectile::draw(sf::RenderWindow &window) {
+    window.draw(*this);
 }
 
 SpriteCollider Projectile::getCollider() {
     return SpriteCollider(*this, vel);
 }
-
-
-
 
 void Projectile::draw(sf::RenderWindow &window) {
     window.draw(*this);
@@ -112,6 +139,7 @@ Fireball::Fireball(Player &player):
 }
 
 Fireball::~Fireball() {
+
 }
 
 bool fireballDamage(Enemy &enemy) {
@@ -125,14 +153,23 @@ void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
 }
 
 void Fireball::use() {
-    player.addProjectile(Projectile(texture,
+    player.addProjectile(Projectile(texture, anim.getTextureRect(),
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
-                         10,
+                         5,
                          player.getPos(),
                          360 - player.getMouseAngle(),
-                         0.5,
+                         2,
                          &fireball,
                          &fireballDamage));
+    Projectile &proj = player.getProjectiles().back();
+    proj.setTextureRect(anim.getTextureRect());
+    proj.setAnimation(anim);
+}
+
+
+
+
+Fireball::~Fireball() {
 }
 
 int Fireball::getCastTime() {
