@@ -14,6 +14,7 @@ public:
     sf::Texture *getSheet();
     sf::IntRect getTextureRect();
     sf::Vector2f getOrigin();
+    static int animation_count;
 
 private:
     sf::Texture *spriteSheet;
@@ -27,12 +28,12 @@ private:
 
 class TerrainAnimation: public sf::Sprite {
 public:
-    TerrainAnimation(Animation &anim);
+    TerrainAnimation(Animation *anim);
     ~TerrainAnimation();
 
-    void update(float dt);
+    void update();
     void draw(sf::RenderWindow &window);
 
 private:
-    Animation &anim;
-}
+    Animation *anim;
+};

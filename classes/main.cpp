@@ -188,6 +188,7 @@ int main() {
             player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
         }
         player.update(dt);
+        map.update(dt);
         sf::Vector2f direction;
 
         // Collision detection
@@ -245,6 +246,7 @@ int main() {
         //window.draw(layer1);
         window.draw(playerInterfaces);
         enemyFactory.draw(window);
+        map.drawAnimatedTerrain(window);
         window.draw(debugLayer);
         window.display();
     }

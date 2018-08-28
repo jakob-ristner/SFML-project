@@ -101,5 +101,5 @@ wall 2816.0 144.0 96.0 24.0
 cell_door 1920.0 1256.0 32.0 24.0 link|map1 linkCoord|640,192 
 wall 2016.0 1560.0 32.0 32.0 
 wall 1944.0 1560.0 40.0 32.0 
-animated_terrain 2016.0 1528.0 32.0 32.0 
-animated_terrain 1952.0 1528.0 32.0 32.0 
+animated_terrain 2016.0 1528.0 32.0 32.0 animIndex|0
+animated_terrain 1952.0 1528.0 32.0 32.0 animIndex|0

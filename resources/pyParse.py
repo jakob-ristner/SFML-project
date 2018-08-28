@@ -28,6 +28,7 @@ with open(outPath + "collData.txt", "w") as f:
                 #else:
                     # TODO: Add animation data to anim file
                     #output += key + "|" + str(tile_object.properties[key]) + " "
+            output += "animIndex|" + str(terrain_anims[tile_object.properties["texture_source"]])
         else:
             for key in tile_object.properties:
                 output += key + "|" + tile_object.properties[key] + " "
