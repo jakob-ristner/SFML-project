@@ -59,7 +59,9 @@ int main() {
     Collider playerCol = player.getCollider();
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
+    SprintSpell sprint = SprintSpell(player);
     player.addSpell(&fireball);
+    player.addSpell(&sprint);
     player.addSpell(&magicMissile);
 
     UiGrid interfaceGrid;

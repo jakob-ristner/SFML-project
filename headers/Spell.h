@@ -6,6 +6,7 @@
 
 class Player;
 class Enemy;
+class Buff;
 class Spell {
 public:
     Spell();
@@ -18,6 +19,19 @@ public:
     int manacost;
     virtual int getCastTime();
     int castTime;
+};
+
+class Buff {
+public:
+    Buff();
+    ~Buff();
+    virtual void update(Player &player, float dt);
+    virtual void begin(Player &player);
+    virtual void end(Player &player);
+
+private:
+    float counter;
+
 };
 
 class Projectile: public sf::Sprite{
@@ -62,10 +76,10 @@ public:
     Fireball(Player &player);
     ~Fireball();
     void use() override;
-    int castTime;
     int getCastTime() override;
 
 private:
+    int castTime;
     Player &player;
     sf::Texture texture;
 
@@ -76,10 +90,44 @@ public:
     MagicMissile(Player &player);
     ~MagicMissile();
     void use() override;
-    int castTime;
     int getCastTime() override;
 
 private:
+    int castTime;
     Player &player;
     sf::Texture texture;
 };
+
+class SprintBuff: public Buff {
+public:
+    SprintBuff();
+    SprintBuff(Player &player);
+    ~SprintBuff();
+    void update(Player &player, float dt) override;
+    void begin(Player &player) override;
+    void end(Player &player) override;
+
+
+
+private:
+    float counter;
+    float duration;
+    float speedBuff;
+
+};
+
+class SprintSpell: public Spell {
+public:
+
+    SprintSpell(Player &player);
+    ~SprintSpell();
+    void use() override;
+    int getCastTime();
+
+private:
+    int castTime;
+    Player &player;
+    SprintBuff temp;
+    Buff *buff;
+};
+

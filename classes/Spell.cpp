@@ -24,11 +24,31 @@ void Spell::setParams(std::string name, std::string spellType,
     this->manacost = manaCost;
     this->castTime = castTime;
 }
-
+    
 void Spell::use() {
 
 }
 int Spell::getCastTime() {
+}
+
+Buff::Buff() {
+
+}
+
+Buff::~Buff() {
+
+}
+
+void Buff::begin(Player &player) {
+    std::cout << "bad hej" << std::endl;
+}
+
+void Buff::end(Player &player) {
+
+}
+
+void Buff::update(Player &player, float dt) {
+
 }
 
 
@@ -187,5 +207,57 @@ void MagicMissile::use() {
 int MagicMissile::getCastTime() {
   return castTime;
 }
-
 //MagicMissile Spell End//
+
+//SprintSpell Spell Start//
+
+SprintSpell::SprintSpell(Player &player):
+player(player) {
+    castTime  = 0;
+    this->player = player;
+    setParams("Sprint", "Buff", 20);std::cout << "bad hej" << std::endl;
+    temp = SprintBuff(player);
+    buff = &temp;
+}
+
+SprintSpell::~SprintSpell() {
+
+}
+
+void SprintSpell::use() {
+    player.addBuff(buff);
+}
+
+int SprintSpell::getCastTime() {
+    return castTime;
+}
+
+SprintBuff::SprintBuff(Player &player) {
+    counter = 0;
+    duration = 60;
+    speedBuff = 2;
+
+}
+
+SprintBuff::SprintBuff() {
+    
+}
+
+SprintBuff::~SprintBuff() {
+
+}
+
+void SprintBuff::update(Player &player, float dt) {
+
+}
+
+void SprintBuff::begin(Player &player) {
+    std::cout << "good hej" << std::endl;
+}
+
+void SprintBuff::end(Player &player) {
+
+}
+
+
+//SprintSpell Spell End//

@@ -16,6 +16,7 @@ Player::Player(sf::RectangleShape body) {
     settings = Settings();
     std::vector<sf::Sprite> projectiles = std::vector<sf::Sprite> {};
     spellInventory = std::vector<Spell *> {};
+    buffs = std::vector<Buff*> {};
     playeracc = 0.5;
     fric = 1.2;
     this->body = body;
@@ -218,3 +219,7 @@ void Player::setMoveSpeed(float newSpeed) {
     playeracc = newSpeed;
 }
 
+void Player::addBuff(Buff *buff) {
+    buffs.push_back(buff);
+    (*buff).begin(*this);
+}

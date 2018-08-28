@@ -8,6 +8,7 @@
 #include "./UiInterface.h"
 
 class Projectile;
+class Buff;
 class Spell;
 class Player {
 public:
@@ -29,6 +30,8 @@ public:
     
     void addSpell(Spell *spell);
     Spell *getSpell(int index);
+
+    void addBuff(Buff *buff);
 
     void onCollision(sf::Vector2f direction);
     Collider getCollider();
@@ -65,6 +68,8 @@ private:
     float playeracc;
     float fric;
     std::vector<Projectile> projectiles;
+    std::vector<Buff*> buffs;
+
     float mouseAngle;
     sf::Vector2f mousePos;
     bool switchedSpells;
