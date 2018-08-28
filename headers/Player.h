@@ -34,19 +34,20 @@ public:
     Collider getCollider();
     void addProjectile(Projectile projectile);
     void clearProjectiles();
-    std::vector<Projectile> &getProjectiles();
 
-    float castProgress;
-    bool casting;
-    CastBar uiCastBar;
-    SpellBar *spellBar;
 
     void hurt(float amount);
     void heal(float amount);
     void setLevel(int newLevel);
 
-    float getMaxHp();
     int getLevel();
+    std::vector<Projectile> &getProjectiles();
+    float getMaxHp();
+    
+    float castProgress;
+    bool casting;
+    CastBar uiCastBar;
+    SpellBar *spellBar;
 
     void setHpBar(PlayerHpBar *bar);
     void setLevelIcon(PlayerLevelIcon *icon);
@@ -72,6 +73,7 @@ private:
     float maxHp;
     float timeSinceHurt;
     int level;
+
 
     PlayerHpBar *hpBar;
     PlayerLevelIcon *levelIcon;
