@@ -250,8 +250,6 @@ player(player) {
     castTime  = 0;
     this->player = player;
     setParams("Sprint", "Buff", 20);
-    temp = SprintBuff(player);
-    buff = &temp;
     cooldown = 1000;
     cooldownTimer = 0;
     isReady = true;
@@ -262,6 +260,8 @@ SprintSpell::~SprintSpell() {
 }
 
 void SprintSpell::use() {
+    temp = SprintBuff(player);
+    buff = &temp;
     player.addBuff(buff);
     isReady = false;
     cooldownTimer = 0;
@@ -281,8 +281,9 @@ int SprintSpell::getCastTime() {
 
 SprintBuff::SprintBuff(Player &player) {
     counter = 0;
-    duration = 60;
+    duration = 1000;
     speedBuff = 2;
+    kill = false;
 
 }
 
@@ -295,16 +296,20 @@ SprintBuff::~SprintBuff() {
 }
 
 void SprintBuff::update(Player &player, float dt) {
-
+    if (counter < duration) {
+        counter += dt;
+    } else {
+        kill = true;
+    }
 }
 
 void SprintBuff::begin(Player &player) {
     playerStartSpeed = player.getSpeed();
-    player.setMoveSpeed(speedBuff * playerStartSpeed);
+    player.setMoveSpeed(speedBuff + playerStartSpeed);
 }
 
 void SprintBuff::end(Player &player) {
-
+    player.setMoveSpeed(playerStartSpeed);
 }
 
 

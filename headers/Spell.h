@@ -34,9 +34,11 @@ public:
     virtual void update(Player &player, float dt);
     virtual void begin(Player &player);
     virtual void end(Player &player);
+    bool kill;
 
-private:
+protected:
     float counter;
+    float duration;
 
 };
 
@@ -118,8 +120,6 @@ public:
 
 
 private:
-    float counter;
-    float duration;
     float speedBuff;
     float playerStartSpeed;
 

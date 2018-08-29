@@ -115,6 +115,14 @@ void Player::update(float dt) {
         }
 
     }
+    
+    for (int i = 0; i < buffs.size(); i++) {
+        (*buffs[i]).update(*this, dt);
+        if ((*buffs[i]).kill) {
+            (*buffs[i]).end(*this);
+            buffs.erase(buffs.begin() + i);
+        }
+    }
 
     if (!casting || switchedSpells) {
       castProgress = 0;
