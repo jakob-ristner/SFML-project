@@ -1,0 +1,1 @@
+smolfirered.png animation_length|1000 frames|4  

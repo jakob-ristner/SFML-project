@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <array>
 
 #include "../headers/Settings.h"
 #include "../headers/TileMap.h"
@@ -16,6 +17,7 @@
 #include "../headers/Npc.h"
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
+#include "../headers/Animation.h"
 #pragma endregion
 
 int main() {
@@ -41,7 +43,7 @@ int main() {
     std::vector<CellDoor> cellDoors;
 
     sf::Clock clock;
-    TileMap map = TileMap("./resources/tmap2", obstacles, cellDoors);
+    TileMap map = TileMap("./resources/tmap3", obstacles, cellDoors);
     sf::Sprite someSprite;
     someSprite.setTexture(map.mapTexture);
     someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
@@ -130,8 +132,24 @@ int main() {
     // Main Game Loop
     clock.restart();
     float dt = 0;
+    // Frame rate display
+    bool showFPS = false;
+    std::array<int, 10> deltaTimes;
+    int frameCount = 0;
     while (isRunning) {
         dt = clock.restart().asMilliseconds();
+        if (showFPS) {
+            deltaTimes[frameCount] = dt;
+            frameCount++;
+            frameCount %= deltaTimes.size();
+            float sum = 0;
+            for (int i = 0; i < 10; i++) {
+                sum += deltaTimes[i];
+            }
+            if (frameCount % 10 == 0) {
+                std:: cout << 1000.0f / (sum / 10.0f) << std::endl;
+            }
+        }
         // Event Loop
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -172,10 +190,13 @@ int main() {
             player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
         }
         player.update(dt);
+
         for (int i = 0; i < player.getSpells().size(); i++) {
             (*player.getSpells()[i]).update(dt);
             
         }
+      
+        map.update(dt);
         sf::Vector2f direction;
 
         // Collision detection
@@ -233,6 +254,7 @@ int main() {
         //window.draw(layer1);
         window.draw(playerInterfaces);
         enemyFactory.draw(window);
+        map.drawAnimatedTerrain(window);
         window.draw(debugLayer);
         window.display();
     }

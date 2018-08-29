@@ -8,6 +8,16 @@ A project using sfml (and a bit of Python) to develop a 2D game in C++.
 ## Compilation
 Just run *make* in the repo's root directory.
 
+## Map Pre-parsing
+Is done through a python script which will take a given tmx file
+and convert it to a folder. In the folder there will be two files.
+One is a new .tmx file which contains all the texture data and the
+other contains the object data which kan then be interpreted by the
+game.
+### args
+* input path (name of .tmx file)
+* output path (name of folder that will be created)
+
 ## Controls:
 * W,A,S,D - Walking
 * Space - Cast spell
