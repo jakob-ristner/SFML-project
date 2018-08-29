@@ -7,6 +7,7 @@
 
 class Player;
 class Enemy;
+class Buff;
 class Spell {
 public:
     Spell();
@@ -19,11 +20,30 @@ public:
     std::string spellType;
     int manacost;
     virtual int getCastTime();
-    int castTime;
+    virtual void update(float dt);
+    bool isReady;
 
 protected:
+    int castTime;
+    float cooldown;
+    float cooldownTimer;
+};
+
+class Buff {
+public:
+    Buff();
+    ~Buff();
+    virtual void update(Player &player, float dt);
+    virtual void begin(Player &player);
+    virtual void end(Player &player);
+    bool kill;
+
+protected:
+    float counter;
+    float duration;
     Animation anim;
     bool isAnimated = false;
+
 };
 
 class Projectile: public sf::Sprite{
@@ -76,10 +96,11 @@ public:
     Fireball(Player &player);
     ~Fireball();
     void use() override;
-    int castTime;
     int getCastTime() override;
+    void update(float dt) override;
 
 private:
+    int castTime;
     Player &player;
     sf::Texture texture;
 
@@ -90,10 +111,46 @@ public:
     MagicMissile(Player &player);
     ~MagicMissile();
     void use() override;
-    int castTime;
     int getCastTime() override;
+    void update(float dt) override;
 
 private:
+    int castTime;
     Player &player;
     sf::Texture texture;
 };
+
+class SprintBuff: public Buff {
+public:
+    SprintBuff();
+    SprintBuff(Player &player);
+    ~SprintBuff();
+    void update(Player &player, float dt) override;
+    void begin(Player &player) override;
+    void end(Player &player) override;
+
+
+
+private:
+    float speedBuff;
+    float playerStartSpeed;
+
+};
+
+class SprintSpell: public Spell {
+public:
+
+    SprintSpell(Player &player);
+    ~SprintSpell();
+    void use() override;
+    int getCastTime();
+    void update(float dt) override;
+
+private:
+    int castTime;
+    Player &player;
+    SprintBuff temp;
+    Buff *buff;
+    
+};
+

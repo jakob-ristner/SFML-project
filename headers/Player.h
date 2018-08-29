@@ -8,6 +8,7 @@
 #include "./UiInterface.h"
 
 class Projectile;
+class Buff;
 class Spell;
 class Player {
 public:
@@ -30,6 +31,8 @@ public:
     void addSpell(Spell *spell);
     Spell *getSpell(int index);
 
+    void addBuff(Buff *buff);
+
     void onCollision(sf::Vector2f direction);
     Collider getCollider();
     void addProjectile(Projectile projectile);
@@ -43,6 +46,7 @@ public:
     int getLevel();
     std::vector<Projectile> &getProjectiles();
     float getMaxHp();
+    float getSpeed();
     
     float castProgress;
     bool casting;
@@ -52,6 +56,8 @@ public:
     void setHpBar(PlayerHpBar *bar);
     void setLevelIcon(PlayerLevelIcon *icon);
     void setMoveSpeed(float newSpeed);
+
+    std::vector<Spell *> getSpells();
 
 private:
     sf::Vector2f pos;
@@ -63,8 +69,11 @@ private:
     int speed;
     int selectedSpell;
     float playeracc;
+    float originalPlayerAcc;
     float fric;
     std::vector<Projectile> projectiles;
+    std::vector<Buff*> buffs;
+
     float mouseAngle;
     sf::Vector2f mousePos;
     bool switchedSpells;

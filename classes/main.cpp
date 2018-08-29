@@ -61,7 +61,9 @@ int main() {
     Collider playerCol = player.getCollider();
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
+    SprintSpell sprint = SprintSpell(player);
     player.addSpell(&fireball);
+    player.addSpell(&sprint);
     player.addSpell(&magicMissile);
 
     UiGrid interfaceGrid;
@@ -188,6 +190,12 @@ int main() {
             player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
         }
         player.update(dt);
+
+        for (int i = 0; i < player.getSpells().size(); i++) {
+            (*player.getSpells()[i]).update(dt);
+            
+        }
+      
         map.update(dt);
         sf::Vector2f direction;
 
