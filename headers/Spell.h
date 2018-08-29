@@ -27,6 +27,8 @@ protected:
     int castTime;
     float cooldown;
     float cooldownTimer;
+    Animation anim;
+    bool isAnimated = false;
 };
 
 class Buff {
@@ -41,8 +43,6 @@ public:
 protected:
     float counter;
     float duration;
-    Animation anim;
-    bool isAnimated = false;
 
 };
 
