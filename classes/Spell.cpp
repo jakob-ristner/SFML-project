@@ -31,6 +31,10 @@ void Spell::use() {
 int Spell::getCastTime() {
 }
 
+void Spell::update(float dt) {
+    
+}
+
 Buff::Buff() {
 
 }
@@ -40,7 +44,7 @@ Buff::~Buff() {
 }
 
 void Buff::begin(Player &player) {
-    std::cout << "bad hej" << std::endl;
+    
 }
 
 void Buff::end(Player &player) {
@@ -83,6 +87,7 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
     this->onCollide = onCollide;
     kill = false;
     counter = 0;
+
 
 
     setScale(scale, scale);
@@ -129,9 +134,22 @@ Fireball::Fireball(Player &player):
     texture.loadFromFile("./resources/spell_textures/fireball.png");
     setParams("Fireball", "Damage", 20);
     this->player = player;
+    cooldown = 2000;
+    cooldownTimer = 0;
+    isReady = true;
 }
 
 Fireball::~Fireball() {
+}
+
+void Fireball::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;
+        
+    }
+    
 }
 
 bool fireballDamage(Enemy &enemy) {
@@ -153,6 +171,8 @@ void Fireball::use() {
                          0.5,
                          &fireball,
                          &fireballDamage));
+    isReady = false;
+    cooldownTimer = 0;
 }
 
 int Fireball::getCastTime() {
@@ -167,10 +187,22 @@ MagicMissile::MagicMissile(Player &player):
     this->player = player;
     texture.loadFromFile("./resources/spell_textures/magicmissile.png");
     setParams("Magic Missile", "Damage", 8);
-}
+    cooldown = 60;
+    cooldownTimer = 0;
+    isReady = true;
+};
 
 MagicMissile::~MagicMissile() {
 
+}
+
+void MagicMissile::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;
+        
+    }
 }
 
 bool magicMissileDamage(Enemy &enemy) {
@@ -201,6 +233,8 @@ void MagicMissile::use() {
     player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
                          4, player.getPos(), 360 - player.getMouseAngle(), 0.5, &magicMissile, &magicMissileDamage));
+    isReady = false;
+    cooldownTimer = 0;
 }
 
 
@@ -215,9 +249,12 @@ SprintSpell::SprintSpell(Player &player):
 player(player) {
     castTime  = 0;
     this->player = player;
-    setParams("Sprint", "Buff", 20);std::cout << "bad hej" << std::endl;
+    setParams("Sprint", "Buff", 20);
     temp = SprintBuff(player);
     buff = &temp;
+    cooldown = 1000;
+    cooldownTimer = 0;
+    isReady = true;
 }
 
 SprintSpell::~SprintSpell() {
@@ -226,6 +263,16 @@ SprintSpell::~SprintSpell() {
 
 void SprintSpell::use() {
     player.addBuff(buff);
+    isReady = false;
+    cooldownTimer = 0;
+}
+
+void SprintSpell::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;
+    }
 }
 
 int SprintSpell::getCastTime() {
@@ -252,7 +299,8 @@ void SprintBuff::update(Player &player, float dt) {
 }
 
 void SprintBuff::begin(Player &player) {
-    std::cout << "good hej" << std::endl;
+    playerStartSpeed = player.getSpeed();
+    player.setMoveSpeed(speedBuff * playerStartSpeed);
 }
 
 void SprintBuff::end(Player &player) {

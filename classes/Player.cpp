@@ -18,6 +18,7 @@ Player::Player(sf::RectangleShape body) {
     spellInventory = std::vector<Spell *> {};
     buffs = std::vector<Buff*> {};
     playeracc = 0.5;
+    originalPlayerAcc = playeracc;
     fric = 1.2;
     this->body = body;
     this->body.setFillColor(sf::Color::Green);
@@ -105,9 +106,14 @@ void Player::update(float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         casting = true;
         castProgress += 0.1 * (dt / Settings::TIMESCALE);
-        if (castProgress > (*spellInventory[selectedSpell]).getCastTime()) {
+        if (castProgress > (*spellInventory[selectedSpell]).getCastTime() 
+            && (*spellInventory[selectedSpell]).isReady) {
           castSpell();
         }
+        if (!(*spellInventory[selectedSpell]).isReady) {
+            casting = false;
+        }
+
     }
 
     if (!casting || switchedSpells) {
@@ -131,6 +137,7 @@ void Player::update(float dt) {
             projectiles.erase(projectiles.begin() + i);
         }
     }
+    
     uiCastBar.update(castProgress, (*spellInventory[selectedSpell]).getCastTime(), casting);
     if (switchedSpells) {
         (*spellBar).changeSelection(selectedSpell + 1);
@@ -222,4 +229,12 @@ void Player::setMoveSpeed(float newSpeed) {
 void Player::addBuff(Buff *buff) {
     buffs.push_back(buff);
     (*buff).begin(*this);
+}
+
+float Player::getSpeed() {
+    return playeracc;
+}
+
+std::vector<Spell *> Player::getSpells() {
+    return spellInventory;
 }

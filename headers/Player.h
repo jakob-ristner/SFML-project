@@ -46,6 +46,7 @@ public:
     int getLevel();
     std::vector<Projectile> &getProjectiles();
     float getMaxHp();
+    float getSpeed();
     
     float castProgress;
     bool casting;
@@ -55,6 +56,8 @@ public:
     void setHpBar(PlayerHpBar *bar);
     void setLevelIcon(PlayerLevelIcon *icon);
     void setMoveSpeed(float newSpeed);
+
+    std::vector<Spell *> getSpells();
 
 private:
     sf::Vector2f pos;
@@ -66,6 +69,7 @@ private:
     int speed;
     int selectedSpell;
     float playeracc;
+    float originalPlayerAcc;
     float fric;
     std::vector<Projectile> projectiles;
     std::vector<Buff*> buffs;

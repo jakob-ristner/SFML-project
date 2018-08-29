@@ -18,7 +18,13 @@ public:
     std::string spellType;
     int manacost;
     virtual int getCastTime();
+    virtual void update(float dt);
+    bool isReady;
+
+protected:
     int castTime;
+    float cooldown;
+    float cooldownTimer;
 };
 
 class Buff {
@@ -77,6 +83,7 @@ public:
     ~Fireball();
     void use() override;
     int getCastTime() override;
+    void update(float dt) override;
 
 private:
     int castTime;
@@ -91,6 +98,7 @@ public:
     ~MagicMissile();
     void use() override;
     int getCastTime() override;
+    void update(float dt) override;
 
 private:
     int castTime;
@@ -113,6 +121,7 @@ private:
     float counter;
     float duration;
     float speedBuff;
+    float playerStartSpeed;
 
 };
 
@@ -123,11 +132,13 @@ public:
     ~SprintSpell();
     void use() override;
     int getCastTime();
+    void update(float dt) override;
 
 private:
     int castTime;
     Player &player;
     SprintBuff temp;
     Buff *buff;
+    
 };
 

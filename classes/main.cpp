@@ -172,6 +172,10 @@ int main() {
             player.getProjectiles()[i].update(dt, sf::Vector2f(mousePos.x, mousePos.y));
         }
         player.update(dt);
+        for (int i = 0; i < player.getSpells().size(); i++) {
+            (*player.getSpells()[i]).update(dt);
+            
+        }
         sf::Vector2f direction;
 
         // Collision detection
