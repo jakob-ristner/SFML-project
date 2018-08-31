@@ -186,3 +186,27 @@ private:
     int xAmount;
     int yAmount;
 };
+
+class StatusMessage {
+public:
+    StatusMessage();
+    ~StatusMessage();
+    virtual void update(float dt);
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states);
+    virtual std::string getMessage();
+    bool kill;
+protected:
+    float duration;
+    std::string message;
+};
+
+
+class CoolDownMessage: public StatusMessage {
+public:
+    CoolDownMessage();
+    ~CoolDownMessage();
+    void update(float dt) override;
+    void draw(sf::RenderTarget &target, sf::RenderStates states) override;
+    std::string getMessage();
+
+};

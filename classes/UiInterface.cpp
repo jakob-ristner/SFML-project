@@ -419,3 +419,24 @@ void UiGrid::setColor(sf::Color color) {
 bool UiGrid::isVisible() {
     return visible;
 }
+
+StatusMessage::StatusMessage() {
+
+}
+
+StatusMessage::~StatusMessage() {
+    
+}
+
+void StatusMessage::update(float dt) {
+    
+}
+
+void StatusMessage::draw(sf::RenderTarget &target, sf::RenderStates states) {
+
+}
+
+std::string StatusMessage::getMessage() {
+
+}
+

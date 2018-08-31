@@ -124,6 +124,8 @@ int main() {
     playerInterfaces.add(&manaBar);
     playerInterfaces.add(&mainSpellBar);
     mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 35, Settings::WINDOW_HEIGHT - 50));
+    
+    std::vector<std::string> statusText;
 
     // Debug Layer
     RenderLayer debugLayer;
