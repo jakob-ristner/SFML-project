@@ -31,7 +31,7 @@ int main() {
     Settings settings = Settings();
 
     sf::RenderWindow window(sf::VideoMode(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT), "SFML Dungeon Crawler", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(120);
+    window.setFramerateLimit(800);
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
@@ -136,20 +136,28 @@ int main() {
     float dt = 0;
     // Frame rate display
     bool showFPS = false;
-    std::array<int, 10> deltaTimes;
+    std::array<float, 10> deltaTimes;
     int frameCount = 0;
     while (isRunning) {
-        dt = clock.restart().asMilliseconds();
+        sf::Time l = clock.restart();
+        dt = l.asMilliseconds();
+        //std::cout << l.asMicroseconds() << std::endl;
         if (showFPS) {
             deltaTimes[frameCount] = dt;
             frameCount++;
-            frameCount %= deltaTimes.size();
+            if (frameCount > deltaTimes.size()) {
+                frameCount = 0;
+            }
             float sum = 0;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < deltaTimes.size(); i++) {
                 sum += deltaTimes[i];
             }
             if (frameCount % 10 == 0) {
-                std:: cout << 1000.0f / (sum / 10.0f) << std::endl;
+                std::cout << 1000.0f / (sum / 10.0f) << std::endl;
+                for (int i = 0; i < deltaTimes.size(); i++) {
+                    std::cout << deltaTimes[i] << " ";
+                }
+                std::cout << std::endl;
             }
         }
         // Event Loop
@@ -199,6 +207,14 @@ int main() {
         }
       
         map.update(dt);
+        std::cout << viewport.getCenter().x << " " << viewport.getCenter().y << std::endl;
+        std::cout << viewport.getSize().x << " " << viewport.getSize().y << std::endl;
+        someSprite.setTextureRect(map.getViewportRect(viewport.getCenter()));
+        sf::IntRect kek = someSprite.getTextureRect();
+        sf::Vector2f vpC = viewport.getCenter();
+        sf::Vector2f vpS = viewport.getSize();
+        std::cout << "Top left corner " << kek.left << " " << kek.top << std::endl;
+        std::cout << "Viewport left top" << vpC.x - (vpS.x/2.0f) << " " << vpC.y - (vpC.y/2.0f) << std::endl;
         sf::Vector2f direction;
 
         // Collision detection
@@ -213,7 +229,8 @@ int main() {
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
-        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
+        //viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
+        viewport.setCenter(player.getPos());
         window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));

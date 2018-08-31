@@ -8,10 +8,11 @@
 
 #include "../libs/include/TMXParser.h"
 #include "../libs/include/TSXParser.h"
-#include "../headers/Obstacle.h"
 #include "../headers/TileMap.h"
+#include "../headers/Obstacle.h" 
 #include "../headers/Utils.h"
 #include "../headers/Obstacle.h"
+#include "../headers/Settings.h"
 
 TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector<CellDoor> &cellDoors) {
     this->path = path;
@@ -262,6 +263,12 @@ sf::Vector2i TileMap::getSize() {
     return sf::Vector2i(width, height);
 }
 
+sf::IntRect TileMap::getViewportRect(sf::Vector2f viewportPos) {
+    float x, y;
+    x = viewportPos.x - (Settings::WINDOW_WIDTH / 2.0f);
+    y = viewportPos.y - (Settings::WINDOW_HEIGHT / 2.0f);
+    return sf::IntRect(x, y, Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+}
 // Prints a vector of ints in a pretty format, used in printData
 void printVec(std::vector< std::vector<int> > vec) {
     std::string lineBuffer = "";
