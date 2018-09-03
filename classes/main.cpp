@@ -56,7 +56,7 @@ int main() {
 
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(28.f, 28.f)));
-    player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2 - 200));
+    player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
     sf::Event event;
     Collider playerCol = player.getCollider();
     Fireball fireball = Fireball(player);
@@ -138,6 +138,7 @@ int main() {
     bool showFPS = false;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
+    sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
     while (isRunning) {
         sf::Time l = clock.restart();
         dt = l.asMilliseconds();
@@ -207,14 +208,12 @@ int main() {
         }
       
         map.update(dt);
-        std::cout << viewport.getCenter().x << " " << viewport.getCenter().y << std::endl;
-        std::cout << viewport.getSize().x << " " << viewport.getSize().y << std::endl;
-        someSprite.setTextureRect(map.getViewportRect(viewport.getCenter()));
+        viewPortRect = map.getViewportRect(viewport.getCenter());
+        someSprite.setTextureRect(viewPortRect);
+        someSprite.setPosition(sf::Vector2f(viewPortRect.left, viewPortRect.top));
         sf::IntRect kek = someSprite.getTextureRect();
         sf::Vector2f vpC = viewport.getCenter();
         sf::Vector2f vpS = viewport.getSize();
-        std::cout << "Top left corner " << kek.left << " " << kek.top << std::endl;
-        std::cout << "Viewport left top" << vpC.x - (vpS.x/2.0f) << " " << vpC.y - (vpC.y/2.0f) << std::endl;
         sf::Vector2f direction;
 
         // Collision detection
@@ -229,8 +228,7 @@ int main() {
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
-        //viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
-        viewport.setCenter(player.getPos());
+        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
         window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
