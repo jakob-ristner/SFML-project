@@ -32,6 +32,8 @@ public:
     // Texture for sprite that bill be used as foreground
     sf::Texture foreGroundTexture;
 
+    sf::IntRect getViewportRect(sf::Vector2f viewportPos);
+
 private:
     TMX::Parser tmx;
     
