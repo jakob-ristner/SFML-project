@@ -9,7 +9,7 @@
 #include "../headers/TileMap.h"
 #include "../headers/Spell.h"
 #include "../headers/Player.h"
-#include "../headers/Settings.h"
+#include "../headers/Settings.h" 
 #include "../headers/Utils.h"
 #include "../headers/Collider.h"
 #include "../headers/Obstacle.h"
@@ -19,7 +19,6 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Animation.h"
 #pragma endregion
-
 int main() {
     const sf::Color bgColor(51, 51, 51);
     sf::Font font;
@@ -43,17 +42,20 @@ int main() {
     std::vector<CellDoor> cellDoors;
 
     sf::Clock clock;
+    
+    // This stores and draws the background image of the map
     TileMap map = TileMap("./resources/tmap3", obstacles, cellDoors);
-    sf::Sprite someSprite;
-    someSprite.setTexture(map.mapTexture);
-    someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
+    sf::Sprite backgroundSprite;
+    backgroundSprite.setTexture(map.mapTexture);
+    backgroundSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
     sf::Vector2f lowerBound(settings.WINDOW_WIDTH / 2.0f, settings.WINDOW_HEIGHT / 2.0f);
     sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f),
                             map.mapTexture.getSize().y - (settings.WINDOW_HEIGHT / 2.0f));
     sf::Sprite foreGround;
     foreGround.setTexture(map.foreGroundTexture);
     foreGround.setPosition(sf::Vector2f(0.0f, 0.0f));
-
+    
+    // Player setup
     bool isRunning = true;
     Player player = Player(sf::RectangleShape(sf::Vector2f(28.f, 28.f)));
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
@@ -66,13 +68,12 @@ int main() {
     player.addSpell(&sprint);
     player.addSpell(&magicMissile);
 
-    UiGrid interfaceGrid;
-
     // Enemies
     EnemyFactory enemyFactory(player);
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
+    UiGrid interfaceGrid;
     DevConsole console = DevConsole(settings, enemyFactory, &interfaceGrid, &player);
 
     // Spell
@@ -82,9 +83,9 @@ int main() {
     RenderLayer layer1;
     layer1.add(&(player.uiCastBar));
     
+    // Spellbar setup
     SpellBarIcon icon1 = SpellBarIcon(1);
     SpellBarIcon icon2 = SpellBarIcon(2);
-
     std::vector<SpellBarIcon *> spellIcons;
     spellIcons.push_back(&icon1);
     spellIcons.push_back(&icon2);
@@ -93,10 +94,10 @@ int main() {
     mainSpellBar.setSize(sf::Vector2f(80, 30));
     mainSpellBar.setSpellIcons(spellIcons);
     mainSpellBar.changeSelection(1);
-
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
+    // Hp bar linking
     PlayerHpBar playerHpBar;
     playerHpBar.setMaxStat(player.getMaxHp());
     player.setHpBar(&playerHpBar);
@@ -125,6 +126,7 @@ int main() {
     playerInterfaces.add(&mainSpellBar);
     mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 35, Settings::WINDOW_HEIGHT - 50));
     
+    // Jakob wat is dis?
     std::vector<std::string> statusText;
 
     // Debug Layer
@@ -209,9 +211,9 @@ int main() {
       
         map.update(dt);
         viewPortRect = map.getViewportRect(viewport.getCenter());
-        someSprite.setTextureRect(viewPortRect);
-        someSprite.setPosition(sf::Vector2f(viewPortRect.left, viewPortRect.top));
-        sf::IntRect kek = someSprite.getTextureRect();
+        backgroundSprite.setTextureRect(viewPortRect);
+        backgroundSprite.setPosition(sf::Vector2f(viewPortRect.left, viewPortRect.top));
+        sf::IntRect kek = backgroundSprite.getTextureRect();
         sf::Vector2f vpC = viewport.getCenter();
         sf::Vector2f vpS = viewport.getSize();
         sf::Vector2f direction;
@@ -241,8 +243,8 @@ int main() {
                 sf::Vector2f linkedPos = door.getLinkedPos();
                 map = TileMap(newPath, obstacles, cellDoors);
                 // Updating texture and texutre clamping
-                someSprite.setTexture(map.mapTexture);
-                someSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
+                backgroundSprite.setTexture(map.mapTexture);
+                backgroundSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
                 sf::Vector2f lowerBound(settings.WINDOW_WIDTH / 2.0f, settings.WINDOW_HEIGHT / 2.0f);
                 sf::Vector2f upperBound(map.mapTexture.getSize().x - (settings.WINDOW_WIDTH / 2.0f),
                                         map.mapTexture.getSize().y - (settings.WINDOW_HEIGHT / 2.0f));
@@ -260,7 +262,7 @@ int main() {
         window.clear(bgColor);
 
         // Landscape background
-        window.draw(someSprite);
+        window.draw(backgroundSprite);
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].draw(window);
