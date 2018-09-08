@@ -103,6 +103,10 @@ void Player::update(float dt) {
         selectedSpell = 1;
         switchedSpells = true;
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3) && selectedSpell != 2) {
+        selectedSpell = 2;
+        switchedSpells = true;
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         casting = true;
         castProgress += 0.1 * (dt / Settings::TIMESCALE);

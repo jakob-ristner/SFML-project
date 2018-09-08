@@ -1,0 +1,1584 @@
+
+;; Function Obstacle::Obstacle(sf::Vector2f, sf::Vector2f) (_ZN8ObstacleC2EN2sf7Vector2IfEES2_, funcdef_no=3244, decl_uid=76715, cgraph_uid=753, symbol_order=757)
+
+
+
+Obstacle::Obstacle(sf::Vector2f, sf::Vector2f)
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 19 [fpcr] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 29 [mm0] 30 [mm1] 31 [mm2] 32 [mm3] 33 [mm4] 34 [mm5] 35 [mm6] 36 [mm7] 37 [r8] 38 [r9] 39 [r10] 40 [r11] 45 [xmm8] 46 [xmm9] 47 [xmm10] 48 [xmm11] 49 [xmm12] 50 [xmm13] 51 [xmm14] 52 [xmm15] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 [] 76 [] 77 [] 78 [] 79 [] 80 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 20 [frame] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 37 [r8] 38 [r9]
+;;  exit block uses 	 3 [bx] 6 [bp] 7 [sp] 20 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags] 21 [xmm0] 22 [xmm1]
+;;  ref usage 	r0={30d,15u} r1={18d,3u} r2={13d} r3={6d,5u} r4={18d,5u} r5={24d,12u} r6={3d,33u} r7={7d,33u} r8={12d} r9={12d} r10={12d} r11={12d} r12={12d} r13={12d} r14={12d} r15={12d} r16={2u} r17={16d,1u} r18={12d} r19={12d} r20={1d,3u} r21={15d,3u} r22={15d,3u} r23={13d} r24={13d} r25={13d} r26={13d} r27={13d} r28={13d} r29={12d} r30={12d} r31={12d} r32={12d} r33={12d} r34={12d} r35={12d} r36={12d} r37={13d} r38={13d} r39={12d} r40={12d} r45={12d} r46={12d} r47={12d} r48={12d} r49={12d} r50={12d} r51={12d} r52={12d} r53={12d} r54={12d} r55={12d} r56={12d} r57={12d} r58={12d} r59={12d} r60={12d} r61={12d} r62={12d} r63={12d} r64={12d} r65={12d} r66={12d} r67={12d} r68={12d} r69={12d} r70={12d} r71={12d} r72={12d} r73={12d} r74={12d} r75={12d} r76={12d} r77={12d} r78={12d} r79={12d} r80={12d} 
+;;    total ref usage 1060{942d,118u,0e} in 68{56 regular + 12 call} insns.
+(note 1 0 7 NOTE_INSN_DELETED)
+(note 7 1 111 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 111 7 112 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Obstacle.cpp":5 -1
+     (nil))
+(insn/f 112 111 113 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Obstacle.cpp":5 -1
+     (nil))
+(insn/f 113 112 114 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg:DI 3 bx)) "classes/Obstacle.cpp":5 -1
+     (nil))
+(insn/f 114 113 115 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -408 [0xfffffffffffffe68])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Obstacle.cpp":5 -1
+     (nil))
+(note 115 114 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 115 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [39 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -400 [0xfffffffffffffe70])) [16 pos+0 S8 A32])
+        (reg:DI 21 xmm0 [ pos ])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 4 3 5 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -408 [0xfffffffffffffe68])) [16 size+0 S8 A32])
+        (reg:DI 22 xmm1 [ size ])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(note 5 4 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 5 9 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -24 [0xffffffffffffffe8])) [5 D.82372+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [109])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Obstacle.cpp":5 1002 {stack_tls_protect_set_di}
+     (nil))
+(insn 9 6 105 2 (set (reg/f:DI 3 bx [orig:87 _1 ] [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [39 this+0 S8 A64])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 105 9 106 2 (set (reg:DI 0 ax [93])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":5 214 {*leadi}
+     (nil))
+(insn 106 105 107 2 (set (reg:SF 22 xmm1)
+        (const_double:SF 0.0 [0x0.0p+0])) "classes/Obstacle.cpp":5 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 0.0 [0x0.0p+0])
+        (nil)))
+(insn 107 106 13 2 (set (reg:SF 21 xmm0)
+        (const_double:SF 0.0 [0x0.0p+0])) "classes/Obstacle.cpp":5 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 0.0 [0x0.0p+0])
+        (nil)))
+(insn 13 107 14 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [93])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(call_insn 14 13 108 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Eff") [flags 0x3]  <function_decl 0x7f7f8d934f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":5 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SF (use (reg:SF 21 xmm0))
+            (expr_list:SF (use (reg:SF 22 xmm1))
+                (nil)))))
+(insn 108 14 16 2 (set (reg:DI 0 ax [94])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":5 214 {*leadi}
+     (nil))
+(insn 16 108 17 2 (set (reg:DI 4 si)
+        (reg:DI 0 ax [94])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 17 16 122 2 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:87 _1 ] [87])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(note 122 17 18 2 0 NOTE_INSN_EH_REGION_BEG)
+(call_insn 18 122 123 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf14RectangleShapeC1ERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d0f9e00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":5 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 123 18 109 2 0 NOTE_INSN_EH_REGION_END)
+(insn 109 123 110 2 (set (reg:DI 1 dx [95])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -408 [0xfffffffffffffe68]))) "classes/Obstacle.cpp":6 214 {*leadi}
+     (nil))
+(insn 110 109 21 2 (set (reg:DI 0 ax [96])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":6 214 {*leadi}
+     (nil))
+(insn 21 110 22 2 (set (reg:DI 4 si)
+        (reg:DI 1 dx [95])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(insn 22 21 124 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [96])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(note 124 22 23 2 1 NOTE_INSN_EH_REGION_BEG)
+(call_insn 23 124 125 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf14RectangleShapeC1ERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d0f9e00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":6 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 125 23 24 1 NOTE_INSN_EH_REGION_END)
+(note 24 125 25 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 25 24 104 3 (set (reg/f:DI 0 ax [orig:88 _2 ] [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [39 this+0 S8 A64])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(insn 104 25 27 3 (set (reg:DI 1 dx [97])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":6 214 {*leadi}
+     (nil))
+(insn 27 104 28 3 (set (reg:DI 4 si)
+        (reg:DI 1 dx [97])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(insn 28 27 126 3 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:88 _2 ] [88])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(note 126 28 29 3 2 NOTE_INSN_EH_REGION_BEG)
+(call_insn 29 126 127 3 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeaSEOS0_") [flags 0x3]  <function_decl 0x7f7f8cfed900 operator=>) [0 operator= S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":6 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 3 [0x3])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 127 29 30 2 NOTE_INSN_EH_REGION_END)
+(note 30 127 100 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 100 30 32 4 (set (reg:DI 0 ax [98])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":6 214 {*leadi}
+     (nil))
+(insn 32 100 33 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [98])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(call_insn 33 32 34 4 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeD1Ev") [flags 0x3]  <function_decl 0x7f7f8d0f9c00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":6 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 34 33 101 4 (set (reg/f:DI 0 ax [99])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [39 this+0 S8 A64])) "classes/Obstacle.cpp":7 81 {*movdi_internal}
+     (nil))
+(insn 101 34 102 4 (set (reg/f:DI 3 bx [orig:89 _3 ] [89])
+        (plus:DI (reg/f:DI 0 ax [99])
+            (const_int 8 [0x8]))) "classes/Obstacle.cpp":7 214 {*leadi}
+     (nil))
+(insn 102 101 37 4 (set (reg:DI 0 ax [100])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":7 214 {*leadi}
+     (nil))
+(insn 37 102 38 4 (set (reg:SF 22 xmm1)
+        (mem/u/c:SF (symbol_ref/u:DI ("*.LC1") [flags 0x2]) [17  S4 A32])) "classes/Obstacle.cpp":7 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 1.6e+1 [0x0.8p+5])
+        (nil)))
+(insn 38 37 39 4 (set (reg:SF 21 xmm0)
+        (mem/u/c:SF (symbol_ref/u:DI ("*.LC1") [flags 0x2]) [17  S4 A32])) "classes/Obstacle.cpp":7 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 1.6e+1 [0x0.8p+5])
+        (nil)))
+(insn 39 38 40 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [100])) "classes/Obstacle.cpp":7 81 {*movdi_internal}
+     (nil))
+(call_insn 40 39 103 4 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Eff") [flags 0x3]  <function_decl 0x7f7f8d934f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":7 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SF (use (reg:SF 21 xmm0))
+            (expr_list:SF (use (reg:SF 22 xmm1))
+                (nil)))))
+(insn 103 40 42 4 (set (reg:DI 0 ax [101])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":7 214 {*leadi}
+     (nil))
+(insn 42 103 43 4 (set (reg:DI 4 si)
+        (reg:DI 0 ax [101])) "classes/Obstacle.cpp":7 81 {*movdi_internal}
+     (nil))
+(insn 43 42 128 4 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:89 _3 ] [89])) "classes/Obstacle.cpp":7 81 {*movdi_internal}
+     (nil))
+(note 128 43 44 4 3 NOTE_INSN_EH_REGION_BEG)
+(call_insn 44 128 45 4 (call (mem:QI (symbol_ref:DI ("_ZN2sf13Transformable9setOriginERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d92ec00 setOrigin>) [0 setOrigin S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":7 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 45 44 46 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 46 45 98 5 (set (reg/f:DI 0 ax [102])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [39 this+0 S8 A64])) "classes/Obstacle.cpp":8 81 {*movdi_internal}
+     (nil))
+(insn 98 46 99 5 (set (reg/f:DI 1 dx [orig:90 _4 ] [90])
+        (plus:DI (reg/f:DI 0 ax [102])
+            (const_int 8 [0x8]))) "classes/Obstacle.cpp":8 214 {*leadi}
+     (nil))
+(insn 99 98 49 5 (set (reg:DI 0 ax [103])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -400 [0xfffffffffffffe70]))) "classes/Obstacle.cpp":8 214 {*leadi}
+     (nil))
+(insn 49 99 50 5 (set (reg:DI 4 si)
+        (reg:DI 0 ax [103])) "classes/Obstacle.cpp":8 81 {*movdi_internal}
+     (nil))
+(insn 50 49 51 5 (set (reg:DI 5 di)
+        (reg/f:DI 1 dx [orig:90 _4 ] [90])) "classes/Obstacle.cpp":8 81 {*movdi_internal}
+     (nil))
+(call_insn 51 50 129 5 (call (mem:QI (symbol_ref:DI ("_ZN2sf13Transformable11setPositionERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d92e700 setPosition>) [0 setPosition S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":8 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 129 51 90 3 NOTE_INSN_EH_REGION_END)
+(note 90 129 92 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 92 90 93 6 (set (pc)
+        (label_ref 91)) "classes/Obstacle.cpp":9 649 {jump}
+     (nil)
+ -> 91)
+(barrier 93 92 86)
+(code_label/s 86 93 89 7 20 (nil) [1 uses])
+(note 89 86 87 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 87 89 97 7 (set (reg:DI 3 bx [106])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(insn 97 87 58 7 (set (reg:DI 0 ax [104])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":6 214 {*leadi}
+     (nil))
+(insn 58 97 59 7 (set (reg:DI 5 di)
+        (reg:DI 0 ax [104])) "classes/Obstacle.cpp":6 81 {*movdi_internal}
+     (nil))
+(call_insn 59 58 94 7 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeD1Ev") [flags 0x3]  <function_decl 0x7f7f8d0f9c00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":6 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(jump_insn 94 59 95 7 (set (pc)
+        (label_ref 62)) 649 {jump}
+     (nil)
+ -> 62)
+(barrier 95 94 80)
+(code_label/s 80 95 85 8 19 (nil) [1 uses])
+(note 85 80 81 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(insn 81 85 62 8 (set (reg:DI 3 bx [105])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(code_label 62 81 63 9 17 (nil) [1 uses])
+(note 63 62 64 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(insn 64 63 65 9 (set (reg/f:DI 0 ax [orig:91 _5 ] [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [39 this+0 S8 A64])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 65 64 66 9 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:91 _5 ] [91])) "classes/Obstacle.cpp":5 81 {*movdi_internal}
+     (nil))
+(call_insn 66 65 67 9 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeD1Ev") [flags 0x3]  <function_decl 0x7f7f8d0f9c00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":5 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 67 66 68 9 (set (reg/f:DI 0 ax [orig:92 D.82370 ] [92])
+        (reg:DI 3 bx [105])) 81 {*movdi_internal}
+     (nil))
+(insn 68 67 130 9 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:92 D.82370 ] [92])) 81 {*movdi_internal}
+     (nil))
+(note 130 68 69 9 4 NOTE_INSN_EH_REGION_BEG)
+(call_insn 69 130 131 9 (call (mem:QI (symbol_ref:DI ("_Unwind_Resume") [flags 0x41]  <function_decl 0x7f7f904ed100 __builtin_unwind_resume>) [0 __builtin_unwind_resume S1 A8])
+        (const_int 0 [0])) 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 131 69 70 4 NOTE_INSN_EH_REGION_END)
+(barrier 70 131 91)
+(code_label 91 70 77 10 21 (nil) [1 uses])
+(note 77 91 72 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(insn 72 77 73 10 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -24 [0xffffffffffffffe8])) [5 D.82372+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 0 ax [110]))
+        ]) "classes/Obstacle.cpp":9 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 73 72 78 10 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 76)
+            (pc))) "classes/Obstacle.cpp":9 617 {*jcc_1}
+     (nil)
+ -> 76)
+(note 78 73 74 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(call_insn 74 78 75 11 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f7f8c72b800 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":9 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 75 74 76)
+(code_label 76 75 79 12 18 (nil) [1 uses])
+(note 79 76 116 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(note 116 79 117 12 NOTE_INSN_EPILOGUE_BEG)
+(insn 117 116 118 12 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int 408 [0x198])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Obstacle.cpp":9 -1
+     (nil))
+(insn 118 117 119 12 (set (reg:DI 3 bx)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Obstacle.cpp":9 -1
+     (nil))
+(insn/f 119 118 120 12 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Obstacle.cpp":9 -1
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 120 119 121 12 (simple_return) "classes/Obstacle.cpp":9 -1
+     (nil)
+ -> simple_return)
+(barrier 121 120 96)
+(note 96 121 0 NOTE_INSN_DELETED)
+
+;; Function CellDoor::CellDoor(sf::Vector2f, sf::Vector2f, std::__cxx11::string, sf::Vector2f) (_ZN8CellDoorC2EN2sf7Vector2IfEES2_NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES2_, funcdef_no=3258, decl_uid=76752, cgraph_uid=767, symbol_order=771)
+
+
+
+CellDoor::CellDoor(sf::Vector2f, sf::Vector2f, std::__cxx11::string, sf::Vector2f)
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 19 [fpcr] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 29 [mm0] 30 [mm1] 31 [mm2] 32 [mm3] 33 [mm4] 34 [mm5] 35 [mm6] 36 [mm7] 37 [r8] 38 [r9] 39 [r10] 40 [r11] 45 [xmm8] 46 [xmm9] 47 [xmm10] 48 [xmm11] 49 [xmm12] 50 [xmm13] 51 [xmm14] 52 [xmm15] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 [] 76 [] 77 [] 78 [] 79 [] 80 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 20 [frame] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 37 [r8] 38 [r9]
+;;  exit block uses 	 3 [bx] 6 [bp] 7 [sp] 20 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags] 21 [xmm0] 22 [xmm1] 23 [xmm2]
+;;  ref usage 	r0={45d,26u} r1={25d,5u} r2={18d} r3={6d,5u} r4={24d,7u} r5={34d,17u} r6={3d,45u} r7={7d,40u} r8={17d} r9={17d} r10={17d} r11={17d} r12={17d} r13={17d} r14={17d} r15={17d} r16={2u} r17={24d,1u} r18={17d} r19={17d} r20={1d,3u,3e} r21={20d,4u} r22={19d,2u} r23={18d,1u} r24={18d} r25={18d} r26={18d} r27={18d} r28={18d} r29={17d} r30={17d} r31={17d} r32={17d} r33={17d} r34={17d} r35={17d} r36={17d} r37={18d} r38={18d} r39={17d} r40={17d} r45={17d} r46={17d} r47={17d} r48={17d} r49={17d} r50={17d} r51={17d} r52={17d} r53={17d} r54={17d} r55={17d} r56={17d} r57={17d} r58={17d} r59={17d} r60={17d} r61={17d} r62={17d} r63={17d} r64={17d} r65={17d} r66={17d} r67={17d} r68={17d} r69={17d} r70={17d} r71={17d} r72={17d} r73={17d} r74={17d} r75={17d} r76={17d} r77={17d} r78={17d} r79={17d} r80={17d} 
+;;    total ref usage 1483{1322d,158u,3e} in 94{77 regular + 17 call} insns.
+(note 1 0 9 NOTE_INSN_DELETED)
+(note 9 1 144 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 144 9 145 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Obstacle.cpp":23 -1
+     (nil))
+(insn/f 145 144 146 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Obstacle.cpp":23 -1
+     (nil))
+(insn/f 146 145 147 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg:DI 3 bx)) "classes/Obstacle.cpp":23 -1
+     (nil))
+(insn/f 147 146 148 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -424 [0xfffffffffffffe58])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Obstacle.cpp":23 -1
+     (nil))
+(note 148 147 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 148 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -400 [0xfffffffffffffe70])) [16 pos+0 S8 A32])
+        (reg:DI 21 xmm0 [ pos ])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 4 3 5 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -408 [0xfffffffffffffe68])) [16 size+0 S8 A32])
+        (reg:DI 22 xmm1 [ size ])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 5 4 6 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -416 [0xfffffffffffffe60])) [44 link+0 S8 A64])
+        (reg:DI 4 si [ link ])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 6 5 7 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -424 [0xfffffffffffffe58])) [16 linkPos+0 S8 A32])
+        (reg:DI 23 xmm2 [ linkPos ])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(note 7 6 8 2 NOTE_INSN_FUNCTION_BEG)
+(insn 8 7 11 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -24 [0xffffffffffffffe8])) [5 D.82379+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [125])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Obstacle.cpp":23 1002 {stack_tls_protect_set_di}
+     (nil))
+(insn 11 8 138 2 (set (reg/f:DI 3 bx [orig:87 _1 ] [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 138 11 139 2 (set (reg:DI 0 ax [99])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":23 214 {*leadi}
+     (nil))
+(insn 139 138 140 2 (set (reg:SF 22 xmm1)
+        (const_double:SF 0.0 [0x0.0p+0])) "classes/Obstacle.cpp":23 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 0.0 [0x0.0p+0])
+        (nil)))
+(insn 140 139 15 2 (set (reg:SF 21 xmm0)
+        (const_double:SF 0.0 [0x0.0p+0])) "classes/Obstacle.cpp":23 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 0.0 [0x0.0p+0])
+        (nil)))
+(insn 15 140 16 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [99])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(call_insn 16 15 141 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Eff") [flags 0x3]  <function_decl 0x7f7f8d934f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":23 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SF (use (reg:SF 21 xmm0))
+            (expr_list:SF (use (reg:SF 22 xmm1))
+                (nil)))))
+(insn 141 16 18 2 (set (reg:DI 0 ax [100])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":23 214 {*leadi}
+     (nil))
+(insn 18 141 19 2 (set (reg:DI 4 si)
+        (reg:DI 0 ax [100])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 19 18 155 2 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:87 _1 ] [87])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(note 155 19 20 2 5 NOTE_INSN_EH_REGION_BEG)
+(call_insn 20 155 156 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf14RectangleShapeC1ERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d0f9e00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":23 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 156 20 21 2 5 NOTE_INSN_EH_REGION_END)
+(insn 21 156 22 2 (set (reg/f:DI 0 ax [101])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 22 21 23 2 (parallel [
+            (set (reg/f:DI 0 ax [orig:88 _2 ] [88])
+                (plus:DI (reg/f:DI 0 ax [101])
+                    (const_int 344 [0x158])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Obstacle.cpp":23 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -376 [0xfffffffffffffe88])) [43 this+0 S8 A64])
+            (const_int 344 [0x158]))
+        (nil)))
+(insn 23 22 24 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:88 _2 ] [88])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(call_insn 24 23 25 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Ev") [flags 0x3]  <function_decl 0x7f7f8d937100 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":23 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 25 24 26 2 (set (reg/f:DI 0 ax [102])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 26 25 27 2 (parallel [
+            (set (reg/f:DI 0 ax [orig:89 _3 ] [89])
+                (plus:DI (reg/f:DI 0 ax [102])
+                    (const_int 352 [0x160])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Obstacle.cpp":23 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -376 [0xfffffffffffffe88])) [43 this+0 S8 A64])
+            (const_int 352 [0x160]))
+        (nil)))
+(insn 27 26 28 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:89 _3 ] [89])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(call_insn 28 27 142 2 (call (mem:QI (symbol_ref:DI ("_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1Ev") [flags 0x41]  <function_decl 0x7f7f8f17f500 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":23 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 142 28 143 2 (set (reg:DI 1 dx [103])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -408 [0xfffffffffffffe68]))) "classes/Obstacle.cpp":24 214 {*leadi}
+     (nil))
+(insn 143 142 31 2 (set (reg:DI 0 ax [104])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":24 214 {*leadi}
+     (nil))
+(insn 31 143 32 2 (set (reg:DI 4 si)
+        (reg:DI 1 dx [103])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(insn 32 31 157 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [104])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(note 157 32 33 2 6 NOTE_INSN_EH_REGION_BEG)
+(call_insn 33 157 158 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf14RectangleShapeC1ERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d0f9e00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":24 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 158 33 34 6 NOTE_INSN_EH_REGION_END)
+(note 34 158 35 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 35 34 137 3 (set (reg/f:DI 0 ax [orig:90 _4 ] [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(insn 137 35 37 3 (set (reg:DI 1 dx [105])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":24 214 {*leadi}
+     (nil))
+(insn 37 137 38 3 (set (reg:DI 4 si)
+        (reg:DI 1 dx [105])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(insn 38 37 159 3 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:90 _4 ] [90])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(note 159 38 39 3 7 NOTE_INSN_EH_REGION_BEG)
+(call_insn 39 159 160 3 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeaSEOS0_") [flags 0x3]  <function_decl 0x7f7f8cfed900 operator=>) [0 operator= S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":24 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 3 [0x3])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 160 39 40 7 NOTE_INSN_EH_REGION_END)
+(note 40 160 135 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 135 40 42 4 (set (reg:DI 0 ax [106])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":24 214 {*leadi}
+     (nil))
+(insn 42 135 43 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [106])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(call_insn 43 42 44 4 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeD1Ev") [flags 0x3]  <function_decl 0x7f7f8d0f9c00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":24 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 44 43 136 4 (set (reg/f:DI 0 ax [107])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(insn 136 44 46 4 (set (reg/f:DI 3 bx [orig:91 _5 ] [91])
+        (plus:DI (reg/f:DI 0 ax [107])
+            (const_int 8 [0x8]))) "classes/Obstacle.cpp":25 214 {*leadi}
+     (nil))
+(insn 46 136 47 4 (set (reg/f:DI 0 ax [orig:92 _6 ] [92])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(insn 47 46 161 4 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:92 _6 ] [92])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(note 161 47 48 4 8 NOTE_INSN_EH_REGION_BEG)
+(call_insn 48 161 110 4 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNK2sf14RectangleShape7getSizeEv") [flags 0x41]  <function_decl 0x7f7f8d0f9700 getSize>) [0 getSize S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":25 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 110 48 51 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 51 110 52 5 (set (reg:SF 21 xmm0)
+        (mem/u/c:SF (symbol_ref/u:DI ("*.LC2") [flags 0x2]) [17  S4 A32])) "classes/Obstacle.cpp":25 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 2.0e+0 [0x0.8p+2])
+        (nil)))
+(insn 52 51 53 5 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:93 _7 ] [93])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(call_insn 53 52 54 5 (set (reg:DI 21 xmm0)
+        (call (mem:QI (symbol_ref/i:DI ("_ZN2sfdvIfEENS_7Vector2IT_EERKS3_S2_") [flags 0x3]  <function_decl 0x7f7f8d00ff00 operator/>) [0 operator/ S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":25 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SF (use (reg:SF 21 xmm0))
+            (nil))))
+(insn 54 53 56 5 (set (reg:DI 0 ax [108])
+        (reg:DI 21 xmm0)) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(insn 56 54 134 5 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -376 [0xfffffffffffffe88])) [16 D.77186+0 S8 A64])
+        (reg:DI 0 ax [109])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(insn 134 56 58 5 (set (reg:DI 0 ax [110])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -376 [0xfffffffffffffe88]))) "classes/Obstacle.cpp":25 214 {*leadi}
+     (nil))
+(insn 58 134 59 5 (set (reg:DI 4 si)
+        (reg:DI 0 ax [110])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(insn 59 58 60 5 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:91 _5 ] [91])) "classes/Obstacle.cpp":25 81 {*movdi_internal}
+     (nil))
+(call_insn 60 59 61 5 (call (mem:QI (symbol_ref:DI ("_ZN2sf13Transformable9setOriginERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d92ec00 setOrigin>) [0 setOrigin S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":25 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 61 60 62 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 62 61 132 6 (set (reg/f:DI 0 ax [111])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":26 81 {*movdi_internal}
+     (nil))
+(insn 132 62 133 6 (set (reg/f:DI 1 dx [orig:94 _8 ] [94])
+        (plus:DI (reg/f:DI 0 ax [111])
+            (const_int 8 [0x8]))) "classes/Obstacle.cpp":26 214 {*leadi}
+     (nil))
+(insn 133 132 65 6 (set (reg:DI 0 ax [112])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -400 [0xfffffffffffffe70]))) "classes/Obstacle.cpp":26 214 {*leadi}
+     (nil))
+(insn 65 133 66 6 (set (reg:DI 4 si)
+        (reg:DI 0 ax [112])) "classes/Obstacle.cpp":26 81 {*movdi_internal}
+     (nil))
+(insn 66 65 67 6 (set (reg:DI 5 di)
+        (reg/f:DI 1 dx [orig:94 _8 ] [94])) "classes/Obstacle.cpp":26 81 {*movdi_internal}
+     (nil))
+(call_insn 67 66 68 6 (call (mem:QI (symbol_ref:DI ("_ZN2sf13Transformable11setPositionERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d92e700 setPosition>) [0 setPosition S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":26 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 68 67 69 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 69 68 70 7 (set (reg/f:DI 0 ax [113])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":27 81 {*movdi_internal}
+     (nil))
+(insn 70 69 71 7 (set (reg:DI 1 dx [114])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -424 [0xfffffffffffffe58])) [16 linkPos+0 S8 A32])) "classes/Obstacle.cpp":27 81 {*movdi_internal}
+     (nil))
+(insn 71 70 72 7 (set (mem:DI (plus:DI (reg/f:DI 0 ax [113])
+                (const_int 344 [0x158])) [16 this_14(D)->linkPos+0 S8 A64])
+        (reg:DI 1 dx [114])) "classes/Obstacle.cpp":27 81 {*movdi_internal}
+     (nil))
+(insn 72 71 131 7 (set (reg/f:DI 0 ax [115])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":28 81 {*movdi_internal}
+     (nil))
+(insn 131 72 74 7 (set (reg/f:DI 1 dx [orig:95 _9 ] [95])
+        (plus:DI (reg/f:DI 0 ax [115])
+            (const_int 352 [0x160]))) "classes/Obstacle.cpp":28 214 {*leadi}
+     (nil))
+(insn 74 131 75 7 (set (reg:DI 0 ax [116])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -416 [0xfffffffffffffe60])) [44 link+0 S8 A64])) "classes/Obstacle.cpp":28 81 {*movdi_internal}
+     (nil))
+(insn 75 74 76 7 (set (reg:DI 4 si)
+        (reg:DI 0 ax [116])) "classes/Obstacle.cpp":28 81 {*movdi_internal}
+     (nil))
+(insn 76 75 77 7 (set (reg:DI 5 di)
+        (reg/f:DI 1 dx [orig:95 _9 ] [95])) "classes/Obstacle.cpp":28 81 {*movdi_internal}
+     (nil))
+(call_insn 77 76 162 7 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEaSERKS4_") [flags 0x41]  <function_decl 0x7f7f8f13f000 operator=>) [0 operator= S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":28 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 162 77 123 8 NOTE_INSN_EH_REGION_END)
+(note 123 162 125 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 125 123 126 8 (set (pc)
+        (label_ref 124)) "classes/Obstacle.cpp":29 649 {jump}
+     (nil)
+ -> 124)
+(barrier 126 125 119)
+(code_label/s 119 126 122 9 33 (nil) [1 uses])
+(note 122 119 120 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(insn 120 122 130 9 (set (reg:DI 3 bx [119])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(insn 130 120 84 9 (set (reg:DI 0 ax [117])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -368 [0xfffffffffffffe90]))) "classes/Obstacle.cpp":24 214 {*leadi}
+     (nil))
+(insn 84 130 85 9 (set (reg:DI 5 di)
+        (reg:DI 0 ax [117])) "classes/Obstacle.cpp":24 81 {*movdi_internal}
+     (nil))
+(call_insn 85 84 127 9 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeD1Ev") [flags 0x3]  <function_decl 0x7f7f8d0f9c00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":24 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(jump_insn 127 85 128 9 (set (pc)
+        (label_ref 88)) 649 {jump}
+     (nil)
+ -> 88)
+(barrier 128 127 113)
+(code_label/s 113 128 118 10 32 (nil) [1 uses])
+(note 118 113 114 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(insn 114 118 88 10 (set (reg:DI 3 bx [118])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(code_label 88 114 89 11 30 (nil) [1 uses])
+(note 89 88 90 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(insn 90 89 91 11 (set (reg/f:DI 0 ax [122])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 91 90 92 11 (parallel [
+            (set (reg/f:DI 0 ax [orig:96 _10 ] [96])
+                (plus:DI (reg/f:DI 0 ax [122])
+                    (const_int 352 [0x160])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Obstacle.cpp":23 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -376 [0xfffffffffffffe88])) [43 this+0 S8 A64])
+            (const_int 352 [0x160]))
+        (nil)))
+(insn 92 91 93 11 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:96 _10 ] [96])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(call_insn 93 92 96 11 (call (mem:QI (symbol_ref:DI ("_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev") [flags 0x41]  <function_decl 0x7f7f8f17f700 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":23 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 96 93 97 11 (set (reg/f:DI 0 ax [orig:97 _11 ] [97])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -392 [0xfffffffffffffe78])) [43 this+0 S8 A64])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(insn 97 96 98 11 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:97 _11 ] [97])) "classes/Obstacle.cpp":23 81 {*movdi_internal}
+     (nil))
+(call_insn 98 97 99 11 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf14RectangleShapeD1Ev") [flags 0x3]  <function_decl 0x7f7f8d0f9c00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":23 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 99 98 100 11 (set (reg/f:DI 0 ax [orig:98 D.82377 ] [98])
+        (reg:DI 3 bx [123])) 81 {*movdi_internal}
+     (nil))
+(insn 100 99 163 11 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:98 D.82377 ] [98])) 81 {*movdi_internal}
+     (nil))
+(note 163 100 101 11 9 NOTE_INSN_EH_REGION_BEG)
+(call_insn 101 163 164 11 (call (mem:QI (symbol_ref:DI ("_Unwind_Resume") [flags 0x41]  <function_decl 0x7f7f904ed100 __builtin_unwind_resume>) [0 __builtin_unwind_resume S1 A8])
+        (const_int 0 [0])) 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 164 101 102 9 NOTE_INSN_EH_REGION_END)
+(barrier 102 164 124)
+(code_label 124 102 109 12 34 (nil) [1 uses])
+(note 109 124 104 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(insn 104 109 105 12 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -24 [0xffffffffffffffe8])) [5 D.82379+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 0 ax [126]))
+        ]) "classes/Obstacle.cpp":29 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 105 104 111 12 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 108)
+            (pc))) "classes/Obstacle.cpp":29 617 {*jcc_1}
+     (nil)
+ -> 108)
+(note 111 105 106 13 [bb 13] NOTE_INSN_BASIC_BLOCK)
+(call_insn 106 111 107 13 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f7f8c72b800 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":29 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 107 106 108)
+(code_label 108 107 112 14 31 (nil) [1 uses])
+(note 112 108 149 14 [bb 14] NOTE_INSN_BASIC_BLOCK)
+(note 149 112 150 14 NOTE_INSN_EPILOGUE_BEG)
+(insn 150 149 151 14 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int 424 [0x1a8])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Obstacle.cpp":29 -1
+     (nil))
+(insn 151 150 152 14 (set (reg:DI 3 bx)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Obstacle.cpp":29 -1
+     (nil))
+(insn/f 152 151 153 14 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Obstacle.cpp":29 -1
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 153 152 154 14 (simple_return) "classes/Obstacle.cpp":29 -1
+     (nil)
+ -> simple_return)
+(barrier 154 153 129)
+(note 129 154 0 NOTE_INSN_DELETED)
+
+;; Function AnimatedTerrain::AnimatedTerrain(Animation&) (_ZN15AnimatedTerrainC2ER9Animation, funcdef_no=3271, decl_uid=76784, cgraph_uid=784, symbol_order=788)
+
+
+
+AnimatedTerrain::AnimatedTerrain(Animation&)
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 19 [fpcr] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 29 [mm0] 30 [mm1] 31 [mm2] 32 [mm3] 33 [mm4] 34 [mm5] 35 [mm6] 36 [mm7] 37 [r8] 38 [r9] 39 [r10] 40 [r11] 45 [xmm8] 46 [xmm9] 47 [xmm10] 48 [xmm11] 49 [xmm12] 50 [xmm13] 51 [xmm14] 52 [xmm15] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 [] 76 [] 77 [] 78 [] 79 [] 80 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 20 [frame] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 37 [r8] 38 [r9]
+;;  exit block uses 	 3 [bx] 6 [bp] 7 [sp] 20 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 2 [cx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags] 21 [xmm0]
+;;  ref usage 	r0={31d,20u} r1={19d,7u} r2={13d,5u} r3={5d,5u} r4={15d,8u} r5={20d,10u} r6={3d,38u} r7={7d,31u} r8={10d} r9={10d} r10={10d} r11={10d} r12={10d} r13={10d} r14={10d} r15={10d} r16={1u} r17={14d,1u} r18={10d} r19={10d} r20={1d,2u} r21={11d,1u} r22={11d} r23={11d} r24={11d} r25={11d} r26={11d} r27={11d} r28={11d} r29={10d} r30={10d} r31={10d} r32={10d} r33={10d} r34={10d} r35={10d} r36={10d} r37={11d} r38={11d} r39={10d} r40={10d} r45={10d} r46={10d} r47={10d} r48={10d} r49={10d} r50={10d} r51={10d} r52={10d} r53={10d} r54={10d} r55={10d} r56={10d} r57={10d} r58={10d} r59={10d} r60={10d} r61={10d} r62={10d} r63={10d} r64={10d} r65={10d} r66={10d} r67={10d} r68={10d} r69={10d} r70={10d} r71={10d} r72={10d} r73={10d} r74={10d} r75={10d} r76={10d} r77={10d} r78={10d} r79={10d} r80={10d} 
+;;    total ref usage 927{798d,129u,0e} in 76{66 regular + 10 call} insns.
+(note 1 0 6 NOTE_INSN_DELETED)
+(note 6 1 111 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 111 6 112 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Obstacle.cpp":47 -1
+     (nil))
+(insn/f 112 111 113 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Obstacle.cpp":47 -1
+     (nil))
+(insn/f 113 112 114 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg:DI 3 bx)) "classes/Obstacle.cpp":47 -1
+     (nil))
+(insn/f 114 113 115 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -72 [0xffffffffffffffb8])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Obstacle.cpp":47 -1
+     (nil))
+(note 115 114 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 115 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -80 [0xffffffffffffffb0])) [52 anim+0 S8 A64])
+        (reg:DI 4 si [ anim ])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(note 4 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 4 8 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -24 [0xffffffffffffffe8])) [5 D.82387+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [117])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Obstacle.cpp":47 1002 {stack_tls_protect_set_di}
+     (nil))
+(insn 8 5 9 2 (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 9 8 122 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(note 122 9 10 2 10 NOTE_INSN_EH_REGION_BEG)
+(call_insn 10 122 123 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf6SpriteC2Ev") [flags 0x41]  <function_decl 0x7f7f8cfb0200 __base_ctor >) [0 __base_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":47 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 123 10 11 2 10 NOTE_INSN_EH_REGION_END)
+(insn 11 123 12 2 (set (reg/f:DI 1 dx [orig:88 _2 ] [88])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTV15AnimatedTerrain") [flags 0x2]  <var_decl 0x7f7f8cfdd120 _ZTV15AnimatedTerrain>)
+                (const_int 16 [0x10])))) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg/f:DI 0 ax [97])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 13 12 14 2 (set (mem/f:DI (reg/f:DI 0 ax [97]) [2 this_11(D)->D.76796.D.76330._vptr.Drawable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:88 _2 ] [88])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg/f:DI 1 dx [orig:89 _3 ] [89])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTV15AnimatedTerrain") [flags 0x2]  <var_decl 0x7f7f8cfdd120 _ZTV15AnimatedTerrain>)
+                (const_int 56 [0x38])))) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg/f:DI 0 ax [98])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [98])
+                (const_int 8 [0x8])) [2 this_11(D)->D.76796.D.76331._vptr.Transformable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:89 _3 ] [89])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg/f:DI 0 ax [99])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg/f:DI 1 dx [100])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -80 [0xffffffffffffffb0])) [52 anim+0 S8 A64])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [99])
+                (const_int 288 [0x120])) [52 this_11(D)->anim+0 S8 A64])
+        (reg/f:DI 1 dx [100])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg/f:DI 0 ax [101])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 21 20 22 2 (set (reg/f:DI 2 cx [orig:90 _4 ] [90])
+        (mem/f:DI (plus:DI (reg/f:DI 0 ax [101])
+                (const_int 288 [0x120])) [52 this_11(D)->anim+0 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 22 21 103 2 (set (reg/f:DI 4 si [102])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -80 [0xffffffffffffffb0])) [52 anim+0 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 103 22 104 2 (set (reg:DI 0 ax [103])
+        (mem:DI (reg/f:DI 4 si [102]) [54 MEM[(const struct Animation &)anim_16(D)]+0 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 104 103 105 2 (set (reg:DI 1 dx [+8 ])
+        (mem:DI (plus:DI (reg/f:DI 4 si [102])
+                (const_int 8 [0x8])) [54 MEM[(const struct Animation &)anim_16(D)]+8 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 105 104 106 2 (set (mem:DI (reg/f:DI 2 cx [orig:90 _4 ] [90]) [54 *_4+0 S8 A64])
+        (reg:DI 0 ax [103])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 106 105 107 2 (set (mem:DI (plus:DI (reg/f:DI 2 cx [orig:90 _4 ] [90])
+                (const_int 8 [0x8])) [54 *_4+8 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 107 106 108 2 (set (reg:DI 0 ax [104])
+        (mem:DI (plus:DI (reg/f:DI 4 si [102])
+                (const_int 16 [0x10])) [54 MEM[(const struct Animation &)anim_16(D)]+16 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 108 107 109 2 (set (reg:DI 1 dx [+8 ])
+        (mem:DI (plus:DI (reg/f:DI 4 si [102])
+                (const_int 24 [0x18])) [54 MEM[(const struct Animation &)anim_16(D)]+24 S8 A64])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 109 108 110 2 (set (mem:DI (plus:DI (reg/f:DI 2 cx [orig:90 _4 ] [90])
+                (const_int 16 [0x10])) [54 *_4+16 S8 A64])
+        (reg:DI 0 ax [104])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 110 109 27 2 (set (mem:DI (plus:DI (reg/f:DI 2 cx [orig:90 _4 ] [90])
+                (const_int 24 [0x18])) [54 *_4+24 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Obstacle.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn 27 110 28 2 (set (reg:DI 0 ax [105])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -80 [0xffffffffffffffb0])) [52 anim+0 S8 A64])) "classes/Obstacle.cpp":49 81 {*movdi_internal}
+     (nil))
+(insn 28 27 124 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [105])) "classes/Obstacle.cpp":49 81 {*movdi_internal}
+     (nil))
+(note 124 28 29 2 11 NOTE_INSN_EH_REGION_BEG)
+(call_insn 29 124 85 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation8getSheetEv") [flags 0x41]  <function_decl 0x7f7f8cfc4e00 getSheet>) [0 getSheet S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":49 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 85 29 32 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 32 85 33 3 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [50 text+0 S8 A64])
+        (reg/f:DI 0 ax [orig:95 _20 ] [95])) "classes/Obstacle.cpp":49 81 {*movdi_internal}
+     (nil))
+(insn 33 32 34 3 (set (reg/f:DI 0 ax [orig:91 _5 ] [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":50 81 {*movdi_internal}
+     (nil))
+(insn 34 33 35 3 (set (reg:DI 2 cx [106])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [50 text+0 S8 A64])) "classes/Obstacle.cpp":50 81 {*movdi_internal}
+     (nil))
+(insn 35 34 36 3 (set (reg:SI 1 dx)
+        (const_int 0 [0])) "classes/Obstacle.cpp":50 82 {*movsi_internal}
+     (nil))
+(insn 36 35 37 3 (set (reg:DI 4 si)
+        (reg:DI 2 cx [106])) "classes/Obstacle.cpp":50 81 {*movdi_internal}
+     (nil))
+(insn 37 36 38 3 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:91 _5 ] [91])) "classes/Obstacle.cpp":50 81 {*movdi_internal}
+     (nil))
+(call_insn 38 37 39 3 (call (mem:QI (symbol_ref:DI ("_ZN2sf6Sprite10setTextureERKNS_7TextureEb") [flags 0x41]  <function_decl 0x7f7f8cf82d00 setTexture>) [0 setTexture S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":50 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:SI (use (reg:SI 1 dx))
+                (nil)))))
+(note 39 38 40 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 40 39 41 4 (set (reg/f:DI 3 bx [orig:92 _6 ] [92])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 41 40 42 4 (set (reg:DI 0 ax [107])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -80 [0xffffffffffffffb0])) [52 anim+0 S8 A64])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 42 41 43 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [107])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(call_insn 43 42 86 4 (set (reg:TI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation14getTextureRectEv") [flags 0x41]  <function_decl 0x7f7f8cfc4f00 getTextureRect>) [0 getTextureRect S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":51 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 86 43 100 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 100 86 101 5 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [32 D.77283+0 S8 A64])
+        (reg:DI 0 ax [109])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 101 100 102 5 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [32 D.77283+8 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 102 101 49 5 (set (reg:DI 0 ax [110])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -48 [0xffffffffffffffd0]))) "classes/Obstacle.cpp":51 214 {*leadi}
+     (nil))
+(insn 49 102 50 5 (set (reg:DI 4 si)
+        (reg:DI 0 ax [110])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 50 49 51 5 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:92 _6 ] [92])) "classes/Obstacle.cpp":51 81 {*movdi_internal}
+     (nil))
+(call_insn 51 50 52 5 (call (mem:QI (symbol_ref:DI ("_ZN2sf6Sprite14setTextureRectERKNS_4RectIiEE") [flags 0x41]  <function_decl 0x7f7f8cf82e00 setTextureRect>) [0 setTextureRect S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":51 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 52 51 53 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 53 52 99 6 (set (reg/f:DI 0 ax [111])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(insn 99 53 55 6 (set (reg/f:DI 3 bx [orig:93 _7 ] [93])
+        (plus:DI (reg/f:DI 0 ax [111])
+            (const_int 8 [0x8]))) "classes/Obstacle.cpp":52 214 {*leadi}
+     (nil))
+(insn 55 99 56 6 (set (reg:DI 0 ax [112])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -80 [0xffffffffffffffb0])) [52 anim+0 S8 A64])) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(insn 56 55 57 6 (set (reg:DI 5 di)
+        (reg:DI 0 ax [112])) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(call_insn 57 56 87 6 (set (reg:DI 21 xmm0)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation9getOriginEv") [flags 0x41]  <function_decl 0x7f7f8cfc9000 getOrigin>) [0 getOrigin S1 A8])
+            (const_int 0 [0]))) "classes/Obstacle.cpp":52 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 87 57 58 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 58 87 60 7 (set (reg:DI 0 ax [113])
+        (reg:DI 21 xmm0)) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(insn 60 58 98 7 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [16 D.77284+0 S8 A64])
+        (reg:DI 0 ax [114])) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(insn 98 60 63 7 (set (reg:DI 0 ax [115])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -48 [0xffffffffffffffd0]))) "classes/Obstacle.cpp":52 214 {*leadi}
+     (nil))
+(insn 63 98 64 7 (set (reg:DI 4 si)
+        (reg:DI 0 ax [115])) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(insn 64 63 65 7 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:93 _7 ] [93])) "classes/Obstacle.cpp":52 81 {*movdi_internal}
+     (nil))
+(call_insn 65 64 125 7 (call (mem:QI (symbol_ref:DI ("_ZN2sf13Transformable9setOriginERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f7f8d92ec00 setOrigin>) [0 setOrigin S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":52 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 125 65 93 11 NOTE_INSN_EH_REGION_END)
+(note 93 125 95 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 95 93 96 8 (set (pc)
+        (label_ref 94)) "classes/Obstacle.cpp":53 649 {jump}
+     (nil)
+ -> 94)
+(barrier 96 95 90)
+(code_label/s 90 96 92 9 48 (nil) [1 uses])
+(note 92 90 91 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(insn 91 92 71 9 (set (reg:DI 3 bx [116])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(insn 71 91 72 9 (set (reg/f:DI 0 ax [orig:94 _8 ] [94])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [51 this+0 S8 A64])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(insn 72 71 73 9 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:94 _8 ] [94])) "classes/Obstacle.cpp":47 81 {*movdi_internal}
+     (nil))
+(call_insn 73 72 74 9 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf6SpriteD2Ev") [flags 0x3]  <function_decl 0x7f7f8cfabb00 __base_dtor >) [0 __base_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":47 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 74 73 75 9 (set (reg/f:DI 0 ax [orig:96 D.82385 ] [96])
+        (reg:DI 3 bx [116])) 81 {*movdi_internal}
+     (nil))
+(insn 75 74 126 9 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:96 D.82385 ] [96])) 81 {*movdi_internal}
+     (nil))
+(note 126 75 76 9 12 NOTE_INSN_EH_REGION_BEG)
+(call_insn 76 126 127 9 (call (mem:QI (symbol_ref:DI ("_Unwind_Resume") [flags 0x41]  <function_decl 0x7f7f904ed100 __builtin_unwind_resume>) [0 __builtin_unwind_resume S1 A8])
+        (const_int 0 [0])) 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 127 76 77 12 NOTE_INSN_EH_REGION_END)
+(barrier 77 127 94)
+(code_label 94 77 84 10 49 (nil) [1 uses])
+(note 84 94 79 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(insn 79 84 80 10 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -24 [0xffffffffffffffe8])) [5 D.82387+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 0 ax [118]))
+        ]) "classes/Obstacle.cpp":53 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 80 79 88 10 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 83)
+            (pc))) "classes/Obstacle.cpp":53 617 {*jcc_1}
+     (nil)
+ -> 83)
+(note 88 80 81 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(call_insn 81 88 82 11 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f7f8c72b800 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Obstacle.cpp":53 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 82 81 83)
+(code_label 83 82 89 12 47 (nil) [1 uses])
+(note 89 83 116 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(note 116 89 117 12 NOTE_INSN_EPILOGUE_BEG)
+(insn 117 116 118 12 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int 72 [0x48])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Obstacle.cpp":53 -1
+     (nil))
+(insn 118 117 119 12 (set (reg:DI 3 bx)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Obstacle.cpp":53 -1
+     (nil))
+(insn/f 119 118 120 12 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Obstacle.cpp":53 -1
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 120 119 121 12 (simple_return) "classes/Obstacle.cpp":53 -1
+     (nil)
+ -> simple_return)
+(barrier 121 120 97)
+(note 97 121 0 NOTE_INSN_DELETED)
+
+;; Function std::vector<_Tp, _Alloc>::pointer std::vector<_Tp, _Alloc>::_M_allocate_and_copy(std::vector<_Tp, _Alloc>::size_type, _ForwardIterator, _ForwardIterator) [with _ForwardIterator = __gnu_cxx::__normal_iterator<const sf::Vertex*, std::vector<sf::Vertex> >; _Tp = sf::Vertex; _Alloc = std::allocator<sf::Vertex>] (_ZNSt6vectorIN2sf6VertexESaIS1_EE20_M_allocate_and_copyIN9__gnu_cxx17__normal_iteratorIPKS1_S3_EEEEPS1_mT_SB_, funcdef_no=3675, decl_uid=79334, cgraph_uid=1192, symbol_order=1196)
+
+
+
+std::vector<_Tp, _Alloc>::pointer std::vector<_Tp, _Alloc>::_M_allocate_and_copy(std::vector<_Tp, _Alloc>::size_type, _ForwardIterator, _ForwardIterator) [with _ForwardIterator = __gnu_cxx::__normal_iterator<const sf::Vertex*, std::vector<sf::Vertex> >; _Tp = sf::Vertex; _Alloc = std::allocator<sf::Vertex>]
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 19 [fpcr] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 29 [mm0] 30 [mm1] 31 [mm2] 32 [mm3] 33 [mm4] 34 [mm5] 35 [mm6] 36 [mm7] 37 [r8] 38 [r9] 39 [r10] 40 [r11] 45 [xmm8] 46 [xmm9] 47 [xmm10] 48 [xmm11] 49 [xmm12] 50 [xmm13] 51 [xmm14] 52 [xmm15] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 [] 76 [] 77 [] 78 [] 79 [] 80 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp] 20 [frame] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 37 [r8] 38 [r9]
+;;  exit block uses 	 0 [ax] 3 [bx] 6 [bp] 7 [sp] 20 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 2 [cx] 3 [bx] 4 [si] 5 [di] 6 [bp] 7 [sp]
+;;  ref usage 	r0={17d,11u} r1={14d,4u} r2={11d,3u} r3={3d,3u} r4={12d,4u} r5={15d,7u} r6={3d,23u} r7={7d,24u} r8={8d} r9={8d} r10={8d} r11={8d} r12={8d} r13={8d} r14={8d} r15={8d} r16={2u} r17={10d} r18={8d} r19={8d} r20={1d,3u} r21={9d} r22={9d} r23={9d} r24={9d} r25={9d} r26={9d} r27={9d} r28={9d} r29={8d} r30={8d} r31={8d} r32={8d} r33={8d} r34={8d} r35={8d} r36={8d} r37={9d} r38={9d} r39={8d} r40={8d} r45={8d} r46={8d} r47={8d} r48={8d} r49={8d} r50={8d} r51={8d} r52={8d} r53={8d} r54={8d} r55={8d} r56={8d} r57={8d} r58={8d} r59={8d} r60={8d} r61={8d} r62={8d} r63={8d} r64={8d} r65={8d} r66={8d} r67={8d} r68={8d} r69={8d} r70={8d} r71={8d} r72={8d} r73={8d} r74={8d} r75={8d} r76={8d} r77={8d} r78={8d} r79={8d} r80={8d} 
+;;    total ref usage 715{631d,84u,0e} in 44{36 regular + 8 call} insns.
+(note 1 0 7 NOTE_INSN_DELETED)
+(note 7 1 71 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 71 7 72 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/c++/7/bits/stl_vector.h":1257 -1
+     (nil))
+(insn/f 72 71 73 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/c++/7/bits/stl_vector.h":1257 -1
+     (nil))
+(insn/f 73 72 74 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg:DI 3 bx)) "/usr/include/c++/7/bits/stl_vector.h":1257 -1
+     (nil))
+(insn/f 74 73 75 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -56 [0xffffffffffffffc8])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/c++/7/bits/stl_vector.h":1257 -1
+     (nil))
+(note 75 74 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 75 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [62 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/c++/7/bits/stl_vector.h":1257 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [4 __n+0 S8 A64])
+        (reg:DI 4 si [ __n ])) "/usr/include/c++/7/bits/stl_vector.h":1257 81 {*movdi_internal}
+     (nil))
+(insn 4 3 5 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [68 __first+0 S8 A64])
+        (reg:DI 1 dx [ __first ])) "/usr/include/c++/7/bits/stl_vector.h":1257 81 {*movdi_internal}
+     (nil))
+(insn 5 4 6 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [68 __last+0 S8 A64])
+        (reg:DI 2 cx [ __last ])) "/usr/include/c++/7/bits/stl_vector.h":1257 81 {*movdi_internal}
+     (nil))
+(note 6 5 9 2 NOTE_INSN_FUNCTION_BEG)
+(insn 9 6 10 2 (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [62 this+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1260 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg:DI 1 dx [96])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [4 __n+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1260 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:DI 4 si)
+        (reg:DI 1 dx [96])) "/usr/include/c++/7/bits/stl_vector.h":1260 81 {*movdi_internal}
+     (nil))
+(insn 12 11 82 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "/usr/include/c++/7/bits/stl_vector.h":1260 81 {*movdi_internal}
+     (nil))
+(note 82 12 13 2 13 NOTE_INSN_EH_REGION_BEG)
+(call_insn 13 82 83 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref/i:DI ("_ZNSt12_Vector_baseIN2sf6VertexESaIS1_EE11_M_allocateEm") [flags 0x3]  <function_decl 0x7f7f8d985f00 _M_allocate>) [0 _M_allocate S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/bits/stl_vector.h":1260 666 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 83 13 15 2 13 NOTE_INSN_EH_REGION_END)
+(insn 15 83 16 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [26 __result+0 S8 A64])
+        (reg/f:DI 0 ax [orig:92 _11 ] [92])) "/usr/include/c++/7/bits/stl_vector.h":1260 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [orig:88 _2 ] [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [62 this+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1264 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:88 _2 ] [88])) "/usr/include/c++/7/bits/stl_vector.h":1264 81 {*movdi_internal}
+     (nil))
+(call_insn 18 17 19 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref/i:DI ("_ZNSt12_Vector_baseIN2sf6VertexESaIS1_EE19_M_get_Tp_allocatorEv") [flags 0x3]  <function_decl 0x7f7f8d964700 _M_get_Tp_allocator>) [0 _M_get_Tp_allocator S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/bits/stl_vector.h":1264 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 19 18 20 2 (set (reg/f:DI 2 cx [orig:89 _3 ] [89])
+        (reg:DI 0 ax)) "/usr/include/c++/7/bits/stl_vector.h":1264 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg:DI 1 dx [97])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [26 __result+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1263 81 {*movdi_internal}
+     (nil))
+(insn 21 20 22 2 (set (reg:DI 4 si [98])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [68 __last+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1263 81 {*movdi_internal}
+     (nil))
+(insn 22 21 26 2 (set (reg:DI 0 ax [99])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [68 __first+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1263 81 {*movdi_internal}
+     (nil))
+(insn 26 22 84 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [99])) "/usr/include/c++/7/bits/stl_vector.h":1263 81 {*movdi_internal}
+     (nil))
+(note 84 26 27 2 14 NOTE_INSN_EH_REGION_BEG)
+(call_insn 27 84 85 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref/i:DI ("_ZSt22__uninitialized_copy_aIN9__gnu_cxx17__normal_iteratorIPKN2sf6VertexESt6vectorIS3_SaIS3_EEEEPS3_S3_ET0_T_SC_SB_RSaIT1_E") [flags 0x3]  <function_decl 0x7f7f8caef700 __uninitialized_copy_a>) [0 __uninitialized_copy_a S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/bits/stl_vector.h":1263 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (expr_list:DI (use (reg:DI 2 cx))
+                    (nil))))))
+(note 85 27 28 14 NOTE_INSN_EH_REGION_END)
+(note 28 85 29 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 29 28 68 3 (set (reg/f:DI 0 ax [orig:93 _15 ] [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [26 __result+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1265 81 {*movdi_internal}
+     (nil))
+(jump_insn 68 29 69 3 (set (pc)
+        (label_ref 67)) "/usr/include/c++/7/bits/stl_vector.h":1265 649 {jump}
+     (nil)
+ -> 67)
+(barrier 69 68 61)
+(code_label/s 61 69 63 4 100 (nil) [1 uses])
+(note 63 61 38 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 38 63 39 4 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:90 _4 ] [90])) "/usr/include/c++/7/bits/stl_vector.h":1267 81 {*movdi_internal}
+     (nil))
+(call_insn 39 38 40 4 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_begin_catch") [flags 0x41]  <function_decl 0x7f7f8ed23100 __cxa_begin_catch>) [0 __cxa_begin_catch S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/bits/stl_vector.h":1267 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 40 39 41 4 (set (reg/f:DI 0 ax [orig:91 _5 ] [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [62 this+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1269 81 {*movdi_internal}
+     (nil))
+(insn 41 40 42 4 (set (reg:DI 1 dx [102])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [4 __n+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1269 81 {*movdi_internal}
+     (nil))
+(insn 42 41 44 4 (set (reg:DI 2 cx [103])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [26 __result+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1269 81 {*movdi_internal}
+     (nil))
+(insn 44 42 45 4 (set (reg:DI 4 si)
+        (reg:DI 2 cx [103])) "/usr/include/c++/7/bits/stl_vector.h":1269 81 {*movdi_internal}
+     (nil))
+(insn 45 44 86 4 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:91 _5 ] [91])) "/usr/include/c++/7/bits/stl_vector.h":1269 81 {*movdi_internal}
+     (nil))
+(note 86 45 46 4 15 NOTE_INSN_EH_REGION_BEG)
+(call_insn 46 86 47 4 (call (mem:QI (symbol_ref/i:DI ("_ZNSt12_Vector_baseIN2sf6VertexESaIS1_EE13_M_deallocateEPS1_m") [flags 0x3]  <function_decl 0x7f7f8d98d000 _M_deallocate>) [0 _M_deallocate S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/bits/stl_vector.h":1269 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(note 47 46 48 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(call_insn 48 47 87 5 (call (mem:QI (symbol_ref:DI ("__cxa_rethrow") [flags 0x41]  <function_decl 0x7f7f8caef900 __cxa_rethrow>) [0 __cxa_rethrow S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/bits/stl_vector.h":1270 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 2 [0x2])
+        (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+            (expr_list:REG_NORETURN (const_int 0 [0])
+                (nil))))
+    (nil))
+(note 87 48 49 15 NOTE_INSN_EH_REGION_END)
+(barrier 49 87 64)
+(code_label/s 64 49 66 6 101 (nil) [1 uses])
+(note 66 64 65 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 65 66 52 6 (set (reg:DI 3 bx [104])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(call_insn 52 65 53 6 (call (mem:QI (symbol_ref:DI ("__cxa_end_catch") [flags 0x41]  <function_decl 0x7f7f8ed23000 __cxa_end_catch>) [0 __cxa_end_catch S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/bits/stl_vector.h":1267 655 {*call}
+     (expr_list:REG_EH_REGION (const_int -3 [0xfffffffffffffffd])
+        (nil))
+    (nil))
+(insn 53 52 54 6 (set (reg/f:DI 0 ax [orig:94 D.82396 ] [94])
+        (reg:DI 3 bx [104])) 81 {*movdi_internal}
+     (nil))
+(insn 54 53 88 6 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:94 D.82396 ] [94])) 81 {*movdi_internal}
+     (nil))
+(note 88 54 55 6 16 NOTE_INSN_EH_REGION_BEG)
+(call_insn 55 88 89 6 (call (mem:QI (symbol_ref:DI ("_Unwind_Resume") [flags 0x41]  <function_decl 0x7f7f904ed100 __builtin_unwind_resume>) [0 __builtin_unwind_resume S1 A8])
+        (const_int 0 [0])) 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 89 55 56 16 NOTE_INSN_EH_REGION_END)
+(barrier 56 89 67)
+(code_label 67 56 60 7 102 (nil) [1 uses])
+(note 60 67 59 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 59 60 76 7 (use (reg/i:DI 0 ax)) "/usr/include/c++/7/bits/stl_vector.h":1272 -1
+     (nil))
+(note 76 59 77 7 NOTE_INSN_EPILOGUE_BEG)
+(insn 77 76 78 7 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int 56 [0x38])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/c++/7/bits/stl_vector.h":1272 -1
+     (nil))
+(insn 78 77 79 7 (set (reg:DI 3 bx)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "/usr/include/c++/7/bits/stl_vector.h":1272 -1
+     (nil))
+(insn/f 79 78 80 7 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "/usr/include/c++/7/bits/stl_vector.h":1272 -1
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 80 79 81 7 (simple_return) "/usr/include/c++/7/bits/stl_vector.h":1272 -1
+     (nil)
+ -> simple_return)
+(barrier 81 80 70)
+(note 70 81 0 NOTE_INSN_DELETED)
+
+;; Function void std::vector<_Tp, _Alloc>::_M_erase_at_end(std::vector<_Tp, _Alloc>::pointer) [with _Tp = sf::Vertex; _Alloc = std::allocator<sf::Vertex>] (_ZNSt6vectorIN2sf6VertexESaIS1_EE15_M_erase_at_endEPS1_, funcdef_no=3721, decl_uid=59540, cgraph_uid=1238, symbol_order=1242)
+
+
+
+void std::vector<_Tp, _Alloc>::_M_erase_at_end(std::vector<_Tp, _Alloc>::pointer) [with _Tp = sf::Vertex; _Alloc = std::allocator<sf::Vertex>]
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 19 [fpcr] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 29 [mm0] 30 [mm1] 31 [mm2] 32 [mm3] 33 [mm4] 34 [mm5] 35 [mm6] 36 [mm7] 37 [r8] 38 [r9] 39 [r10] 40 [r11] 45 [xmm8] 46 [xmm9] 47 [xmm10] 48 [xmm11] 49 [xmm12] 50 [xmm13] 51 [xmm14] 52 [xmm15] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 [] 76 [] 77 [] 78 [] 79 [] 80 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 20 [frame] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 37 [r8] 38 [r9]
+;;  exit block uses 	 6 [bp] 7 [sp] 20 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp]
+;;  ref usage 	r0={7d,5u} r1={5d,2u} r2={4d,1u} r4={4d,2u} r5={5d,3u} r6={3d,12u} r7={4d,9u} r8={2d} r9={2d} r10={2d} r11={2d} r12={2d} r13={2d} r14={2d} r15={2d} r17={3d} r18={2d} r19={2d} r20={1d,1u} r21={3d} r22={3d} r23={3d} r24={3d} r25={3d} r26={3d} r27={3d} r28={3d} r29={2d} r30={2d} r31={2d} r32={2d} r33={2d} r34={2d} r35={2d} r36={2d} r37={3d} r38={3d} r39={2d} r40={2d} r45={2d} r46={2d} r47={2d} r48={2d} r49={2d} r50={2d} r51={2d} r52={2d} r53={2d} r54={2d} r55={2d} r56={2d} r57={2d} r58={2d} r59={2d} r60={2d} r61={2d} r62={2d} r63={2d} r64={2d} r65={2d} r66={2d} r67={2d} r68={2d} r69={2d} r70={2d} r71={2d} r72={2d} r73={2d} r74={2d} r75={2d} r76={2d} r77={2d} r78={2d} r79={2d} r80={2d} 
+;;    total ref usage 213{178d,35u,0e} in 21{19 regular + 2 call} insns.
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 25 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 25 5 26 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/c++/7/bits/stl_vector.h":1511 -1
+     (nil))
+(insn/f 26 25 27 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/c++/7/bits/stl_vector.h":1511 -1
+     (nil))
+(insn/f 27 26 28 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/c++/7/bits/stl_vector.h":1511 -1
+     (nil))
+(note 28 27 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 28 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [62 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/c++/7/bits/stl_vector.h":1511 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [26 __pos+0 S8 A64])
+        (reg:DI 4 si [ __pos ])) "/usr/include/c++/7/bits/stl_vector.h":1511 81 {*movdi_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [62 this+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(call_insn 9 8 10 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref/i:DI ("_ZNSt12_Vector_baseIN2sf6VertexESaIS1_EE19_M_get_Tp_allocatorEv") [flags 0x3]  <function_decl 0x7f7f8d964700 _M_get_Tp_allocator>) [0 _M_get_Tp_allocator S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/bits/stl_vector.h":1513 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 10 9 11 2 (set (reg/f:DI 1 dx [orig:88 _2 ] [88])
+        (reg:DI 0 ax)) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg/f:DI 0 ax [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [62 this+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg/f:DI 2 cx [orig:89 _3 ] [89])
+        (mem/f:DI (plus:DI (reg/f:DI 0 ax [90])
+                (const_int 8 [0x8])) [26 this_4(D)->D.59661._M_impl._M_finish+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(insn 13 12 15 2 (set (reg:DI 0 ax [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [26 __pos+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(insn 15 13 16 2 (set (reg:DI 4 si)
+        (reg/f:DI 2 cx [orig:89 _3 ] [89])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [91])) "/usr/include/c++/7/bits/stl_vector.h":1513 81 {*movdi_internal}
+     (nil))
+(call_insn 17 16 18 2 (call (mem:QI (symbol_ref/i:DI ("_ZSt8_DestroyIPN2sf6VertexES1_EvT_S3_RSaIT0_E") [flags 0x3]  <function_decl 0x7f7f8ce24f00 _Destroy>) [0 _Destroy S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/bits/stl_vector.h":1513 655 {*call}
+     (expr_list:REG_EH_REGION (const_int -1 [0xffffffffffffffff])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(insn 18 17 19 2 (set (reg/f:DI 0 ax [92])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [62 this+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1514 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg/f:DI 1 dx [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [26 __pos+0 S8 A64])) "/usr/include/c++/7/bits/stl_vector.h":1514 81 {*movdi_internal}
+     (nil))
+(insn 20 19 23 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [92])
+                (const_int 8 [0x8])) [26 this_4(D)->D.59661._M_impl._M_finish+0 S8 A64])
+        (reg/f:DI 1 dx [93])) "/usr/include/c++/7/bits/stl_vector.h":1514 81 {*movdi_internal}
+     (nil))
+(insn 23 20 29 2 (const_int 0 [0]) "/usr/include/c++/7/bits/stl_vector.h":1515 684 {nop}
+     (nil))
+(note 29 23 30 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 30 29 31 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/c++/7/bits/stl_vector.h":1515 -1
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 31 30 32 2 (simple_return) "/usr/include/c++/7/bits/stl_vector.h":1515 -1
+     (nil)
+ -> simple_return)
+(barrier 32 31 24)
+(note 24 32 0 NOTE_INSN_DELETED)

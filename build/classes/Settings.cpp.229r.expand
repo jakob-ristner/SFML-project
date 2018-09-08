@@ -1,0 +1,606 @@
+
+;; Function Settings::Settings() (_ZN8SettingsC2Ev, funcdef_no=3239, decl_uid=76515, cgraph_uid=748, symbol_order=753)
+
+Settings::Settings() (struct Settings * const this)
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  MEM[(struct  &)this_2(D)] ={v} {CLOBBER};
+  this_2(D)->playerColliding = 1;
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+Partition 2 (this_2(D) - 2 )
+
+
+Partition map 
+
+Partition 0 (this_2(D) - 2 )
+
+
+Conflict graph:
+
+After sorting:
+Coalesce List:
+
+Partition map 
+
+Partition 0 (this_2(D) - 2 )
+
+After Coalescing:
+
+Partition map 
+
+Partition 0 (this_2(D) - 2 )
+
+Settings::Settings() (struct Settings * const this)
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  MEM[(struct  &)this_2(D)] ={v} {CLOBBER};
+  this_2(D)->playerColliding = 1;
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+;; Generating RTL for gimple basic block 2
+
+;; MEM[(struct  &)this_2(D)] ={v} {CLOBBER};
+
+(nil)
+
+;; this_2(D)->playerColliding = 1;
+
+(insn 6 5 7 (set (reg/f:DI 87)
+        (mem/f/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])) "classes/Settings.cpp":5 -1
+     (nil))
+
+(insn 7 6 0 (set (mem:QI (reg/f:DI 87) [10 this_2(D)->playerColliding+0 S1 A8])
+        (const_int 1 [0x1])) "classes/Settings.cpp":5 -1
+     (nil))
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 4 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 4 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Settings.cpp":5 -1
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (reg/f:DI 87)
+        (mem/f/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])) "classes/Settings.cpp":5 -1
+     (nil))
+(insn 7 6 10 2 (set (mem:QI (reg/f:DI 87) [10 this_2(D)->playerColliding+0 S1 A8])
+        (const_int 1 [0x1])) "classes/Settings.cpp":5 -1
+     (nil))
+(insn 10 7 0 2 (const_int 0 [0]) "classes/Settings.cpp":7 -1
+     (nil))
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
+
+;; Function Settings::~Settings() (_ZN8SettingsD2Ev, funcdef_no=3242, decl_uid=76520, cgraph_uid=751, symbol_order=756)
+
+Settings::~Settings() (struct Settings * const this)
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  MEM[(struct  &)this_2(D)] ={v} {CLOBBER};
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+Partition 2 (this_2(D) - 2 )
+
+
+Partition map 
+
+Partition 0 (this_2(D) - 2 )
+
+
+Conflict graph:
+
+After sorting:
+Coalesce List:
+
+Partition map 
+
+Partition 0 (this_2(D) - 2 )
+
+After Coalescing:
+
+Partition map 
+
+Partition 0 (this_2(D) - 2 )
+
+Settings::~Settings() (struct Settings * const this)
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  MEM[(struct  &)this_2(D)] ={v} {CLOBBER};
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+;; Generating RTL for gimple basic block 2
+
+;; MEM[(struct  &)this_2(D)] ={v} {CLOBBER};
+
+(nil)
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 4 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 4 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Settings.cpp":9 -1
+     (nil))
+(note 3 2 8 2 NOTE_INSN_FUNCTION_BEG)
+(insn 8 3 0 2 (const_int 0 [0]) "classes/Settings.cpp":11 -1
+     (nil))
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
+
+;; Function void __static_initialization_and_destruction_0(int, int) (_Z41__static_initialization_and_destruction_0ii, funcdef_no=3753, decl_uid=80168, cgraph_uid=1262, symbol_order=1348)
+
+void __static_initialization_and_destruction_0(int, int) (int __initialize_p, int __priority)
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  if (__initialize_p_2(D) == 1)
+    goto <bb 3>; [0.00%]
+  else
+    goto <bb 5>; [0.00%]
+;;    succ:       3
+;;                5
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+  if (__priority_4(D) == 65535)
+    goto <bb 4>; [0.00%]
+  else
+    goto <bb 5>; [0.00%]
+;;    succ:       4
+;;                5
+
+;;   basic block 4, loop depth 0
+;;    pred:       3
+  std::ios_base::Init::Init (&__ioinit);
+  __cxa_atexit (__comp_dtor , &__ioinit, &__dso_handle);
+;;    succ:       5
+
+;;   basic block 5, loop depth 0
+;;    pred:       2
+;;                4
+;;                3
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+Partition 2 (__initialize_p_2(D) - 2 )
+Partition 4 (__priority_4(D) - 4 )
+
+
+Partition map 
+
+Partition 0 (__initialize_p_2(D) - 2 )
+Partition 1 (__priority_4(D) - 4 )
+
+
+Conflict graph:
+
+After sorting:
+Coalesce List:
+
+Partition map 
+
+Partition 0 (__initialize_p_2(D) - 2 )
+Partition 1 (__priority_4(D) - 4 )
+
+After Coalescing:
+
+Partition map 
+
+Partition 0 (__initialize_p_2(D) - 2 )
+Partition 1 (__priority_4(D) - 4 )
+
+void __static_initialization_and_destruction_0(int, int) (int __initialize_p, int __priority)
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  if (__initialize_p_2(D) == 1)
+    goto <bb 3>; [0.00%]
+  else
+    goto <bb 5>; [0.00%]
+;;    succ:       3
+;;                5
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+  if (__priority_4(D) == 65535)
+    goto <bb 4>; [0.00%]
+  else
+    goto <bb 5>; [0.00%]
+;;    succ:       4
+;;                5
+
+;;   basic block 4, loop depth 0
+;;    pred:       3
+  std::ios_base::Init::Init (&__ioinit);
+  __cxa_atexit (__comp_dtor , &__ioinit, &__dso_handle);
+;;    succ:       5
+
+;;   basic block 5, loop depth 0
+;;    pred:       2
+;;                4
+;;                3
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+;; Generating RTL for gimple basic block 2
+
+;; if (__initialize_p_2(D) == 1)
+
+(insn 7 6 8 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                    (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+            (const_int 1 [0x1]))) "classes/Settings.cpp":11 -1
+     (nil))
+
+(jump_insn 8 7 0 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 0)
+            (pc))) "classes/Settings.cpp":11 -1
+     (nil))
+
+;; Generating RTL for gimple basic block 3
+
+;; if (__priority_4(D) == 65535)
+
+(insn 10 9 11 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                    (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+            (const_int 65535 [0xffff]))) "classes/Settings.cpp":11 -1
+     (nil))
+
+(jump_insn 11 10 0 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 0)
+            (pc))) "classes/Settings.cpp":11 -1
+     (nil))
+
+;; Generating RTL for gimple basic block 4
+
+;; std::ios_base::Init::Init (&__ioinit);
+
+(insn 13 12 14 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7ff63b50b120 __ioinit>)) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+
+(call_insn 14 13 0 (call (mem:QI (symbol_ref:DI ("_ZNSt8ios_base4InitC1Ev") [flags 0x41]  <function_decl 0x7ff63d3a4f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/iostream":74 -1
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+
+;; __cxa_atexit (__comp_dtor , &__ioinit, &__dso_handle);
+
+(insn 15 14 16 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("__dso_handle") [flags 0x42]  <var_decl 0x7ff63b08dea0 __dso_handle>)) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+
+(insn 16 15 17 (set (reg:DI 4 si)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7ff63b50b120 __ioinit>)) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+
+(insn 17 16 18 (set (reg:DI 87)
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7ff63d3af100 __comp_dtor >)
+                    ] UNSPEC_GOTPCREL)) [13  S8 A8])) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+
+(insn 18 17 19 (set (reg:DI 5 di)
+        (reg:DI 87)) "/usr/include/c++/7/iostream":74 -1
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7ff63d3af100 __comp_dtor >)
+        (nil)))
+
+(call_insn 19 18 0 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_atexit") [flags 0x41]  <function_decl 0x7ff63b091800 __cxa_atexit>) [0 __cxa_atexit S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/iostream":74 -1
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+
+;; Generating RTL for gimple basic block 5
+
+;; 
+
+(code_label 20 19 21 4 (nil) [0 uses])
+
+(note 21 20 0 NOTE_INSN_BASIC_BLOCK)
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Edge 2->6 redirected to 7
+Edge 4->6 redirected to 7
+Merging block 6 into block 5...
+Merged blocks 5 and 6.
+Merged 5 and 6 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 5 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 4, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       ENTRY (FALLTHRU)
+(note 5 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 5 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+        (reg:SI 5 di [ __initialize_p ])) "classes/Settings.cpp":11 -1
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+        (reg:SI 4 si [ __priority ])) "classes/Settings.cpp":11 -1
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                    (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+            (const_int 1 [0x1]))) "classes/Settings.cpp":11 -1
+     (nil))
+(jump_insn 8 7 9 2 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 22)
+            (pc))) "classes/Settings.cpp":11 617 {*jcc_1}
+     (nil)
+ -> 22)
+;;  succ:       4 (FALLTHRU)
+;;              7
+
+;; basic block 4, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 2, next block 5, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       2 (FALLTHRU)
+(note 9 8 10 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 10 9 11 4 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                    (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+            (const_int 65535 [0xffff]))) "classes/Settings.cpp":11 -1
+     (nil))
+(jump_insn 11 10 12 4 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 22)
+            (pc))) "classes/Settings.cpp":11 617 {*jcc_1}
+     (nil)
+ -> 22)
+;;  succ:       5 (FALLTHRU)
+;;              7
+
+;; basic block 5, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 4, next block 7, flags: (NEW, REACHABLE, RTL)
+;;  pred:       4 (FALLTHRU)
+(note 12 11 13 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 5 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7ff63b50b120 __ioinit>)) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+(call_insn 14 13 15 5 (call (mem:QI (symbol_ref:DI ("_ZNSt8ios_base4InitC1Ev") [flags 0x41]  <function_decl 0x7ff63d3a4f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/iostream":74 -1
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 15 14 16 5 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("__dso_handle") [flags 0x42]  <var_decl 0x7ff63b08dea0 __dso_handle>)) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+(insn 16 15 17 5 (set (reg:DI 4 si)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7ff63b50b120 __ioinit>)) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+(insn 17 16 18 5 (set (reg:DI 87)
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7ff63d3af100 __comp_dtor >)
+                    ] UNSPEC_GOTPCREL)) [13  S8 A8])) "/usr/include/c++/7/iostream":74 -1
+     (nil))
+(insn 18 17 19 5 (set (reg:DI 5 di)
+        (reg:DI 87)) "/usr/include/c++/7/iostream":74 -1
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7ff63d3af100 __comp_dtor >)
+        (nil)))
+(call_insn 19 18 22 5 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_atexit") [flags 0x41]  <function_decl 0x7ff63b091800 __cxa_atexit>) [0 __cxa_atexit S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/iostream":74 -1
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+;;  succ:       7 (FALLTHRU)
+
+;; basic block 7, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 5, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       5 (FALLTHRU)
+;;              2
+;;              4
+(code_label 22 19 23 7 3 (nil) [2 uses])
+(note 23 22 0 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
+
+;; Function void _GLOBAL__sub_I__ZN8SettingsC2Ev() (_GLOBAL__sub_I__ZN8SettingsC2Ev, funcdef_no=3754, decl_uid=80175, cgraph_uid=1263, symbol_order=2009)
+
+void _GLOBAL__sub_I__ZN8SettingsC2Ev() ()
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  __static_initialization_and_destruction_0 (1, 65535);
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+
+After Coalescing:
+
+Partition map 
+
+
+void _GLOBAL__sub_I__ZN8SettingsC2Ev() ()
+{
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  __static_initialization_and_destruction_0 (1, 65535);
+  return;
+;;    succ:       EXIT
+
+}
+
+
+
+;; Generating RTL for gimple basic block 2
+
+;; __static_initialization_and_destruction_0 (1, 65535);
+
+(insn 5 4 6 (set (reg:SI 4 si)
+        (const_int 65535 [0xffff])) "classes/Settings.cpp":11 -1
+     (nil))
+
+(insn 6 5 7 (set (reg:SI 5 di)
+        (const_int 1 [0x1])) "classes/Settings.cpp":11 -1
+     (nil))
+
+(call_insn 7 6 0 (call (mem:QI (symbol_ref:DI ("_Z41__static_initialization_and_destruction_0ii") [flags 0x3]  <function_decl 0x7ff63b091600 __static_initialization_and_destruction_0>) [0 __static_initialization_and_destruction_0 S1 A8])
+        (const_int 0 [0])) "classes/Settings.cpp":11 -1
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:SI (use (reg:SI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 3 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (reg:SI 4 si)
+        (const_int 65535 [0xffff])) "classes/Settings.cpp":11 -1
+     (nil))
+(insn 6 5 7 2 (set (reg:SI 5 di)
+        (const_int 1 [0x1])) "classes/Settings.cpp":11 -1
+     (nil))
+(call_insn 7 6 0 2 (call (mem:QI (symbol_ref:DI ("_Z41__static_initialization_and_destruction_0ii") [flags 0x3]  <function_decl 0x7ff63b091600 __static_initialization_and_destruction_0>) [0 __static_initialization_and_destruction_0 S1 A8])
+        (const_int 0 [0])) "classes/Settings.cpp":11 -1
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:SI (use (reg:SI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+

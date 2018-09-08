@@ -1,0 +1,234 @@
+
+;; Function Settings::Settings() (_ZN8SettingsC2Ev, funcdef_no=3239, decl_uid=76515, cgraph_uid=748, symbol_order=753)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 12 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 12 4 13 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Settings.cpp":5 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 13 12 14 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Settings.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 14 13 15 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Settings.cpp":5 677 {*memory_blockage}
+     (nil))
+(note 15 14 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 15 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Settings.cpp":5 81 {*movdi_internal}
+     (nil))
+(note 3 2 25 2 NOTE_INSN_FUNCTION_BEG)
+(note 25 3 6 2 0x7ff63b4182a0 NOTE_INSN_BLOCK_BEG)
+(insn 6 25 7 2 (set (reg/f:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])) "classes/Settings.cpp":5 81 {*movdi_internal}
+     (nil))
+(insn 7 6 26 2 (set (mem:QI (reg/f:DI 0 ax [87]) [10 this_2(D)->playerColliding+0 S1 A8])
+        (const_int 1 [0x1])) "classes/Settings.cpp":5 84 {*movqi_internal}
+     (nil))
+(note 26 7 10 2 0x7ff63b4182a0 NOTE_INSN_BLOCK_END)
+(insn 10 26 16 2 (const_int 0 [0]) "classes/Settings.cpp":7 684 {nop}
+     (nil))
+(note 16 10 17 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 17 16 18 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Settings.cpp":7 677 {*memory_blockage}
+     (nil))
+(insn/f 18 17 19 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Settings.cpp":7 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 19 18 20 2 (simple_return) "classes/Settings.cpp":7 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 20 19 11)
+(note 11 20 0 NOTE_INSN_DELETED)
+
+;; Function Settings::~Settings() (_ZN8SettingsD2Ev, funcdef_no=3242, decl_uid=76520, cgraph_uid=751, symbol_order=756)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 10 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 10 4 11 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Settings.cpp":9 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 11 10 12 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Settings.cpp":9 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Settings.cpp":9 677 {*memory_blockage}
+     (nil))
+(note 13 12 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 13 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [8 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Settings.cpp":9 81 {*movdi_internal}
+     (nil))
+(note 3 2 8 2 NOTE_INSN_FUNCTION_BEG)
+(insn 8 3 14 2 (const_int 0 [0]) "classes/Settings.cpp":11 684 {nop}
+     (nil))
+(note 14 8 15 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 15 14 16 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Settings.cpp":11 677 {*memory_blockage}
+     (nil))
+(insn/f 16 15 17 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Settings.cpp":11 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 17 16 18 2 (simple_return) "classes/Settings.cpp":11 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 18 17 9)
+(note 9 18 0 NOTE_INSN_DELETED)
+
+;; Function void __static_initialization_and_destruction_0(int, int) (_Z41__static_initialization_and_destruction_0ii, funcdef_no=3753, decl_uid=80168, cgraph_uid=1262, symbol_order=1348)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 28 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 28 5 29 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Settings.cpp":11 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 29 28 30 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Settings.cpp":11 81 {*movdi_internal}
+     (nil))
+(insn/f 30 29 31 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Settings.cpp":11 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 31 30 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 31 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+        (reg:SI 5 di [ __initialize_p ])) "classes/Settings.cpp":11 82 {*movsi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+        (reg:SI 4 si [ __priority ])) "classes/Settings.cpp":11 82 {*movsi_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+            (const_int 1 [0x1]))) "classes/Settings.cpp":11 7 {*cmpsi_1}
+     (nil))
+(jump_insn 8 7 9 2 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "classes/Settings.cpp":11 617 {*jcc_1}
+     (nil)
+ -> 26)
+(note 9 8 10 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 10 9 11 3 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+            (const_int 65535 [0xffff]))) "classes/Settings.cpp":11 7 {*cmpsi_1}
+     (nil))
+(jump_insn 11 10 12 3 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "classes/Settings.cpp":11 617 {*jcc_1}
+     (nil)
+ -> 26)
+(note 12 11 13 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 4 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7ff63b50b120 __ioinit>)) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(call_insn 14 13 15 4 (call (mem:QI (symbol_ref:DI ("_ZNSt8ios_base4InitC1Ev") [flags 0x41]  <function_decl 0x7ff63d3a4f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/iostream":74 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 15 14 16 4 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("__dso_handle") [flags 0x42]  <var_decl 0x7ff63b08dea0 __dso_handle>)) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 4 (set (reg:DI 4 si)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7ff63b50b120 __ioinit>)) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 4 (set (reg:DI 0 ax [87])
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7ff63d3af100 __comp_dtor >)
+                    ] UNSPEC_GOTPCREL)) [13  S8 A8])) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [87])) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7ff63d3af100 __comp_dtor >)
+        (nil)))
+(call_insn 19 18 26 4 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_atexit") [flags 0x41]  <function_decl 0x7ff63b091800 __cxa_atexit>) [0 __cxa_atexit S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/iostream":74 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(code_label 26 19 24 5 5 (nil) [2 uses])
+(note 24 26 25 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 25 24 32 5 (const_int 0 [0]) "classes/Settings.cpp":11 684 {nop}
+     (nil))
+(note 32 25 33 5 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 33 32 34 5 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Settings.cpp":11 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 34 33 35 5 (simple_return) "classes/Settings.cpp":11 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 35 34 27)
+(note 27 35 0 NOTE_INSN_DELETED)
+
+;; Function void _GLOBAL__sub_I__ZN8SettingsC2Ev() (_GLOBAL__sub_I__ZN8SettingsC2Ev, funcdef_no=3754, decl_uid=80175, cgraph_uid=1263, symbol_order=2009)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 11 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 11 3 12 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Settings.cpp":11 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 12 11 13 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Settings.cpp":11 81 {*movdi_internal}
+     (nil))
+(note 13 12 2 2 NOTE_INSN_PROLOGUE_END)
+(note 2 13 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (reg:SI 4 si)
+        (const_int 65535 [0xffff])) "classes/Settings.cpp":11 82 {*movsi_internal}
+     (nil))
+(insn 6 5 7 2 (set (reg:SI 5 di)
+        (const_int 1 [0x1])) "classes/Settings.cpp":11 82 {*movsi_internal}
+     (nil))
+(call_insn 7 6 14 2 (call (mem:QI (symbol_ref:DI ("_Z41__static_initialization_and_destruction_0ii") [flags 0x3]  <function_decl 0x7ff63b091600 __static_initialization_and_destruction_0>) [0 __static_initialization_and_destruction_0 S1 A8])
+        (const_int 0 [0])) "classes/Settings.cpp":11 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:SI (use (reg:SI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(note 14 7 15 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 15 14 16 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Settings.cpp":11 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 16 15 17 2 (simple_return) "classes/Settings.cpp":11 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 17 16 10)
+(note 10 17 0 NOTE_INSN_DELETED)

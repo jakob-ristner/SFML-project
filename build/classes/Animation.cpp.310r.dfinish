@@ -1,0 +1,2353 @@
+
+;; Function sf::Drawable::~Drawable() (_ZN2sf8DrawableD2Ev, funcdef_no=2892, decl_uid=58227, cgraph_uid=726, symbol_order=730)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 13 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 13 4 14 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/Graphics/Drawable.hpp":52 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 14 13 15 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/Graphics/Drawable.hpp":52 677 {*memory_blockage}
+     (nil))
+(note 16 15 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 16 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [7 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(note 3 2 26 2 NOTE_INSN_FUNCTION_BEG)
+(note 26 3 6 2 0x7f51c20919c0 NOTE_INSN_BLOCK_BEG)
+(insn 6 26 7 2 (set (reg/f:DI 1 dx [orig:87 _1 ] [87])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTVN2sf8DrawableE") [flags 0x2]  <var_decl 0x7f51c20ce480 _ZTVN2sf8DrawableE>)
+                (const_int 16 [0x10])))) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg/f:DI 0 ax [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [7 this+0 S8 A64])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn 8 7 27 2 (set (mem/f:DI (reg/f:DI 0 ax [88]) [2 this_3(D)->_vptr.Drawable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:87 _1 ] [87])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(note 27 8 11 2 0x7f51c20919c0 NOTE_INSN_BLOCK_END)
+(insn 11 27 17 2 (const_int 0 [0]) "/usr/include/SFML/Graphics/Drawable.hpp":52 684 {nop}
+     (nil))
+(note 17 11 18 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 18 17 19 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/Graphics/Drawable.hpp":52 677 {*memory_blockage}
+     (nil))
+(insn/f 19 18 20 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "/usr/include/SFML/Graphics/Drawable.hpp":52 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 20 19 21 2 (simple_return) "/usr/include/SFML/Graphics/Drawable.hpp":52 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 21 20 12)
+(note 12 21 0 NOTE_INSN_DELETED)
+
+;; Function virtual sf::Drawable::~Drawable() (_ZN2sf8DrawableD0Ev, funcdef_no=2894, decl_uid=58221, cgraph_uid=728, symbol_order=732)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 16 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 16 4 17 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/Graphics/Drawable.hpp":52 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 17 16 18 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn/f 18 17 19 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/SFML/Graphics/Drawable.hpp":52 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 19 18 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 19 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [7 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (reg:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [7 this+0 S8 A64])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [87])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(call_insn 8 7 9 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf8DrawableD1Ev") [flags 0x3]  <function_decl 0x7f51c20e4e00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "/usr/include/SFML/Graphics/Drawable.hpp":52 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 9 8 10 2 (set (reg:DI 0 ax [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [7 this+0 S8 A64])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg:DI 4 si)
+        (const_int 8 [0x8])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [88])) "/usr/include/SFML/Graphics/Drawable.hpp":52 81 {*movdi_internal}
+     (nil))
+(call_insn 12 11 20 2 (call (mem:QI (symbol_ref:DI ("_ZdlPvm") [flags 0x41]  <function_decl 0x7f51c4cb1100 operator delete>) [0 operator delete S1 A8])
+        (const_int 0 [0])) "/usr/include/SFML/Graphics/Drawable.hpp":52 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 20 12 21 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 21 20 22 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/SFML/Graphics/Drawable.hpp":52 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 22 21 23 2 (simple_return) "/usr/include/SFML/Graphics/Drawable.hpp":52 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 23 22 15)
+(note 15 23 0 NOTE_INSN_DELETED)
+
+;; Function Animation::Animation() (_ZN9AnimationC2Ev, funcdef_no=3239, decl_uid=76550, cgraph_uid=748, symbol_order=754)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 14 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 14 4 15 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":8 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 15 14 16 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":8 81 {*movdi_internal}
+     (nil))
+(insn/f 16 15 17 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":8 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 17 16 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 17 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":8 81 {*movdi_internal}
+     (nil))
+(note 3 2 26 2 NOTE_INSN_FUNCTION_BEG)
+(note 26 3 6 2 0x7f51c168b360 NOTE_INSN_BLOCK_BEG)
+(insn 6 26 7 2 (set (reg/f:DI 0 ax [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":8 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (parallel [
+            (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+                (plus:DI (reg/f:DI 0 ax [88])
+                    (const_int 8 [0x8])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":8 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])
+            (const_int 8 [0x8]))
+        (nil)))
+(insn 8 7 9 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "classes/Animation.cpp":8 81 {*movdi_internal}
+     (nil))
+(call_insn 9 8 27 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Ev") [flags 0x3]  <function_decl 0x7f51c20f5100 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":8 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 27 9 12 2 0x7f51c168b360 NOTE_INSN_BLOCK_END)
+(insn 12 27 18 2 (const_int 0 [0]) "classes/Animation.cpp":10 684 {nop}
+     (nil))
+(note 18 12 19 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 19 18 20 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":10 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 20 19 21 2 (simple_return) "classes/Animation.cpp":10 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 21 20 13)
+(note 13 21 0 NOTE_INSN_DELETED)
+
+;; Function Animation::Animation(sf::Texture&, sf::Vector2f, float, float, float, int) (_ZN9AnimationC2ERN2sf7TextureENS0_7Vector2IfEEfffi, funcdef_no=3242, decl_uid=76540, cgraph_uid=751, symbol_order=757)
+
+(note 1 0 10 NOTE_INSN_DELETED)
+(note 10 1 45 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 45 10 46 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":12 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 46 45 47 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":12 81 {*movdi_internal}
+     (nil))
+(insn/f 47 46 48 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -48 [0xffffffffffffffd0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":12 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 48 47 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 48 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":12 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [13 spriteSheet+0 S8 A64])
+        (reg:DI 4 si [ spriteSheet ])) "classes/Animation.cpp":12 81 {*movdi_internal}
+     (nil))
+(insn 4 3 5 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [14 size+0 S8 A32])
+        (reg:DI 21 xmm0 [ size ])) "classes/Animation.cpp":12 81 {*movdi_internal}
+     (nil))
+(insn 5 4 6 2 (set (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -28 [0xffffffffffffffe4])) [15 animLength+0 S4 A32])
+        (reg:SF 22 xmm1 [ animLength ])) "classes/Animation.cpp":12 127 {*movsf_internal}
+     (nil))
+(insn 6 5 7 2 (set (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -32 [0xffffffffffffffe0])) [15 currTime+0 S4 A32])
+        (reg:SF 23 xmm2 [ currTime ])) "classes/Animation.cpp":12 127 {*movsf_internal}
+     (nil))
+(insn 7 6 8 2 (set (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -36 [0xffffffffffffffdc])) [15 frames+0 S4 A32])
+        (reg:SF 24 xmm3 [ frames ])) "classes/Animation.cpp":12 127 {*movsf_internal}
+     (nil))
+(insn 8 7 9 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [11 currFrame+0 S4 A32])
+        (reg:SI 1 dx [ currFrame ])) "classes/Animation.cpp":12 82 {*movsi_internal}
+     (nil))
+(note 9 8 57 2 NOTE_INSN_FUNCTION_BEG)
+(note 57 9 12 2 0x7f51c168b4e0 NOTE_INSN_BLOCK_BEG)
+(insn 12 57 13 2 (set (reg/f:DI 0 ax [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":13 81 {*movdi_internal}
+     (nil))
+(insn 13 12 14 2 (parallel [
+            (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+                (plus:DI (reg/f:DI 0 ax [90])
+                    (const_int 8 [0x8])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":13 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])
+            (const_int 8 [0x8]))
+        (nil)))
+(insn 14 13 15 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "classes/Animation.cpp":13 81 {*movdi_internal}
+     (nil))
+(call_insn 15 14 16 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Ev") [flags 0x3]  <function_decl 0x7f51c20f5100 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":13 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":14 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg/f:DI 1 dx [92])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [13 spriteSheet+0 S8 A64])) "classes/Animation.cpp":14 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 2 (set (mem/f:DI (reg/f:DI 0 ax [91]) [17 this_5(D)->spriteSheet+0 S8 A64])
+        (reg/f:DI 1 dx [92])) "classes/Animation.cpp":14 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg:DI 0 ax [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [13 spriteSheet+0 S8 A64])) "classes/Animation.cpp":15 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg:SI 4 si)
+        (const_int 1 [0x1])) "classes/Animation.cpp":15 82 {*movsi_internal}
+     (nil))
+(insn 21 20 22 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [93])) "classes/Animation.cpp":15 81 {*movdi_internal}
+     (nil))
+(call_insn 22 21 23 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf7Texture11setRepeatedEb") [flags 0x41]  <function_decl 0x7f51c1f31600 setRepeated>) [0 setRepeated S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":15 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 23 22 24 2 (set (reg/f:DI 0 ax [94])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":16 81 {*movdi_internal}
+     (nil))
+(insn 24 23 25 2 (set (reg:DI 1 dx [95])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [14 size+0 S8 A32])) "classes/Animation.cpp":16 81 {*movdi_internal}
+     (nil))
+(insn 25 24 26 2 (set (mem:DI (plus:DI (reg/f:DI 0 ax [94])
+                (const_int 8 [0x8])) [14 this_5(D)->size+0 S8 A64])
+        (reg:DI 1 dx [95])) "classes/Animation.cpp":16 81 {*movdi_internal}
+     (nil))
+(insn 26 25 27 2 (set (reg/f:DI 0 ax [96])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":17 81 {*movdi_internal}
+     (nil))
+(insn 27 26 28 2 (set (reg:SF 21 xmm0 [97])
+        (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -28 [0xffffffffffffffe4])) [15 animLength+0 S4 A32])) "classes/Animation.cpp":17 127 {*movsf_internal}
+     (nil))
+(insn 28 27 29 2 (set (mem:SF (plus:DI (reg/f:DI 0 ax [96])
+                (const_int 16 [0x10])) [15 this_5(D)->animLength+0 S4 A64])
+        (reg:SF 21 xmm0 [97])) "classes/Animation.cpp":17 127 {*movsf_internal}
+     (nil))
+(insn 29 28 30 2 (set (reg/f:DI 0 ax [98])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":18 81 {*movdi_internal}
+     (nil))
+(insn 30 29 31 2 (set (reg:SF 21 xmm0 [99])
+        (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -32 [0xffffffffffffffe0])) [15 currTime+0 S4 A32])) "classes/Animation.cpp":18 127 {*movsf_internal}
+     (nil))
+(insn 31 30 32 2 (set (mem:SF (plus:DI (reg/f:DI 0 ax [98])
+                (const_int 20 [0x14])) [15 this_5(D)->currTime+0 S4 A32])
+        (reg:SF 21 xmm0 [99])) "classes/Animation.cpp":18 127 {*movsf_internal}
+     (nil))
+(insn 32 31 33 2 (set (reg/f:DI 0 ax [100])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":19 81 {*movdi_internal}
+     (nil))
+(insn 33 32 34 2 (set (reg:SF 21 xmm0 [101])
+        (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -36 [0xffffffffffffffdc])) [15 frames+0 S4 A32])) "classes/Animation.cpp":19 127 {*movsf_internal}
+     (nil))
+(insn 34 33 35 2 (set (mem:SF (plus:DI (reg/f:DI 0 ax [100])
+                (const_int 24 [0x18])) [15 this_5(D)->frames+0 S4 A64])
+        (reg:SF 21 xmm0 [101])) "classes/Animation.cpp":19 127 {*movsf_internal}
+     (nil))
+(insn 35 34 36 2 (set (reg/f:DI 0 ax [102])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":20 81 {*movdi_internal}
+     (nil))
+(insn 36 35 37 2 (set (reg:SI 1 dx [103])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [11 currFrame+0 S4 A32])) "classes/Animation.cpp":20 82 {*movsi_internal}
+     (nil))
+(insn 37 36 38 2 (set (mem:SI (plus:DI (reg/f:DI 0 ax [102])
+                (const_int 28 [0x1c])) [11 this_5(D)->currFrame+0 S4 A32])
+        (reg:SI 1 dx [103])) "classes/Animation.cpp":20 82 {*movsi_internal}
+     (nil))
+(insn 38 37 39 2 (set (reg:SI 0 ax [orig:88 animation_count.0_2 ] [88])
+        (mem/c:SI (symbol_ref:DI ("_ZN9Animation15animation_countE") [flags 0x2]  <var_decl 0x7f51c177e3f0 animation_count>) [11 animation_count+0 S4 A32])) "classes/Animation.cpp":21 82 {*movsi_internal}
+     (nil))
+(insn 39 38 40 2 (parallel [
+            (set (reg:SI 0 ax [orig:89 _3 ] [89])
+                (plus:SI (reg:SI 0 ax [orig:88 animation_count.0_2 ] [88])
+                    (const_int 1 [0x1])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":21 217 {*addsi_1}
+     (nil))
+(insn 40 39 58 2 (set (mem/c:SI (symbol_ref:DI ("_ZN9Animation15animation_countE") [flags 0x2]  <var_decl 0x7f51c177e3f0 animation_count>) [11 animation_count+0 S4 A32])
+        (reg:SI 0 ax [orig:89 _3 ] [89])) "classes/Animation.cpp":21 82 {*movsi_internal}
+     (nil))
+(note 58 40 43 2 0x7f51c168b4e0 NOTE_INSN_BLOCK_END)
+(insn 43 58 49 2 (const_int 0 [0]) "classes/Animation.cpp":22 684 {nop}
+     (nil))
+(note 49 43 50 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 50 49 51 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":22 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 51 50 52 2 (simple_return) "classes/Animation.cpp":22 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 52 51 44)
+(note 44 52 0 NOTE_INSN_DELETED)
+
+;; Function Animation::~Animation() (_ZN9AnimationD2Ev, funcdef_no=3245, decl_uid=76555, cgraph_uid=754, symbol_order=760)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 10 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 10 4 11 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":24 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 11 10 12 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":24 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Animation.cpp":24 677 {*memory_blockage}
+     (nil))
+(note 13 12 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 13 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":24 81 {*movdi_internal}
+     (nil))
+(note 3 2 8 2 NOTE_INSN_FUNCTION_BEG)
+(insn 8 3 14 2 (const_int 0 [0]) "classes/Animation.cpp":26 684 {nop}
+     (nil))
+(note 14 8 15 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 15 14 16 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Animation.cpp":26 677 {*memory_blockage}
+     (nil))
+(insn/f 16 15 17 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":26 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 17 16 18 2 (simple_return) "classes/Animation.cpp":26 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 18 17 9)
+(note 9 18 0 NOTE_INSN_DELETED)
+
+;; Function void Animation::update(float) (_ZN9Animation6updateEf, funcdef_no=3247, decl_uid=76517, cgraph_uid=756, symbol_order=762)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 81 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 81 5 82 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":28 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 82 81 83 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":28 81 {*movdi_internal}
+     (nil))
+(insn 83 82 84 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Animation.cpp":28 677 {*memory_blockage}
+     (nil))
+(note 84 83 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 84 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":28 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -28 [0xffffffffffffffe4])) [15 dt+0 S4 A32])
+        (reg:SF 21 xmm0 [ dt ])) "classes/Animation.cpp":28 127 {*movsf_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg/f:DI 0 ax [104])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":29 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg:SF 21 xmm0 [orig:87 _1 ] [87])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [104])
+                (const_int 20 [0x14])) [15 this_22(D)->currTime+0 S4 A32])) "classes/Animation.cpp":29 127 {*movsf_internal}
+     (nil))
+(insn 9 8 10 2 (set (reg:SF 21 xmm0 [orig:88 _2 ] [88])
+        (plus:SF (reg:SF 21 xmm0 [orig:87 _1 ] [87])
+            (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                    (const_int -28 [0xffffffffffffffe4])) [15 dt+0 S4 A32]))) "classes/Animation.cpp":29 802 {*fop_sf_comm}
+     (nil))
+(insn 10 9 11 2 (set (reg/f:DI 0 ax [105])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":29 81 {*movdi_internal}
+     (nil))
+(insn 11 10 94 2 (set (mem:SF (plus:DI (reg/f:DI 0 ax [105])
+                (const_int 20 [0x14])) [15 this_22(D)->currTime+0 S4 A32])
+        (reg:SF 21 xmm0 [orig:88 _2 ] [88])) "classes/Animation.cpp":29 127 {*movsf_internal}
+     (nil))
+(note 94 11 12 2 0x7f51c168b7e0 NOTE_INSN_BLOCK_BEG)
+(insn 12 94 13 2 (set (reg/f:DI 0 ax [106])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":30 81 {*movdi_internal}
+     (nil))
+(insn 13 12 14 2 (set (reg:SF 22 xmm1 [orig:89 _3 ] [89])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [106])
+                (const_int 20 [0x14])) [15 this_22(D)->currTime+0 S4 A32])) "classes/Animation.cpp":30 127 {*movsf_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg/f:DI 0 ax [107])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":30 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg:SF 21 xmm0 [orig:90 _4 ] [90])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [107])
+                (const_int 16 [0x10])) [15 this_22(D)->animLength+0 S4 A64])) "classes/Animation.cpp":30 127 {*movsf_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [108])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":30 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg:SF 23 xmm2 [orig:91 _5 ] [91])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [108])
+                (const_int 24 [0x18])) [15 this_22(D)->frames+0 S4 A64])) "classes/Animation.cpp":30 127 {*movsf_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg:SF 21 xmm0 [orig:92 _6 ] [92])
+        (div:SF (reg:SF 21 xmm0 [orig:90 _4 ] [90])
+            (reg:SF 23 xmm2 [orig:91 _5 ] [91]))) "classes/Animation.cpp":30 805 {*fop_sf_1}
+     (nil))
+(insn 19 18 20 2 (set (reg:CCFPU 17 flags)
+        (compare:CCFPU (reg:SF 22 xmm1 [orig:89 _3 ] [89])
+            (reg:SF 21 xmm0 [orig:92 _6 ] [92]))) "classes/Animation.cpp":30 51 {*cmpiusf}
+     (nil))
+(jump_insn 20 19 65 2 (set (pc)
+        (if_then_else (ge (reg:CCFPU 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 69)
+            (pc))) "classes/Animation.cpp":30 617 {*jcc_1}
+     (nil)
+ -> 69)
+(note 65 20 95 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(note 95 65 71 3 0x7f51c168b7e0 NOTE_INSN_BLOCK_END)
+(jump_insn 71 95 72 3 (set (pc)
+        (label_ref 63)) "classes/Animation.cpp":38 649 {jump}
+     (nil)
+ -> 63)
+(barrier 72 71 69)
+(code_label 69 72 24 4 12 (nil) [1 uses])
+(note 24 69 97 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(note 97 24 96 4 0x7f51c10937e0 NOTE_INSN_BLOCK_BEG)
+(note 96 97 25 4 0x7f51c168b780 NOTE_INSN_BLOCK_BEG)
+(insn 25 96 56 4 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -4 [0xfffffffffffffffc])) [11 i+0 S4 A32])
+        (const_int 0 [0])) "classes/Animation.cpp":31 82 {*movsi_internal}
+     (nil))
+(code_label 56 25 26 5 11 (nil) [1 uses])
+(note 26 56 27 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 27 26 28 5 (set (reg/f:DI 0 ax [109])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":32 81 {*movdi_internal}
+     (nil))
+(insn 28 27 29 5 (set (reg:SF 22 xmm1 [orig:93 _7 ] [93])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [109])
+                (const_int 20 [0x14])) [15 this_22(D)->currTime+0 S4 A32])) "classes/Animation.cpp":32 127 {*movsf_internal}
+     (nil))
+(insn 29 28 30 5 (set (reg/f:DI 0 ax [110])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":32 81 {*movdi_internal}
+     (nil))
+(insn 30 29 31 5 (set (reg:SF 21 xmm0 [orig:94 _8 ] [94])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [110])
+                (const_int 16 [0x10])) [15 this_22(D)->animLength+0 S4 A64])) "classes/Animation.cpp":32 127 {*movsf_internal}
+     (nil))
+(insn 31 30 32 5 (set (reg/f:DI 0 ax [111])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":32 81 {*movdi_internal}
+     (nil))
+(insn 32 31 33 5 (set (reg:SF 23 xmm2 [orig:95 _9 ] [95])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [111])
+                (const_int 24 [0x18])) [15 this_22(D)->frames+0 S4 A64])) "classes/Animation.cpp":32 127 {*movsf_internal}
+     (nil))
+(insn 33 32 34 5 (set (reg:SF 21 xmm0 [orig:96 _10 ] [96])
+        (div:SF (reg:SF 21 xmm0 [orig:94 _8 ] [94])
+            (reg:SF 23 xmm2 [orig:95 _9 ] [95]))) "classes/Animation.cpp":32 805 {*fop_sf_1}
+     (nil))
+(insn 34 33 35 5 (set (reg:CCFPU 17 flags)
+        (compare:CCFPU (reg:SF 22 xmm1 [orig:93 _7 ] [93])
+            (reg:SF 21 xmm0 [orig:96 _10 ] [96]))) "classes/Animation.cpp":32 51 {*cmpiusf}
+     (nil))
+(jump_insn 35 34 67 5 (set (pc)
+        (if_then_else (ge (reg:CCFPU 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 70)
+            (pc))) "classes/Animation.cpp":32 617 {*jcc_1}
+     (nil)
+ -> 70)
+(note 67 35 98 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(note 98 67 99 6 0x7f51c168b780 NOTE_INSN_BLOCK_END)
+(note 99 98 73 6 0x7f51c10937e0 NOTE_INSN_BLOCK_END)
+(jump_insn 73 99 74 6 (set (pc)
+        (label_ref 63)) "classes/Animation.cpp":38 649 {jump}
+     (nil)
+ -> 63)
+(barrier 74 73 70)
+(code_label 70 74 39 7 13 (nil) [1 uses])
+(note 39 70 101 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(note 101 39 100 7 0x7f51c1093840 NOTE_INSN_BLOCK_BEG)
+(note 100 101 40 7 0x7f51c10938a0 NOTE_INSN_BLOCK_BEG)
+(insn 40 100 41 7 (set (reg/f:DI 0 ax [112])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":33 81 {*movdi_internal}
+     (nil))
+(insn 41 40 80 7 (set (reg:SI 0 ax [orig:97 _11 ] [97])
+        (mem:SI (plus:DI (reg/f:DI 0 ax [112])
+                (const_int 28 [0x1c])) [11 this_22(D)->currFrame+0 S4 A32])) "classes/Animation.cpp":33 82 {*movsi_internal}
+     (nil))
+(insn 80 41 43 7 (set (reg:SI 1 dx [orig:98 _12 ] [98])
+        (plus:SI (reg:SI 0 ax [orig:97 _11 ] [97])
+            (const_int 1 [0x1]))) "classes/Animation.cpp":33 213 {*leasi}
+     (nil))
+(insn 43 80 44 7 (set (reg/f:DI 0 ax [113])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":33 81 {*movdi_internal}
+     (nil))
+(insn 44 43 45 7 (set (mem:SI (plus:DI (reg/f:DI 0 ax [113])
+                (const_int 28 [0x1c])) [11 this_22(D)->currFrame+0 S4 A32])
+        (reg:SI 1 dx [orig:98 _12 ] [98])) "classes/Animation.cpp":33 82 {*movsi_internal}
+     (nil))
+(insn 45 44 46 7 (set (reg/f:DI 0 ax [114])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":34 81 {*movdi_internal}
+     (nil))
+(insn 46 45 47 7 (set (reg:SF 22 xmm1 [orig:99 _13 ] [99])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [114])
+                (const_int 20 [0x14])) [15 this_22(D)->currTime+0 S4 A32])) "classes/Animation.cpp":34 127 {*movsf_internal}
+     (nil))
+(insn 47 46 48 7 (set (reg/f:DI 0 ax [115])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":34 81 {*movdi_internal}
+     (nil))
+(insn 48 47 49 7 (set (reg:SF 21 xmm0 [orig:100 _14 ] [100])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [115])
+                (const_int 16 [0x10])) [15 this_22(D)->animLength+0 S4 A64])) "classes/Animation.cpp":34 127 {*movsf_internal}
+     (nil))
+(insn 49 48 50 7 (set (reg/f:DI 0 ax [116])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":34 81 {*movdi_internal}
+     (nil))
+(insn 50 49 51 7 (set (reg:SF 23 xmm2 [orig:101 _15 ] [101])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [116])
+                (const_int 24 [0x18])) [15 this_22(D)->frames+0 S4 A64])) "classes/Animation.cpp":34 127 {*movsf_internal}
+     (nil))
+(insn 51 50 52 7 (set (reg:SF 21 xmm0 [orig:102 _16 ] [102])
+        (div:SF (reg:SF 21 xmm0 [orig:100 _14 ] [100])
+            (reg:SF 23 xmm2 [orig:101 _15 ] [101]))) "classes/Animation.cpp":34 805 {*fop_sf_1}
+     (nil))
+(insn 52 51 79 7 (set (reg:SF 22 xmm1 [orig:99 _13 ] [99])
+        (minus:SF (reg:SF 22 xmm1 [orig:99 _13 ] [99])
+            (reg:SF 21 xmm0 [orig:102 _16 ] [102]))) "classes/Animation.cpp":34 805 {*fop_sf_1}
+     (nil))
+(insn 79 52 53 7 (set (reg:SF 21 xmm0 [orig:103 _17 ] [103])
+        (reg:SF 22 xmm1 [orig:99 _13 ] [99])) "classes/Animation.cpp":34 127 {*movsf_internal}
+     (nil))
+(insn 53 79 54 7 (set (reg/f:DI 0 ax [117])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [12 this+0 S8 A64])) "classes/Animation.cpp":34 81 {*movdi_internal}
+     (nil))
+(insn 54 53 55 7 (set (mem:SF (plus:DI (reg/f:DI 0 ax [117])
+                (const_int 20 [0x14])) [15 this_22(D)->currTime+0 S4 A32])
+        (reg:SF 21 xmm0 [orig:103 _17 ] [103])) "classes/Animation.cpp":34 127 {*movsf_internal}
+     (nil))
+(insn 55 54 75 7 (parallel [
+            (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -4 [0xfffffffffffffffc])) [11 i+0 S4 A32])
+                (plus:SI (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                            (const_int -4 [0xfffffffffffffffc])) [11 i+0 S4 A32])
+                    (const_int 1 [0x1])))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":35 217 {*addsi_1}
+     (nil))
+(jump_insn 75 55 76 7 (set (pc)
+        (label_ref 56)) "classes/Animation.cpp":32 649 {jump}
+     (nil)
+ -> 56)
+(barrier 76 75 63)
+(code_label 63 76 64 8 6 (nil) [2 uses])
+(note 64 63 85 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(note 85 64 102 8 NOTE_INSN_EPILOGUE_BEG)
+(note 102 85 103 8 0x7f51c10938a0 NOTE_INSN_BLOCK_END)
+(note 103 102 86 8 0x7f51c1093840 NOTE_INSN_BLOCK_END)
+(insn 86 103 87 8 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Animation.cpp":38 677 {*memory_blockage}
+     (nil))
+(insn/f 87 86 88 8 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":38 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 88 87 89 8 (simple_return) "classes/Animation.cpp":38 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 89 88 77)
+(note 77 89 0 NOTE_INSN_DELETED)
+
+;; Function sf::Texture* Animation::getSheet() (_ZN9Animation8getSheetEv, funcdef_no=3248, decl_uid=76519, cgraph_uid=757, symbol_order=763)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 18 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 18 4 19 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":40 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 19 18 20 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":40 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Animation.cpp":40 677 {*memory_blockage}
+     (nil))
+(note 21 20 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 21 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":40 81 {*movdi_internal}
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (reg/f:DI 0 ax [89])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [12 this+0 S8 A64])) "classes/Animation.cpp":41 81 {*movdi_internal}
+     (nil))
+(insn 7 6 15 2 (set (reg/f:DI 0 ax [orig:87 _3 ] [87])
+        (mem/f:DI (reg/f:DI 0 ax [89]) [17 this_2(D)->spriteSheet+0 S8 A64])) "classes/Animation.cpp":41 81 {*movdi_internal}
+     (nil))
+(insn 15 7 22 2 (use (reg/i:DI 0 ax)) "classes/Animation.cpp":42 -1
+     (nil))
+(note 22 15 23 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 23 22 24 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "classes/Animation.cpp":42 677 {*memory_blockage}
+     (nil))
+(insn/f 24 23 25 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":42 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 25 24 26 2 (simple_return) "classes/Animation.cpp":42 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 26 25 17)
+(note 17 26 0 NOTE_INSN_DELETED)
+
+;; Function sf::IntRect Animation::getTextureRect() (_ZN9Animation14getTextureRectEv, funcdef_no=3249, decl_uid=76521, cgraph_uid=758, symbol_order=764)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 48 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 48 5 49 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":44 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 49 48 50 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":44 81 {*movdi_internal}
+     (nil))
+(insn/f 50 49 51 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -48 [0xffffffffffffffd0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":44 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 51 50 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 51 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":44 81 {*movdi_internal}
+     (nil))
+(note 3 2 4 2 NOTE_INSN_FUNCTION_BEG)
+(insn 4 3 7 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -8 [0xfffffffffffffff8])) [18 D.80500+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [104])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":44 1002 {stack_tls_protect_set_di}
+     (nil))
+(insn 7 4 8 2 (set (reg/f:DI 0 ax [98])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [12 this+0 S8 A64])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg:SF 21 xmm0 [orig:87 _1 ] [87])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [98])
+                (const_int 12 [0xc])) [15 this_11(D)->size.y+0 S4 A32])) "classes/Animation.cpp":45 127 {*movsf_internal}
+     (nil))
+(insn 9 8 10 2 (set (reg:SI 2 cx [orig:88 _2 ] [88])
+        (fix:SI (reg:SF 21 xmm0 [orig:87 _1 ] [87]))) "classes/Animation.cpp":45 170 {fix_truncsfsi_sse}
+     (nil))
+(insn 10 9 11 2 (set (reg/f:DI 0 ax [99])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [12 this+0 S8 A64])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:SF 21 xmm0 [orig:89 _3 ] [89])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [99])
+                (const_int 8 [0x8])) [15 this_11(D)->size.x+0 S4 A64])) "classes/Animation.cpp":45 127 {*movsf_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg:SI 1 dx [orig:90 _4 ] [90])
+        (fix:SI (reg:SF 21 xmm0 [orig:89 _3 ] [89]))) "classes/Animation.cpp":45 170 {fix_truncsfsi_sse}
+     (nil))
+(insn 13 12 14 2 (set (reg/f:DI 0 ax [100])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [12 this+0 S8 A64])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 0 ax [orig:91 _5 ] [91])
+        (mem:SI (plus:DI (reg/f:DI 0 ax [100])
+                (const_int 28 [0x1c])) [11 this_11(D)->currFrame+0 S4 A32])) "classes/Animation.cpp":45 82 {*movsi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg:SF 21 xmm0 [orig:92 _6 ] [92])
+        (float:SF (reg:SI 0 ax [orig:91 _5 ] [91]))) "classes/Animation.cpp":45 199 {*floatsisf2_mixed}
+     (nil))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [101])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [12 this+0 S8 A64])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg:SF 22 xmm1 [orig:93 _7 ] [93])
+        (mem:SF (plus:DI (reg/f:DI 0 ax [101])
+                (const_int 8 [0x8])) [15 this_11(D)->size.x+0 S4 A64])) "classes/Animation.cpp":45 127 {*movsf_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg:SF 21 xmm0 [orig:94 _8 ] [94])
+        (mult:SF (reg:SF 21 xmm0 [orig:92 _6 ] [92])
+            (reg:SF 22 xmm1 [orig:93 _7 ] [93]))) "classes/Animation.cpp":45 802 {*fop_sf_comm}
+     (nil))
+(insn 19 18 45 2 (set (reg:SI 4 si [orig:95 _9 ] [95])
+        (fix:SI (reg:SF 21 xmm0 [orig:94 _8 ] [94]))) "classes/Animation.cpp":45 170 {fix_truncsfsi_sse}
+     (nil))
+(insn 45 19 21 2 (set (reg:DI 0 ax [102])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -32 [0xffffffffffffffe0]))) "classes/Animation.cpp":45 214 {*leadi}
+     (nil))
+(insn 21 45 22 2 (set (reg:SI 37 r8)
+        (reg:SI 2 cx [orig:88 _2 ] [88])) "classes/Animation.cpp":45 82 {*movsi_internal}
+     (nil))
+(insn 22 21 23 2 (set (reg:SI 2 cx)
+        (reg:SI 1 dx [orig:90 _4 ] [90])) "classes/Animation.cpp":45 82 {*movsi_internal}
+     (nil))
+(insn 23 22 25 2 (set (reg:SI 1 dx)
+        (const_int 0 [0])) "classes/Animation.cpp":45 82 {*movsi_internal}
+     (nil))
+(insn 25 23 26 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [102])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(call_insn 26 25 46 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf4RectIiEC1Eiiii") [flags 0x3]  <function_decl 0x7f51c21bac00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":45 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (expr_list:SI (use (reg:SI 1 dx))
+                (expr_list:SI (use (reg:SI 2 cx))
+                    (expr_list:SI (use (reg:SI 37 r8))
+                        (nil)))))))
+(insn 46 26 47 2 (set (reg:DI 0 ax [orig:96 D.80460 ] [96])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -32 [0xffffffffffffffe0])) [19 D.76664+0 S8 A64])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(insn 47 46 35 2 (set (reg:DI 1 dx [ D.80460+8 ])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [19 D.76664+8 S8 A64])) "classes/Animation.cpp":45 81 {*movdi_internal}
+     (nil))
+(insn 35 47 36 2 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -8 [0xfffffffffffffff8])) [18 D.80500+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 5 di [105]))
+        ]) "classes/Animation.cpp":46 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 36 35 42 2 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 39)
+            (pc))) "classes/Animation.cpp":46 617 {*jcc_1}
+     (nil)
+ -> 39)
+(note 42 36 37 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(call_insn 37 42 38 3 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f51c1094b00 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":46 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 38 37 39)
+(code_label 39 38 43 4 18 (nil) [1 uses])
+(note 43 39 40 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 40 43 52 4 (use (reg/i:TI 0 ax)) "classes/Animation.cpp":46 -1
+     (nil))
+(note 52 40 53 4 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 53 52 54 4 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":46 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 54 53 55 4 (simple_return) "classes/Animation.cpp":46 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 55 54 44)
+(note 44 55 0 NOTE_INSN_DELETED)
+
+;; Function sf::Vector2f Animation::getOrigin() (_ZN9Animation9getOriginEv, funcdef_no=3250, decl_uid=76523, cgraph_uid=759, symbol_order=765)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 56 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 56 5 57 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":48 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 57 56 58 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":48 81 {*movdi_internal}
+     (nil))
+(insn/f 58 57 59 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -64 [0xffffffffffffffc0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":48 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 59 58 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 59 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [12 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":48 81 {*movdi_internal}
+     (nil))
+(note 3 2 4 2 NOTE_INSN_FUNCTION_BEG)
+(insn 4 3 7 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -8 [0xfffffffffffffff8])) [18 D.80502+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [108])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":48 1002 {stack_tls_protect_set_di}
+     (nil))
+(insn 7 4 8 2 (set (reg:DI 0 ax [101])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [12 this+0 S8 A64])) "classes/Animation.cpp":49 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [101])) "classes/Animation.cpp":49 81 {*movdi_internal}
+     (nil))
+(call_insn 9 8 53 2 (set (reg:TI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation14getTextureRectEv") [flags 0x3]  <function_decl 0x7f51c177f500 getTextureRect>) [0 getTextureRect S1 A8])
+            (const_int 0 [0]))) "classes/Animation.cpp":49 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 53 9 54 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -32 [0xffffffffffffffe0])) [19 r+0 S8 A64])
+        (reg:DI 0 ax [103])) "classes/Animation.cpp":49 81 {*movdi_internal}
+     (nil))
+(insn 54 53 13 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [19 r+8 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Animation.cpp":49 81 {*movdi_internal}
+     (nil))
+(insn 13 54 14 2 (set (reg:SI 0 ax [orig:87 _1 ] [87])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -28 [0xffffffffffffffe4])) [11 r.top+0 S4 A32])) "classes/Animation.cpp":50 82 {*movsi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg:SF 22 xmm1 [orig:88 _2 ] [88])
+        (float:SF (reg:SI 0 ax [orig:87 _1 ] [87]))) "classes/Animation.cpp":50 199 {*floatsisf2_mixed}
+     (nil))
+(insn 15 14 16 2 (set (reg:SI 0 ax [orig:89 _3 ] [89])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [11 r.height+0 S4 A32])) "classes/Animation.cpp":50 82 {*movsi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg:SF 21 xmm0 [orig:90 _4 ] [90])
+        (float:SF (reg:SI 0 ax [orig:89 _3 ] [89]))) "classes/Animation.cpp":50 199 {*floatsisf2_mixed}
+     (nil))
+(insn 17 16 18 2 (set (reg:SF 23 xmm2 [104])
+        (mem/u/c:SF (symbol_ref/u:DI ("*.LC0") [flags 0x2]) [15  S4 A32])) "classes/Animation.cpp":50 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 2.0e+0 [0x0.8p+2])
+        (nil)))
+(insn 18 17 50 2 (set (reg:SF 21 xmm0 [orig:91 _5 ] [91])
+        (div:SF (reg:SF 21 xmm0 [orig:90 _4 ] [90])
+            (reg:SF 23 xmm2 [104]))) "classes/Animation.cpp":50 805 {*fop_sf_1}
+     (nil))
+(insn 50 18 19 2 (set (reg:SF 24 xmm3 [orig:88 _2 ] [88])
+        (reg:SF 22 xmm1 [orig:88 _2 ] [88])) "classes/Animation.cpp":50 127 {*movsf_internal}
+     (nil))
+(insn 19 50 20 2 (set (reg:SF 24 xmm3 [orig:88 _2 ] [88])
+        (plus:SF (reg:SF 24 xmm3 [orig:88 _2 ] [88])
+            (reg:SF 21 xmm0 [orig:91 _5 ] [91]))) "classes/Animation.cpp":50 802 {*fop_sf_comm}
+     (nil))
+(insn 20 19 21 2 (set (reg:SI 0 ax [orig:93 _7 ] [93])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -32 [0xffffffffffffffe0])) [11 r.left+0 S4 A64])) "classes/Animation.cpp":50 82 {*movsi_internal}
+     (nil))
+(insn 21 20 22 2 (set (reg:SF 22 xmm1 [orig:94 _8 ] [94])
+        (float:SF (reg:SI 0 ax [orig:93 _7 ] [93]))) "classes/Animation.cpp":50 199 {*floatsisf2_mixed}
+     (nil))
+(insn 22 21 23 2 (set (reg:SI 0 ax [orig:95 _9 ] [95])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [11 r.width+0 S4 A64])) "classes/Animation.cpp":50 82 {*movsi_internal}
+     (nil))
+(insn 23 22 24 2 (set (reg:SF 21 xmm0 [orig:96 _10 ] [96])
+        (float:SF (reg:SI 0 ax [orig:95 _9 ] [95]))) "classes/Animation.cpp":50 199 {*floatsisf2_mixed}
+     (nil))
+(insn 24 23 25 2 (set (reg:SF 23 xmm2 [105])
+        (mem/u/c:SF (symbol_ref/u:DI ("*.LC0") [flags 0x2]) [15  S4 A32])) "classes/Animation.cpp":50 127 {*movsf_internal}
+     (expr_list:REG_EQUAL (const_double:SF 2.0e+0 [0x0.8p+2])
+        (nil)))
+(insn 25 24 26 2 (set (reg:SF 21 xmm0 [orig:97 _11 ] [97])
+        (div:SF (reg:SF 21 xmm0 [orig:96 _10 ] [96])
+            (reg:SF 23 xmm2 [105]))) "classes/Animation.cpp":50 805 {*fop_sf_1}
+     (nil))
+(insn 26 25 55 2 (set (reg:SF 21 xmm0 [orig:98 _12 ] [98])
+        (plus:SF (reg:SF 21 xmm0 [orig:97 _11 ] [97])
+            (reg:SF 22 xmm1 [orig:94 _8 ] [94]))) "classes/Animation.cpp":50 802 {*fop_sf_comm}
+     (nil))
+(insn 55 26 28 2 (set (reg:DI 0 ax [106])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -40 [0xffffffffffffffd8]))) "classes/Animation.cpp":50 214 {*leadi}
+     (nil))
+(insn 28 55 30 2 (set (reg:SF 22 xmm1)
+        (reg:SF 24 xmm3 [orig:92 _6 ] [92])) "classes/Animation.cpp":50 127 {*movsf_internal}
+     (nil))
+(insn 30 28 31 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [106])) "classes/Animation.cpp":50 81 {*movdi_internal}
+     (nil))
+(call_insn 31 30 32 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf7Vector2IfEC1Eff") [flags 0x3]  <function_decl 0x7f51c20f2f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":50 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SF (use (reg:SF 21 xmm0))
+            (expr_list:SF (use (reg:SF 22 xmm1))
+                (nil)))))
+(insn 32 31 39 2 (set (reg:DI 0 ax [orig:99 D.80463 ] [99])
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [14 D.76670+0 S8 A64])) "classes/Animation.cpp":50 81 {*movdi_internal}
+     (nil))
+(insn 39 32 52 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [20 %sfp+-64 S8 A64])
+        (reg:DI 0 ax [orig:100 <retval> ] [100])) "classes/Animation.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 52 39 40 2 (set (reg/i:DI 21 xmm0)
+        (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [20 %sfp+-64 S8 A64])) "classes/Animation.cpp":51 81 {*movdi_internal}
+     (nil))
+(insn 40 52 41 2 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -8 [0xfffffffffffffff8])) [18 D.80502+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 0 ax [109]))
+        ]) "classes/Animation.cpp":51 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 41 40 47 2 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 44)
+            (pc))) "classes/Animation.cpp":51 617 {*jcc_1}
+     (nil)
+ -> 44)
+(note 47 41 42 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(call_insn 42 47 43 3 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f51c1094b00 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":51 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 43 42 44)
+(code_label 44 43 48 4 21 (nil) [1 uses])
+(note 48 44 45 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 45 48 60 4 (use (reg/i:DI 21 xmm0)) "classes/Animation.cpp":51 -1
+     (nil))
+(note 60 45 61 4 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 61 60 62 4 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":51 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 62 61 63 4 (simple_return) "classes/Animation.cpp":51 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 63 62 49)
+(note 49 63 0 NOTE_INSN_DELETED)
+
+;; Function sf::Sprite::~Sprite() (_ZN2sf6SpriteD2Ev, funcdef_no=3253, decl_uid=76309, cgraph_uid=761, symbol_order=767)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 23 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 23 4 24 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/Graphics/Sprite.hpp":47 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 24 23 25 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn/f 25 24 26 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/SFML/Graphics/Sprite.hpp":47 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 26 25 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 26 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(note 3 2 35 2 NOTE_INSN_FUNCTION_BEG)
+(note 35 3 6 2 0x7f51c168ba20 NOTE_INSN_BLOCK_BEG)
+(insn 6 35 7 2 (set (reg/f:DI 1 dx [orig:87 _1 ] [87])
+        (const:DI (plus:DI (symbol_ref:DI ("_ZTVN2sf6SpriteE") [flags 0x40]  <var_decl 0x7f51c1647bd0 _ZTVN2sf6SpriteE>)
+                (const_int 16 [0x10])))) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg/f:DI 0 ax [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (mem/f:DI (reg/f:DI 0 ax [91]) [2 this_6(D)->D.76330._vptr.Drawable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:87 _1 ] [87])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 9 8 10 2 (set (reg/f:DI 1 dx [orig:88 _2 ] [88])
+        (const:DI (plus:DI (symbol_ref:DI ("_ZTVN2sf6SpriteE") [flags 0x40]  <var_decl 0x7f51c1647bd0 _ZTVN2sf6SpriteE>)
+                (const_int 56 [0x38])))) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg/f:DI 0 ax [92])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [92])
+                (const_int 8 [0x8])) [2 this_6(D)->D.76331._vptr.Transformable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:88 _2 ] [88])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg/f:DI 0 ax [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 13 12 14 2 (parallel [
+            (set (reg/f:DI 0 ax [orig:89 _3 ] [89])
+                (plus:DI (reg/f:DI 0 ax [93])
+                    (const_int 8 [0x8])))
+            (clobber (reg:CC 17 flags))
+        ]) "/usr/include/SFML/Graphics/Sprite.hpp":47 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])
+            (const_int 8 [0x8]))
+        (nil)))
+(insn 14 13 15 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:89 _3 ] [89])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(call_insn 15 14 16 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf13TransformableD2Ev") [flags 0x41]  <function_decl 0x7f51c20f5800 __base_dtor >) [0 __base_dtor  S1 A8])
+        (const_int 0 [0])) "/usr/include/SFML/Graphics/Sprite.hpp":47 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [orig:90 _4 ] [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:90 _4 ] [90])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(call_insn 18 17 36 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf8DrawableD2Ev") [flags 0x3]  <function_decl 0x7f51c20e4f00 __base_dtor >) [0 __base_dtor  S1 A8])
+        (const_int 0 [0])) "/usr/include/SFML/Graphics/Sprite.hpp":47 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 36 18 21 2 0x7f51c168ba20 NOTE_INSN_BLOCK_END)
+(insn 21 36 27 2 (const_int 0 [0]) "/usr/include/SFML/Graphics/Sprite.hpp":47 684 {nop}
+     (nil))
+(note 27 21 28 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 28 27 29 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/SFML/Graphics/Sprite.hpp":47 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 29 28 30 2 (simple_return) "/usr/include/SFML/Graphics/Sprite.hpp":47 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 30 29 22)
+(note 22 30 0 NOTE_INSN_DELETED)
+
+;; Function virtual sf::Sprite::~Sprite() (_ZN2sf6SpriteD0Ev, funcdef_no=3255, decl_uid=76303, cgraph_uid=763, symbol_order=769)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 16 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 16 4 17 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/Graphics/Sprite.hpp":47 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 17 16 18 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn/f 18 17 19 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/SFML/Graphics/Sprite.hpp":47 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 19 18 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 19 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (reg:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [87])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(call_insn 8 7 9 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf6SpriteD1Ev") [flags 0x3]  <function_decl 0x7f51c176aa00 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "/usr/include/SFML/Graphics/Sprite.hpp":47 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 9 8 10 2 (set (reg:DI 0 ax [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [21 this+0 S8 A64])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg:DI 4 si)
+        (const_int 288 [0x120])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [88])) "/usr/include/SFML/Graphics/Sprite.hpp":47 81 {*movdi_internal}
+     (nil))
+(call_insn 12 11 20 2 (call (mem:QI (symbol_ref:DI ("_ZdlPvm") [flags 0x41]  <function_decl 0x7f51c4cb1100 operator delete>) [0 operator delete S1 A8])
+        (const_int 0 [0])) "/usr/include/SFML/Graphics/Sprite.hpp":47 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 20 12 21 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 21 20 22 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "/usr/include/SFML/Graphics/Sprite.hpp":47 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 22 21 23 2 (simple_return) "/usr/include/SFML/Graphics/Sprite.hpp":47 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 23 22 15)
+(note 15 23 0 NOTE_INSN_DELETED)
+
+;; Function TerrainAnimation::TerrainAnimation(Animation*) (_ZN16TerrainAnimationC2EP9Animation, funcdef_no=3256, decl_uid=76581, cgraph_uid=769, symbol_order=775)
+
+(note 1 0 6 NOTE_INSN_DELETED)
+(note 6 1 88 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 88 6 89 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":53 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 89 88 90 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn/f 90 89 91 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg:DI 3 bx)) "classes/Animation.cpp":53 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 91 90 92 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -56 [0xffffffffffffffc8])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":53 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 92 91 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 92 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [12 anim+0 S8 A64])
+        (reg:DI 4 si [ anim ])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(note 4 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 4 110 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -24 [0xffffffffffffffe8])) [18 D.80508+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [111])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":53 1002 {stack_tls_protect_set_di}
+     (nil))
+(note 110 5 8 2 0x7f51c168bc00 NOTE_INSN_BLOCK_BEG)
+(insn 8 110 9 2 (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 9 8 99 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(note 99 9 10 2 0 NOTE_INSN_EH_REGION_BEG)
+(call_insn 10 99 100 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf6SpriteC2Ev") [flags 0x41]  <function_decl 0x7f51c176f200 __base_ctor >) [0 __base_ctor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":53 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 100 10 11 2 0 NOTE_INSN_EH_REGION_END)
+(insn 11 100 12 2 (set (reg/f:DI 1 dx [orig:88 _2 ] [88])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTV16TerrainAnimation") [flags 0x2]  <var_decl 0x7f51c177e750 _ZTV16TerrainAnimation>)
+                (const_int 16 [0x10])))) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg/f:DI 0 ax [96])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 13 12 14 2 (set (mem/f:DI (reg/f:DI 0 ax [96]) [2 this_11(D)->D.76593.D.76330._vptr.Drawable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:88 _2 ] [88])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg/f:DI 1 dx [orig:89 _3 ] [89])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTV16TerrainAnimation") [flags 0x2]  <var_decl 0x7f51c177e750 _ZTV16TerrainAnimation>)
+                (const_int 56 [0x38])))) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg/f:DI 0 ax [97])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [97])
+                (const_int 8 [0x8])) [2 this_11(D)->D.76593.D.76331._vptr.Transformable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:89 _3 ] [89])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg/f:DI 0 ax [98])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":54 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg/f:DI 1 dx [99])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [12 anim+0 S8 A64])) "classes/Animation.cpp":54 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [98])
+                (const_int 288 [0x120])) [12 this_11(D)->anim+0 S8 A64])
+        (reg/f:DI 1 dx [99])) "classes/Animation.cpp":54 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg/f:DI 3 bx [orig:90 _4 ] [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":55 81 {*movdi_internal}
+     (nil))
+(insn 21 20 22 2 (set (reg:DI 0 ax [100])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [12 anim+0 S8 A64])) "classes/Animation.cpp":55 81 {*movdi_internal}
+     (nil))
+(insn 22 21 23 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [100])) "classes/Animation.cpp":55 81 {*movdi_internal}
+     (nil))
+(call_insn 23 22 25 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation8getSheetEv") [flags 0x3]  <function_decl 0x7f51c177f400 getSheet>) [0 getSheet S1 A8])
+            (const_int 0 [0]))) "classes/Animation.cpp":55 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 25 23 26 2 (set (reg:SI 1 dx)
+        (const_int 0 [0])) "classes/Animation.cpp":55 82 {*movsi_internal}
+     (nil))
+(insn 26 25 27 2 (set (reg:DI 4 si)
+        (reg/f:DI 0 ax [orig:91 _5 ] [91])) "classes/Animation.cpp":55 81 {*movdi_internal}
+     (nil))
+(insn 27 26 101 2 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:90 _4 ] [90])) "classes/Animation.cpp":55 81 {*movdi_internal}
+     (nil))
+(note 101 27 28 2 1 NOTE_INSN_EH_REGION_BEG)
+(call_insn 28 101 29 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf6Sprite10setTextureERKNS_7TextureEb") [flags 0x41]  <function_decl 0x7f51c1741d00 setTexture>) [0 setTexture S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":55 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:SI (use (reg:SI 1 dx))
+                (nil)))))
+(note 29 28 30 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 30 29 86 3 (set (reg/f:DI 0 ax [101])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(insn 86 30 32 3 (set (reg/f:DI 3 bx [orig:92 _6 ] [92])
+        (plus:DI (reg/f:DI 0 ax [101])
+            (const_int 8 [0x8]))) "classes/Animation.cpp":56 214 {*leadi}
+     (nil))
+(insn 32 86 33 3 (set (reg:DI 0 ax [102])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [12 anim+0 S8 A64])) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(insn 33 32 34 3 (set (reg:DI 5 di)
+        (reg:DI 0 ax [102])) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(call_insn 34 33 35 3 (set (reg:DI 21 xmm0)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation9getOriginEv") [flags 0x3]  <function_decl 0x7f51c177f600 getOrigin>) [0 getOrigin S1 A8])
+            (const_int 0 [0]))) "classes/Animation.cpp":56 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 35 34 37 3 (set (reg:DI 0 ax [103])
+        (reg:DI 21 xmm0)) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(insn 37 35 87 3 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [14 D.76789+0 S8 A64])
+        (reg:DI 0 ax [104])) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(insn 87 37 39 3 (set (reg:DI 0 ax [105])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -48 [0xffffffffffffffd0]))) "classes/Animation.cpp":56 214 {*leadi}
+     (nil))
+(insn 39 87 40 3 (set (reg:DI 4 si)
+        (reg:DI 0 ax [105])) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(insn 40 39 41 3 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:92 _6 ] [92])) "classes/Animation.cpp":56 81 {*movdi_internal}
+     (nil))
+(call_insn 41 40 42 3 (call (mem:QI (symbol_ref:DI ("_ZN2sf13Transformable9setOriginERKNS_7Vector2IfEE") [flags 0x41]  <function_decl 0x7f51c20ecc00 setOrigin>) [0 setOrigin S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":56 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 42 41 43 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 43 42 44 4 (set (reg/f:DI 3 bx [orig:93 _7 ] [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(insn 44 43 45 4 (set (reg:DI 0 ax [106])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [12 anim+0 S8 A64])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(insn 45 44 46 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [106])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(call_insn 46 45 83 4 (set (reg:TI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation14getTextureRectEv") [flags 0x3]  <function_decl 0x7f51c177f500 getTextureRect>) [0 getTextureRect S1 A8])
+            (const_int 0 [0]))) "classes/Animation.cpp":57 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 83 46 84 4 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [19 D.76790+0 S8 A64])
+        (reg:DI 0 ax [108])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(insn 84 83 85 4 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [19 D.76790+8 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(insn 85 84 51 4 (set (reg:DI 0 ax [109])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -48 [0xffffffffffffffd0]))) "classes/Animation.cpp":57 214 {*leadi}
+     (nil))
+(insn 51 85 52 4 (set (reg:DI 4 si)
+        (reg:DI 0 ax [109])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(insn 52 51 53 4 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:93 _7 ] [93])) "classes/Animation.cpp":57 81 {*movdi_internal}
+     (nil))
+(call_insn 53 52 102 4 (call (mem:QI (symbol_ref:DI ("_ZN2sf6Sprite14setTextureRectERKNS_4RectIiEE") [flags 0x41]  <function_decl 0x7f51c1741e00 setTextureRect>) [0 setTextureRect S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":57 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 1 [0x1])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 102 53 78 1 NOTE_INSN_EH_REGION_END)
+(note 78 102 111 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(note 111 78 80 5 0x7f51c168bc00 NOTE_INSN_BLOCK_END)
+(jump_insn 80 111 81 5 (set (pc)
+        (label_ref 79)) "classes/Animation.cpp":58 649 {jump}
+     (nil)
+ -> 79)
+(barrier 81 80 75)
+(code_label/s 75 81 77 6 27 (nil) [1 uses])
+(note 77 75 76 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 76 77 112 6 (set (reg:DI 3 bx [110])
+        (reg:DI 0 ax)) 81 {*movdi_internal}
+     (nil))
+(note 112 76 59 6 0x7f51c10939c0 NOTE_INSN_BLOCK_BEG)
+(insn 59 112 60 6 (set (reg/f:DI 0 ax [orig:94 _8 ] [94])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [28 this+0 S8 A64])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(insn 60 59 61 6 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:94 _8 ] [94])) "classes/Animation.cpp":53 81 {*movdi_internal}
+     (nil))
+(call_insn 61 60 62 6 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf6SpriteD2Ev") [flags 0x3]  <function_decl 0x7f51c176ab00 __base_dtor >) [0 __base_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":53 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 62 61 63 6 (set (reg/f:DI 0 ax [orig:95 D.80506 ] [95])
+        (reg:DI 3 bx [110])) 81 {*movdi_internal}
+     (nil))
+(insn 63 62 103 6 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:95 D.80506 ] [95])) 81 {*movdi_internal}
+     (nil))
+(note 103 63 64 6 2 NOTE_INSN_EH_REGION_BEG)
+(call_insn 64 103 104 6 (call (mem:QI (symbol_ref:DI ("_Unwind_Resume") [flags 0x41]  <function_decl 0x7f51c4cac100 __builtin_unwind_resume>) [0 __builtin_unwind_resume S1 A8])
+        (const_int 0 [0])) 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 104 64 65 2 NOTE_INSN_EH_REGION_END)
+(barrier 65 104 79)
+(code_label 79 65 72 7 28 (nil) [1 uses])
+(note 72 79 113 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(note 113 72 67 7 0x7f51c10939c0 NOTE_INSN_BLOCK_END)
+(insn 67 113 68 7 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -24 [0xffffffffffffffe8])) [18 D.80508+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 0 ax [112]))
+        ]) "classes/Animation.cpp":58 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 68 67 73 7 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 71)
+            (pc))) "classes/Animation.cpp":58 617 {*jcc_1}
+     (nil)
+ -> 71)
+(note 73 68 69 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(call_insn 69 73 70 8 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f51c1094b00 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":58 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 70 69 71)
+(code_label 71 70 74 9 26 (nil) [1 uses])
+(note 74 71 93 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(note 93 74 94 9 NOTE_INSN_EPILOGUE_BEG)
+(insn 94 93 95 9 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int 56 [0x38])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":58 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(insn 95 94 96 9 (set (reg:DI 3 bx)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":58 67 {*popdi1}
+     (nil))
+(insn/f 96 95 97 9 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":58 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 97 96 98 9 (simple_return) "classes/Animation.cpp":58 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 98 97 82)
+(note 82 98 0 NOTE_INSN_DELETED)
+
+;; Function TerrainAnimation::~TerrainAnimation() (_ZN16TerrainAnimationD2Ev, funcdef_no=3259, decl_uid=76590, cgraph_uid=772, symbol_order=778)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 19 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 19 4 20 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":60 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 20 19 21 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn/f 21 20 22 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":60 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 22 21 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 22 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(note 3 2 31 2 NOTE_INSN_FUNCTION_BEG)
+(note 31 3 6 2 0x7f51c168bd80 NOTE_INSN_BLOCK_BEG)
+(insn 6 31 7 2 (set (reg/f:DI 1 dx [orig:87 _1 ] [87])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTV16TerrainAnimation") [flags 0x2]  <var_decl 0x7f51c177e750 _ZTV16TerrainAnimation>)
+                (const_int 16 [0x10])))) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg/f:DI 0 ax [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (mem/f:DI (reg/f:DI 0 ax [90]) [2 this_5(D)->D.76593.D.76330._vptr.Drawable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:87 _1 ] [87])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 9 8 10 2 (set (reg/f:DI 1 dx [orig:88 _2 ] [88])
+        (const:DI (plus:DI (symbol_ref/i:DI ("_ZTV16TerrainAnimation") [flags 0x2]  <var_decl 0x7f51c177e750 _ZTV16TerrainAnimation>)
+                (const_int 56 [0x38])))) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg/f:DI 0 ax [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (mem/f:DI (plus:DI (reg/f:DI 0 ax [91])
+                (const_int 8 [0x8])) [2 this_5(D)->D.76593.D.76331._vptr.Transformable+0 S8 A64])
+        (reg/f:DI 1 dx [orig:88 _2 ] [88])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg/f:DI 0 ax [orig:89 _3 ] [89])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn 13 12 14 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:89 _3 ] [89])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(call_insn 14 13 32 2 (call (mem:QI (symbol_ref/i:DI ("_ZN2sf6SpriteD2Ev") [flags 0x3]  <function_decl 0x7f51c176ab00 __base_dtor >) [0 __base_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":60 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(note 32 14 17 2 0x7f51c168bd80 NOTE_INSN_BLOCK_END)
+(insn 17 32 23 2 (const_int 0 [0]) "classes/Animation.cpp":62 684 {nop}
+     (nil))
+(note 23 17 24 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 24 23 25 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":62 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 25 24 26 2 (simple_return) "classes/Animation.cpp":62 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 26 25 18)
+(note 18 26 0 NOTE_INSN_DELETED)
+
+;; Function virtual TerrainAnimation::~TerrainAnimation() (_ZN16TerrainAnimationD0Ev, funcdef_no=3261, decl_uid=76584, cgraph_uid=776, symbol_order=782)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 16 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 16 4 17 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":60 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 17 16 18 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(insn/f 18 17 19 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":60 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 19 18 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 19 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":60 81 {*movdi_internal}
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (reg:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])) "classes/Animation.cpp":62 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [87])) "classes/Animation.cpp":62 81 {*movdi_internal}
+     (nil))
+(call_insn 8 7 9 2 (call (mem:QI (symbol_ref:DI ("_ZN16TerrainAnimationD1Ev") [flags 0x3]  <function_decl 0x7f51c1787400 __comp_dtor >) [0 __comp_dtor  S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":62 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 9 8 10 2 (set (reg:DI 0 ax [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])) "classes/Animation.cpp":62 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg:DI 4 si)
+        (const_int 296 [0x128])) "classes/Animation.cpp":62 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:DI 5 di)
+        (reg:DI 0 ax [88])) "classes/Animation.cpp":62 81 {*movdi_internal}
+     (nil))
+(call_insn 12 11 20 2 (call (mem:QI (symbol_ref:DI ("_ZdlPvm") [flags 0x41]  <function_decl 0x7f51c4cb1100 operator delete>) [0 operator delete S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":62 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(note 20 12 21 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 21 20 22 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":62 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 22 21 23 2 (simple_return) "classes/Animation.cpp":62 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 23 22 15)
+(note 15 23 0 NOTE_INSN_DELETED)
+
+;; Function void TerrainAnimation::update() (_ZN16TerrainAnimation6updateEv, funcdef_no=3262, decl_uid=76572, cgraph_uid=779, symbol_order=785)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 42 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 42 5 43 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":64 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 43 42 44 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":64 81 {*movdi_internal}
+     (nil))
+(insn/f 44 43 45 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg:DI 3 bx)) "classes/Animation.cpp":64 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 45 44 46 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -72 [0xffffffffffffffb8])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":64 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 46 45 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 46 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [28 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":64 81 {*movdi_internal}
+     (nil))
+(note 3 2 4 2 NOTE_INSN_FUNCTION_BEG)
+(insn 4 3 7 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -24 [0xffffffffffffffe8])) [18 D.80511+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (reg:DI 0 ax [97])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "classes/Animation.cpp":64 1002 {stack_tls_protect_set_di}
+     (nil))
+(insn 7 4 8 2 (set (reg/f:DI 0 ax [90])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [28 this+0 S8 A64])) "classes/Animation.cpp":65 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg/f:DI 0 ax [orig:87 _1 ] [87])
+        (mem/f:DI (plus:DI (reg/f:DI 0 ax [90])
+                (const_int 288 [0x120])) [12 this_6(D)->anim+0 S8 A64])) "classes/Animation.cpp":65 81 {*movdi_internal}
+     (nil))
+(insn 9 8 10 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:87 _1 ] [87])) "classes/Animation.cpp":65 81 {*movdi_internal}
+     (nil))
+(call_insn 10 9 37 2 (set (reg:TI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation14getTextureRectEv") [flags 0x3]  <function_decl 0x7f51c177f500 getTextureRect>) [0 getTextureRect S1 A8])
+            (const_int 0 [0]))) "classes/Animation.cpp":65 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 37 10 38 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -64 [0xffffffffffffffc0])) [19 test+0 S8 A64])
+        (reg:DI 0 ax [92])) "classes/Animation.cpp":65 81 {*movdi_internal}
+     (nil))
+(insn 38 37 14 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -56 [0xffffffffffffffc8])) [19 test+8 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Animation.cpp":65 81 {*movdi_internal}
+     (nil))
+(insn 14 38 15 2 (set (reg/f:DI 3 bx [orig:88 _2 ] [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [28 this+0 S8 A64])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg/f:DI 0 ax [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -72 [0xffffffffffffffb8])) [28 this+0 S8 A64])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [orig:89 _3 ] [89])
+        (mem/f:DI (plus:DI (reg/f:DI 0 ax [93])
+                (const_int 288 [0x120])) [12 this_6(D)->anim+0 S8 A64])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg:DI 5 di)
+        (reg/f:DI 0 ax [orig:89 _3 ] [89])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(call_insn 18 17 39 2 (set (reg:TI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZN9Animation14getTextureRectEv") [flags 0x3]  <function_decl 0x7f51c177f500 getTextureRect>) [0 getTextureRect S1 A8])
+            (const_int 0 [0]))) "classes/Animation.cpp":66 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 39 18 40 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -48 [0xffffffffffffffd0])) [19 D.76815+0 S8 A64])
+        (reg:DI 0 ax [95])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(insn 40 39 41 2 (set (mem/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -40 [0xffffffffffffffd8])) [19 D.76815+8 S8 A64])
+        (reg:DI 1 dx [+8 ])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(insn 41 40 23 2 (set (reg:DI 0 ax [96])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -48 [0xffffffffffffffd0]))) "classes/Animation.cpp":66 214 {*leadi}
+     (nil))
+(insn 23 41 24 2 (set (reg:DI 4 si)
+        (reg:DI 0 ax [96])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(insn 24 23 25 2 (set (reg:DI 5 di)
+        (reg/f:DI 3 bx [orig:88 _2 ] [88])) "classes/Animation.cpp":66 81 {*movdi_internal}
+     (nil))
+(call_insn 25 24 35 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf6Sprite14setTextureRectERKNS_4RectIiEE") [flags 0x41]  <function_decl 0x7f51c1741e00 setTextureRect>) [0 setTextureRect S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":66 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 35 25 27 2 (const_int 0 [0]) "classes/Animation.cpp":67 684 {nop}
+     (nil))
+(insn 27 35 28 2 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -24 [0xffffffffffffffe8])) [18 D.80511+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (reg:DI 0 ax [98]))
+        ]) "classes/Animation.cpp":67 1006 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 28 27 33 2 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 31)
+            (pc))) "classes/Animation.cpp":67 617 {*jcc_1}
+     (nil)
+ -> 31)
+(note 33 28 29 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(call_insn 29 33 30 3 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f51c1094b00 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":67 655 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 30 29 31)
+(code_label 31 30 34 4 32 (nil) [1 uses])
+(note 34 31 47 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(note 47 34 48 4 NOTE_INSN_EPILOGUE_BEG)
+(insn 48 47 49 4 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int 72 [0x48])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":67 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(insn 49 48 50 4 (set (reg:DI 3 bx)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":67 67 {*popdi1}
+     (nil))
+(insn/f 50 49 51 4 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":67 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 51 50 52 4 (simple_return) "classes/Animation.cpp":67 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 52 51 36)
+(note 36 52 0 NOTE_INSN_DELETED)
+
+;; Function void TerrainAnimation::draw(sf::RenderWindow&) (_ZN16TerrainAnimation4drawERN2sf12RenderWindowE, funcdef_no=3263, decl_uid=76575, cgraph_uid=780, symbol_order=786)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 19 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 19 5 20 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":69 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 20 19 21 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":69 81 {*movdi_internal}
+     (nil))
+(insn/f 21 20 22 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":69 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 22 21 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 22 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "classes/Animation.cpp":69 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [30 window+0 S8 A64])
+        (reg:DI 4 si [ window ])) "classes/Animation.cpp":69 81 {*movdi_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 18 2 (set (reg/f:DI 0 ax [89])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [30 window+0 S8 A64])) "classes/Animation.cpp":70 81 {*movdi_internal}
+     (nil))
+(insn 18 7 9 2 (set (reg/f:DI 2 cx [orig:87 _1 ] [87])
+        (plus:DI (reg/f:DI 0 ax [89])
+            (const_int 48 [0x30]))) "classes/Animation.cpp":70 214 {*leadi}
+     (nil))
+(insn 9 18 10 2 (set (reg/f:DI 0 ax [orig:88 _2 ] [88])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [28 this+0 S8 A64])) "classes/Animation.cpp":70 81 {*movdi_internal}
+     (nil))
+(insn 10 9 11 2 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("_ZN2sf12RenderStates7DefaultE") [flags 0x40]  <var_decl 0x7f51c20d6e10 Default>)) "classes/Animation.cpp":70 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:DI 4 si)
+        (reg/f:DI 0 ax [orig:88 _2 ] [88])) "classes/Animation.cpp":70 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg:DI 5 di)
+        (reg/f:DI 2 cx [orig:87 _1 ] [87])) "classes/Animation.cpp":70 81 {*movdi_internal}
+     (nil))
+(call_insn 13 12 16 2 (call (mem:QI (symbol_ref:DI ("_ZN2sf12RenderTarget4drawERKNS_8DrawableERKNS_12RenderStatesE") [flags 0x41]  <function_decl 0x7f51c18cfd00 draw>) [0 draw S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":70 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(insn 16 13 23 2 (const_int 0 [0]) "classes/Animation.cpp":71 684 {nop}
+     (nil))
+(note 23 16 24 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 24 23 25 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":71 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 25 24 26 2 (simple_return) "classes/Animation.cpp":71 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 26 25 17)
+(note 17 26 0 NOTE_INSN_DELETED)
+
+;; Function sf::Rect<T>::Rect(T, T, T, T) [with T = int] (_ZN2sf4RectIiEC2Eiiii, funcdef_no=3522, decl_uid=59820, cgraph_uid=1039, symbol_order=1045)
+
+(note 1 0 8 NOTE_INSN_DELETED)
+(note 8 1 26 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 26 8 27 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/Graphics/Rect.inl":40 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 27 26 28 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/Graphics/Rect.inl":40 81 {*movdi_internal}
+     (nil))
+(insn 28 27 29 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/Graphics/Rect.inl":40 677 {*memory_blockage}
+     (nil))
+(note 29 28 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 29 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [36 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/Graphics/Rect.inl":40 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -12 [0xfffffffffffffff4])) [11 rectLeft+0 S4 A32])
+        (reg:SI 4 si [ rectLeft ])) "/usr/include/SFML/Graphics/Rect.inl":40 82 {*movsi_internal}
+     (nil))
+(insn 4 3 5 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [11 rectTop+0 S4 A32])
+        (reg:SI 1 dx [ rectTop ])) "/usr/include/SFML/Graphics/Rect.inl":40 82 {*movsi_internal}
+     (nil))
+(insn 5 4 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [11 rectWidth+0 S4 A32])
+        (reg:SI 2 cx [ rectWidth ])) "/usr/include/SFML/Graphics/Rect.inl":40 82 {*movsi_internal}
+     (nil))
+(insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [11 rectHeight+0 S4 A32])
+        (reg:SI 37 r8 [ rectHeight ])) "/usr/include/SFML/Graphics/Rect.inl":40 82 {*movsi_internal}
+     (nil))
+(note 7 6 39 2 NOTE_INSN_FUNCTION_BEG)
+(note 39 7 10 2 0x7f51c155bc00 NOTE_INSN_BLOCK_BEG)
+(insn 10 39 11 2 (set (reg/f:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [36 this+0 S8 A64])) "/usr/include/SFML/Graphics/Rect.inl":44 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:SI 1 dx [88])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -12 [0xfffffffffffffff4])) [11 rectLeft+0 S4 A32])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 12 11 13 2 (set (mem:SI (reg/f:DI 0 ax [87]) [11 this_2(D)->left+0 S4 A32])
+        (reg:SI 1 dx [88])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 13 12 14 2 (set (reg/f:DI 0 ax [89])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [36 this+0 S8 A64])) "/usr/include/SFML/Graphics/Rect.inl":44 81 {*movdi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 1 dx [90])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [11 rectTop+0 S4 A32])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 15 14 16 2 (set (mem:SI (plus:DI (reg/f:DI 0 ax [89])
+                (const_int 4 [0x4])) [11 this_2(D)->top+0 S4 A32])
+        (reg:SI 1 dx [90])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg/f:DI 0 ax [91])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [36 this+0 S8 A64])) "/usr/include/SFML/Graphics/Rect.inl":44 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (reg:SI 1 dx [92])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [11 rectWidth+0 S4 A32])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 18 17 19 2 (set (mem:SI (plus:DI (reg/f:DI 0 ax [91])
+                (const_int 8 [0x8])) [11 this_2(D)->width+0 S4 A32])
+        (reg:SI 1 dx [92])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg/f:DI 0 ax [93])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [36 this+0 S8 A64])) "/usr/include/SFML/Graphics/Rect.inl":44 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg:SI 1 dx [94])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [11 rectHeight+0 S4 A32])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(insn 21 20 40 2 (set (mem:SI (plus:DI (reg/f:DI 0 ax [93])
+                (const_int 12 [0xc])) [11 this_2(D)->height+0 S4 A32])
+        (reg:SI 1 dx [94])) "/usr/include/SFML/Graphics/Rect.inl":44 82 {*movsi_internal}
+     (nil))
+(note 40 21 24 2 0x7f51c155bc00 NOTE_INSN_BLOCK_END)
+(insn 24 40 30 2 (const_int 0 [0]) "/usr/include/SFML/Graphics/Rect.inl":47 684 {nop}
+     (nil))
+(note 30 24 31 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 31 30 32 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/Graphics/Rect.inl":47 677 {*memory_blockage}
+     (nil))
+(insn/f 32 31 33 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "/usr/include/SFML/Graphics/Rect.inl":47 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 33 32 34 2 (simple_return) "/usr/include/SFML/Graphics/Rect.inl":47 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 34 33 25)
+(note 25 34 0 NOTE_INSN_DELETED)
+
+;; Function sf::Vector2<T>::Vector2(T, T) [with T = float] (_ZN2sf7Vector2IfEC2Eff, funcdef_no=3525, decl_uid=58339, cgraph_uid=1042, symbol_order=1048)
+
+(note 1 0 6 NOTE_INSN_DELETED)
+(note 6 1 18 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 18 6 19 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/System/Vector2.inl":38 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 19 18 20 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/System/Vector2.inl":38 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/System/Vector2.inl":38 677 {*memory_blockage}
+     (nil))
+(note 21 20 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 21 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [37 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/System/Vector2.inl":38 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -12 [0xfffffffffffffff4])) [15 X+0 S4 A32])
+        (reg:SF 21 xmm0 [ X ])) "/usr/include/SFML/System/Vector2.inl":38 127 {*movsf_internal}
+     (nil))
+(insn 4 3 5 2 (set (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [15 Y+0 S4 A32])
+        (reg:SF 22 xmm1 [ Y ])) "/usr/include/SFML/System/Vector2.inl":38 127 {*movsf_internal}
+     (nil))
+(note 5 4 31 2 NOTE_INSN_FUNCTION_BEG)
+(note 31 5 8 2 0x7f51c155bd80 NOTE_INSN_BLOCK_BEG)
+(insn 8 31 9 2 (set (reg/f:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [37 this+0 S8 A64])) "/usr/include/SFML/System/Vector2.inl":40 81 {*movdi_internal}
+     (nil))
+(insn 9 8 10 2 (set (reg:SF 21 xmm0 [88])
+        (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -12 [0xfffffffffffffff4])) [15 X+0 S4 A32])) "/usr/include/SFML/System/Vector2.inl":40 127 {*movsf_internal}
+     (nil))
+(insn 10 9 11 2 (set (mem:SF (reg/f:DI 0 ax [87]) [15 this_2(D)->x+0 S4 A32])
+        (reg:SF 21 xmm0 [88])) "/usr/include/SFML/System/Vector2.inl":40 127 {*movsf_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg/f:DI 0 ax [89])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [37 this+0 S8 A64])) "/usr/include/SFML/System/Vector2.inl":40 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg:SF 21 xmm0 [90])
+        (mem/c:SF (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [15 Y+0 S4 A32])) "/usr/include/SFML/System/Vector2.inl":40 127 {*movsf_internal}
+     (nil))
+(insn 13 12 32 2 (set (mem:SF (plus:DI (reg/f:DI 0 ax [89])
+                (const_int 4 [0x4])) [15 this_2(D)->y+0 S4 A32])
+        (reg:SF 21 xmm0 [90])) "/usr/include/SFML/System/Vector2.inl":40 127 {*movsf_internal}
+     (nil))
+(note 32 13 16 2 0x7f51c155bd80 NOTE_INSN_BLOCK_END)
+(insn 16 32 22 2 (const_int 0 [0]) "/usr/include/SFML/System/Vector2.inl":43 684 {nop}
+     (nil))
+(note 22 16 23 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 23 22 24 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/System/Vector2.inl":43 677 {*memory_blockage}
+     (nil))
+(insn/f 24 23 25 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "/usr/include/SFML/System/Vector2.inl":43 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 25 24 26 2 (simple_return) "/usr/include/SFML/System/Vector2.inl":43 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 26 25 17)
+(note 17 26 0 NOTE_INSN_DELETED)
+
+;; Function sf::Vector2<T>::Vector2() [with T = float] (_ZN2sf7Vector2IfEC2Ev, funcdef_no=3528, decl_uid=58345, cgraph_uid=1045, symbol_order=1051)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 18 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 18 4 19 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "/usr/include/SFML/System/Vector2.inl":28 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 19 18 20 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "/usr/include/SFML/System/Vector2.inl":28 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/System/Vector2.inl":28 677 {*memory_blockage}
+     (nil))
+(note 21 20 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 21 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [37 this+0 S8 A64])
+        (reg:DI 5 di [ this ])) "/usr/include/SFML/System/Vector2.inl":28 81 {*movdi_internal}
+     (nil))
+(note 3 2 31 2 NOTE_INSN_FUNCTION_BEG)
+(note 31 3 6 2 0x7f51c155bf00 NOTE_INSN_BLOCK_BEG)
+(insn 6 31 16 2 (set (reg/f:DI 0 ax [87])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [37 this+0 S8 A64])) "/usr/include/SFML/System/Vector2.inl":30 81 {*movdi_internal}
+     (nil))
+(insn 16 6 8 2 (set (reg:SF 21 xmm0 [88])
+        (const_double:SF 0.0 [0x0.0p+0])) "/usr/include/SFML/System/Vector2.inl":30 127 {*movsf_internal}
+     (nil))
+(insn 8 16 9 2 (set (mem:SF (reg/f:DI 0 ax [87]) [15 this_2(D)->x+0 S4 A32])
+        (reg:SF 21 xmm0 [88])) "/usr/include/SFML/System/Vector2.inl":30 127 {*movsf_internal}
+     (nil))
+(insn 9 8 17 2 (set (reg/f:DI 0 ax [89])
+        (mem/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [37 this+0 S8 A64])) "/usr/include/SFML/System/Vector2.inl":30 81 {*movdi_internal}
+     (nil))
+(insn 17 9 11 2 (set (reg:SF 21 xmm0 [90])
+        (const_double:SF 0.0 [0x0.0p+0])) "/usr/include/SFML/System/Vector2.inl":30 127 {*movsf_internal}
+     (nil))
+(insn 11 17 32 2 (set (mem:SF (plus:DI (reg/f:DI 0 ax [89])
+                (const_int 4 [0x4])) [15 this_2(D)->y+0 S4 A32])
+        (reg:SF 21 xmm0 [90])) "/usr/include/SFML/System/Vector2.inl":30 127 {*movsf_internal}
+     (nil))
+(note 32 11 14 2 0x7f51c155bf00 NOTE_INSN_BLOCK_END)
+(insn 14 32 22 2 (const_int 0 [0]) "/usr/include/SFML/System/Vector2.inl":33 684 {nop}
+     (nil))
+(note 22 14 23 2 NOTE_INSN_EPILOGUE_BEG)
+(insn 23 22 24 2 (set (mem/v:BLK (scratch:DI) [0  A8])
+        (unspec:BLK [
+                (mem/v:BLK (scratch:DI) [0  A8])
+            ] UNSPEC_MEMORY_BLOCKAGE)) "/usr/include/SFML/System/Vector2.inl":33 677 {*memory_blockage}
+     (nil))
+(insn/f 24 23 25 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "/usr/include/SFML/System/Vector2.inl":33 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 25 24 26 2 (simple_return) "/usr/include/SFML/System/Vector2.inl":33 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 26 25 15)
+(note 15 26 0 NOTE_INSN_DELETED)
+
+;; Function void __static_initialization_and_destruction_0(int, int) (_Z41__static_initialization_and_destruction_0ii, funcdef_no=3776, decl_uid=80443, cgraph_uid=1293, symbol_order=1383)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 28 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 28 5 29 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":71 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 29 28 30 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":71 81 {*movdi_internal}
+     (nil))
+(insn/f 30 29 31 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":71 984 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 31 30 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 31 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+        (reg:SI 5 di [ __initialize_p ])) "classes/Animation.cpp":71 82 {*movsi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+        (reg:SI 4 si [ __priority ])) "classes/Animation.cpp":71 82 {*movsi_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -4 [0xfffffffffffffffc])) [11 __initialize_p+0 S4 A32])
+            (const_int 1 [0x1]))) "classes/Animation.cpp":71 7 {*cmpsi_1}
+     (nil))
+(jump_insn 8 7 9 2 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "classes/Animation.cpp":71 617 {*jcc_1}
+     (nil)
+ -> 26)
+(note 9 8 10 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 10 9 11 3 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -8 [0xfffffffffffffff8])) [11 __priority+0 S4 A32])
+            (const_int 65535 [0xffff]))) "classes/Animation.cpp":71 7 {*cmpsi_1}
+     (nil))
+(jump_insn 11 10 12 3 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "classes/Animation.cpp":71 617 {*jcc_1}
+     (nil)
+ -> 26)
+(note 12 11 13 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 4 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7f51c177e120 __ioinit>)) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(call_insn 14 13 15 4 (call (mem:QI (symbol_ref:DI ("_ZNSt8ios_base4InitC1Ev") [flags 0x41]  <function_decl 0x7f51c3617f00 __comp_ctor >) [0 __comp_ctor  S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/7/iostream":74 655 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 15 14 16 4 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("__dso_handle") [flags 0x42]  <var_decl 0x7f51c1350750 __dso_handle>)) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 4 (set (reg:DI 4 si)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7f51c177e120 __ioinit>)) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 4 (set (reg:DI 0 ax [87])
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7f51c3622100 __comp_dtor >)
+                    ] UNSPEC_GOTPCREL)) [44  S8 A8])) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [87])) "/usr/include/c++/7/iostream":74 81 {*movdi_internal}
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7f51c3622100 __comp_dtor >)
+        (nil)))
+(call_insn 19 18 26 4 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_atexit") [flags 0x41]  <function_decl 0x7f51c132cb00 __cxa_atexit>) [0 __cxa_atexit S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/7/iostream":74 666 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(code_label 26 19 24 5 39 (nil) [2 uses])
+(note 24 26 25 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 25 24 32 5 (const_int 0 [0]) "classes/Animation.cpp":71 684 {nop}
+     (nil))
+(note 32 25 33 5 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 33 32 34 5 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "classes/Animation.cpp":71 694 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 34 33 35 5 (simple_return) "classes/Animation.cpp":71 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 35 34 27)
+(note 27 35 0 NOTE_INSN_DELETED)
+
+;; Function (static initializers for classes/Animation.cpp) (_GLOBAL__sub_I__ZN9Animation15animation_countE, funcdef_no=3777, decl_uid=80450, cgraph_uid=1294, symbol_order=2040)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 11 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 11 3 12 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "classes/Animation.cpp":71 57 {*pushdi2_rex64}
+     (nil))
+(insn/f 12 11 13 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "classes/Animation.cpp":71 81 {*movdi_internal}
+     (nil))
+(note 13 12 2 2 NOTE_INSN_PROLOGUE_END)
+(note 2 13 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (reg:SI 4 si)
+        (const_int 65535 [0xffff])) "classes/Animation.cpp":71 82 {*movsi_internal}
+     (nil))
+(insn 6 5 7 2 (set (reg:SI 5 di)
+        (const_int 1 [0x1])) "classes/Animation.cpp":71 82 {*movsi_internal}
+     (nil))
+(call_insn 7 6 14 2 (call (mem:QI (symbol_ref:DI ("_Z41__static_initialization_and_destruction_0ii") [flags 0x3]  <function_decl 0x7f51c132c900 __static_initialization_and_destruction_0>) [0 __static_initialization_and_destruction_0 S1 A8])
+        (const_int 0 [0])) "classes/Animation.cpp":71 655 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:SI (use (reg:SI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(note 14 7 15 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 15 14 16 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "classes/Animation.cpp":71 67 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(jump_insn 16 15 17 2 (simple_return) "classes/Animation.cpp":71 679 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 17 16 10)
+(note 10 17 0 NOTE_INSN_DELETED)
