@@ -46,6 +46,9 @@ MKDIR_P ?= mkdir -p
 run:
 	./build/a.out
 
+runc: $(BUILD_DIR)/$(TARGET_EXEC)
+	./build/a.out
+
 profile: CPPFLAGS += -pg
 profile: LDFLAGS += -pg
 profile: $(BUILD_DIR)/$(TARGET_EXEC)

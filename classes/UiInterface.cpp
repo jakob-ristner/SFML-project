@@ -15,6 +15,10 @@ UiElement::~UiElement() {
 
 }
 
+void UiElement::toggleDebugMode() {
+    debugMode = !debugMode;
+}
+
 CastBar::CastBar() {
     progress = 0;
     casting = false;
@@ -174,6 +178,10 @@ sf::Vector2f SpellBarIcon::getPosition() {
     return background.getPosition();
 }
 
+sf::Vector2f SpellBarIcon::getSize() {
+    return background.getSize();
+}
+
 void SpellBarIcon::setSelected(bool isSelected) {
     selected = isSelected;
     if (selected) {
@@ -193,7 +201,7 @@ SpellBar::SpellBar() {
 }
 
 SpellBar::SpellBar(int amount) {
-    size = sf::Vector2f(800, 40);
+    size = sf::Vector2f(600, 30); // Räkna med sista spejset
     std::vector<SpellBarIcon> tmp;
     for (int i = 1; i <= amount; i++) {
         tmp.push_back(SpellBarIcon(i));
@@ -204,6 +212,11 @@ SpellBar::SpellBar(int amount) {
         (*(icons[i].getText())).setPosition(icons[i].getPosition());
         (*(icons[i].getText())).move(sf::Vector2f(8, -3));
     }
+    changeSelection(1);
+    background.setPosition(sf::Vector2f(0, 0));
+    background.setSize(size);
+    background.setFillColor(sf::Color::Red);
+    debugMode = false;
 }
 
 SpellBar::~SpellBar() {
@@ -211,6 +224,9 @@ SpellBar::~SpellBar() {
 }
 
 void SpellBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if (debugMode) {
+        target.draw(background);
+    }
     for (int i = 0; i < icons.size(); i++) {
         target.draw(icons[i]);
     }
@@ -218,6 +234,7 @@ void SpellBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
 void SpellBar::move(sf::Vector2f distance) {
     position += distance;
+    background.move(distance);
     for (int i = 0; i < icons.size(); i++) {
         icons[i].move(distance);
     }
@@ -242,14 +259,17 @@ void SpellBar::changeSelection(unsigned short int id) {
 
 void SpellBar::setSpellIcons(std::vector<SpellBarIcon> newIcons) {
     icons = newIcons;
-    //size.x = 60*icons.size();
     for (int i = 0; i < icons.size(); i++) {
-        icons[i].setPosition(position + sf::Vector2f((size.x / icons.size()) * i, 0));
+        icons[i].setPosition(position + sf::Vector2f((size.x - icons[0].getSize().x) / (icons.size() - 1)* i, 0));
     }
 }
 
 void SpellBar::update() {
 
+}
+
+sf::Vector2f SpellBar::getSize() {
+    return size;
 }
 
 PlayerStatBar::PlayerStatBar() {
@@ -267,6 +287,7 @@ PlayerStatBar::PlayerStatBar() {
     statText.setFontSize(14);
     position = background.getPosition();
 }
+
 
 PlayerStatBar::~PlayerStatBar() {
 
