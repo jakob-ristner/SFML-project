@@ -10,10 +10,12 @@ public:
     ~UiElement();
     virtual void move(sf::Vector2f distance)=0;
     virtual void setPosition(sf::Vector2f pos)=0;
+    void toggleDebugMode();
 
 protected:
     sf::Vector2f position;
     sf::Font mainFont;
+    bool debugMode = false;
 };
 
 // Class representing and implementing the players spell
@@ -70,22 +72,24 @@ public:
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
     void setSelected(bool isSelected);
+    void setFont(sf::Font &font);
 
     sf::Vector2f getPosition() ;
-    void printPos() {std::cout << background.getPosition().x << " " << background.getPosition().y << std::endl;}
-    void printSize() {std::cout << background.getSize().x << " " << background.getSize().y << std::endl;}
+    sf::Vector2f getSize();
+    UiText *getText();
 
 private: // Some of these are temporary
-    UiText slotIdText;
     bool selected;
     int slotId;
 
     sf::RectangleShape background;
+    UiText slotIdText;
 };
 
 class SpellBar: public UiElement {
 public:
     SpellBar();
+    SpellBar(int amount);
     ~SpellBar();
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
@@ -94,12 +98,16 @@ public:
 
     void setSize(sf::Vector2f size);
     void changeSelection(unsigned short int id);
-    void setSpellIcons(std::vector<SpellBarIcon *> newIcons);
+    void setSpellIcons(std::vector<SpellBarIcon> newIcons);
     void update();
+    
+    sf::Vector2f getSize();
+    sf::Vector2f getPosition() {return position;}
 
 private:
-    std::vector<SpellBarIcon *> icons;
+    std::vector<SpellBarIcon> icons;
     sf::Vector2f size;
+    sf::RectangleShape background;
     unsigned short int selected;
 };
 

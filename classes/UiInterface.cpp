@@ -6,7 +6,6 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
 
-
 UiElement::UiElement() {
     position = sf::Vector2f(0, 0);
     mainFont.loadFromFile("font.ttf");
@@ -14,6 +13,10 @@ UiElement::UiElement() {
 
 UiElement::~UiElement() {
 
+}
+
+void UiElement::toggleDebugMode() {
+    debugMode = !debugMode;
 }
 
 CastBar::CastBar() {
@@ -91,6 +94,8 @@ UiText::~UiText() {
 
 void UiText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(text);
+    //std::cout << text.getString().toAnsiString() << std::endl;
+    //std::cout << text.getPosition().x << " " << text.getPosition().y << std::endl;
 }
 
 void UiText::move(sf::Vector2f distance) {
@@ -143,6 +148,10 @@ SpellBarIcon::SpellBarIcon(int id): SpellBarIcon() {
     slotId = id;
 }
 
+void SpellBarIcon::setFont(sf::Font &font) {
+    slotIdText.setFont(font);
+}
+
 SpellBarIcon::~SpellBarIcon() {
 
 }
@@ -150,9 +159,9 @@ SpellBarIcon::~SpellBarIcon() {
 void SpellBarIcon::draw(sf::RenderTarget &target, sf::RenderStates states) const{
     target.draw(background);
     target.draw(slotIdText);
-}
+} 
 
-void SpellBarIcon::move(sf::Vector2f distance) {
+void SpellBarIcon::move(sf::Vector2f distance) { 
     background.move(distance);
     slotIdText.move(distance);
     position += distance;
@@ -169,6 +178,10 @@ sf::Vector2f SpellBarIcon::getPosition() {
     return background.getPosition();
 }
 
+sf::Vector2f SpellBarIcon::getSize() {
+    return background.getSize();
+}
+
 void SpellBarIcon::setSelected(bool isSelected) {
     selected = isSelected;
     if (selected) {
@@ -178,9 +191,32 @@ void SpellBarIcon::setSelected(bool isSelected) {
     }
 }
 
+UiText* SpellBarIcon::getText() {
+    return &slotIdText;
+}
+
 SpellBar::SpellBar() {
     selected = 0;
     size = sf::Vector2f(800, 30);
+}
+
+SpellBar::SpellBar(int amount) {
+    size = sf::Vector2f(600, 30); // Räkna med sista spejset
+    std::vector<SpellBarIcon> tmp;
+    for (int i = 1; i <= amount; i++) {
+        tmp.push_back(SpellBarIcon(i));
+    }
+    setSpellIcons(tmp);
+    for (int i = 0; i < amount; i++) {
+        icons[i].setFont(mainFont);
+        (*(icons[i].getText())).setPosition(icons[i].getPosition());
+        (*(icons[i].getText())).move(sf::Vector2f(8, -3));
+    }
+    changeSelection(1);
+    background.setPosition(sf::Vector2f(0, 0));
+    background.setSize(size);
+    background.setFillColor(sf::Color::Red);
+    debugMode = false;
 }
 
 SpellBar::~SpellBar() {
@@ -188,15 +224,19 @@ SpellBar::~SpellBar() {
 }
 
 void SpellBar::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if (debugMode) {
+        target.draw(background);
+    }
     for (int i = 0; i < icons.size(); i++) {
-        target.draw(*icons[i]);
+        target.draw(icons[i]);
     }
 }
 
 void SpellBar::move(sf::Vector2f distance) {
     position += distance;
+    background.move(distance);
     for (int i = 0; i < icons.size(); i++) {
-        (*icons[i]).move(distance);
+        icons[i].move(distance);
     }
 }
 
@@ -211,21 +251,25 @@ void SpellBar::setSize(sf::Vector2f size) {
 void SpellBar::changeSelection(unsigned short int id) {
     selected = id - 1;
     for (int i = 0; i < icons.size(); i++) {
-       (*icons[i]).setSelected(false);
+       icons[i].setSelected(false);
     }
-    (*icons[selected]).setSelected(true);
+    icons[selected].setSelected(true);
 
 }
 
-void SpellBar::setSpellIcons(std::vector<SpellBarIcon *> newIcons) {
+void SpellBar::setSpellIcons(std::vector<SpellBarIcon> newIcons) {
     icons = newIcons;
     for (int i = 0; i < icons.size(); i++) {
-        (*icons[i]).setPosition(position + sf::Vector2f((size.x / icons.size()) * i, 0));
+        icons[i].setPosition(position + sf::Vector2f((size.x - icons[0].getSize().x) / (icons.size() - 1)* i, 0));
     }
 }
 
 void SpellBar::update() {
 
+}
+
+sf::Vector2f SpellBar::getSize() {
+    return size;
 }
 
 PlayerStatBar::PlayerStatBar() {
@@ -243,6 +287,7 @@ PlayerStatBar::PlayerStatBar() {
     statText.setFontSize(14);
     position = background.getPosition();
 }
+
 
 PlayerStatBar::~PlayerStatBar() {
 

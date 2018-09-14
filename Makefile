@@ -11,7 +11,7 @@ INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 CPPFLAGS ?= $(INC_FLAGS) -MMD -MP -g
-LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -pg
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 CC = g++
 CXX = g++
 
@@ -46,5 +46,12 @@ MKDIR_P ?= mkdir -p
 run:
 	./build/a.out
 
+crun: $(BUILD_DIR)/$(TARGET_EXEC)
+	./build/a.out
+
 profile: CPPFLAGS += -pg
+profile: LDFLAGS += -pg
 profile: $(BUILD_DIR)/$(TARGET_EXEC)
+
+stacktrace: CPPFLAGS += -v -da -Q
+stacktrace: $(BUILD_DIR)/$(TARGET_EXEC)

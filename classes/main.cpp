@@ -30,7 +30,7 @@ int main() {
     Settings settings = Settings();
 
     sf::RenderWindow window(sf::VideoMode(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT), "SFML Dungeon Crawler", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(800);
+    window.setFramerateLimit(120);
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
@@ -84,16 +84,23 @@ int main() {
     layer1.add(&(player.uiCastBar));
     
     // Spellbar setup
-    SpellBarIcon icon1 = SpellBarIcon(1);
-    SpellBarIcon icon2 = SpellBarIcon(2);
-    std::vector<SpellBarIcon *> spellIcons;
-    spellIcons.push_back(&icon1);
-    spellIcons.push_back(&icon2);
-    SpellBar mainSpellBar = SpellBar();
-    mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 40, Settings::WINDOW_HEIGHT - 100));
-    mainSpellBar.setSize(sf::Vector2f(80, 30));
-    mainSpellBar.setSpellIcons(spellIcons);
-    mainSpellBar.changeSelection(1);
+    //SpellBarIcon icon1 = SpellBarIcon(1);
+    //SpellBarIcon icon2 = SpellBarIcon(2);
+    //spellIcons.push_back(icon1);
+    //spellIcons.push_back(icon2);
+    //SpellBar mainSpellBar = SpellBar();
+    //mainSpellBar.setSize(sf::Vector2f(80, 30));
+    //mainSpellBar.setSpellIcons(spellIcons);
+    //mainSpellBar.changeSelection(1);
+    std::vector<SpellBarIcon> spellIcons;
+    //for (int i = 0; i < 2; i++) {
+        //spellIcons.push_back(SpellBarIcon(i + 1));
+    //}
+    SpellBar mainSpellBar = SpellBar(9);
+    mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - (mainSpellBar.getSize().x / 2), Settings::WINDOW_HEIGHT - 40));
+    //mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 1400, Settings::WINDOW_HEIGHT - 100));
+    std::cout << mainSpellBar.getPosition().x << " " << mainSpellBar.getPosition().y << std::endl;
+    std::cout << mainSpellBar.getSize().x << " " << mainSpellBar.getSize().y << std::endl;
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
@@ -124,7 +131,6 @@ int main() {
     manaBar.setMaxStat(100);
     playerInterfaces.add(&manaBar);
     playerInterfaces.add(&mainSpellBar);
-    mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 35, Settings::WINDOW_HEIGHT - 50));
     
     // Jakob wat is dis?
     std::vector<std::string> statusText;
