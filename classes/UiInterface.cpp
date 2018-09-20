@@ -485,3 +485,39 @@ std::string StatusMessage::getMessage() {
 
 }
 
+PauseMenu::PauseMenu() {
+
+}
+
+PauseMenu::~PauseMenu() {
+
+}
+
+void PauseMenu::open(const sf::Window &window, sf::Clock &clock) {
+    sf::Texture bgTexture;
+    bgTexture.update(window);
+    bgSprite.setTexture(bgTexture);
+    bgSprite.setPosition(sf::Vector2f(0.0, 0.0));
+    bool isOpen = true;
+    sf::Time frameDelta;
+    float dt;
+    sf::Event event;
+    //while (isOpen) {
+        frameDelta = clock.restart();
+        dt = frameDelta.asMilliseconds();
+        //while (window.pollEvent(event)) {
+            //if (event.type == sf::Event::Closed) {
+                //isOpen = false;
+                ////window.close();
+            //} else if (event.type == sf::Event::KeyPressed) {
+                //switch (event.key.code) {
+                    //case sf::Keyboard::Key::W:
+                        //break;
+                    //case sf::Keyboard::Key::S:
+                        //break;
+                    //case sf::Keyboard::Key
+                //}
+            //}
+        //}
+    //}
+}

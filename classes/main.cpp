@@ -215,13 +215,13 @@ int main() {
             
         }
       
+        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
+        window.setView(viewport);
         map.update(dt);
         viewPortRect = map.getViewportRect(viewport.getCenter());
         backgroundSprite.setTextureRect(viewPortRect);
         backgroundSprite.setPosition(sf::Vector2f(viewPortRect.left, viewPortRect.top));
         sf::IntRect kek = backgroundSprite.getTextureRect();
-        sf::Vector2f vpC = viewport.getCenter();
-        sf::Vector2f vpS = viewport.getSize();
         sf::Vector2f direction;
 
         // Collision detection
@@ -236,8 +236,6 @@ int main() {
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
-        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
-        window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));

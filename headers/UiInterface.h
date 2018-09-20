@@ -218,3 +218,12 @@ public:
     std::string getMessage();
 
 };
+
+class PauseMenu: public UiElement {
+public:
+    PauseMenu();
+    ~PauseMenu();
+    void open(const sf::Window &window, sf::Clock &clock);
+private:
+    sf::Sprite bgSprite;
+};
