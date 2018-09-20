@@ -493,31 +493,73 @@ PauseMenu::~PauseMenu() {
 
 }
 
-void PauseMenu::open(const sf::Window &window, sf::Clock &clock) {
+void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
     sf::Texture bgTexture;
+    bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
     bgTexture.update(window);
+
+    //bgTexture.loadFromImage(window.capture());
+
+    sf::Vector2f viewCenter = viewport.getCenter();
+    sf::Vector2f topLeftPos;
+    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
     bgSprite.setTexture(bgTexture);
-    bgSprite.setPosition(sf::Vector2f(0.0, 0.0));
+    bgSprite.setPosition(topLeftPos);
+
+    bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
+    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setFillColor(sf::Color(51, 51, 51));
+    bgRibbon.setRotation(-45);
+
+    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setPosition(topLeftPos);
+    bgDim.setFillColor(sf::Color(0, 0, 0, 100));
+
     bool isOpen = true;
     sf::Time frameDelta;
     float dt;
     sf::Event event;
-    //while (isOpen) {
+    while (isOpen) {
         frameDelta = clock.restart();
         dt = frameDelta.asMilliseconds();
-        //while (window.pollEvent(event)) {
-            //if (event.type == sf::Event::Closed) {
-                //isOpen = false;
-                ////window.close();
-            //} else if (event.type == sf::Event::KeyPressed) {
-                //switch (event.key.code) {
-                    //case sf::Keyboard::Key::W:
-                        //break;
-                    //case sf::Keyboard::Key::S:
-                        //break;
-                    //case sf::Keyboard::Key
-                //}
-            //}
-        //}
-    //}
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                isOpen = false;
+                window.close();
+            } else if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                    case sf::Keyboard::Key::W:
+                        break;
+                    case sf::Keyboard::Key::S:
+                        break;
+                    case sf::Keyboard::Key::Escape:
+                        isOpen = false;
+                }
+            }
+        }
+        // Drawing
+        window.clear(sf::Color(51, 51, 51));
+        window.draw(bgSprite);
+        window.draw(bgDim);
+        window.draw(bgRibbon);
+        window.display();
+    }
+}
+
+void PauseMenu::update(float dt) {
+
+}
+
+void PauseMenu::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+
+}
+
+void PauseMenu::move(sf::Vector2f distance) {
+
+}
+
+void PauseMenu::setPosition(sf::Vector2f pos) {
+
 }

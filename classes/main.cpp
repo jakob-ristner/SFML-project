@@ -135,9 +135,11 @@ int main() {
     // Jakob wat is dis?
     std::vector<std::string> statusText;
 
-    // Debug Layer
     RenderLayer debugLayer;
     debugLayer.add(&interfaceGrid);
+
+    PauseMenu pauseMenu;
+
 
     // Main Game Loop
     clock.restart();
@@ -187,6 +189,8 @@ int main() {
                     case sf::Keyboard::Key::B:
                         enemyFactory.hurtEnemy(0, 1);
                         break;
+                    case sf::Keyboard::Key::Escape:
+                        pauseMenu.open(window, clock, viewport);
                     default:
                         break;
                 }

@@ -223,7 +223,16 @@ class PauseMenu: public UiElement {
 public:
     PauseMenu();
     ~PauseMenu();
-    void open(const sf::Window &window, sf::Clock &clock);
+    void open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
+    void update(float dt) ;
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
 private:
     sf::Sprite bgSprite;
+    sf::RectangleShape bgRibbon;
+    sf::RectangleShape bgDim;
+
+    UiText title;
+    std::vector<UiText> menuOptions;
 };
