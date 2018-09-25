@@ -486,7 +486,23 @@ std::string StatusMessage::getMessage() {
 }
 
 PauseMenu::PauseMenu() {
+     title.setFontSize(60);
+     title.setString("Paused");
+     title.setFillColor(sf::Color::White);
 
+     titleSeparator.setSize(sf::Vector2f(400, 3));
+     titleSeparator.setFillColor(sf::Color::White);
+
+     menuOptions.resize(3);
+     for (int i = 0; i < nOptions; i++) {
+        menuOptions[i] = UiText();
+        menuOptions[i].setFont(menuOptions[i].mainFont);
+        menuOptions[i].setFontSize(50);
+        menuOptions[i].setFillColor(sf::Color::White);
+     }
+     menuOptions[0].setString("Inventory");
+     menuOptions[1].setString("Settings");
+     menuOptions[2].setString("Exit");
 }
 
 PauseMenu::~PauseMenu() {
@@ -510,12 +526,22 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
 
     bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
     bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
-    bgRibbon.setFillColor(sf::Color(51, 51, 51));
+    bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
     bgRibbon.setRotation(-45);
 
     bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, 100));
+
+    title.setPosition(sf::Vector2f(topLeftPos.x + 260, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
+
+    for (int i = 0; i < nOptions; i++) {
+        sf::Vector2f dims = menuOptions[i].getDims();
+        menuOptions[i].setPosition(sf::Vector2f(
+                    topLeftPos.x + 150 + i * 100 + (288 - dims.x / 2), 
+                    topLeftPos.y + 120 + i * 100));
+    }
 
     bool isOpen = true;
     sf::Time frameDelta;
@@ -544,6 +570,11 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
         window.draw(bgSprite);
         window.draw(bgDim);
         window.draw(bgRibbon);
+        window.draw(title);
+        window.draw(titleSeparator);
+        for (int i = 0; i < nOptions; i++) {
+            window.draw(menuOptions[i]);
+        }
         window.display();
     }
 }

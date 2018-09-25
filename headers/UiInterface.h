@@ -11,10 +11,10 @@ public:
     virtual void move(sf::Vector2f distance)=0;
     virtual void setPosition(sf::Vector2f pos)=0;
     void toggleDebugMode();
+    sf::Font mainFont;
 
 protected:
     sf::Vector2f position;
-    sf::Font mainFont;
     bool debugMode = false;
 };
 
@@ -232,7 +232,9 @@ private:
     sf::Sprite bgSprite;
     sf::RectangleShape bgRibbon;
     sf::RectangleShape bgDim;
+    sf::RectangleShape titleSeparator;
 
     UiText title;
     std::vector<UiText> menuOptions;
+    int nOptions = 3;
 };
