@@ -57,6 +57,7 @@ public:
 
     sf::Vector2f getDims();
     sf::Text getText() {return text;}
+    std::string getString() {return text.getString();}
 
 private:
     sf::Text text;
@@ -229,12 +230,20 @@ public:
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
 private:
+    void moveSelector(int dir);
+
     sf::Sprite bgSprite;
     sf::RectangleShape bgRibbon;
     sf::RectangleShape bgDim;
     sf::RectangleShape titleSeparator;
 
+    sf::Vector2f topLeftPos;
+
     UiText title;
+    UiText selector;
     std::vector<UiText> menuOptions;
+    int selectedOption = 0;
     int nOptions = 3;
+    float blinkDuration = 2000;
+    float blinkTimer = blinkDuration;
 };

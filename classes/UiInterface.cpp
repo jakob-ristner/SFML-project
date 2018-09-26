@@ -509,15 +509,32 @@ PauseMenu::~PauseMenu() {
 
 }
 
+void PauseMenu::moveSelector(int dir) {
+    selectedOption += dir;
+    if (selectedOption < 0) {
+        selectedOption = 0;
+    } else if (selectedOption >= nOptions) {
+        selectedOption = nOptions - 1;
+    }
+    selector.setPosition(sf::Vector2f(
+                topLeftPos.x + 250 + selectedOption * 100,
+                topLeftPos.y + 120 + selectedOption * 100));
+    selector.setString(">                           <");
+    blinkTimer = blinkDuration;
+}
+
 void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+    // Gets current screen from the window and saves it for drawing every
+    // frame. This saves a lot of processing power by not having to draw
+    // every entity several times.
     sf::Texture bgTexture;
     bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
     bgTexture.update(window);
 
-    //bgTexture.loadFromImage(window.capture());
-
+    // Find offset of menu in worldspace through viewport center,
+    // This is done because the player is not always in the center
+    // of the screen and we already have a reference of the window.
     sf::Vector2f viewCenter = viewport.getCenter();
-    sf::Vector2f topLeftPos;
     topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
     std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
@@ -531,10 +548,14 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
 
     bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
-    bgDim.setFillColor(sf::Color(0, 0, 0, 100));
+    bgDim.setFillColor(sf::Color(0, 0, 0, 80));
 
     title.setPosition(sf::Vector2f(topLeftPos.x + 260, topLeftPos.y + 10));
     titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
+
+    selector.setFontSize(50);
+    selector.setString(">                           <");
+    selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
 
     for (int i = 0; i < nOptions; i++) {
         sf::Vector2f dims = menuOptions[i].getDims();
@@ -546,6 +567,7 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bool isOpen = true;
     sf::Time frameDelta;
     float dt;
+    float blinkTimer = blinkDuration;
     sf::Event event;
     while (isOpen) {
         frameDelta = clock.restart();
@@ -557,14 +579,25 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
             } else if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
                     case sf::Keyboard::Key::W:
+                        moveSelector(-1);
                         break;
                     case sf::Keyboard::Key::S:
+                        moveSelector(1);
                         break;
                     case sf::Keyboard::Key::Escape:
                         isOpen = false;
                 }
             }
         }
+        blinkTimer -= dt;
+        if (blinkTimer < 0) {
+            if (selector.getString() == "") {
+                selector.setString(">                           <");
+            } else {
+                selector.setString("");
+            }
+            blinkTimer += blinkDuration;
+        } 
         // Drawing
         window.clear(sf::Color(51, 51, 51));
         window.draw(bgSprite);
@@ -572,6 +605,7 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
         window.draw(bgRibbon);
         window.draw(title);
         window.draw(titleSeparator);
+        window.draw(selector);
         for (int i = 0; i < nOptions; i++) {
             window.draw(menuOptions[i]);
         }
