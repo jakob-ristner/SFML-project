@@ -622,13 +622,17 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
 }
 
 bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+    // Will be returned to tell main wheter a sf::Event::Closed has been sent
+    bool shouldClose = false;
     // Gets current screen from the window and saves it for drawing every
     // frame. This saves a lot of processing power by not having to draw
     // every entity several times.
     bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
     bgTexture.update(window);
 
-    playStartAnim(window, clock, viewport);
+    if (playStartAnim(window, clock, viewport)) {
+        shouldClose = true;
+    }
 
     // Find offset of menu in worldspace through viewport center,
     // This is done because the player is not always in the center
@@ -664,7 +668,6 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     }
 
     bool isOpen = true;
-    bool shouldClose = false;
     sf::Time frameDelta;
     float dt;
     float blinkTimer = blinkDuration;
@@ -714,6 +717,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
         }
         window.display();
     }
+    return shouldClose;
 }
 
 void PauseMenu::update(float dt) {

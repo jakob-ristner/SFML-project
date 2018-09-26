@@ -190,7 +190,7 @@ int main() {
                         enemyFactory.hurtEnemy(0, 1);
                         break;
                     case sf::Keyboard::Key::Escape:
-                        pauseMenu.open(window, clock, viewport);
+                        isRunning = !pauseMenu.open(window, clock, viewport);
                     default:
                         break;
                 }
