@@ -503,6 +503,7 @@ PauseMenu::PauseMenu() {
      menuOptions[0].setString("Inventory");
      menuOptions[1].setString("Settings");
      menuOptions[2].setString("Exit");
+
 }
 
 PauseMenu::~PauseMenu() {
@@ -523,21 +524,119 @@ void PauseMenu::moveSelector(int dir) {
     blinkTimer = blinkDuration;
 }
 
-void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport) {
+    
+    bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    bgTexture.update(window);
+    
+    viewCenter = viewport.getCenter();
+    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    
+    int ribbonPos = topLeftPos.x - 800;
+    int ribbonEndPos = topLeftPos.x + 20;
+    float currentOpacity = 0;
+    float finalOpacity = 80;
+    
+    bgSprite.setTexture(bgTexture);
+    bgSprite.setPosition(topLeftPos);
+    
+    bgRibbon.setPosition(sf::Vector2f(ribbonPos, topLeftPos.y));
+    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
+    bgRibbon.setRotation(-45);
+    
+    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setPosition(topLeftPos);
+    bgDim.setFillColor(sf::Color(0, 0, 0, finalOpacity));
+    
+    title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+    
+    selector.setFontSize(50);
+    selector.setString("");
+    //selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
+    
+    for (int i = 0; i < nOptions; i++) {
+        sf::Vector2f dims = menuOptions[i].getDims();
+        menuOptions[i].setPosition(sf::Vector2f(
+                    ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
+                    topLeftPos.y + 120 + i * 100));
+    }
+    
+    bool isRunning = true;
+    bool shouldClose = false;
+    sf::Time frameDelta;
+    float dt;
+    float deltaX;
+    float scrollSpeed = 5;
+    float duration = (ribbonEndPos - ribbonPos) / scrollSpeed;
+    float timeLeft = duration;
+    sf::Event event;
+    while (isRunning) {
+        frameDelta = clock.restart();
+        dt = frameDelta.asMicroseconds() / 1000;
+        while (window.pollEvent(event)) {
+            switch (event.type){
+                case sf::Event::Closed:
+                    shouldClose = true;
+                    isRunning = false;
+                    break;
+            }
+        }
+        timeLeft -= dt;
+        if (timeLeft < 0) {
+            shouldClose = true;
+            isRunning = false;
+        }
+        deltaX = std::min(scrollSpeed * dt, (float)(ribbonEndPos - ribbonPos));
+        bgRibbon.move(sf::Vector2f(deltaX, 0));
+        ribbonPos += deltaX;
+        
+        title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
+        titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+        for (int i = 0; i < nOptions; i++) {
+            sf::Vector2f dims = menuOptions[i].getDims();
+            menuOptions[i].setPosition(sf::Vector2f(
+                        ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
+                        topLeftPos.y + 120 + i * 100));
+        }
+        
+        currentOpacity += std::min((finalOpacity / duration) * dt, (float)(finalOpacity - currentOpacity));
+        std::cout << currentOpacity << std::endl;
+        bgDim.setFillColor(sf::Color(0, 0, 0, currentOpacity));
+
+        window.clear(sf::Color(51, 51, 51));
+        window.draw(bgSprite);
+        window.draw(bgDim);
+        window.draw(bgRibbon);
+        window.draw(title);
+        window.draw(titleSeparator);
+        for (int i = 0; i < nOptions; i++) {
+            window.draw(menuOptions[i]);
+        }
+        window.display();
+    }
+    return shouldClose;
+}
+
+bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
     // Gets current screen from the window and saves it for drawing every
     // frame. This saves a lot of processing power by not having to draw
     // every entity several times.
-    sf::Texture bgTexture;
     bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
     bgTexture.update(window);
+
+    playStartAnim(window, clock, viewport);
 
     // Find offset of menu in worldspace through viewport center,
     // This is done because the player is not always in the center
     // of the screen and we already have a reference of the window.
-    sf::Vector2f viewCenter = viewport.getCenter();
+    viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
-    std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
+    //std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
 
@@ -565,6 +664,7 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     }
 
     bool isOpen = true;
+    bool shouldClose = false;
     sf::Time frameDelta;
     float dt;
     float blinkTimer = blinkDuration;
@@ -573,20 +673,23 @@ void PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
         frameDelta = clock.restart();
         dt = frameDelta.asMilliseconds();
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+            switch (event.type) {
+            case sf::Event::Closed:
                 isOpen = false;
-                window.close();
-            } else if (event.type == sf::Event::KeyPressed) {
+                shouldClose = true;
+                break;
+            case sf::Event::KeyPressed:
                 switch (event.key.code) {
-                    case sf::Keyboard::Key::W:
-                        moveSelector(-1);
-                        break;
-                    case sf::Keyboard::Key::S:
-                        moveSelector(1);
-                        break;
-                    case sf::Keyboard::Key::Escape:
-                        isOpen = false;
+                case sf::Keyboard::Key::W:
+                    moveSelector(-1);
+                    break;
+                case sf::Keyboard::Key::S:
+                    moveSelector(1);
+                    break;
+                case sf::Keyboard::Key::Escape:
+                    isOpen = false;
                 }
+                break;
             }
         }
         blinkTimer -= dt;

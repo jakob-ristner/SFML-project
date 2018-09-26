@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "./Settings.h"
+#include "./Animation.h"
 #include <iostream>
 
 // Abstract class representing a ui interface
@@ -56,6 +57,7 @@ public:
     void setFontSize(unsigned int size);
 
     sf::Vector2f getDims();
+    sf::Vector2f getPosition() { return text.getPosition(); }
     sf::Text getText() {return text;}
     std::string getString() {return text.getString();}
 
@@ -224,24 +226,29 @@ class PauseMenu: public UiElement {
 public:
     PauseMenu();
     ~PauseMenu();
-    void open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
+    bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
     void update(float dt) ;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
 private:
     void moveSelector(int dir);
+    bool playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
+                       sf::View &viewport);
 
     sf::Sprite bgSprite;
+    sf::Texture bgTexture;
     sf::RectangleShape bgRibbon;
     sf::RectangleShape bgDim;
     sf::RectangleShape titleSeparator;
 
     sf::Vector2f topLeftPos;
+    sf::Vector2f viewCenter;
 
     UiText title;
     UiText selector;
     std::vector<UiText> menuOptions;
+
     int selectedOption = 0;
     int nOptions = 3;
     float blinkDuration = 2000;
