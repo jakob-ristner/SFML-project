@@ -567,7 +567,7 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
     sf::Time frameDelta;
     float dt;
     float deltaX;
-    float scrollSpeed = 5;
+    float scrollSpeed = 1;
     float duration = (ribbonEndPos - ribbonPos) / scrollSpeed;
     float timeLeft = duration;
     sf::Event event;
@@ -606,7 +606,6 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
             currentOpacity  -= std::min((startOpacity / duration) * dt,
                     (float)(currentOpacity - finalOpacity));
         }
-        std::cout << currentOpacity << std::endl;
         bgDim.setFillColor(sf::Color(0, 0, 0, currentOpacity));
 
         window.clear(sf::Color(51, 51, 51));
@@ -644,7 +643,6 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
     bgTexture.update(window);
 
-    shouldClose = playStartAnim(window, clock, viewport);
 
     // Find offset of menu in worldspace through viewport center,
     // This is done because the player is not always in the center
@@ -652,6 +650,9 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+
+    // Play start animation and store wether the window should be closed or not
+    shouldClose = playStartAnim(window, clock, viewport);
     //std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
@@ -684,7 +685,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     float dt;
     float blinkTimer = blinkDuration;
     sf::Event event;
-    while (isOpen) {
+    while (isOpen && !shouldClose) {
         frameDelta = clock.restart();
         dt = frameDelta.asMilliseconds();
         while (window.pollEvent(event)) {
