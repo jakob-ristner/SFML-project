@@ -222,15 +222,12 @@ public:
 
 };
 
-class PauseMenu: public UiElement {
+class PauseMenu {
 public:
     PauseMenu();
     ~PauseMenu();
     bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
-    void update(float dt) ;
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-    void move(sf::Vector2f distance);
-    void setPosition(sf::Vector2f pos);
+
 private:
     void moveSelector(int dir);
     bool playSlideAnim(sf::RenderWindow &window, sf::Clock &clock, 

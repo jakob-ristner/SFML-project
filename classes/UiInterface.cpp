@@ -510,6 +510,9 @@ PauseMenu::~PauseMenu() {
 
 }
 
+// Move the selection indicator up or down. Also does out-of-bounds checks.
+// Args:
+// dir - amount of steps to take, -1 is up 1 is down
 void PauseMenu::moveSelector(int dir) {
     selectedOption += dir;
     if (selectedOption < 0) {
@@ -524,6 +527,17 @@ void PauseMenu::moveSelector(int dir) {
     blinkTimer = blinkDuration;
 }
 
+// Plays the slide animation from one pause menu position or opacity to another.
+// This function is used for both opening and closing to avoid lots of 
+// boilerplate code.
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
+// ribbonPos    - start position of the pause menu ribbon
+// ribbonEndPos - end position of the ribbon
+// startOpacity - starting opacity of the background
+// finalOpacity - end opacity of the background
 bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock, 
         sf::View &viewport, int ribbonPos, int ribbonEndPos, 
         float startOpacity, float finalOpacity) {
@@ -567,7 +581,7 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
     sf::Time frameDelta;
     float dt;
     float deltaX;
-    float scrollSpeed = 1;
+    float scrollSpeed = 5;
     float duration = (ribbonEndPos - ribbonPos) / scrollSpeed;
     float timeLeft = duration;
     sf::Event event;
@@ -622,18 +636,34 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
     return shouldClose;
 }
 
+// Calls slide animation as it's supposed to look when opening the pause menu
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
 bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
         sf::View &viewport) {
     return playSlideAnim(window, clock, viewport, topLeftPos.x - 800, 
                          topLeftPos.x + 20, 0, 80);
 }
 
+// Calls slide animation as it's supposed to look when closing the pause menu
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
 bool PauseMenu::playCloseAnim(sf::RenderWindow &window, sf::Clock &clock, 
         sf::View &viewport) {
     return playSlideAnim(window, clock, viewport, topLeftPos.x + 20, 
                          topLeftPos.x + Settings::WINDOW_WIDTH, 80, 0);
 }
 
+// Opens the pause menu. Handles drawing, updating, window and keyboard events.
+// Also plays opening and closing animations.
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
 bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
     // Will be returned to tell main wheter a sf::Event::Closed has been sent
     bool shouldClose = false;
@@ -734,18 +764,3 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     return shouldClose;
 }
 
-void PauseMenu::update(float dt) {
-
-}
-
-void PauseMenu::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-
-}
-
-void PauseMenu::move(sf::Vector2f distance) {
-
-}
-
-void PauseMenu::setPosition(sf::Vector2f pos) {
-
-}
