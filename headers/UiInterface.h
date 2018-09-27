@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "./Settings.h"
+#include "./Animation.h"
 #include <iostream>
 
 // Abstract class representing a ui interface
@@ -11,10 +12,10 @@ public:
     virtual void move(sf::Vector2f distance)=0;
     virtual void setPosition(sf::Vector2f pos)=0;
     void toggleDebugMode();
+    sf::Font mainFont;
 
 protected:
     sf::Vector2f position;
-    sf::Font mainFont;
     bool debugMode = false;
 };
 
@@ -56,7 +57,9 @@ public:
     void setFontSize(unsigned int size);
 
     sf::Vector2f getDims();
+    sf::Vector2f getPosition() { return text.getPosition(); }
     sf::Text getText() {return text;}
+    std::string getString() {return text.getString();}
 
 private:
     sf::Text text;
@@ -217,4 +220,39 @@ public:
     void draw(sf::RenderTarget &target, sf::RenderStates states) override;
     std::string getMessage();
 
+};
+
+class PauseMenu {
+public:
+    PauseMenu();
+    ~PauseMenu();
+    bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
+
+private:
+    void moveSelector(int dir);
+    bool playSlideAnim(sf::RenderWindow &window, sf::Clock &clock, 
+                       sf::View &viewport, int ribbonPos, int ribbonEndPos,
+                       float startOpacity, float finalOpacity);
+    bool playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
+                       sf::View &viewport);
+    bool playCloseAnim(sf::RenderWindow &window, sf::Clock &clock,
+                       sf::View &viewport);
+
+    sf::Sprite bgSprite;
+    sf::Texture bgTexture;
+    sf::RectangleShape bgRibbon;
+    sf::RectangleShape bgDim;
+    sf::RectangleShape titleSeparator;
+
+    sf::Vector2f topLeftPos;
+    sf::Vector2f viewCenter;
+
+    UiText title;
+    UiText selector;
+    std::vector<UiText> menuOptions;
+
+    int selectedOption = 0;
+    int nOptions = 3;
+    float blinkDuration = 2000;
+    float blinkTimer = blinkDuration;
 };

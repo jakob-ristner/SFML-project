@@ -485,3 +485,282 @@ std::string StatusMessage::getMessage() {
 
 }
 
+PauseMenu::PauseMenu() {
+     title.setFontSize(60);
+     title.setString("Paused");
+     title.setFillColor(sf::Color::White);
+
+     titleSeparator.setSize(sf::Vector2f(400, 3));
+     titleSeparator.setFillColor(sf::Color::White);
+
+     menuOptions.resize(3);
+     for (int i = 0; i < nOptions; i++) {
+        menuOptions[i] = UiText();
+        menuOptions[i].setFont(menuOptions[i].mainFont);
+        menuOptions[i].setFontSize(50);
+        menuOptions[i].setFillColor(sf::Color::White);
+     }
+     menuOptions[0].setString("Inventory");
+     menuOptions[1].setString("Settings");
+     menuOptions[2].setString("Exit");
+
+}
+
+PauseMenu::~PauseMenu() {
+
+}
+
+// Move the selection indicator up or down. Also does out-of-bounds checks.
+// Args:
+// dir - amount of steps to take, -1 is up 1 is down
+void PauseMenu::moveSelector(int dir) {
+    selectedOption += dir;
+    if (selectedOption < 0) {
+        selectedOption = 0;
+    } else if (selectedOption >= nOptions) {
+        selectedOption = nOptions - 1;
+    }
+    selector.setPosition(sf::Vector2f(
+                topLeftPos.x + 250 + selectedOption * 100,
+                topLeftPos.y + 120 + selectedOption * 100));
+    selector.setString(">                           <");
+    blinkTimer = blinkDuration;
+}
+
+// Plays the slide animation from one pause menu position or opacity to another.
+// This function is used for both opening and closing to avoid lots of 
+// boilerplate code.
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
+// ribbonPos    - start position of the pause menu ribbon
+// ribbonEndPos - end position of the ribbon
+// startOpacity - starting opacity of the background
+// finalOpacity - end opacity of the background
+bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport, int ribbonPos, int ribbonEndPos, 
+        float startOpacity, float finalOpacity) {
+    
+    float currentOpacity = startOpacity;
+    //bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    //bgTexture.update(window);
+    
+    viewCenter = viewport.getCenter();
+    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    
+    bgSprite.setTexture(bgTexture);
+    bgSprite.setPosition(topLeftPos);
+    
+    bgRibbon.setPosition(sf::Vector2f(ribbonPos, topLeftPos.y));
+    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
+    bgRibbon.setRotation(-45);
+    
+    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setPosition(topLeftPos);
+    bgDim.setFillColor(sf::Color(0, 0, 0, finalOpacity));
+    
+    title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+    
+    selector.setFontSize(50);
+    selector.setString("");
+    //selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
+    
+    for (int i = 0; i < nOptions; i++) {
+        sf::Vector2f dims = menuOptions[i].getDims();
+        menuOptions[i].setPosition(sf::Vector2f(
+                    ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
+                    topLeftPos.y + 120 + i * 100));
+    }
+    
+    bool isRunning = true;
+    bool shouldClose = false;
+    sf::Time frameDelta;
+    float dt;
+    float deltaX;
+    float scrollSpeed = 5;
+    float duration = (ribbonEndPos - ribbonPos) / scrollSpeed;
+    float timeLeft = duration;
+    sf::Event event;
+    while (isRunning) {
+        frameDelta = clock.restart();
+        dt = frameDelta.asMicroseconds() / 1000;
+        while (window.pollEvent(event)) {
+            switch (event.type){
+                case sf::Event::Closed:
+                    shouldClose = true;
+                    isRunning = false;
+                    break;
+            }
+        }
+        timeLeft -= dt;
+        if (timeLeft < 0) {
+            isRunning = false;
+        }
+        deltaX = std::min(scrollSpeed * dt, (float)(ribbonEndPos - ribbonPos));
+        bgRibbon.move(sf::Vector2f(deltaX, 0));
+        ribbonPos += deltaX;
+        
+        title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
+        titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+        for (int i = 0; i < nOptions; i++) {
+            sf::Vector2f dims = menuOptions[i].getDims();
+            menuOptions[i].setPosition(sf::Vector2f(
+                        ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
+                        topLeftPos.y + 120 + i * 100));
+        }
+        
+        if (finalOpacity - startOpacity > 0) {
+            currentOpacity += std::min((finalOpacity / duration) * dt, 
+                    (float)(finalOpacity - currentOpacity));
+        } else {
+            currentOpacity  -= std::min((startOpacity / duration) * dt,
+                    (float)(currentOpacity - finalOpacity));
+        }
+        bgDim.setFillColor(sf::Color(0, 0, 0, currentOpacity));
+
+        window.clear(sf::Color(51, 51, 51));
+        window.draw(bgSprite);
+        window.draw(bgDim);
+        window.draw(bgRibbon);
+        window.draw(title);
+        window.draw(titleSeparator);
+        for (int i = 0; i < nOptions; i++) {
+            window.draw(menuOptions[i]);
+        }
+        window.display();
+    }
+    return shouldClose;
+}
+
+// Calls slide animation as it's supposed to look when opening the pause menu
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
+bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport) {
+    return playSlideAnim(window, clock, viewport, topLeftPos.x - 800, 
+                         topLeftPos.x + 20, 0, 80);
+}
+
+// Calls slide animation as it's supposed to look when closing the pause menu
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
+bool PauseMenu::playCloseAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport) {
+    return playSlideAnim(window, clock, viewport, topLeftPos.x + 20, 
+                         topLeftPos.x + Settings::WINDOW_WIDTH, 80, 0);
+}
+
+// Opens the pause menu. Handles drawing, updating, window and keyboard events.
+// Also plays opening and closing animations.
+// Args:
+// window       - reference to the main renderwindow
+// clock        - reference to the main game clock
+// viewport     - reference to the player view
+bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+    // Will be returned to tell main wheter a sf::Event::Closed has been sent
+    bool shouldClose = false;
+    // Gets current screen from the window and saves it for drawing every
+    // frame. This saves a lot of processing power by not having to draw
+    // every entity several times.
+    bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    bgTexture.update(window);
+
+
+    // Find offset of menu in worldspace through viewport center,
+    // This is done because the player is not always in the center
+    // of the screen and we already have a reference of the window.
+    viewCenter = viewport.getCenter();
+    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+
+    // Play start animation and store wether the window should be closed or not
+    shouldClose = playStartAnim(window, clock, viewport);
+    //std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
+    bgSprite.setTexture(bgTexture);
+    bgSprite.setPosition(topLeftPos);
+
+    bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
+    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
+    bgRibbon.setRotation(-45);
+
+    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setPosition(topLeftPos);
+    bgDim.setFillColor(sf::Color(0, 0, 0, 80));
+
+    title.setPosition(sf::Vector2f(topLeftPos.x + 260, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
+
+    selector.setFontSize(50);
+    selector.setString(">                           <");
+    selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
+
+    for (int i = 0; i < nOptions; i++) {
+        sf::Vector2f dims = menuOptions[i].getDims();
+        menuOptions[i].setPosition(sf::Vector2f(
+                    topLeftPos.x + 150 + i * 100 + (288 - dims.x / 2), 
+                    topLeftPos.y + 120 + i * 100));
+    }
+
+    bool isOpen = true;
+    sf::Time frameDelta;
+    float dt;
+    float blinkTimer = blinkDuration;
+    sf::Event event;
+    while (isOpen && !shouldClose) {
+        frameDelta = clock.restart();
+        dt = frameDelta.asMilliseconds();
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+            case sf::Event::Closed:
+                isOpen = false;
+                shouldClose = true;
+                break;
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                case sf::Keyboard::Key::W:
+                    moveSelector(-1);
+                    break;
+                case sf::Keyboard::Key::S:
+                    moveSelector(1);
+                    break;
+                case sf::Keyboard::Key::Escape:
+                    isOpen = false;
+                    playCloseAnim(window, clock, viewport);
+                }
+                break;
+            }
+        }
+        blinkTimer -= dt;
+        if (blinkTimer < 0) {
+            if (selector.getString() == "") {
+                selector.setString(">                           <");
+            } else {
+                selector.setString("");
+            }
+            blinkTimer += blinkDuration;
+        } 
+        // Drawing
+        window.clear(sf::Color(51, 51, 51));
+        window.draw(bgSprite);
+        window.draw(bgDim);
+        window.draw(bgRibbon);
+        window.draw(title);
+        window.draw(titleSeparator);
+        window.draw(selector);
+        for (int i = 0; i < nOptions; i++) {
+            window.draw(menuOptions[i]);
+        }
+        window.display();
+    }
+    return shouldClose;
+}
+

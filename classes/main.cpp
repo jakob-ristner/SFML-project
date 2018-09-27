@@ -99,8 +99,6 @@ int main() {
     SpellBar mainSpellBar = SpellBar(9);
     mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - (mainSpellBar.getSize().x / 2), Settings::WINDOW_HEIGHT - 40));
     //mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 1400, Settings::WINDOW_HEIGHT - 100));
-    std::cout << mainSpellBar.getPosition().x << " " << mainSpellBar.getPosition().y << std::endl;
-    std::cout << mainSpellBar.getSize().x << " " << mainSpellBar.getSize().y << std::endl;
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
@@ -135,9 +133,11 @@ int main() {
     // Jakob wat is dis?
     std::vector<std::string> statusText;
 
-    // Debug Layer
     RenderLayer debugLayer;
     debugLayer.add(&interfaceGrid);
+
+    PauseMenu pauseMenu;
+
 
     // Main Game Loop
     clock.restart();
@@ -163,10 +163,10 @@ int main() {
             }
             if (frameCount % 10 == 0) {
                 std::cout << 1000.0f / (sum / 10.0f) << std::endl;
-                for (int i = 0; i < deltaTimes.size(); i++) {
-                    std::cout << deltaTimes[i] << " ";
-                }
-                std::cout << std::endl;
+                //for (int i = 0; i < deltaTimes.size(); i++) {
+                    //std::cout << deltaTimes[i] << " ";
+                //}
+                //std::cout << std::endl;
             }
         }
         // Event Loop
@@ -187,6 +187,8 @@ int main() {
                     case sf::Keyboard::Key::B:
                         enemyFactory.hurtEnemy(0, 1);
                         break;
+                    case sf::Keyboard::Key::Escape:
+                        isRunning = !pauseMenu.open(window, clock, viewport);
                     default:
                         break;
                 }
@@ -215,13 +217,13 @@ int main() {
             
         }
       
+        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
+        window.setView(viewport);
         map.update(dt);
         viewPortRect = map.getViewportRect(viewport.getCenter());
         backgroundSprite.setTextureRect(viewPortRect);
         backgroundSprite.setPosition(sf::Vector2f(viewPortRect.left, viewPortRect.top));
         sf::IntRect kek = backgroundSprite.getTextureRect();
-        sf::Vector2f vpC = viewport.getCenter();
-        sf::Vector2f vpS = viewport.getSize();
         sf::Vector2f direction;
 
         // Collision detection
@@ -236,8 +238,6 @@ int main() {
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
-        viewport.setCenter(clampVec(player.getPos(), lowerBound, upperBound));
-        window.setView(viewport);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
