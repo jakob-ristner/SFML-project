@@ -99,8 +99,6 @@ int main() {
     SpellBar mainSpellBar = SpellBar(9);
     mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - (mainSpellBar.getSize().x / 2), Settings::WINDOW_HEIGHT - 40));
     //mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 1400, Settings::WINDOW_HEIGHT - 100));
-    std::cout << mainSpellBar.getPosition().x << " " << mainSpellBar.getPosition().y << std::endl;
-    std::cout << mainSpellBar.getSize().x << " " << mainSpellBar.getSize().y << std::endl;
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
@@ -165,10 +163,10 @@ int main() {
             }
             if (frameCount % 10 == 0) {
                 std::cout << 1000.0f / (sum / 10.0f) << std::endl;
-                for (int i = 0; i < deltaTimes.size(); i++) {
-                    std::cout << deltaTimes[i] << " ";
-                }
-                std::cout << std::endl;
+                //for (int i = 0; i < deltaTimes.size(); i++) {
+                    //std::cout << deltaTimes[i] << " ";
+                //}
+                //std::cout << std::endl;
             }
         }
         // Event Loop
