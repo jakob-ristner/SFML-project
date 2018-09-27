@@ -233,7 +233,12 @@ public:
     void setPosition(sf::Vector2f pos);
 private:
     void moveSelector(int dir);
-    bool playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
+    bool playSlideAnim(sf::RenderWindow &window, sf::Clock &clock, 
+                       sf::View &viewport, int ribbonPos, int ribbonEndPos,
+                       float startOpacity, float finalOpacity);
+    bool playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
+                       sf::View &viewport);
+    bool playCloseAnim(sf::RenderWindow &window, sf::Clock &clock,
                        sf::View &viewport);
 
     sf::Sprite bgSprite;

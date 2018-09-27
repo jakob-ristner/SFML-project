@@ -524,20 +524,17 @@ void PauseMenu::moveSelector(int dir) {
     blinkTimer = blinkDuration;
 }
 
-bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
-        sf::View &viewport) {
+bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport, int ribbonPos, int ribbonEndPos, 
+        float startOpacity, float finalOpacity) {
     
-    bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
-    bgTexture.update(window);
+    float currentOpacity = startOpacity;
+    //bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    //bgTexture.update(window);
     
     viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
-    
-    int ribbonPos = topLeftPos.x - 800;
-    int ribbonEndPos = topLeftPos.x + 20;
-    float currentOpacity = 0;
-    float finalOpacity = 80;
     
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
@@ -587,7 +584,6 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
         }
         timeLeft -= dt;
         if (timeLeft < 0) {
-            shouldClose = true;
             isRunning = false;
         }
         deltaX = std::min(scrollSpeed * dt, (float)(ribbonEndPos - ribbonPos));
@@ -603,7 +599,13 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
                         topLeftPos.y + 120 + i * 100));
         }
         
-        currentOpacity += std::min((finalOpacity / duration) * dt, (float)(finalOpacity - currentOpacity));
+        if (finalOpacity - startOpacity > 0) {
+            currentOpacity += std::min((finalOpacity / duration) * dt, 
+                    (float)(finalOpacity - currentOpacity));
+        } else {
+            currentOpacity  -= std::min((startOpacity / duration) * dt,
+                    (float)(currentOpacity - finalOpacity));
+        }
         std::cout << currentOpacity << std::endl;
         bgDim.setFillColor(sf::Color(0, 0, 0, currentOpacity));
 
@@ -621,6 +623,18 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
     return shouldClose;
 }
 
+bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport) {
+    return playSlideAnim(window, clock, viewport, topLeftPos.x - 800, 
+                         topLeftPos.x + 20, 0, 80);
+}
+
+bool PauseMenu::playCloseAnim(sf::RenderWindow &window, sf::Clock &clock, 
+        sf::View &viewport) {
+    return playSlideAnim(window, clock, viewport, topLeftPos.x + 20, 
+                         topLeftPos.x + Settings::WINDOW_WIDTH, 80, 0);
+}
+
 bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
     // Will be returned to tell main wheter a sf::Event::Closed has been sent
     bool shouldClose = false;
@@ -630,9 +644,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
     bgTexture.update(window);
 
-    if (playStartAnim(window, clock, viewport)) {
-        shouldClose = true;
-    }
+    shouldClose = playStartAnim(window, clock, viewport);
 
     // Find offset of menu in worldspace through viewport center,
     // This is done because the player is not always in the center
@@ -691,6 +703,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
                     break;
                 case sf::Keyboard::Key::Escape:
                     isOpen = false;
+                    playCloseAnim(window, clock, viewport);
                 }
                 break;
             }
