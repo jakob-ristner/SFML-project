@@ -486,24 +486,23 @@ std::string StatusMessage::getMessage() {
 }
 
 PauseMenu::PauseMenu() {
-     title.setFontSize(60);
-     title.setString("Paused");
-     title.setFillColor(sf::Color::White);
+    title.setFontSize(60);
+    title.setString("Paused");
+    title.setFillColor(sf::Color::White);
 
-     titleSeparator.setSize(sf::Vector2f(400, 3));
-     titleSeparator.setFillColor(sf::Color::White);
+    titleSeparator.setSize(sf::Vector2f(400, 3));
+    titleSeparator.setFillColor(sf::Color::White);
 
-     menuOptions.resize(3);
-     for (int i = 0; i < nOptions; i++) {
-        menuOptions[i] = UiText();
-        menuOptions[i].setFont(menuOptions[i].mainFont);
-        menuOptions[i].setFontSize(50);
-        menuOptions[i].setFillColor(sf::Color::White);
-     }
-     menuOptions[0].setString("Inventory");
-     menuOptions[1].setString("Settings");
-     menuOptions[2].setString("Exit");
-
+    menuOptions.resize(3);
+    for (int i = 0; i < nOptions; i++) {
+       menuOptions[i] = UiText();
+       menuOptions[i].setFont(menuOptions[i].mainFont);
+       menuOptions[i].setFontSize(50);
+       menuOptions[i].setFillColor(sf::Color::White);
+    }
+    menuOptions[0].setString("Inventory");
+    menuOptions[1].setString("Settings");
+    menuOptions[2].setString("Exit");
 }
 
 PauseMenu::~PauseMenu() {
