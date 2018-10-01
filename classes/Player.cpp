@@ -27,6 +27,9 @@ Player::Player(sf::RectangleShape body) {
     casting = false;
     maxHp = 20;
     hitpoints = maxHp;
+    maxMana = 100;
+    mana = maxMana;
+    manaRegen = 5;
     timeSinceHurt = 0;
     level = 1;
 }
@@ -40,8 +43,12 @@ Player::~Player() {
 }
 
 void Player::castSpell() {
-   (*spellInventory[selectedSpell]).use();
-   castProgress = 0;
+    float cost = (*spellInventory[selectedSpell]).getManaCost();
+    if (cost <= mana) {
+        (*spellInventory[selectedSpell]).use();
+        spendMana(cost);
+        castProgress = 0;
+    }
 }
 
 void Player::addSpell(Spell *spell) {
@@ -114,7 +121,7 @@ void Player::update(float dt) {
             && (*spellInventory[selectedSpell]).isReady) {
           castSpell();
         }
-        if (!(*spellInventory[selectedSpell]).isReady) {
+        if (!(*spellInventory[selectedSpell]).isReady || mana - (*spellInventory[selectedSpell]).getManaCost() < 0) {
             casting = false;
         }
 
@@ -158,6 +165,8 @@ void Player::update(float dt) {
     if (timeSinceHurt > 0) {
         timeSinceHurt -= dt;
     }
+
+    restoreMana(std::min((float)(dt * manaRegen / 1000.0), maxMana - mana));
 
 }
 
@@ -213,12 +222,26 @@ void Player::heal(float amount) {
     (*hpBar).update(hitpoints);
 }
 
+void Player::spendMana(float amount) {
+    mana -= amount;
+    (*manaBar).update(mana);
+}
+
+void Player::restoreMana(float amount) {
+    mana += amount;
+    (*manaBar).update(mana);
+}
+
 float Player::getMaxHp() {
     return maxHp;
 }
 
 void Player::setHpBar(PlayerHpBar *bar) {
     hpBar = bar;
+}
+
+void Player::setManaBar(PlayerManaBar *bar) {
+    manaBar = bar;
 }
 
 int Player::getLevel() {

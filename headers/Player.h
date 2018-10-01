@@ -41,6 +41,8 @@ public:
 
     void hurt(float amount);
     void heal(float amount);
+    void spendMana(float amount);
+    void restoreMana(float amount);
     void setLevel(int newLevel);
 
     int getLevel();
@@ -54,6 +56,7 @@ public:
     SpellBar *spellBar;
 
     void setHpBar(PlayerHpBar *bar);
+    void setManaBar(PlayerManaBar *bar);
     void setLevelIcon(PlayerLevelIcon *icon);
     void setMoveSpeed(float newSpeed);
 
@@ -80,10 +83,15 @@ private:
 
     float hitpoints;
     float maxHp;
+    float mana;
+    float maxMana;
+    // Should be amount per second
+    float manaRegen;
     float timeSinceHurt;
     int level;
 
 
     PlayerHpBar *hpBar;
+    PlayerManaBar *manaBar;
     PlayerLevelIcon *levelIcon;
 };
