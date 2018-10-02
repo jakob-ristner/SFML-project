@@ -27,8 +27,6 @@ private:
     std::string getWord(int index);
 
     void noclip();
-    void setlevel();
-    void setmovespeed();
     void setplayerval();
     void setvisible();
     void setxlines();
@@ -44,10 +42,9 @@ private:
     std::vector<std::string> history;
     std::vector<std::string> words;
     // Must be in alphabetical order in order to work
-    std::vector<std::string> commands = { "noclip",
+    std::vector<std::string> commands = { 
+    "noclip",
     "setcolor",
-    "setlevel",
-    "setmovespeed",
     "setplayerval",
     "setvisible",
     "setxlines",

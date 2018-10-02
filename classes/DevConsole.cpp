@@ -16,8 +16,6 @@ settings(settings), enemyFactory(enemyFactory) {
     this->player = player;
     commandPointers.push_back(&DevConsole::noclip);
     commandPointers.push_back(&DevConsole::setcolor);
-    commandPointers.push_back(&DevConsole::setlevel);
-    commandPointers.push_back(&DevConsole::setmovespeed);
     commandPointers.push_back(&DevConsole::setplayerval);
     commandPointers.push_back(&DevConsole::setvisible);
     commandPointers.push_back(&DevConsole::setxlines);
@@ -253,30 +251,7 @@ void DevConsole::noclip() {
     settings.playerColliding = !settings.playerColliding;
 }
 
-void DevConsole::setlevel() {
-    if (getWord(1) == "player") {
-        int newLevel;
-        try {
-            newLevel = std::stoi(getWord(2));
-        } catch (std::invalid_argument e) {
-            newLevel = (*player).getLevel();
-        }
-        (*player).setLevel(newLevel);
-    }
-}
-
-void DevConsole::setmovespeed() {
-    if (getWord(1) == "player") {
-        float moveSpeed;
-        try {
-            moveSpeed = std::stof(getWord(2));
-            (*player).setMoveSpeed(moveSpeed);
-        } catch (std::invalid_argument e) {
-            print("Invalid speed");
-        }
-    }
-}
-
+// Sets an attribute of player
 void DevConsole::setplayerval() {
     std::string arg1 = getWord(1);
     std::string arg2 = getWord(2);
