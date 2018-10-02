@@ -73,16 +73,21 @@ public:
     void setPosition(sf::Vector2f pos);
     void setSelected(bool isSelected);
     void setFont(sf::Font &font);
-
+    void update();
+    void setCooldown(float cooldownPercent);
     sf::Vector2f getPosition() ;
     sf::Vector2f getSize();
     UiText *getText();
+    sf::RectangleShape *getCooldownRect();
 
 private: // Some of these are temporary
     bool selected;
     int slotId;
+    float cooldownPercent;
 
+    sf::RectangleShape cooldownRect;
     sf::RectangleShape background;
+
     UiText slotIdText;
 };
 
@@ -103,6 +108,8 @@ public:
     
     sf::Vector2f getSize();
     sf::Vector2f getPosition() {return position;}
+
+    std::vector<SpellBarIcon>* getIcons();
 
 private:
     std::vector<SpellBarIcon> icons;

@@ -46,6 +46,14 @@ void Spell::update(float dt) {
     
 }
 
+float Spell::getCooldown() {
+
+}
+
+float Spell::getCooldownTimer() {
+
+}
+
 Buff::Buff() {
 
 }
@@ -224,6 +232,16 @@ void Fireball::use() {
 int Fireball::getCastTime() {
   return castTime;
 }
+
+float Fireball::getCooldown() {
+    return cooldown;
+}
+
+float Fireball::getCooldownTimer() {
+    return cooldownTimer;
+}
+
+
 //FireBall Spell End//
 
 //MagicMissile Spell Start//
@@ -233,7 +251,7 @@ MagicMissile::MagicMissile(Player &player):
     this->player = player;
     texture.loadFromFile("./resources/spell_textures/magicmissile.png");
     setParams("Magic Missile", "Damage", 8);
-    cooldown = 60;
+    cooldown = 1000;
     cooldownTimer = 0;
     isReady = true;
 };
@@ -287,6 +305,17 @@ void MagicMissile::use() {
 int MagicMissile::getCastTime() {
   return castTime;
 }
+
+float MagicMissile::getCooldown() {
+    return cooldown;
+}
+
+float MagicMissile::getCooldownTimer() {
+    return cooldownTimer;
+}
+
+
+
 //MagicMissile Spell End//
 
 //SprintSpell Spell Start//
@@ -358,5 +387,12 @@ void SprintBuff::end(Player &player) {
     player.setMoveSpeed(playerStartSpeed);
 }
 
+float SprintSpell::getCooldown() {
+    return cooldown;
+}
+
+float SprintSpell::getCooldownTimer() {
+    return cooldownTimer;
+}
 
 //SprintSpell Spell End//
