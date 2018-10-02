@@ -520,16 +520,17 @@ PauseMenu::PauseMenu() {
     titleSeparator.setSize(sf::Vector2f(400, 3));
     titleSeparator.setFillColor(sf::Color::White);
 
-    menuOptions.resize(3);
+    menuOptions.resize(nOptions);
     for (int i = 0; i < nOptions; i++) {
        menuOptions[i] = UiText();
        menuOptions[i].setFont(menuOptions[i].mainFont);
        menuOptions[i].setFontSize(50);
        menuOptions[i].setFillColor(sf::Color::White);
     }
-    menuOptions[0].setString("Inventory");
-    menuOptions[1].setString("Settings");
-    menuOptions[2].setString("Exit");
+    menuOptions[0].setString("Resume");
+    menuOptions[1].setString("Inventory");
+    menuOptions[2].setString("Settings");
+    menuOptions[3].setString("Exit");
 }
 
 PauseMenu::~PauseMenu() {
@@ -758,6 +759,15 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
                 case sf::Keyboard::Key::S:
                     moveSelector(1);
                     break;
+                case sf::Keyboard::Key::E:
+                    if (selectedOption == 0) { 
+                        isOpen = false; 
+                        playCloseAnim(window, clock, viewport);
+                    } else if (selectedOption == nOptions - 1) {
+                        isOpen = false; 
+                        shouldClose = true; 
+                    }
+                    break;
                 case sf::Keyboard::Key::Escape:
                     isOpen = false;
                     playCloseAnim(window, clock, viewport);
@@ -789,4 +799,3 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     }
     return shouldClose;
 }
-

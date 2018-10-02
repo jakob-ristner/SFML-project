@@ -259,7 +259,7 @@ private:
     std::vector<UiText> menuOptions;
 
     int selectedOption = 0;
-    int nOptions = 3;
+    const int nOptions = 4;
     float blinkDuration = 2000;
     float blinkTimer = blinkDuration;
 };
