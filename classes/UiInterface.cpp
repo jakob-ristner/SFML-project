@@ -141,6 +141,12 @@ SpellBarIcon::SpellBarIcon() {
 
     selected = false;
     slotId = 1;
+    cooldownPercent = 0;
+
+    cooldownRect.setPosition(sf::Vector2f(0, 0));
+    cooldownRect.setSize(sf::Vector2f(30 * cooldownPercent, 30));
+    cooldownRect.setFillColor(sf::Color(0, 0, 0, 128));
+
 }
 
 SpellBarIcon::SpellBarIcon(int id): SpellBarIcon() {
@@ -155,10 +161,15 @@ void SpellBarIcon::setFont(sf::Font &font) {
 SpellBarIcon::~SpellBarIcon() {
 
 }
+void SpellBarIcon::update() {
+    cooldownRect.setSize(sf::Vector2f(30 * cooldownPercent, 30));
+}
+ 
 
 void SpellBarIcon::draw(sf::RenderTarget &target, sf::RenderStates states) const{
     target.draw(background);
     target.draw(slotIdText);
+    target.draw(cooldownRect);
 } 
 
 void SpellBarIcon::move(sf::Vector2f distance) { 
@@ -191,8 +202,16 @@ void SpellBarIcon::setSelected(bool isSelected) {
     }
 }
 
+void SpellBarIcon::setCooldown(float cooldownPercent) {
+    this->cooldownPercent = cooldownPercent;
+}
+
 UiText* SpellBarIcon::getText() {
     return &slotIdText;
+}
+
+sf::RectangleShape* SpellBarIcon::getCooldownRect() {
+    return &cooldownRect;
 }
 
 SpellBar::SpellBar() {
@@ -211,6 +230,7 @@ SpellBar::SpellBar(int amount) {
         icons[i].setFont(mainFont);
         (*(icons[i].getText())).setPosition(icons[i].getPosition());
         (*(icons[i].getText())).move(sf::Vector2f(8, -3));
+        (*(icons[i].getCooldownRect())).setPosition(icons[i].getPosition());
     }
     changeSelection(1);
     background.setPosition(sf::Vector2f(0, 0));
@@ -237,6 +257,7 @@ void SpellBar::move(sf::Vector2f distance) {
     background.move(distance);
     for (int i = 0; i < icons.size(); i++) {
         icons[i].move(distance);
+        (*(icons[i].getCooldownRect())).setPosition(icons[i].getPosition());
     }
 }
 
@@ -265,11 +286,17 @@ void SpellBar::setSpellIcons(std::vector<SpellBarIcon> newIcons) {
 }
 
 void SpellBar::update() {
-
+    for (int i = 0; i < icons.size(); i++) {
+        icons[i].update();
+    }
 }
 
 sf::Vector2f SpellBar::getSize() {
     return size;
+}
+
+std::vector<SpellBarIcon>* SpellBar::getIcons() {
+    return &icons;
 }
 
 PlayerStatBar::PlayerStatBar() {

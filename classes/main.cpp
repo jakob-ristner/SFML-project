@@ -265,6 +265,8 @@ int main() {
             }
         }
 
+
+
         // Drawing
         window.clear(bgColor);
 
