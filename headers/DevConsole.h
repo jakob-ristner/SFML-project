@@ -29,6 +29,7 @@ private:
     void noclip();
     void setlevel();
     void setmovespeed();
+    void setplayerval();
     void setvisible();
     void setxlines();
     void setylines();
@@ -47,6 +48,7 @@ private:
     "setcolor",
     "setlevel",
     "setmovespeed",
+    "setplayerval",
     "setvisible",
     "setxlines",
     "setylines",

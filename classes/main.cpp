@@ -119,6 +119,7 @@ int main() {
     PlayerStaminaBar staminaBar;
     staminaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 31));
     staminaBar.setMaxStat(100);
+    staminaBar.update(100);
     playerInterfaces.add(&staminaBar);
     
     PlayerManaBar playerManaBar;

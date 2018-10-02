@@ -10,7 +10,7 @@
 
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
-    speed = 1;
+    speedMult = 1;
     switchedSpells = false;
     selectedSpell = 0;
     settings = Settings();
@@ -75,7 +75,6 @@ sf::Vector2f Player::getPos() {
     return body.getPosition();
 }
 
-
 void Player::setPos(sf::Vector2f newPos) {
     pos = newPos;
     body.setPosition(newPos);
@@ -86,6 +85,8 @@ void Player::setVel(sf::Vector2f newVel) {
 }
 
 void Player::update(float dt) {
+    (*hpBar).update(hitpoints);
+    (*manaBar).update(mana);
     acc = sf::Vector2f(0, 0);
     casting = false;
     switchedSpells = false;
@@ -147,7 +148,7 @@ void Player::update(float dt) {
 
     vel = acc;
 
-    pos += vel * (dt / settings.TIMESCALE);
+    pos += vel * (dt / settings.TIMESCALE) * speedMult;
 
     body.setPosition(pos);
 
@@ -166,8 +167,9 @@ void Player::update(float dt) {
         timeSinceHurt -= dt;
     }
 
-    restoreMana(std::min((float)(dt * manaRegen / 1000.0), maxMana - mana));
-
+    if (maxMana > mana) {
+        restoreMana(std::min((float)(dt * manaRegen / 1000.0), maxMana - mana));
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
@@ -222,6 +224,17 @@ void Player::heal(float amount) {
     (*hpBar).update(hitpoints);
 }
 
+void Player::setHp(float amount) {
+    hitpoints = amount;
+    (*hpBar).update(hitpoints);
+}
+
+void Player::setMaxHp(float amount) {
+    maxHp = amount;
+    (*hpBar).update(hitpoints);
+    (*hpBar).setMaxStat(maxHp);
+}
+
 void Player::spendMana(float amount) {
     mana -= amount;
     (*manaBar).update(mana);
@@ -230,6 +243,17 @@ void Player::spendMana(float amount) {
 void Player::restoreMana(float amount) {
     mana += amount;
     (*manaBar).update(mana);
+}
+
+void Player::setMana(float amount) {
+    mana = amount;
+    (*manaBar).update(mana);
+}
+
+void Player::setMaxMana(float amount) {
+    maxMana = amount;
+    (*manaBar).update(mana);
+    (*manaBar).setMaxStat(maxMana);
 }
 
 float Player::getMaxHp() {
@@ -259,6 +283,10 @@ void Player::setLevelIcon(PlayerLevelIcon *icon) {
 
 void Player::setMoveSpeed(float newSpeed) {
     playeracc = newSpeed;
+}
+
+void Player::setSpeedMult(float newMult) {
+    speedMult = newMult;
 }
 
 void Player::addBuff(Buff *buff) {
