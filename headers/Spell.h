@@ -20,6 +20,8 @@ public:
     std::string spellType;
     int manacost;
     virtual int getCastTime();
+    virtual float getCooldown();
+    virtual float getCooldownTimer();
     virtual void update(float dt);
     bool isReady;
 
@@ -98,6 +100,8 @@ public:
     void use() override;
     int getCastTime() override;
     void update(float dt) override;
+    float getCooldownTimer() override;
+    float getCooldown() override;
 
 private:
     int castTime;
@@ -113,6 +117,8 @@ public:
     void use() override;
     int getCastTime() override;
     void update(float dt) override;
+    float getCooldownTimer() override;
+    float getCooldown() override;
 
 private:
     int castTime;
@@ -145,6 +151,8 @@ public:
     void use() override;
     int getCastTime();
     void update(float dt) override;
+    float getCooldownTimer() override;
+    float getCooldown() override;
 
 private:
     int castTime;

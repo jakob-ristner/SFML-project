@@ -159,6 +159,14 @@ void Player::update(float dt) {
         timeSinceHurt -= dt;
     }
 
+    for (int i = 0; i < spellInventory.size(); i++) {
+        (*((*spellBar).getIcons()))[i].setCooldown(1 - (
+        (*spellInventory[i]).getCooldownTimer() / 
+        (*spellInventory[i]).getCooldown()));
+                                                       
+    }
+    (*spellBar).update();
+
 }
 
 void Player::draw(sf::RenderWindow &window) {
