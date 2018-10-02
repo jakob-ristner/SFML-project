@@ -10,7 +10,7 @@
 
 Player::Player(sf::RectangleShape body) {
     pos = sf::Vector2f(0, 0);
-    speed = 1;
+    speedMult = 1;
     switchedSpells = false;
     selectedSpell = 0;
     settings = Settings();
@@ -27,6 +27,9 @@ Player::Player(sf::RectangleShape body) {
     casting = false;
     maxHp = 20;
     hitpoints = maxHp;
+    maxMana = 100;
+    mana = maxMana;
+    manaRegen = 5;
     timeSinceHurt = 0;
     level = 1;
 }
@@ -40,8 +43,12 @@ Player::~Player() {
 }
 
 void Player::castSpell() {
-   (*spellInventory[selectedSpell]).use();
-   castProgress = 0;
+    float cost = (*spellInventory[selectedSpell]).getManaCost();
+    if (cost <= mana) {
+        (*spellInventory[selectedSpell]).use();
+        spendMana(cost);
+        castProgress = 0;
+    }
 }
 
 void Player::addSpell(Spell *spell) {
@@ -68,7 +75,6 @@ sf::Vector2f Player::getPos() {
     return body.getPosition();
 }
 
-
 void Player::setPos(sf::Vector2f newPos) {
     pos = newPos;
     body.setPosition(newPos);
@@ -79,6 +85,8 @@ void Player::setVel(sf::Vector2f newVel) {
 }
 
 void Player::update(float dt) {
+    (*hpBar).update(hitpoints);
+    (*manaBar).update(mana);
     acc = sf::Vector2f(0, 0);
     casting = false;
     switchedSpells = false;
@@ -114,7 +122,7 @@ void Player::update(float dt) {
             && (*spellInventory[selectedSpell]).isReady) {
           castSpell();
         }
-        if (!(*spellInventory[selectedSpell]).isReady) {
+        if (!(*spellInventory[selectedSpell]).isReady || mana - (*spellInventory[selectedSpell]).getManaCost() < 0) {
             casting = false;
         }
 
@@ -140,7 +148,7 @@ void Player::update(float dt) {
 
     vel = acc;
 
-    pos += vel * (dt / settings.TIMESCALE);
+    pos += vel * (dt / settings.TIMESCALE) * speedMult;
 
     body.setPosition(pos);
 
@@ -159,6 +167,10 @@ void Player::update(float dt) {
         timeSinceHurt -= dt;
     }
 
+    if (maxMana > mana) {
+        restoreMana(std::min((float)(dt * manaRegen / 1000.0), maxMana - mana));
+    }
+      
     for (int i = 0; i < spellInventory.size(); i++) {
         (*((*spellBar).getIcons()))[i].setCooldown(1 - (
         (*spellInventory[i]).getCooldownTimer() / 
@@ -166,7 +178,6 @@ void Player::update(float dt) {
                                                        
     }
     (*spellBar).update();
-
 }
 
 void Player::draw(sf::RenderWindow &window) {
@@ -221,12 +232,48 @@ void Player::heal(float amount) {
     (*hpBar).update(hitpoints);
 }
 
+void Player::setHp(float amount) {
+    hitpoints = amount;
+    (*hpBar).update(hitpoints);
+}
+
+void Player::setMaxHp(float amount) {
+    maxHp = amount;
+    (*hpBar).update(hitpoints);
+    (*hpBar).setMaxStat(maxHp);
+}
+
+void Player::spendMana(float amount) {
+    mana -= amount;
+    (*manaBar).update(mana);
+}
+
+void Player::restoreMana(float amount) {
+    mana += amount;
+    (*manaBar).update(mana);
+}
+
+void Player::setMana(float amount) {
+    mana = amount;
+    (*manaBar).update(mana);
+}
+
+void Player::setMaxMana(float amount) {
+    maxMana = amount;
+    (*manaBar).update(mana);
+    (*manaBar).setMaxStat(maxMana);
+}
+
 float Player::getMaxHp() {
     return maxHp;
 }
 
 void Player::setHpBar(PlayerHpBar *bar) {
     hpBar = bar;
+}
+
+void Player::setManaBar(PlayerManaBar *bar) {
+    manaBar = bar;
 }
 
 int Player::getLevel() {
@@ -244,6 +291,10 @@ void Player::setLevelIcon(PlayerLevelIcon *icon) {
 
 void Player::setMoveSpeed(float newSpeed) {
     playeracc = newSpeed;
+}
+
+void Player::setSpeedMult(float newMult) {
+    speedMult = newMult;
 }
 
 void Player::addBuff(Buff *buff) {

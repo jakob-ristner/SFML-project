@@ -102,11 +102,8 @@ int main() {
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
-    // Hp bar linking
     PlayerHpBar playerHpBar;
     playerHpBar.setMaxStat(player.getMaxHp());
-    player.setHpBar(&playerHpBar);
-    layer1.add(&playerHpBar);
 
     // Player interface layer 1
     RenderLayer playerInterfaces;
@@ -122,13 +119,17 @@ int main() {
     PlayerStaminaBar staminaBar;
     staminaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 31));
     staminaBar.setMaxStat(100);
+    staminaBar.update(100);
     playerInterfaces.add(&staminaBar);
     
-    PlayerManaBar manaBar;
-    manaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 53));
-    manaBar.setMaxStat(100);
-    playerInterfaces.add(&manaBar);
+    PlayerManaBar playerManaBar;
+    playerManaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 53));
+    playerManaBar.setMaxStat(100);
+    playerInterfaces.add(&playerManaBar);
     playerInterfaces.add(&mainSpellBar);
+
+    player.setHpBar(&playerHpBar);
+    player.setManaBar(&playerManaBar);
     
     // Jakob wat is dis?
     std::vector<std::string> statusText;

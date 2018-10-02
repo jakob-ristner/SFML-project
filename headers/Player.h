@@ -41,6 +41,12 @@ public:
 
     void hurt(float amount);
     void heal(float amount);
+    void setHp(float amount);
+    void setMaxHp(float amount);
+    void spendMana(float amount);
+    void restoreMana(float amount);
+    void setMana(float amount);
+    void setMaxMana(float amount);
     void setLevel(int newLevel);
 
     int getLevel();
@@ -54,8 +60,10 @@ public:
     SpellBar *spellBar;
 
     void setHpBar(PlayerHpBar *bar);
+    void setManaBar(PlayerManaBar *bar);
     void setLevelIcon(PlayerLevelIcon *icon);
     void setMoveSpeed(float newSpeed);
+    void setSpeedMult(float newMult);
 
     std::vector<Spell *> getSpells();
 
@@ -66,8 +74,8 @@ private:
     sf::Vector2f acc;
     sf::RectangleShape body;
     Settings settings;
-    int speed;
     int selectedSpell;
+    float speedMult;
     float playeracc;
     float originalPlayerAcc;
     float fric;
@@ -80,10 +88,15 @@ private:
 
     float hitpoints;
     float maxHp;
+    float mana;
+    float maxMana;
+    // Should be amount per second
+    float manaRegen;
     float timeSinceHurt;
     int level;
 
 
     PlayerHpBar *hpBar;
+    PlayerManaBar *manaBar;
     PlayerLevelIcon *levelIcon;
 };

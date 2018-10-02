@@ -21,19 +21,24 @@ game.
 ## Controls:
 * W,A,S,D - Walking
 * Space - Cast spell
-* 1, 2 - Switch active spell
-* § - Open developer console
+* 1-9 - Switch active spell
+* §/F1 - Open developer console
+* Escape - Pause
 
 ## Dev console commands:
 x and y can always be any numbers, int or floating point.
 ### noclip
 Toggles player collision with walls.
-### tp *target* *x* *y*
-Teleports the target to given coordinate. Availible targets are: 
-* player
-### spawn *npc* *x* *y*
-Spawns a given npc on the given coordinates. Availible npcs are:
-* slime
+### setcolor *target* *r* *g* *b*
+Sets the color of the given interface. Availile targets are:
+* uigrid
+### setplayerval *attribute* *amount*
+Sets a given attribute of the player to a value. Availible attributes are:
+* hp
+* mana
+* maxHp
+* maxMana
+* speedmult - *Multiplier of the players movement speed*
 ### setvisible *target* *bool*
 Sets the visibility of the given interface. Availible targets are:
 * uigrid
@@ -41,6 +46,9 @@ Sets the visibility of the given interface. Availible targets are:
 Sets the amount of vertical lines in the uigrid.
 ### setylines uigrid *amount*
 Sets the amount of horizontal lines in the uigrid.
-### setcolor *target* *r* *g* *b*
-Sets the color of the given interface. Availile targets are:
-* uigrid
+### spawn *npc* *x* *y*
+Spawns a given npc on the given coordinates. Availible npcs are:
+* slime
+### tp *target* *x* *y*
+Teleports the target to given coordinate. Availible targets are: 
+* player

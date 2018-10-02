@@ -346,7 +346,7 @@ void PlayerStatBar::update(float newStat) {
 
 void PlayerStatBar::setMaxStat(float newStat) {
     maxStat = newStat;
-    update(maxStat);
+    update(stat);
 }
 
 PlayerHpBar::PlayerHpBar() {

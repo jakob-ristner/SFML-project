@@ -21,7 +21,7 @@ void Spell::setParams(std::string name, std::string spellType,
                       int manaCost) {
     this->name = name;
     this->spellType = spellType;
-    this->manacost = manaCost;
+    this->manaCost = manaCost;
     this->castTime = castTime;
 }
 
@@ -44,6 +44,10 @@ int Spell::getCastTime() {
 
 void Spell::update(float dt) {
     
+}
+
+float Spell::getManaCost() {
+    return manaCost;
 }
 
 float Spell::getCooldown() {

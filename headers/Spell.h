@@ -18,17 +18,19 @@ public:
     void setAnimation(Animation anim);
     std::string name;
     std::string spellType;
-    int manacost;
     virtual int getCastTime();
     virtual float getCooldown();
     virtual float getCooldownTimer();
     virtual void update(float dt);
     bool isReady;
 
+    float getManaCost();
+
 protected:
     int castTime;
     float cooldown;
     float cooldownTimer;
+    float manaCost;
     Animation anim;
     bool isAnimated = false;
 };

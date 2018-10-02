@@ -16,8 +16,7 @@ settings(settings), enemyFactory(enemyFactory) {
     this->player = player;
     commandPointers.push_back(&DevConsole::noclip);
     commandPointers.push_back(&DevConsole::setcolor);
-    commandPointers.push_back(&DevConsole::setlevel);
-    commandPointers.push_back(&DevConsole::setmovespeed);
+    commandPointers.push_back(&DevConsole::setplayerval);
     commandPointers.push_back(&DevConsole::setvisible);
     commandPointers.push_back(&DevConsole::setxlines);
     commandPointers.push_back(&DevConsole::setylines);
@@ -53,8 +52,7 @@ bool DevConsole::open(sf::RenderWindow &window, Player &player) {
     oldWindow.create(window.getSize().x, window.getSize().y);
     oldWindow.update(window);
 
-    sf::RectangleShape oldTextHolder(sf::Vector2f(window.getSize().x, window.getSize().y));
-    oldTextHolder.setTexture(&oldWindow);
+    sf::RectangleShape oldTextHolder(sf::Vector2f(window.getSize().x, window.getSize().y)); oldTextHolder.setTexture(&oldWindow);
     oldTextHolder.setPosition(window.mapPixelToCoords(sf::Vector2i(0, 0)));
 
     sf::Text text;
@@ -253,26 +251,62 @@ void DevConsole::noclip() {
     settings.playerColliding = !settings.playerColliding;
 }
 
-void DevConsole::setlevel() {
-    if (getWord(1) == "player") {
-        int newLevel;
+// Sets an attribute of player
+void DevConsole::setplayerval() {
+    std::string arg1 = getWord(1);
+    std::string arg2 = getWord(2);
+    if (arg1 == "speedmult") {
+        float newMult;
         try {
-            newLevel = std::stoi(getWord(2));
-        } catch (std::invalid_argument e) {
-            newLevel = (*player).getLevel();
-        }
-        (*player).setLevel(newLevel);
-    }
-}
-
-void DevConsole::setmovespeed() {
-    if (getWord(1) == "player") {
-        float moveSpeed;
-        try {
-            moveSpeed = std::stof(getWord(2));
-            (*player).setMoveSpeed(moveSpeed);
+            newMult = std::stof(arg2);
+            (*player).setSpeedMult(newMult);
         } catch (std::invalid_argument e) {
             print("Invalid speed");
+        }
+    } else if (arg1 == "level") {
+        int newLevel;
+        try {
+            newLevel = std::stof(arg2);
+            if (newLevel <= 0) { throw(std::invalid_argument("Negative level")); }
+            (*player).setLevel(newLevel);
+        } catch (std::invalid_argument e) {
+            print("Invalid level");
+        }
+    } else if (arg1 == "mana") {
+        float newMana;
+        try {
+            newMana = std::stof(arg2);
+            if (newMana < 0) { throw(std::invalid_argument("Negative mana")); }
+            (*player).setMana(newMana);
+        } catch (std::invalid_argument e) {
+            print("Invalid mana");
+        }
+    } else if (arg1 == "maxmana") {
+        float newMana;
+        try {
+            newMana = std::stof(arg2);
+            if (newMana < 0) { throw(std::invalid_argument("Negative mana")); }
+            (*player).setMaxMana(newMana);
+        } catch (std::invalid_argument e) {
+            print("Invalid mana");
+        }
+    } else if (arg1 == "hp") {
+        float newHp;
+        try {
+            newHp = std::stof(arg2);
+            if (newHp < 0) { throw(std::invalid_argument("Negative hp")); }
+            (*player).setHp(newHp);
+        } catch (std::invalid_argument e) {
+            print("Invalid hp");
+        }
+    } else if (arg1 == "maxhp") {
+        float newHp;
+        try {
+            newHp = std::stof(arg2);
+            if (newHp < 0) { throw(std::invalid_argument("Negative hp")); }
+            (*player).setMaxHp(newHp);
+        } catch (std::invalid_argument e) {
+            print("Invalid hp");
         }
     }
 }
