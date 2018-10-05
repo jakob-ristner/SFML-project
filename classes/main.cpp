@@ -97,8 +97,8 @@ int main() {
         //spellIcons.push_back(SpellBarIcon(i + 1));
     //}
     SpellBar mainSpellBar = SpellBar(9);
-    mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - (mainSpellBar.getSize().x / 2), Settings::WINDOW_HEIGHT - 40));
-    //mainSpellBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2 - 1400, Settings::WINDOW_HEIGHT - 100));
+    mainSpellBar.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2 - (mainSpellBar.getSize().x / 2), settings.WINDOW_HEIGHT - 40));
+    //mainSpellBar.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2 - 1400, settings.WINDOW_HEIGHT - 100));
     layer1.add(&mainSpellBar);
     player.spellBar = &mainSpellBar;
 
@@ -108,22 +108,23 @@ int main() {
     // Player interface layer 1
     RenderLayer playerInterfaces;
     playerInterfaces.add(&(player.uiCastBar));
-    player.uiCastBar.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2, Settings::WINDOW_HEIGHT - 72));
+    player.uiCastBar.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT - 72));
     PlayerLevelIcon levelIcon;
     levelIcon.update(player.getLevel());
     playerInterfaces.add(&levelIcon);
     player.setLevelIcon(&levelIcon);
+    levelIcon.setPosition(sf::Vector2f(10, 18));
     playerInterfaces.add(&playerHpBar);
-    playerHpBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 75));
+    playerHpBar.setPosition(sf::Vector2f(110, 31));
 
     PlayerStaminaBar staminaBar;
-    staminaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 31));
+    staminaBar.setPosition(sf::Vector2f(110, 75));
     staminaBar.setMaxStat(100);
     staminaBar.update(100);
     playerInterfaces.add(&staminaBar);
     
     PlayerManaBar playerManaBar;
-    playerManaBar.setPosition(sf::Vector2f(110, Settings::WINDOW_HEIGHT - 53));
+    playerManaBar.setPosition(sf::Vector2f(110, 53));
     playerManaBar.setMaxStat(100);
     playerInterfaces.add(&playerManaBar);
     playerInterfaces.add(&mainSpellBar);
@@ -198,10 +199,10 @@ int main() {
 
         mousePos = sf::Mouse::getPosition(window);
 
-        mousePos.y -= std::min(0, (int)(Settings::WINDOW_HEIGHT  / 2 - player.getPos().y));
-        mousePos.x -= std::min(0, (int)(Settings::WINDOW_WIDTH / 2 - player.getPos().x));
-        mousePos.y += std::min(0, (int)((map.getSize().y * Settings::TILESIZE - Settings::WINDOW_HEIGHT / 2) - player.getPos().y));
-        mousePos.x += std::min(0, (int)((map.getSize().x * Settings::TILESIZE - Settings::WINDOW_WIDTH / 2) - player.getPos().x));
+        mousePos.y -= std::min(0, (int)(settings.WINDOW_HEIGHT  / 2 - player.getPos().y));
+        mousePos.x -= std::min(0, (int)(settings.WINDOW_WIDTH / 2 - player.getPos().x));
+        mousePos.y += std::min(0, (int)((map.getSize().y * settings.TILESIZE - settings.WINDOW_HEIGHT / 2) - player.getPos().y));
+        mousePos.x += std::min(0, (int)((map.getSize().x * settings.TILESIZE - settings.WINDOW_WIDTH / 2) - player.getPos().x));
         player.setMousePos(sf::Vector2f(mousePos.x, mousePos.y));
 
         player.setMouseAngle(getAngle(player.getPos(),
@@ -240,8 +241,8 @@ int main() {
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
         // Moving the ui layer to ensure that it follows the screen
-        playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
-        debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
+        playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
+        debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
         // Collision with cell linkers
         for (CellDoor &door : cellDoors) {
             if (door.getCollider().isColliding(&playerCol)) {
@@ -279,10 +280,9 @@ int main() {
 
         player.draw(window);
         window.draw(foreGround);
-        //window.draw(layer1);
-        window.draw(playerInterfaces);
         enemyFactory.draw(window);
         map.drawAnimatedTerrain(window);
+        window.draw(playerInterfaces);
         window.draw(debugLayer);
         window.display();
     }

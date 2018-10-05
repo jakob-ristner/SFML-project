@@ -117,7 +117,7 @@ void Player::update(float dt) {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         casting = true;
-        castProgress += 0.1 * (dt / Settings::TIMESCALE);
+        castProgress += 0.1 * (dt / settings.TIMESCALE);
         if (castProgress > (*spellInventory[selectedSpell]).getCastTime() 
             && (*spellInventory[selectedSpell]).isReady) {
           castSpell();

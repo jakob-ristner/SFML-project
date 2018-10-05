@@ -263,3 +263,16 @@ private:
     float blinkDuration = 2000;
     float blinkTimer = blinkDuration;
 };
+
+class SettingsMenu {
+public:
+    SettingsMenu();
+    ~SettingsMenu();
+
+    bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
+private:
+    sf::RectangleShape background;
+    // Tab 1
+    UiText window_width;
+    UiText window_height;
+};

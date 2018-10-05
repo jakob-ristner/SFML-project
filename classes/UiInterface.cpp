@@ -27,7 +27,7 @@ CastBar::CastBar() {
     background.setSize(sf::Vector2f(200, 15));
     background.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
+    background.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2,
                                         600));
     background.setFillColor(sf::Color(31, 31, 31));
     background.setOutlineColor(sf::Color(51, 51, 51));
@@ -36,7 +36,7 @@ CastBar::CastBar() {
     foreground.setSize(sf::Vector2f(0, 15));
     foreground.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    foreground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
+    foreground.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2,
                                         600));
     foreground.setFillColor(sf::Color(0, 200, 255));
     position = background.getPosition();
@@ -301,13 +301,13 @@ std::vector<SpellBarIcon>* SpellBar::getIcons() {
 
 PlayerStatBar::PlayerStatBar() {
     background.setSize(sf::Vector2f(200.0f, 15.0f));
-    background.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - background.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    background.setPosition(sf::Vector2f((settings.WINDOW_WIDTH - background.getSize().x) / 2, settings.WINDOW_HEIGHT - 44.0f));
     background.setFillColor(sf::Color(31, 31, 31));
     background.setOutlineColor(sf::Color(51, 51, 51));
     background.setOutlineThickness(2);
 
     foreground.setSize(sf::Vector2f(200.0f, 15.0f));
-    foreground.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - foreground.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    foreground.setPosition(sf::Vector2f((settings.WINDOW_WIDTH - foreground.getSize().x) / 2, settings.WINDOW_HEIGHT - 44.0f));
     foreground.setFillColor(sf::Color(200, 0, 0));
 
     statText.setFillColor(sf::Color::White);
@@ -393,8 +393,6 @@ PlayerLevelIcon::PlayerLevelIcon() {
     levelText.setFontSize(40);
     levelText.setPosition(sf::Vector2f(-1 + 2, -14 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
     levelText.setFillColor(sf::Color::White);
-    setPosition(sf::Vector2f(10, (float) Settings::WINDOW_HEIGHT - background.getRadius() - 10));
-
 }
 
 PlayerLevelIcon::~PlayerLevelIcon() {
@@ -423,7 +421,7 @@ void PlayerLevelIcon::update(float newLevel) {
 }
 
 UiGrid::UiGrid() {
-    text.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT, false);
+    text.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT, false);
         visible = false;
     xAmount = 8;
     yAmount = 8;
@@ -467,15 +465,15 @@ void UiGrid::setYLines(int amount) {
 void UiGrid::render() {
     sf::RectangleShape line;
     line.setFillColor(lineColor);
-    line.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, 1));
+    line.setSize(sf::Vector2f(settings.WINDOW_WIDTH, 1));
     text.clear(sf::Color::Transparent);
     for (float y = 0; y < yAmount; y++) {
-        line.setPosition(sf::Vector2f(0, y * Settings::WINDOW_HEIGHT / yAmount));
+        line.setPosition(sf::Vector2f(0, y * settings.WINDOW_HEIGHT / yAmount));
         text.draw(line);
     }
-    line.setSize(sf::Vector2f(1, Settings::WINDOW_HEIGHT));
+    line.setSize(sf::Vector2f(1, settings.WINDOW_HEIGHT));
     for (float x = 0; x < xAmount; x++) {
-        line.setPosition(sf::Vector2f(x * Settings::WINDOW_WIDTH / xAmount, 0));
+        line.setPosition(sf::Vector2f(x * settings.WINDOW_WIDTH / xAmount, 0));
         text.draw(line);
     }
 
@@ -570,22 +568,22 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
         float startOpacity, float finalOpacity) {
     
     float currentOpacity = startOpacity;
-    //bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    //bgTexture.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT);
     //bgTexture.update(window);
     
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - settings.WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - settings.WINDOW_HEIGHT / 2;
     
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
     
     bgRibbon.setPosition(sf::Vector2f(ribbonPos, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(400, settings.WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
     bgRibbon.setRotation(-45);
     
-    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setSize(sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, finalOpacity));
     
@@ -682,7 +680,7 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
 bool PauseMenu::playCloseAnim(sf::RenderWindow &window, sf::Clock &clock, 
         sf::View &viewport) {
     return playSlideAnim(window, clock, viewport, topLeftPos.x + 20, 
-                         topLeftPos.x + Settings::WINDOW_WIDTH, 80, 0);
+                         topLeftPos.x + settings.WINDOW_WIDTH, 80, 0);
 }
 
 // Opens the pause menu. Handles drawing, updating, window and keyboard events.
@@ -697,7 +695,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     // Gets current screen from the window and saves it for drawing every
     // frame. This saves a lot of processing power by not having to draw
     // every entity several times.
-    bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    bgTexture.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT);
     bgTexture.update(window);
 
 
@@ -705,8 +703,8 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     // This is done because the player is not always in the center
     // of the screen and we already have a reference of the window.
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - settings.WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - settings.WINDOW_HEIGHT / 2;
 
     // Play start animation and store wether the window should be closed or not
     shouldClose = playStartAnim(window, clock, viewport);
@@ -715,11 +713,11 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bgSprite.setPosition(topLeftPos);
 
     bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(400, settings.WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
     bgRibbon.setRotation(-45);
 
-    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setSize(sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, 80));
 
@@ -798,4 +796,12 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
         window.display();
     }
     return shouldClose;
+}
+
+SettingsMenu::SettingsMenu() {
+    //background.setSize()
+}
+
+SettingsMenu::~SettingsMenu() {
+
 }

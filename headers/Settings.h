@@ -2,16 +2,27 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+// Supported resolutions:
+// 800x600
+// 1024x768
+// 1280x960
+// 1366x768
+// 1600x900
+// 1680x1050
+// 1920x1080
+
 class Settings {
 public:
     Settings();
     ~Settings();
 
-    const static int WINDOW_WIDTH = 1400;
-    const static int WINDOW_HEIGHT = 800;
-  
-    const static int TIMESCALE = 10;
-    const static int TILESIZE = 32;
+    int WINDOW_WIDTH = 800;
+    int WINDOW_HEIGHT = 600;
+ 
+    int TIMESCALE = 10;
+    int TILESIZE = 32;
   
     bool playerColliding = true;
 };
+
+extern Settings settings;
