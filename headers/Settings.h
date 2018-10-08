@@ -16,8 +16,8 @@ public:
     Settings();
     ~Settings();
 
-    int WINDOW_WIDTH = 1600;
-    int WINDOW_HEIGHT = 900;
+    int WINDOW_WIDTH = 800;
+    int WINDOW_HEIGHT = 600;
  
     int TIMESCALE = 10;
     int TILESIZE = 32;

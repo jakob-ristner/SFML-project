@@ -13,10 +13,10 @@ public:
     virtual void setPosition(sf::Vector2f pos)=0;
     void toggleDebugMode();
     sf::Font mainFont;
+    bool debugMode = false;
 
 protected:
     sf::Vector2f position;
-    bool debugMode = false;
 };
 
 // Class representing and implementing the players spell
@@ -55,6 +55,7 @@ public:
     void setFillColor(sf::Color color);
     void setFont(sf::Font &font);
     void setFontSize(unsigned int size);
+    void setRotation(float angle) { text.setRotation(angle); }
 
     sf::Vector2f getDims();
     sf::Vector2f getPosition() { return text.getPosition(); }
@@ -205,6 +206,27 @@ private:
     int yAmount;
 };
 
+class DropDownMenu: public UiElement {
+public:
+    DropDownMenu();
+    ~DropDownMenu();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void setOptions(std::vector<std::string> options);
+    void toggleExpand();
+    void onClickEvent(sf::Vector2f pos);
+private:
+    bool expanded = false;
+    sf::RectangleShape background;
+    UiText downArrow;
+    UiText selectedOption;
+    UiText allOptions;
+    std::vector<std::string> options;
+    std::vector<sf::RectangleShape> debugShapes;
+};
+
 class StatusMessage {
 public:
     StatusMessage();
@@ -271,9 +293,19 @@ public:
     ~SettingsMenu();
 
     bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
+    void openGraphicsTab();
 private:
+    std::string openTab;
     sf::RectangleShape background;
+    sf::RectangleShape inactiveTabs;
+    sf::RectangleShape activeTab;
+    sf::Sprite bgSprite;
+    sf::Texture bgTexture;
+    sf::Vector2f topLeftPos;
+    sf::Vector2f viewCenter;
     // Tab 1
-    UiText window_width;
-    UiText window_height;
+    UiText graphicsTitle;
+    UiText resolution;
+    DropDownMenu resolutionOptions;
+    std::vector<std::string> resOptions;
 };
