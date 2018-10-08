@@ -262,6 +262,7 @@ private:
     const int nOptions = 4;
     float blinkDuration = 2000;
     float blinkTimer = blinkDuration;
+    float ribbonAngle = -20;
 };
 
 class SettingsMenu {

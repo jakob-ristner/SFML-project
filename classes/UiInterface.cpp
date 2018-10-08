@@ -6,6 +6,8 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
 
+#define PI 3.14159265
+
 UiElement::UiElement() {
     position = sf::Vector2f(0, 0);
     mainFont.loadFromFile("font.ttf");
@@ -511,7 +513,7 @@ std::string StatusMessage::getMessage() {
 }
 
 PauseMenu::PauseMenu() {
-    title.setFontSize(60);
+    title.setFontSize(40);
     title.setString("Paused");
     title.setFillColor(sf::Color::White);
 
@@ -522,13 +524,14 @@ PauseMenu::PauseMenu() {
     for (int i = 0; i < nOptions; i++) {
        menuOptions[i] = UiText();
        menuOptions[i].setFont(menuOptions[i].mainFont);
-       menuOptions[i].setFontSize(50);
+       menuOptions[i].setFontSize(30);
        menuOptions[i].setFillColor(sf::Color::White);
     }
     menuOptions[0].setString("Resume");
     menuOptions[1].setString("Inventory");
     menuOptions[2].setString("Settings");
     menuOptions[3].setString("Exit");
+    selector.setFontSize(30);
 }
 
 PauseMenu::~PauseMenu() {
@@ -546,8 +549,10 @@ void PauseMenu::moveSelector(int dir) {
         selectedOption = nOptions - 1;
     }
     selector.setPosition(sf::Vector2f(
-                topLeftPos.x + 250 + selectedOption * 100,
-                topLeftPos.y + 120 + selectedOption * 100));
+                topLeftPos.x + 320 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100,
+                topLeftPos.y + 120 + cos((ribbonAngle + 90) * PI/180)selectedOption * 100));
+    // FIX THIS
+                    topLeftPos.x + 150 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
     selector.setString(">                           <");
     blinkTimer = blinkDuration;
 }
@@ -590,7 +595,6 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
     title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
     titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
     
-    selector.setFontSize(50);
     selector.setString("");
     //selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
     
@@ -713,9 +717,9 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bgSprite.setPosition(topLeftPos);
 
     bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(400, settings.WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(300, settings.WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
-    bgRibbon.setRotation(-45);
+    bgRibbon.setRotation(ribbonAngle);
 
     bgDim.setSize(sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
@@ -724,15 +728,14 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     title.setPosition(sf::Vector2f(topLeftPos.x + 260, topLeftPos.y + 10));
     titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
 
-    selector.setFontSize(50);
     selector.setString(">                           <");
-    selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
+    selector.setPosition(sf::Vector2f(topLeftPos.x + 320 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
 
     for (int i = 0; i < nOptions; i++) {
         sf::Vector2f dims = menuOptions[i].getDims();
         menuOptions[i].setPosition(sf::Vector2f(
-                    topLeftPos.x + 150 + i * 100 + (288 - dims.x / 2), 
-                    topLeftPos.y + 120 + i * 100));
+                    topLeftPos.x + 150 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                    topLeftPos.y + 120 + sin((ribbonAngle + 90)*PI/180) * i * 100));
     }
 
     bool isOpen = true;
