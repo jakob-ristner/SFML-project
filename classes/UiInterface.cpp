@@ -517,7 +517,7 @@ PauseMenu::PauseMenu() {
     title.setString("Paused");
     title.setFillColor(sf::Color::White);
 
-    titleSeparator.setSize(sf::Vector2f(400, 3));
+    titleSeparator.setSize(sf::Vector2f(270, 3));
     titleSeparator.setFillColor(sf::Color::White);
 
     menuOptions.resize(nOptions);
@@ -548,11 +548,10 @@ void PauseMenu::moveSelector(int dir) {
     } else if (selectedOption >= nOptions) {
         selectedOption = nOptions - 1;
     }
+    std::cout << ribbonAngle << std::endl;
     selector.setPosition(sf::Vector2f(
-                topLeftPos.x + 320 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100,
-                topLeftPos.y + 120 + cos((ribbonAngle + 90) * PI/180)selectedOption * 100));
-    // FIX THIS
-                    topLeftPos.x + 150 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                topLeftPos.x + 120 + cos((ribbonAngle + 90) * PI/180) * selectedOption * 100,
+                topLeftPos.y + 120 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100));
     selector.setString(">                           <");
     blinkTimer = blinkDuration;
 }
@@ -584,26 +583,28 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
     bgSprite.setPosition(topLeftPos);
     
     bgRibbon.setPosition(sf::Vector2f(ribbonPos, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(400, settings.WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(300, settings.WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
-    bgRibbon.setRotation(-45);
+    bgRibbon.setRotation(ribbonAngle);
     
     bgDim.setSize(sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, finalOpacity));
     
-    title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
-    titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+    //title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
+    //titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+    title.setPosition(sf::Vector2f(topLeftPos.x + 60, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
     
     selector.setString("");
     //selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
     
     for (int i = 0; i < nOptions; i++) {
-        sf::Vector2f dims = menuOptions[i].getDims();
-        menuOptions[i].setPosition(sf::Vector2f(
-                    ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
-                    topLeftPos.y + 120 + i * 100));
-    }
+            sf::Vector2f dims = menuOptions[i].getDims();
+            menuOptions[i].setPosition(sf::Vector2f(
+                        ribbonPos + 130 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                        topLeftPos.y + 120 + sin((ribbonAngle + 90)*PI/180) * i * 100));
+        }
     
     bool isRunning = true;
     bool shouldClose = false;
@@ -633,13 +634,13 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
         bgRibbon.move(sf::Vector2f(deltaX, 0));
         ribbonPos += deltaX;
         
-        title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
-        titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+        title.setPosition(sf::Vector2f(ribbonPos + 110, topLeftPos.y + 10));
+        titleSeparator.setPosition(sf::Vector2f(ribbonPos + 50, topLeftPos.y + 80));
         for (int i = 0; i < nOptions; i++) {
             sf::Vector2f dims = menuOptions[i].getDims();
             menuOptions[i].setPosition(sf::Vector2f(
-                        ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
-                        topLeftPos.y + 120 + i * 100));
+                        ribbonPos + 130 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                        topLeftPos.y + 120 + sin((ribbonAngle + 90)*PI/180) * i * 100));
         }
         
         if (finalOpacity - startOpacity > 0) {
@@ -725,11 +726,13 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, 80));
 
-    title.setPosition(sf::Vector2f(topLeftPos.x + 260, topLeftPos.y + 10));
-    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
+    title.setPosition(sf::Vector2f(topLeftPos.x + 130, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 70, topLeftPos.y + 80));
 
     selector.setString(">                           <");
-    selector.setPosition(sf::Vector2f(topLeftPos.x + 320 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
+    selector.setPosition(sf::Vector2f(
+                topLeftPos.x + 120 + cos((ribbonAngle + 90) * PI/180) * selectedOption * 100,
+                topLeftPos.y + 120 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100));
 
     for (int i = 0; i < nOptions; i++) {
         sf::Vector2f dims = menuOptions[i].getDims();
