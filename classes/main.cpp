@@ -18,6 +18,7 @@
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
 #include "../headers/Animation.h"
+#include "../headers/Explosion.h"
 #pragma endregion
 int main() {
     const sf::Color bgColor(51, 51, 51);
@@ -40,6 +41,9 @@ int main() {
     // Vector with all obstacles - kind of like a sprite group
     std::vector<Obstacle> obstacles;
     std::vector<CellDoor> cellDoors;
+
+    std::vector<Explosion> explosions;
+    explosions.push_back(Explosion(10, sf::Vector2f(400, 400), 10, 200));
 
     sf::Clock clock;
     
