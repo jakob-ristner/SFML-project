@@ -324,6 +324,55 @@ float MagicMissile::getCooldownTimer() {
 
 //MagicMissile Spell End//
 
+//Explode Spell Start//
+
+Explode::Explode(Player &player):
+player(player) {
+    castTime = 5;
+    this->player = player;
+    cooldown = 100;
+    cooldownTimer = 0;
+    isReady = true;
+    name = "Explode";
+    spellType = "Damage";
+    manaCost = 10;
+}
+
+Explode::~Explode() {
+    
+}
+
+void Explode::use() {
+
+    (*explosions).push_back(Explosion(100, sf::Vector2f(player.getPos().x - 100, player.getPos().y - 100), 20, 1000));
+
+    cooldownTimer = 0;
+    isReady = false;
+}
+
+int Explode::getCastTime() {
+    return castTime;
+}
+
+void Explode::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;
+    }
+}
+
+float Explode::getCooldownTimer() {
+    return cooldownTimer;
+}
+
+float Explode::getCooldown() {
+    return cooldown;
+}
+
+
+//Explode Spell End//
+
 //SprintSpell Spell Start//
 
 SprintSpell::SprintSpell(Player &player):

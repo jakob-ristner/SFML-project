@@ -129,6 +129,21 @@ private:
     sf::Texture texture;
 };
 
+class Explode: public Spell {
+public:
+    Explode(Player &player);
+    ~Explode();
+    void use() override;
+    int getCastTime() override;
+    void update(float dt) override;
+    float getCooldownTimer() override;
+    float getCooldown() override;
+private:
+    int castTime;
+    Player &player;
+    sf::Texture texture;
+};
+
 class SprintBuff: public Buff {
 public:
     SprintBuff();

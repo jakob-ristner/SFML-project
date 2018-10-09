@@ -69,10 +69,12 @@ int main() {
     Collider playerCol = player.getCollider();
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
+    Explode explode = Explode(player);
     SprintSpell sprint = SprintSpell(player);
     player.addSpell(&fireball);
-    player.addSpell(&sprint);
+    player.addSpell(&explode);
     player.addSpell(&magicMissile);
+    player.addSpell(&sprint);
 
     // Enemies
     EnemyFactory enemyFactory(player);
