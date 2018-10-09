@@ -217,6 +217,8 @@ public:
     void setOptions(std::vector<std::string> options);
     void toggleExpand();
     void onClickEvent(sf::Vector2f pos);
+
+    std::string getSelectedOption();
 private:
     bool expanded = false;
     sf::RectangleShape background;

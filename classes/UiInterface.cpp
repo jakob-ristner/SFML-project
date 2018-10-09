@@ -597,13 +597,17 @@ bool isOnTop(sf::Vector2f pos, sf::FloatRect box) {
 }
 
 void DropDownMenu::onClickEvent(sf::Vector2f pos) {
-    std::cout << "click" << std::endl;
     if (isOnTop(pos, sf::FloatRect(position.x, position.y, background.getSize().x, background.getSize().y))) {
         if (expanded) {
-            int index = std::floor((pos.x - position.x) / 22.3);
+            int index = std::floor((pos.y - position.y) / 22.3);
+            selectedOption.setString(options[index]);
         }
         toggleExpand();
     }
+}
+
+std::string DropDownMenu::getSelectedOption() {
+    return selectedOption.getString();
 }
 
 StatusMessage::StatusMessage() {
@@ -943,7 +947,6 @@ SettingsMenu::SettingsMenu() {
                   "1680x1050",
                   "1920x1080"};
     resolutionOptions.setOptions(resOptions);
-    resolutionOptions.debugMode = true;
 }
 
 SettingsMenu::~SettingsMenu() {
@@ -989,7 +992,8 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button){
                     case sf::Mouse::Button::Left:
-                        resolutionOptions.onClickEvent(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+                        resolutionOptions.onClickEvent(sf::Vector2f(event.mouseButton.x, event.mouseButton.y) + topLeftPos);
+                        std::string newResolution = resolutionOptions.getSelectedOption();
                         break;
                 }
             }
