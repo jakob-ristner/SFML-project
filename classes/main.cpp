@@ -43,7 +43,7 @@ int main() {
     std::vector<CellDoor> cellDoors;
 
     std::vector<Explosion> explosions;
-    explosions.push_back(Explosion(10, sf::Vector2f(400, 400), 10, 200));
+    explosions.push_back(Explosion(10, sf::Vector2f(400, 400), 10, 2000));
 
     sf::Clock clock;
     
@@ -268,7 +268,13 @@ int main() {
                 // In future the enemyFactory should also be reset and spawn new enemies
             }
         }
-
+        
+        for (int i = 0; i < explosions.size(); i++) {
+            explosions[i].update(dt);
+            if (explosions[i].kill) {
+                explosions.erase(explosions.begin() + i);
+            }
+        }
 
 
         // Drawing
@@ -279,6 +285,10 @@ int main() {
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].draw(window);
+        }
+
+        for (int i = 0; i < explosions.size(); i++) {
+            explosions[i].draw(window);
         }
 
         player.draw(window);
