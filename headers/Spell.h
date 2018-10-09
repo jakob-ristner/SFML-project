@@ -4,6 +4,7 @@
 #include "./Npc.h"
 #include "./Collider.h"
 #include "./Animation.h"
+#include "./Explosion.h"
 
 class Player;
 class Enemy;
@@ -13,8 +14,6 @@ public:
     Spell();
     ~Spell();
     virtual void use();
-    void setParams(std::string name, std::string spellType,
-                   int manaCost);
     void setAnimation(Animation anim);
     std::string name;
     std::string spellType;
@@ -24,7 +23,9 @@ public:
     virtual void update(float dt);
     bool isReady;
 
+    static  std::vector<Explosion> *explosions;
     float getManaCost();
+private:
 
 protected:
     int castTime;

@@ -45,6 +45,8 @@ int main() {
     std::vector<Explosion> explosions;
     explosions.push_back(Explosion(10, sf::Vector2f(400, 400), 10, 2000));
 
+    Spell::explosions = &explosions;
+
     sf::Clock clock;
     
     // This stores and draws the background image of the map

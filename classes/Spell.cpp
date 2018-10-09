@@ -17,13 +17,11 @@ Spell::~Spell() {
 
 }
 
-void Spell::setParams(std::string name, std::string spellType,
-                      int manaCost) {
-    this->name = name;
-    this->spellType = spellType;
-    this->manaCost = manaCost;
-    this->castTime = castTime;
-}
+
+
+
+
+std::vector<Explosion> *Spell::explosions;
 
 void Spell::setAnimation(Animation anim) {
     this->anim = anim;
@@ -185,11 +183,13 @@ Fireball::Fireball(Player &player):
     texture.loadFromFile("./resources/spell_textures/altfire.png");
     texture.setRepeated(true);
     anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
-    setParams("Fireball", "Damage", 20);
     this->player = player;
     cooldown = 2000;
     cooldownTimer = 0;
     isReady = true;
+    name = "Fireball";
+    spellType = "Damage";
+    manaCost = 20;
 }
 
 Fireball::~Fireball() {
@@ -254,10 +254,12 @@ MagicMissile::MagicMissile(Player &player):
     castTime = 4;
     this->player = player;
     texture.loadFromFile("./resources/spell_textures/magicmissile.png");
-    setParams("Magic Missile", "Damage", 8);
     cooldown = 1000;
     cooldownTimer = 0;
     isReady = true;
+    name = "Magic Missile";
+    spellType = "Damage";
+    manaCost = 8;
 };
 
 MagicMissile::~MagicMissile() {
@@ -328,10 +330,12 @@ SprintSpell::SprintSpell(Player &player):
 player(player) {
     castTime  = 0;
     this->player = player;
-    setParams("Sprint", "Buff", 20);
     cooldown = 1000;
     cooldownTimer = 0;
     isReady = true;
+    name = "Sprint";
+    spellType = "Buff";
+    manaCost = 30;
 }
 
 SprintSpell::~SprintSpell() {
