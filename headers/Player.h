@@ -12,7 +12,7 @@ class Buff;
 class Spell;
 class Player {
 public:
-    Player(sf::RectangleShape body);
+    Player(sf::RectangleShape body, Settings *settings);
     Player();
     ~Player();
     sf::Vector2f getPos();
@@ -73,7 +73,7 @@ private:
     sf::Vector2f vel;
     sf::Vector2f acc;
     sf::RectangleShape body;
-    Settings settings;
+    Settings *settings;
     int selectedSpell;
     float speedMult;
     float playeracc;

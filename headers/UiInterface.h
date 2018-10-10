@@ -255,7 +255,7 @@ public:
 
 class PauseMenu {
 public:
-    PauseMenu();
+    PauseMenu(Settings *settings);
     ~PauseMenu();
     bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
 
@@ -287,16 +287,20 @@ private:
     float blinkDuration = 2000;
     float blinkTimer = blinkDuration;
     float ribbonAngle = -20;
+
+    Settings *settings;
 };
 
 class SettingsMenu {
 public:
-    SettingsMenu();
+    SettingsMenu(Settings *settings);
     ~SettingsMenu();
 
     bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
     void openGraphicsTab();
+    void openControlsTab();
 private:
+    Settings *settings;
     std::string openTab;
     sf::RectangleShape background;
     sf::RectangleShape inactiveTabs;
@@ -310,4 +314,8 @@ private:
     UiText resolution;
     DropDownMenu resolutionOptions;
     std::vector<std::string> resOptions;
+    sf::FloatRect graphicsTitleClickBox;
+    // Tab 2
+    UiText controlsTitle;
+    sf::FloatRect controlsTitleClickBox;
 };

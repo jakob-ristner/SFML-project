@@ -69,8 +69,7 @@ void CastBar::setPosition(sf::Vector2f pos) {
 // of the foreground.
 // Args:
 // newProgress - Float representing how many seconds the spell has been
-//               casted for
-// castTime    - Float representing the total casting time of a spell
+//               casted for // castTime    - Float representing the total casting time of a spell
 // isCasting   - Boolean coming from player, tells the bar if the spell
 //               has been canceled or not
 void CastBar::update(float newProgress, float castTime, bool isCasting) {
@@ -630,7 +629,7 @@ std::string StatusMessage::getMessage() {
 
 }
 
-PauseMenu::PauseMenu() {
+PauseMenu::PauseMenu(Settings *settings) {
     title.setFontSize(40);
     title.setString("Paused");
     title.setFillColor(sf::Color::White);
@@ -650,6 +649,7 @@ PauseMenu::PauseMenu() {
     menuOptions[2].setString("Settings");
     menuOptions[3].setString("Exit");
     selector.setFontSize(30);
+    this->settings = settings;
 }
 
 PauseMenu::~PauseMenu() {
@@ -694,18 +694,18 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
     //bgTexture.update(window);
     
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - settings.WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - settings.WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
     
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
     
     bgRibbon.setPosition(sf::Vector2f(ribbonPos, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(300, settings.WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(300, (*settings).WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
     bgRibbon.setRotation(ribbonAngle);
     
-    bgDim.setSize(sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
+    bgDim.setSize(sf::Vector2f((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, finalOpacity));
     
@@ -803,7 +803,7 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
 bool PauseMenu::playCloseAnim(sf::RenderWindow &window, sf::Clock &clock, 
         sf::View &viewport) {
     return playSlideAnim(window, clock, viewport, topLeftPos.x + 20, 
-                         topLeftPos.x + settings.WINDOW_WIDTH, 80, 0);
+                         topLeftPos.x + (*settings).WINDOW_WIDTH, 80, 0);
 }
 
 // Opens the pause menu. Handles drawing, updating, window and keyboard events.
@@ -818,7 +818,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     // Gets current screen from the window and saves it for drawing every
     // frame. This saves a lot of processing power by not having to draw
     // every entity several times.
-    bgTexture.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT);
+    bgTexture.create((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT);
     bgTexture.update(window);
 
 
@@ -826,8 +826,8 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     // This is done because the player is not always in the center
     // of the screen and we already have a reference of the window.
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - settings.WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - settings.WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
 
     // Play start animation and store wether the window should be closed or not
     shouldClose = playStartAnim(window, clock, viewport);
@@ -836,11 +836,11 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     bgSprite.setPosition(topLeftPos);
 
     bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(300, settings.WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(300, (*settings).WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
     bgRibbon.setRotation(ribbonAngle);
 
-    bgDim.setSize(sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
+    bgDim.setSize(sf::Vector2f((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, 80));
 
@@ -874,14 +874,11 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
                 shouldClose = true;
                 break;
             case sf::Event::KeyPressed:
-                switch (event.key.code) {
-                case sf::Keyboard::Key::W:
+                if (event.key.code == (*settings).keyMap.up) {
                     moveSelector(-1);
-                    break;
-                case sf::Keyboard::Key::S:
+                } else if (event.key.code == sf::Keyboard::Key::S) {
                     moveSelector(1);
-                    break;
-                case sf::Keyboard::Key::E:
+                } else if (event.key.code == sf::Keyboard::Key::E) {
                     if (selectedOption == 0) { 
                         isOpen = false; 
                         playCloseAnim(window, clock, viewport);
@@ -889,15 +886,13 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
                         isOpen = false; 
                         shouldClose = true; 
                     } else if (selectedOption == 2) {
-                        SettingsMenu settingsMenu;
+                        SettingsMenu settingsMenu(settings);
                         shouldClose = settingsMenu.open(window, clock, viewport);
                     }
-                    break;
-                case sf::Keyboard::Key::Escape:
+                } else if (event.key.code == sf::Keyboard::Key::Escape) {
                     isOpen = false;
                     playCloseAnim(window, clock, viewport);
                 }
-                break;
             }
         }
         blinkTimer -= dt;
@@ -925,7 +920,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     return shouldClose;
 }
 
-SettingsMenu::SettingsMenu() {
+SettingsMenu::SettingsMenu(Settings *settings) {
     background.setSize(sf::Vector2f(750, 550));
     background.setFillColor(sf::Color(51, 51, 51));
     inactiveTabs.setSize(sf::Vector2f(750, 46));
@@ -935,6 +930,10 @@ SettingsMenu::SettingsMenu() {
     graphicsTitle.setFontSize(30);
     graphicsTitle.setString("Graphics");
     graphicsTitle.setFillColor(sf::Color::White);
+
+    controlsTitle.setFontSize(30);
+    controlsTitle.setString("Controls");
+    controlsTitle.setFillColor(sf::Color::White);
 
     resolution.setFontSize(20);
     resolution.setFillColor(sf::Color::White);
@@ -947,6 +946,7 @@ SettingsMenu::SettingsMenu() {
                   "1680x1050",
                   "1920x1080"};
     resolutionOptions.setOptions(resOptions);
+    this->settings = settings;
 }
 
 SettingsMenu::~SettingsMenu() {
@@ -955,16 +955,21 @@ SettingsMenu::~SettingsMenu() {
 
 bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - settings.WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - settings.WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
     background.setPosition(topLeftPos + sf::Vector2f(25, 25));
     inactiveTabs.setPosition(topLeftPos + sf::Vector2f(25, 25));
 
-    bgTexture.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT);
+    std::cout << (*settings).WINDOW_WIDTH << " " << (*settings).WINDOW_HEIGHT << std::endl;
+    bgTexture.create((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT);
     bgTexture.update(window);
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
 
+    graphicsTitleClickBox = sf::FloatRect(background.getPosition().x, background.getPosition().y, background.getPosition().x + 160, background.getPosition().y + inactiveTabs.getSize().y);
+    controlsTitleClickBox = sf::FloatRect(background.getPosition().x + 160, background.getPosition().y, background.getPosition().x + 320, background.getPosition().y + inactiveTabs.getSize().y);
+    graphicsTitle.setPosition(topLeftPos + sf::Vector2f(40, 28));
+    controlsTitle.setPosition(topLeftPos + sf::Vector2f(200, 28));
     openTab = "graphics";
     openGraphicsTab();
 
@@ -994,6 +999,11 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
                     case sf::Mouse::Button::Left:
                         resolutionOptions.onClickEvent(sf::Vector2f(event.mouseButton.x, event.mouseButton.y) + topLeftPos);
                         std::string newResolution = resolutionOptions.getSelectedOption();
+                        if (isOnTop(sf::Vector2f(event.mouseButton.x, event.mouseButton.y),graphicsTitleClickBox)) {
+                            openGraphicsTab();
+                        } else if (isOnTop(sf::Vector2f(event.mouseButton.x, event.mouseButton.y),controlsTitleClickBox)) {
+                            openControlsTab();
+                        } 
                         break;
                 }
             }
@@ -1003,10 +1013,12 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
         window.draw(background);
         if (openTab == "graphics") {
             window.draw(resolution);
+        } else if (openTab == "controls") {
         }
         window.draw(inactiveTabs);
         window.draw(activeTab);
         window.draw(graphicsTitle);
+        window.draw(controlsTitle);
         window.draw(resolutionOptions);
         window.display();
     }
@@ -1016,8 +1028,12 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
 void SettingsMenu::openGraphicsTab() {
     resolution.setString("Resolution:");
     resolution.setPosition(topLeftPos + sf::Vector2f(40, 100));
-    graphicsTitle.setPosition(topLeftPos + sf::Vector2f(40, 28));
     activeTab.setPosition(background.getPosition());
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
     resolutionOptions.setPosition(background.getPosition() + sf::Vector2f(128, 78));
+}
+
+void SettingsMenu::openControlsTab() {
+    activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
+    activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
 }

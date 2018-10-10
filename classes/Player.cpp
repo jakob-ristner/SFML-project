@@ -8,12 +8,12 @@
 #include "../headers/Utils.h"
 #include "../headers/Collider.h"
 
-Player::Player(sf::RectangleShape body) {
+Player::Player(sf::RectangleShape body, Settings *settings) {
     pos = sf::Vector2f(0, 0);
+    this->settings = settings;
     speedMult = 1;
     switchedSpells = false;
     selectedSpell = 0;
-    settings = Settings();
     std::vector<sf::Sprite> projectiles = std::vector<sf::Sprite> {};
     spellInventory = std::vector<Spell *> {};
     buffs = std::vector<Buff*> {};
@@ -91,33 +91,33 @@ void Player::update(float dt) {
     casting = false;
     switchedSpells = false;
     pos = body.getPosition();
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.up)) {
         acc.y = -playeracc;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.down)) {
         acc.y = playeracc;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.left)) {
         acc.x = -playeracc;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.right)) {
         acc.x = playeracc;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) && selectedSpell != 0) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.spell1) && selectedSpell != 0) {
         selectedSpell = 0;
         switchedSpells = true;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2) && selectedSpell != 1) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.spell2) && selectedSpell != 1) {
         selectedSpell = 1;
         switchedSpells = true;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3) && selectedSpell != 2) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.spell3) && selectedSpell != 2) {
         selectedSpell = 2;
         switchedSpells = true;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.useSpell)) {
         casting = true;
-        castProgress += 0.1 * (dt / settings.TIMESCALE);
+        castProgress += 0.1 * (dt / (*settings).TIMESCALE);
         if (castProgress > (*spellInventory[selectedSpell]).getCastTime() 
             && (*spellInventory[selectedSpell]).isReady) {
           castSpell();
@@ -148,7 +148,7 @@ void Player::update(float dt) {
 
     vel = acc;
 
-    pos += vel * (dt / settings.TIMESCALE) * speedMult;
+    pos += vel * (dt / (*settings).TIMESCALE) * speedMult;
 
     body.setPosition(pos);
 

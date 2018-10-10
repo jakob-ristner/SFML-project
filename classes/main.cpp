@@ -19,7 +19,29 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Animation.h"
 #pragma endregion
+
 int main() {
+    Settings settings = Settings();
+    settings.keyMap.left  = sf::Keyboard::Key::A;
+    settings.keyMap.right = sf::Keyboard::D;
+    settings.keyMap.up    = sf::Keyboard::Key::W;
+    settings.keyMap.down  = sf::Keyboard::Key::S;
+
+    settings.keyMap.openConsole = sf::Keyboard::Key::F1;
+
+    settings.keyMap.spell1 = sf::Keyboard::Key::Num1;
+    settings.keyMap.spell2 = sf::Keyboard::Key::Num2;
+    settings.keyMap.spell3 = sf::Keyboard::Key::Num3;
+    settings.keyMap.spell4 = sf::Keyboard::Key::Num4;
+    settings.keyMap.spell5 = sf::Keyboard::Key::Num5;
+    settings.keyMap.spell6 = sf::Keyboard::Key::Num6;
+    settings.keyMap.spell7 = sf::Keyboard::Key::Num7;
+    settings.keyMap.spell8 = sf::Keyboard::Key::Num8;
+    settings.keyMap.spell9 = sf::Keyboard::Key::Num9;
+
+    settings.keyMap.useSpell = sf::Keyboard::Key::Space;
+
+
     const sf::Color bgColor(51, 51, 51);
     sf::Font font;
     sf::Vector2i mousePos;
@@ -27,7 +49,6 @@ int main() {
     font.loadFromFile("font.ttf");
 
     // Initialization of important stuff
-    Settings settings = Settings();
 
     sf::RenderWindow window(sf::VideoMode(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT), "SFML Dungeon Crawler", sf::Style::Close | sf::Style::Titlebar);
     window.setFramerateLimit(120);
@@ -57,7 +78,7 @@ int main() {
     
     // Player setup
     bool isRunning = true;
-    Player player = Player(sf::RectangleShape(sf::Vector2f(28.f, 28.f)));
+    Player player = Player(sf::RectangleShape(sf::Vector2f(28.f, 28.f)), &settings);
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
     sf::Event event;
     Collider playerCol = player.getCollider();
@@ -138,7 +159,7 @@ int main() {
     RenderLayer debugLayer;
     debugLayer.add(&interfaceGrid);
 
-    PauseMenu pauseMenu;
+    PauseMenu pauseMenu(&settings);
 
 
     // Main Game Loop
