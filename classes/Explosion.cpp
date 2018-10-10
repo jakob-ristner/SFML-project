@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+
 #include <vector>
 #include "../headers/Explosion.h"
 
@@ -42,7 +43,11 @@ float Explosion::getDamage() {
 }
 
 CollisionCircle Explosion::getCollider() {
-    return CollisionCircle(pos, rad);
+    return CollisionCircle(sf::Vector2f(pos.x + rad, pos.y + rad), rad);
+}
+
+void Explosion::onCollision(Enemy &enemy) {
+    enemy.hurt(dmg);
 }
 
 

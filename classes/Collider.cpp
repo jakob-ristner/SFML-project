@@ -130,6 +130,8 @@ sf::Vector2f SpriteCollider::getHalfSize() {
 }
 
 CollisionCircle::CollisionCircle(sf::Vector2f epicenter, float radius) {
+    this->epicenter = epicenter;
+    this->radius = radius;
 
 }
 
@@ -151,9 +153,14 @@ bool CollisionCircle::isColliding(CollisionBox *other) {
     
     sf::Vector2f closestPoint = clampVec(getEpicenter(), topleft, bottomright);
 
+    //std::cout << getDistance((*other).getPosition(), getEpicenter()) << std::endl;
+    //printVec(getEpicenter());
+    
     if (getDistance(closestPoint, getEpicenter()) < getRadius()) {
         return true;
+        
     } 
+    //printVec(getEpicenter());
     return false;
 }
 

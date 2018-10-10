@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "./Collider.h"
+#include "./Npc.h"
+
+class Enemy;
 
 class Explosion {
 public:
@@ -15,6 +18,7 @@ public:
     void draw(sf::RenderWindow &window);
     void update(float dt);
     CollisionCircle getCollider();
+    void onCollision(Enemy &enemy);
 
 
 private:

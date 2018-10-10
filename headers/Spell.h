@@ -7,6 +7,7 @@
 #include "./Explosion.h"
 
 class Player;
+class Explosion;
 class Enemy;
 class Buff;
 class Spell {

@@ -344,7 +344,7 @@ Explode::~Explode() {
 
 void Explode::use() {
 
-    (*explosions).push_back(Explosion(100, sf::Vector2f(player.getPos().x - 100, player.getPos().y - 100), 20, 1000));
+    (*explosions).push_back(Explosion(100, sf::Vector2f(player.getPos().x - 100, player.getPos().y - 100), 2, 1000));
 
     cooldownTimer = 0;
     isReady = false;

@@ -43,7 +43,6 @@ int main() {
     std::vector<CellDoor> cellDoors;
 
     std::vector<Explosion> explosions;
-    explosions.push_back(Explosion(10, sf::Vector2f(400, 400), 10, 2000));
 
     Spell::explosions = &explosions;
 
@@ -202,7 +201,7 @@ int main() {
                         break;
                 }
             }
-        }
+        }   
 
         mousePos = sf::Mouse::getPosition(window);
 
@@ -243,10 +242,12 @@ int main() {
                 }
             }
         }
+        
         enemyFactory.update(dt);
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
+        enemyFactory.explosionCollide(explosions);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) Settings::WINDOW_WIDTH / 2, (float) Settings::WINDOW_HEIGHT / 2));
