@@ -51,3 +51,7 @@ std::vector<std::string> strSplit(std::string str, char c) {
     output.push_back(buffer);
     return output;
 }
+
+float getDistance(sf::Vector2f vec1, sf::Vector2f vec2) {
+    return std::sqrt(std::pow(2, (vec1.x - vec2.x)) + std::pow(2, (vec1.y - vec2.y)));
+}

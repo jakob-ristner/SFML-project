@@ -51,3 +51,19 @@ private:
     sf::Sprite &body;
     sf::Vector2f velocity;
 };
+
+class CollisionCircle {
+public:
+    CollisionCircle(sf::Vector2f epicenter, float radius);
+    ~CollisionCircle();
+    
+    bool isColliding(CollisionCircle *other);
+    bool isColliding(CollisionBox *other);
+
+    sf::Vector2f getEpicenter();
+    float getRadius();
+    
+private:
+    sf::Vector2f epicenter;
+    float radius;
+};
