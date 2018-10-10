@@ -954,6 +954,7 @@ SettingsMenu::~SettingsMenu() {
 }
 
 bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+    toggleDebugMode();
     viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
@@ -966,8 +967,8 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
 
-    graphicsTitleClickBox = sf::FloatRect(background.getPosition().x, background.getPosition().y, background.getPosition().x + 160, background.getPosition().y + inactiveTabs.getSize().y);
-    controlsTitleClickBox = sf::FloatRect(background.getPosition().x + 160, background.getPosition().y, background.getPosition().x + 320, background.getPosition().y + inactiveTabs.getSize().y);
+    graphicsTitleClickBox = sf::FloatRect(background.getPosition().x, background.getPosition().y, 160, inactiveTabs.getSize().y);
+    controlsTitleClickBox = sf::FloatRect(background.getPosition().x + 160, background.getPosition().y, 160, inactiveTabs.getSize().y);
     graphicsTitle.setPosition(topLeftPos + sf::Vector2f(40, 28));
     controlsTitle.setPosition(topLeftPos + sf::Vector2f(200, 28));
     openTab = "graphics";
@@ -1015,12 +1016,25 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
             window.draw(resolution);
         } else if (openTab == "controls") {
         }
+        
         window.draw(inactiveTabs);
         window.draw(activeTab);
         window.draw(graphicsTitle);
         window.draw(controlsTitle);
         window.draw(resolutionOptions);
-        window.display();
+        if (debugMode) {
+            sf::RectangleShape tmp;
+            tmp.setOutlineColor(sf::Color::Red);
+            tmp.setFillColor(sf::Color(0, 0, 0, 0));
+            tmp.setOutlineThickness(1);
+            tmp.setSize(sf::Vector2f(graphicsTitleClickBox.width, graphicsTitleClickBox.height));
+            tmp.setPosition(sf::Vector2f(graphicsTitleClickBox.left, graphicsTitleClickBox.top));
+            window.draw(tmp);
+            tmp.setOutlineColor(sf::Color::Green);
+            tmp.setSize(sf::Vector2f(controlsTitleClickBox.width, controlsTitleClickBox.height));
+            tmp.setPosition(sf::Vector2f(controlsTitleClickBox.left, controlsTitleClickBox.top));
+            window.draw(tmp);
+        }window.display();
     }
     return shouldClose;
 }
@@ -1036,4 +1050,8 @@ void SettingsMenu::openGraphicsTab() {
 void SettingsMenu::openControlsTab() {
     activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
+}
+
+void SettingsMenu::toggleDebugMode() {
+    debugMode = !debugMode;
 }

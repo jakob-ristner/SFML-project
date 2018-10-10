@@ -299,7 +299,10 @@ public:
     bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
     void openGraphicsTab();
     void openControlsTab();
+    void toggleDebugMode();
+
 private:
+    bool debugMode = false;
     Settings *settings;
     std::string openTab;
     sf::RectangleShape background;
