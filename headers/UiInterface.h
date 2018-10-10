@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "./Settings.h"
 #include "./Animation.h"
-#include <iostream>
+#include "./Utils.h"
 
 // Abstract class representing a ui interface
 class UiElement: public sf::Drawable {
@@ -321,4 +322,23 @@ private:
     // Tab 2
     UiText controlsTitle;
     sf::FloatRect controlsTitleClickBox;
+    std::vector<std::string> bindingNames = {
+        "Left",
+        "Right",
+        "Up",
+        "Down",
+        "Open Console",
+        "Select Spell 1",
+        "Select Spell 2",
+        "Select Spell 3",
+        "Select Spell 4",
+        "Select Spell 5",
+        "Select Spell 6",
+        "Select Spell 7",
+        "Select Spell 8",
+        "Select Spell 9",
+        "Use Spell"
+    };
+    // Defined in .cpp since it needs settings
+    std::vector<std::string> bindingKeyNames;
 };

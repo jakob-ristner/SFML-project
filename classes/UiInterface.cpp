@@ -947,6 +947,23 @@ SettingsMenu::SettingsMenu(Settings *settings) {
                   "1920x1080"};
     resolutionOptions.setOptions(resOptions);
     this->settings = settings;
+    bindingKeyNames = {
+        getKeyName((*settings).keyMap.left),
+        getKeyName((*settings).keyMap.right),
+        getKeyName((*settings).keyMap.up),
+        getKeyName((*settings).keyMap.down),
+        getKeyName((*settings).keyMap.openConsole),
+        getKeyName((*settings).keyMap.spell1),
+        getKeyName((*settings).keyMap.spell2),
+        getKeyName((*settings).keyMap.spell3),
+        getKeyName((*settings).keyMap.spell4),
+        getKeyName((*settings).keyMap.spell5),
+        getKeyName((*settings).keyMap.spell6),
+        getKeyName((*settings).keyMap.spell7),
+        getKeyName((*settings).keyMap.spell8),
+        getKeyName((*settings).keyMap.spell9),
+        getKeyName((*settings).keyMap.useSpell)
+    };
 }
 
 SettingsMenu::~SettingsMenu() {
@@ -998,11 +1015,14 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button){
                     case sf::Mouse::Button::Left:
-                        resolutionOptions.onClickEvent(sf::Vector2f(event.mouseButton.x, event.mouseButton.y) + topLeftPos);
+                        resolutionOptions.onClickEvent(sf::Vector2f(event.mouseButton.x, 
+                                    event.mouseButton.y) + topLeftPos);
                         std::string newResolution = resolutionOptions.getSelectedOption();
-                        if (isOnTop(sf::Vector2f(event.mouseButton.x, event.mouseButton.y),graphicsTitleClickBox)) {
+                        if (isOnTop(sf::Vector2f(event.mouseButton.x, event.mouseButton.y),
+                                    graphicsTitleClickBox)) {
                             openGraphicsTab();
-                        } else if (isOnTop(sf::Vector2f(event.mouseButton.x, event.mouseButton.y),controlsTitleClickBox)) {
+                        } else if (isOnTop(sf::Vector2f(event.mouseButton.x, 
+                                        event.mouseButton.y), controlsTitleClickBox)) {
                             openControlsTab();
                         } 
                         break;
@@ -1014,6 +1034,7 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
         window.draw(background);
         if (openTab == "graphics") {
             window.draw(resolution);
+        window.draw(resolutionOptions);
         } else if (openTab == "controls") {
         }
         
@@ -1021,25 +1042,30 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
         window.draw(activeTab);
         window.draw(graphicsTitle);
         window.draw(controlsTitle);
-        window.draw(resolutionOptions);
         if (debugMode) {
             sf::RectangleShape tmp;
             tmp.setOutlineColor(sf::Color::Red);
             tmp.setFillColor(sf::Color(0, 0, 0, 0));
             tmp.setOutlineThickness(1);
-            tmp.setSize(sf::Vector2f(graphicsTitleClickBox.width, graphicsTitleClickBox.height));
-            tmp.setPosition(sf::Vector2f(graphicsTitleClickBox.left, graphicsTitleClickBox.top));
+            tmp.setSize(
+                    sf::Vector2f(graphicsTitleClickBox.width, graphicsTitleClickBox.height));
+            tmp.setPosition(
+                    sf::Vector2f(graphicsTitleClickBox.left, graphicsTitleClickBox.top));
             window.draw(tmp);
             tmp.setOutlineColor(sf::Color::Green);
-            tmp.setSize(sf::Vector2f(controlsTitleClickBox.width, controlsTitleClickBox.height));
-            tmp.setPosition(sf::Vector2f(controlsTitleClickBox.left, controlsTitleClickBox.top));
+            tmp.setSize(
+                    sf::Vector2f(controlsTitleClickBox.width, controlsTitleClickBox.height));
+            tmp.setPosition(
+                    sf::Vector2f(controlsTitleClickBox.left, controlsTitleClickBox.top));
             window.draw(tmp);
-        }window.display();
+        }
+        window.display();
     }
     return shouldClose;
 }
 
 void SettingsMenu::openGraphicsTab() {
+    openTab = "graphics";
     resolution.setString("Resolution:");
     resolution.setPosition(topLeftPos + sf::Vector2f(40, 100));
     activeTab.setPosition(background.getPosition());
@@ -1048,6 +1074,7 @@ void SettingsMenu::openGraphicsTab() {
 }
 
 void SettingsMenu::openControlsTab() {
+    openTab = "controls";
     activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
 }
