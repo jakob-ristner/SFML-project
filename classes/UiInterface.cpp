@@ -1014,18 +1014,17 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
                 break;
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button){
-                    case sf::Mouse::Button::Left:
-                        resolutionOptions.onClickEvent(sf::Vector2f(event.mouseButton.x, 
-                                    event.mouseButton.y) + topLeftPos);
-                        std::string newResolution = resolutionOptions.getSelectedOption();
-                        if (isOnTop(sf::Vector2f(event.mouseButton.x, event.mouseButton.y),
-                                    graphicsTitleClickBox)) {
-                            openGraphicsTab();
-                        } else if (isOnTop(sf::Vector2f(event.mouseButton.x, 
-                                        event.mouseButton.y), controlsTitleClickBox)) {
-                            openControlsTab();
-                        } 
-                        break;
+                case sf::Mouse::Button::Left:
+                    sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                    mousePos += topLeftPos;
+                    resolutionOptions.onClickEvent(mousePos);
+                    std::string newResolution = resolutionOptions.getSelectedOption();
+                    if (isOnTop(mousePos, graphicsTitleClickBox)) {
+                        openGraphicsTab();
+                    } else if (isOnTop(mousePos, controlsTitleClickBox)) {
+                        openControlsTab();
+                    } 
+                    break;
                 }
             }
         }
