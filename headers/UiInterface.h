@@ -230,6 +230,24 @@ private:
     std::vector<sf::RectangleShape> debugShapes;
 };
 
+class UiTable: public UiElement {
+public:
+    UiTable();
+    ~UiTable();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void setSize(sf::Vector2f dims);
+private:
+    sf::RectangleShape background;
+    int columns;
+    int rows;
+    int rowHeight = 20;
+    int colWidth = 300;
+    int scrollOffset = 0;
+}
+
 class StatusMessage {
 public:
     StatusMessage();

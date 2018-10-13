@@ -586,6 +586,38 @@ void DropDownMenu::toggleExpand() {
     }
 }
 
+UiTable::UiTable(int columns, int rows) {
+    this->columns = columns;
+    this->rows = rows;
+}
+
+UiTable::~UiTable() {
+
+}
+
+void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(background);
+    for (int y = background.getPosition().y + (scrollOffset % rowHeight); 
+         y < background.getSize().y;
+         y += rowHeight) {
+
+    }
+}
+
+void UiTable::move(sf::Vector2f distance) {
+    background.move(distance);
+}
+
+void UiTable::setPosition(sf::Vector2f pos) {
+
+}
+
+void UiTable::setSize(sf::Vector2f dims) {
+    background.setSize(dims);
+}
+
+
+
 bool isOnTop(sf::Vector2f pos, sf::FloatRect box) {
     if (pos.x >= box.left && pos.x <= box.left + box.width) {
         if (pos.y >= box.top && pos.y <= box.top + box.height) {
