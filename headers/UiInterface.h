@@ -233,6 +233,7 @@ private:
 class UiTable: public UiElement {
 public:
     UiTable();
+    UiTable(int columns, int row);
     ~UiTable();
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
@@ -246,7 +247,7 @@ private:
     int rowHeight = 20;
     int colWidth = 300;
     int scrollOffset = 0;
-}
+};
 
 class StatusMessage {
 public:
@@ -359,4 +360,5 @@ private:
     };
     // Defined in .cpp since it needs settings
     std::vector<std::string> bindingKeyNames;
+    UiTable mappingTable;
 };

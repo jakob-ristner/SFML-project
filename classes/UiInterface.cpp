@@ -586,6 +586,10 @@ void DropDownMenu::toggleExpand() {
     }
 }
 
+UiTable::UiTable() {
+
+}
+
 UiTable::UiTable(int columns, int rows) {
     this->columns = columns;
     this->rows = rows;
@@ -593,27 +597,33 @@ UiTable::UiTable(int columns, int rows) {
 
 UiTable::~UiTable() {
 
-}
-
+} 
 void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(background);
+    sf::RectangleShape line;
+    line.setSize(sf::Vector2f(background.getSize().x, 1));
+    line.setFillColor(sf::Color(51, 51, 51));
     for (int y = background.getPosition().y + (scrollOffset % rowHeight); 
          y < background.getSize().y;
          y += rowHeight) {
-
+        line.setPosition(background.getPosition() + sf::Vector2f(0, y));
+        std::cout << background.getPosition().y << " " << y << std::endl;
+        target.draw(line);
     }
 }
 
 void UiTable::move(sf::Vector2f distance) {
     background.move(distance);
+    position += distance;
 }
 
 void UiTable::setPosition(sf::Vector2f pos) {
-
+    move(pos - position);
 }
 
 void UiTable::setSize(sf::Vector2f dims) {
     background.setSize(dims);
+    colWidth = background.getSize().x / columns;
 }
 
 
@@ -996,6 +1006,7 @@ SettingsMenu::SettingsMenu(Settings *settings) {
         getKeyName((*settings).keyMap.spell9),
         getKeyName((*settings).keyMap.useSpell)
     };
+    mappingTable = UiTable(2, 10);
 }
 
 SettingsMenu::~SettingsMenu() {
@@ -1065,8 +1076,9 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
         window.draw(background);
         if (openTab == "graphics") {
             window.draw(resolution);
-        window.draw(resolutionOptions);
+            window.draw(resolutionOptions);
         } else if (openTab == "controls") {
+            window.draw(mappingTable);
         }
         
         window.draw(inactiveTabs);
@@ -1106,6 +1118,8 @@ void SettingsMenu::openGraphicsTab() {
 
 void SettingsMenu::openControlsTab() {
     openTab = "controls";
+    mappingTable.setPosition(background.getPosition() + sf::Vector2f(50, 50));
+    mappingTable.setSize(sf::Vector2f(400, 400));
     activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
 }
