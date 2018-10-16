@@ -287,7 +287,7 @@ void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
     }
     float angle = getAngle(projectile.getPosition(), mousePos);
 
-    projectile.vel = normalizedVec((sf::Vector2f(-sin(angle * (M_PI / 180)), -cos(angle * (M_PI / 180))) / 18.f + projectile.vel) / 2.f);
+    projectile.vel = normalizedVec((sf::Vector2f(-sin(angle * (M_PI / 180)), -cos(angle * (M_PI / 180))) / 18.f + projectile.vel) / 0.5f * dt);
     projectile.setRotation(180 - atan2(projectile.vel.x, projectile.vel.y) * (180 / M_PI));
     projectile.move(projectile.vel * projectile.getSpeed() * (dt / Settings::TIMESCALE));
     // These lines of math basically make the projectile follow the mouse by rotating towards it
@@ -333,7 +333,8 @@ player(player) {
     texture.loadFromFile("./resources/spell_textures/explosion1.png");
     texture.setRepeated(true);
     cooldown = 100;
-    anim = Animation(texture, sf::Vector2f(40, 40), 1000, 0, 6, 0);
+    duration = 500;
+    anim = Animation(texture, sf::Vector2f(40, 40), 500, 0, 6, 0);
     cooldownTimer = 0;
     isReady = true;
     name = "Explode";
@@ -347,7 +348,7 @@ Explode::~Explode() {
 
 void Explode::use() {
 
-    (*explosions).push_back(Explosion(100, player.getPos(), 2, 1000, anim));
+    (*explosions).push_back(Explosion(100, player.getPos(), 2, duration, anim));
 
     cooldownTimer = 0;
     isReady = false;

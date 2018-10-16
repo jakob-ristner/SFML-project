@@ -143,6 +143,7 @@ public:
     float getCooldown() override;
 private:
     int castTime;
+    int duration;
     Player &player;
     sf::Texture texture;
 };
