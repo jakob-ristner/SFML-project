@@ -180,9 +180,9 @@ SpriteCollider Projectile::getCollider() {
 Fireball::Fireball(Player &player):
     player(player) {
       castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/altfire.png");
+    texture.loadFromFile("./resources/spell_textures/explosion1.png");
     texture.setRepeated(true);
-    anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
+    anim = Animation(texture, sf::Vector2f(40, 40), 400, 0, 6, 0);
     this->player = player;
     cooldown = 2000;
     cooldownTimer = 0;
@@ -330,9 +330,10 @@ Explode::Explode(Player &player):
 player(player) {
     castTime = 5;
     this->player = player;
-    texture.loadFromFile("../resources/spell_textures/explosion1.png");
+    texture.loadFromFile("./resources/spell_textures/explosion1.png");
+    texture.setRepeated(true);
     cooldown = 100;
-    anim = Animation(texture, sf::Vector2f(40, 40), 0.5, 0, 6, 0);
+    anim = Animation(texture, sf::Vector2f(40, 40), 1000, 0, 6, 0);
     cooldownTimer = 0;
     isReady = true;
     name = "Explode";
@@ -346,7 +347,7 @@ Explode::~Explode() {
 
 void Explode::use() {
 
-    (*explosions).push_back(Explosion(100, sf::Vector2f(player.getPos().x - 100, player.getPos().y - 100), 2, 1000, anim));
+    (*explosions).push_back(Explosion(100, player.getPos(), 2, 1000, anim));
 
     cooldownTimer = 0;
     isReady = false;
