@@ -180,9 +180,9 @@ SpriteCollider Projectile::getCollider() {
 Fireball::Fireball(Player &player):
     player(player) {
       castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/explosion1.png");
+    texture.loadFromFile("./resources/spell_textures/altfire.png");
     texture.setRepeated(true);
-    anim = Animation(texture, sf::Vector2f(40, 40), 400, 0, 6, 0);
+    anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
     this->player = player;
     cooldown = 2000;
     cooldownTimer = 0;
