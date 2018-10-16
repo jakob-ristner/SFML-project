@@ -330,7 +330,9 @@ Explode::Explode(Player &player):
 player(player) {
     castTime = 5;
     this->player = player;
+    texture.loadFromFile("../resources/spell_textures/explosion1.png");
     cooldown = 100;
+    anim = Animation(texture, sf::Vector2f(40, 40), 0.5, 0, 6, 0);
     cooldownTimer = 0;
     isReady = true;
     name = "Explode";
@@ -344,7 +346,7 @@ Explode::~Explode() {
 
 void Explode::use() {
 
-    (*explosions).push_back(Explosion(100, sf::Vector2f(player.getPos().x - 100, player.getPos().y - 100), 2, 1000));
+    (*explosions).push_back(Explosion(100, sf::Vector2f(player.getPos().x - 100, player.getPos().y - 100), 2, 1000, anim));
 
     cooldownTimer = 0;
     isReady = false;

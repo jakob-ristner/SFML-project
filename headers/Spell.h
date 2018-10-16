@@ -137,6 +137,8 @@ public:
     void use() override;
     int getCastTime() override;
     void update(float dt) override;
+    Animation animation;
+    sf::Texture text;
     float getCooldownTimer() override;
     float getCooldown() override;
 private:

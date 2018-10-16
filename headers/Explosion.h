@@ -2,13 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "./Collider.h"
+#include "./Animation.h"
 #include "./Npc.h"
-
 class Enemy;
-
 class Explosion {
 public:
-    Explosion(float rad, sf::Vector2f pos, float dmg, float maxDuration);
+    Explosion(float rad, sf::Vector2f pos, float dmg, float maxDuration, Animation animation);
     Explosion();
     ~Explosion();
 
@@ -28,6 +27,9 @@ private:
     float maxDuration;
     sf::Vector2f pos;
     
+    Animation animation;
+    sf::Sprite sprite;
+
 
     //temporary until animation frames
     sf::CircleShape body;
