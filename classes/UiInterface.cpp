@@ -603,13 +603,19 @@ void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     sf::RectangleShape line;
     line.setSize(sf::Vector2f(background.getSize().x, 1));
     line.setFillColor(sf::Color(51, 51, 51));
-    for (int y = background.getPosition().y + (scrollOffset % rowHeight); 
+    for (int y = 0 + (scrollOffset % rowHeight); 
          y < background.getSize().y;
          y += rowHeight) {
         line.setPosition(background.getPosition() + sf::Vector2f(0, y));
         std::cout << background.getPosition().y << " " << y << std::endl;
+        std::cout << "Scroll Offset: " << scrollOffset << " " << rowHeight << std::endl;
         target.draw(line);
     }
+
+    for (int x = 0; y < background.getSize().x; y += colWidth) {
+
+    }
+    std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;
 }
 
 void UiTable::move(sf::Vector2f distance) {
