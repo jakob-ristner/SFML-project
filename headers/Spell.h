@@ -4,8 +4,10 @@
 #include "./Npc.h"
 #include "./Collider.h"
 #include "./Animation.h"
+#include "./Explosion.h"
 
 class Player;
+class Explosion;
 class Enemy;
 class Buff;
 class Spell {
@@ -13,8 +15,6 @@ public:
     Spell();
     ~Spell();
     virtual void use();
-    void setParams(std::string name, std::string spellType,
-                   int manaCost);
     void setAnimation(Animation anim);
     std::string name;
     std::string spellType;
@@ -24,7 +24,9 @@ public:
     virtual void update(float dt);
     bool isReady;
 
+    static  std::vector<Explosion> *explosions;
     float getManaCost();
+private:
 
 protected:
     int castTime;
@@ -122,6 +124,23 @@ public:
     float getCooldownTimer() override;
     float getCooldown() override;
 
+private:
+    int castTime;
+    Player &player;
+    sf::Texture texture;
+};
+
+class Explode: public Spell {
+public:
+    Explode(Player &player);
+    ~Explode();
+    void use() override;
+    int getCastTime() override;
+    void update(float dt) override;
+    Animation animation;
+    sf::Texture text;
+    float getCooldownTimer() override;
+    float getCooldown() override;
 private:
     int castTime;
     Player &player;

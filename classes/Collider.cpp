@@ -1,7 +1,9 @@
 #include "../headers/Collider.h"
+#include "../headers/Utils.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+
 
 CollisionBox::CollisionBox() {
 
@@ -125,4 +127,47 @@ sf::Vector2f SpriteCollider::getHalfSize() {
     sf::IntRect boundRect = body.getTextureRect();
 
     return sf::Vector2f(boundRect.width, boundRect.height) / 2.0f;
+}
+
+CollisionCircle::CollisionCircle(sf::Vector2f epicenter, float radius) {
+    this->epicenter = epicenter;
+    this->radius = radius;
+
+}
+
+CollisionCircle::~CollisionCircle() {
+
+}
+
+bool CollisionCircle::isColliding(CollisionCircle *other) {
+    if (getDistance(getEpicenter(), (*other).getEpicenter()) 
+        < (getRadius() + (*other).getRadius())) {
+        return true;
+    }
+    return false;
+}
+
+bool CollisionCircle::isColliding(CollisionBox *other) {
+    sf::Vector2f topleft = (*other).getPosition() - (*other).getHalfSize();
+    sf::Vector2f bottomright = (*other).getPosition() + (*other).getHalfSize();
+    
+    sf::Vector2f closestPoint = clampVec(getEpicenter(), topleft, bottomright);
+
+    //std::cout << getDistance((*other).getPosition(), getEpicenter()) << std::endl;
+    //printVec(getEpicenter());
+    
+    if (getDistance(closestPoint, getEpicenter()) < getRadius()) {
+        return true;
+        
+    } 
+    //printVec(getEpicenter());
+    return false;
+}
+
+sf::Vector2f CollisionCircle::getEpicenter() {
+    return epicenter;
+}
+
+float CollisionCircle::getRadius() {
+    return radius;
 }

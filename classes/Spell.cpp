@@ -17,13 +17,11 @@ Spell::~Spell() {
 
 }
 
-void Spell::setParams(std::string name, std::string spellType,
-                      int manaCost) {
-    this->name = name;
-    this->spellType = spellType;
-    this->manaCost = manaCost;
-    this->castTime = castTime;
-}
+
+
+
+
+std::vector<Explosion> *Spell::explosions;
 
 void Spell::setAnimation(Animation anim) {
     this->anim = anim;
@@ -182,14 +180,16 @@ SpriteCollider Projectile::getCollider() {
 Fireball::Fireball(Player &player):
     player(player) {
       castTime = 10;
-    texture.loadFromFile("./resources/spell_textures/altfire.png");
+    texture.loadFromFile("./resources/spell_textures/explosion1.png");
     texture.setRepeated(true);
-    anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
-    setParams("Fireball", "Damage", 20);
+    anim = Animation(texture, sf::Vector2f(40, 40), 400, 0, 6, 0);
     this->player = player;
     cooldown = 2000;
     cooldownTimer = 0;
     isReady = true;
+    name = "Fireball";
+    spellType = "Damage";
+    manaCost = 20;
 }
 
 Fireball::~Fireball() {
@@ -254,10 +254,12 @@ MagicMissile::MagicMissile(Player &player):
     castTime = 4;
     this->player = player;
     texture.loadFromFile("./resources/spell_textures/magicmissile.png");
-    setParams("Magic Missile", "Damage", 8);
     cooldown = 1000;
     cooldownTimer = 0;
     isReady = true;
+    name = "Magic Missile";
+    spellType = "Damage";
+    manaCost = 8;
 };
 
 MagicMissile::~MagicMissile() {
@@ -322,16 +324,70 @@ float MagicMissile::getCooldownTimer() {
 
 //MagicMissile Spell End//
 
+//Explode Spell Start//
+
+Explode::Explode(Player &player):
+player(player) {
+    castTime = 5;
+    this->player = player;
+    texture.loadFromFile("./resources/spell_textures/explosion1.png");
+    texture.setRepeated(true);
+    cooldown = 100;
+    anim = Animation(texture, sf::Vector2f(40, 40), 1000, 0, 6, 0);
+    cooldownTimer = 0;
+    isReady = true;
+    name = "Explode";
+    spellType = "Damage";
+    manaCost = 10;
+}
+
+Explode::~Explode() {
+    
+}
+
+void Explode::use() {
+
+    (*explosions).push_back(Explosion(100, player.getPos(), 2, 1000, anim));
+
+    cooldownTimer = 0;
+    isReady = false;
+}
+
+int Explode::getCastTime() {
+    return castTime;
+}
+
+void Explode::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;
+    }
+}
+
+float Explode::getCooldownTimer() {
+    return cooldownTimer;
+}
+
+float Explode::getCooldown() {
+    return cooldown;
+}
+
+
+//Explode Spell End//
+
 //SprintSpell Spell Start//
 
 SprintSpell::SprintSpell(Player &player):
 player(player) {
     castTime  = 0;
     this->player = player;
-    setParams("Sprint", "Buff", 20);
     cooldown = 1000;
     cooldownTimer = 0;
     isReady = true;
+    name = "Sprint";
+    spellType = "Buff";
+    manaCost = 30;
 }
 
 SprintSpell::~SprintSpell() {

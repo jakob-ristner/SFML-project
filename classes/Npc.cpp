@@ -206,3 +206,15 @@ void EnemyFactory::playerCollide(Player &player) {
         }
     }
 }
+
+void EnemyFactory::explosionCollide(std::vector<Explosion> &explosions) {
+    for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
+        SpriteCollider currentSprite = (*itr)->getCollider();
+        for (auto iitr = explosions.begin(); iitr != explosions.end(); ++iitr) {
+            CollisionCircle currentExplosion = iitr->getCollider();
+            if (currentExplosion.isColliding(&currentSprite) && iitr->active) {
+                iitr->onCollision(*(itr->get()));
+            }
+        }
+    }
+}

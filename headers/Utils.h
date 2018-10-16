@@ -17,3 +17,5 @@ sf::Vector2f rotateNormalVect(sf::Vector2f vector, float degrees);
 void printVec(sf::Vector2f vec);
 
 std::vector<std::string> strSplit(std::string, char c);
+
+float getDistance(sf::Vector2f vec1, sf::Vector2f vec2);
