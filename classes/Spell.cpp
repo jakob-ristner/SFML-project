@@ -17,10 +17,6 @@ Spell::~Spell() {
 
 }
 
-
-
-
-
 std::vector<Explosion> *Spell::explosions;
 
 void Spell::setAnimation(Animation anim) {
@@ -37,7 +33,7 @@ void Spell::use() {
 }
 
 int Spell::getCastTime() {
-
+    return castTime;
 }
 
 void Spell::update(float dt) {
@@ -49,11 +45,11 @@ float Spell::getManaCost() {
 }
 
 float Spell::getCooldown() {
-
+    return cooldown;
 }
 
 float Spell::getCooldownTimer() {
-
+    return cooldownTimer;
 }
 
 Buff::Buff() {
@@ -75,10 +71,6 @@ void Buff::end(Player &player) {
 void Buff::update(Player &player, float dt) {
 
 }
-
-
-
-
 
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float speed, sf::Vector2f pos, float rotation,
@@ -233,19 +225,6 @@ void Fireball::use() {
 
 }
 
-int Fireball::getCastTime() {
-  return castTime;
-}
-
-float Fireball::getCooldown() {
-    return cooldown;
-}
-
-float Fireball::getCooldownTimer() {
-    return cooldownTimer;
-}
-
-
 //FireBall Spell End//
 
 //MagicMissile Spell Start//
@@ -307,21 +286,6 @@ void MagicMissile::use() {
     cooldownTimer = 0;
 }
 
-
-int MagicMissile::getCastTime() {
-  return castTime;
-}
-
-float MagicMissile::getCooldown() {
-    return cooldown;
-}
-
-float MagicMissile::getCooldownTimer() {
-    return cooldownTimer;
-}
-
-
-
 //MagicMissile Spell End//
 
 //Explode Spell Start//
@@ -354,9 +318,6 @@ void Explode::use() {
     isReady = false;
 }
 
-int Explode::getCastTime() {
-    return castTime;
-}
 
 void Explode::update(float dt) {
     if (cooldownTimer < cooldown) {
@@ -365,15 +326,6 @@ void Explode::update(float dt) {
         isReady = true;
     }
 }
-
-float Explode::getCooldownTimer() {
-    return cooldownTimer;
-}
-
-float Explode::getCooldown() {
-    return cooldown;
-}
-
 
 //Explode Spell End//
 
@@ -411,9 +363,6 @@ void SprintSpell::update(float dt) {
     }
 }
 
-int SprintSpell::getCastTime() {
-    return castTime;
-}
 
 SprintBuff::SprintBuff(Player &player) {
     counter = 0;
@@ -446,14 +395,6 @@ void SprintBuff::begin(Player &player) {
 
 void SprintBuff::end(Player &player) {
     player.setMoveSpeed(playerStartSpeed);
-}
-
-float SprintSpell::getCooldown() {
-    return cooldown;
-}
-
-float SprintSpell::getCooldownTimer() {
-    return cooldownTimer;
 }
 
 //SprintSpell Spell End//

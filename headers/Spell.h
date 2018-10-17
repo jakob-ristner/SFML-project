@@ -16,11 +16,9 @@ public:
     ~Spell();
     virtual void use();
     void setAnimation(Animation anim);
-    std::string name;
-    std::string spellType;
-    virtual int getCastTime();
-    virtual float getCooldown();
-    virtual float getCooldownTimer();
+    int getCastTime();
+    float getCooldown();
+    float getCooldownTimer();
     virtual void update(float dt);
     bool isReady;
 
@@ -29,6 +27,8 @@ public:
 private:
 
 protected:
+    std::string spellType;
+    std::string name;
     int castTime;
     float cooldown;
     float cooldownTimer;
@@ -102,10 +102,7 @@ public:
     Fireball(Player &player);
     ~Fireball();
     void use() override;
-    int getCastTime() override;
     void update(float dt) override;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 
 private:
     int castTime;
@@ -119,10 +116,7 @@ public:
     MagicMissile(Player &player);
     ~MagicMissile();
     void use() override;
-    int getCastTime() override;
     void update(float dt) override;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 
 private:
     int castTime;
@@ -135,12 +129,9 @@ public:
     Explode(Player &player);
     ~Explode();
     void use() override;
-    int getCastTime() override;
     void update(float dt) override;
     Animation animation;
     sf::Texture text;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 private:
     int castTime;
     int duration;
@@ -171,10 +162,7 @@ public:
     SprintSpell(Player &player);
     ~SprintSpell();
     void use() override;
-    int getCastTime();
     void update(float dt) override;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 
 private:
     int castTime;
@@ -183,4 +171,6 @@ private:
     Buff *buff;
     
 };
+
+
 
