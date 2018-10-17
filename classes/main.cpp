@@ -66,14 +66,19 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
     sf::Event event;
     Collider playerCol = player.getCollider();
+    //Spell initialization
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
     Explode explode = Explode(player);
     SprintSpell sprint = SprintSpell(player);
-    player.addSpell(&fireball);
+    FlashHeal flashHeal = FlashHeal(player);
+    //Adding spells to player
+
+    player.addSpell(&flashHeal);
     player.addSpell(&explode);
     player.addSpell(&magicMissile);
     player.addSpell(&sprint);
+    player.addSpell(&fireball);
 
     // Enemies
     EnemyFactory enemyFactory(player);

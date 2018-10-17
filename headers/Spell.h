@@ -49,7 +49,6 @@ public:
 protected:
     float counter;
     float duration;
-
 };
 
 class Projectile: public sf::Sprite{
@@ -105,7 +104,6 @@ public:
     void update(float dt) override;
 
 private:
-    int castTime;
     Player &player;
     sf::Texture texture;
 
@@ -119,7 +117,6 @@ public:
     void update(float dt) override;
 
 private:
-    int castTime;
     Player &player;
     sf::Texture texture;
 };
@@ -133,7 +130,6 @@ public:
     Animation animation;
     sf::Texture text;
 private:
-    int castTime;
     int duration;
     Player &player;
     sf::Texture texture;
@@ -165,11 +161,22 @@ public:
     void update(float dt) override;
 
 private:
-    int castTime;
     Player &player;
     SprintBuff temp;
     Buff *buff;
     
+};
+
+class FlashHeal: public Spell {
+public:
+    FlashHeal(Player &player);
+    ~FlashHeal();
+    void use() override;
+    void update(float dt) override;
+
+private:
+    Player &player;
+    float healing;
 };
 
 

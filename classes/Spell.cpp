@@ -177,7 +177,7 @@ Fireball::Fireball(Player &player):
     anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
     this->player = player;
     cooldown = 2000;
-    cooldownTimer = 0;
+    cooldownTimer = cooldown;
     isReady = true;
     name = "Fireball";
     spellType = "Damage";
@@ -234,7 +234,7 @@ MagicMissile::MagicMissile(Player &player):
     this->player = player;
     texture.loadFromFile("./resources/spell_textures/magicmissile.png");
     cooldown = 1000;
-    cooldownTimer = 0;
+    cooldownTimer = cooldown;
     isReady = true;
     name = "Magic Missile";
     spellType = "Damage";
@@ -299,7 +299,7 @@ player(player) {
     cooldown = 100;
     duration = 500;
     anim = Animation(texture, sf::Vector2f(40, 40), 500, 0, 6, 0);
-    cooldownTimer = 0;
+    cooldownTimer = cooldown;
     isReady = true;
     name = "Explode";
     spellType = "Damage";
@@ -336,7 +336,7 @@ player(player) {
     castTime  = 0;
     this->player = player;
     cooldown = 1000;
-    cooldownTimer = 0;
+    cooldownTimer = cooldown;
     isReady = true;
     name = "Sprint";
     spellType = "Buff";
@@ -398,3 +398,35 @@ void SprintBuff::end(Player &player) {
 }
 
 //SprintSpell Spell End//
+
+//FlashHeal Spell Start//
+FlashHeal::FlashHeal(Player &player):
+player(player){
+    castTime  = 10;
+    this->player = player;
+    cooldown = 3000;
+    cooldownTimer = cooldown;
+    isReady = true;
+    name = "Flash Heal";
+    spellType = "Heal";
+    healing = 20;
+}
+
+FlashHeal::~FlashHeal() {
+
+}
+
+void FlashHeal::use() {
+    player.heal(healing);
+    cooldownTimer = 0;
+    isReady = false;
+}
+
+void FlashHeal::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;
+    }
+}
+//FlashHeal Spell End//
