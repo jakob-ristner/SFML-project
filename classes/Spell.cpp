@@ -77,24 +77,6 @@ void Buff::update(Player &player, float dt) {
 
 }
 
-Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
-                       float speed, sf::Vector2f pos, float rotation,
-                       float scale, void (*callback)(Projectile &projectile,
-                       float dt, sf::Vector2f mousePos)) {
-    this->vel = vel;
-    this->speed = speed;
-    this->func = callback;
-    this->rotation = rotation;
-    kill = false;
-    counter = 0;
-
-
-    setScale(scale, scale);
-    setTexture(texture);
-    setRotation(rotation);
-    setOrigin(sf::Vector2f(texture.getSize().x, texture.getSize().y) / 2.0f);
-    setPosition(pos);
-}
 
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float speed, sf::Vector2f pos, float rotation,
