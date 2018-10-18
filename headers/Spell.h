@@ -89,7 +89,6 @@ public:
     sf::Vector2f vel;
     SpriteCollider getCollider();
 
-    void setAnimation(Animation anim);
     void setAnimationAtIndex(int index);
     void setAnimations(std::vector<Animation> animations);
     void addAnimation(Animation anim);

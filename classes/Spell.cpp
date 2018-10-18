@@ -158,13 +158,23 @@ void Projectile::draw(sf::RenderWindow &window) {
     window.draw(*this);
 }
 
-void Projectile::setAnimation(Animation anim) {
-    this->anim = anim;
+
+void Projectile::setAnimationAtIndex(int index) {
+    anim = animations[index];
     isAnimated = true;
+    setTextureRect(anim.getTextureRect());
     setTextureSize(anim.getTextureRect());
 }
 
+void Projectile::setAnimations(std::vector<Animation> animations) {
+    this->animations = animations;
+    isAnimated = true;
+}
 
+void Projectile::addAnimation(Animation anim) {
+    animations.push_back(anim);
+    isAnimated = true;
+}
 
 
 
@@ -230,8 +240,8 @@ void Fireball::use() {
     isReady = false;
     cooldownTimer = 0;
     Projectile &proj = player.getProjectiles().back();
-    proj.setTextureRect(anim.getTextureRect());
-    proj.setAnimation(anim);
+    proj.addAnimation(anim);
+    proj.setAnimationAtIndex(0);
 
 }
 
