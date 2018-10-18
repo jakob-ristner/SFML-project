@@ -19,8 +19,13 @@ Spell::~Spell() {
 
 std::vector<Explosion> *Spell::explosions;
 
-void Spell::setAnimation(Animation anim) {
-    this->anim = anim;
+void Spell::setAnimations(std::vector<Animation> animations) {
+    this->animations = animations;
+    bool isAnimated = true;
+}
+
+void Spell::addAnimation(Animation anim) {
+    animations.push_back(anim);
     bool isAnimated = true;
 }
 
@@ -159,6 +164,10 @@ void Projectile::setAnimation(Animation anim) {
     setTextureSize(anim.getTextureRect());
 }
 
+
+
+
+
 void Projectile::setTextureSize(sf::IntRect newSize) {
     setTextureRect(newSize);
     setOrigin(sf::Vector2f(newSize.width, newSize.height) / 2.0f);
@@ -174,7 +183,8 @@ Fireball::Fireball(Player &player):
       castTime = 10;
     texture.loadFromFile("./resources/spell_textures/altfire.png");
     texture.setRepeated(true);
-    anim = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
+    addAnimation(Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0));
+    anim = animations[0];
     this->player = player;
     cooldown = 2000;
     cooldownTimer = cooldown;
@@ -298,7 +308,8 @@ player(player) {
     texture.setRepeated(true);
     cooldown = 100;
     duration = 500;
-    anim = Animation(texture, sf::Vector2f(40, 40), 500, 0, 6, 0);
+    addAnimation(Animation(texture, sf::Vector2f(40, 40), 500, 0, 6, 0));
+    anim = animations[0];
     cooldownTimer = cooldown;
     isReady = true;
     name = "Explode";

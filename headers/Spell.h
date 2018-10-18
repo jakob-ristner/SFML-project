@@ -15,8 +15,9 @@ public:
     Spell();
     ~Spell();
     virtual void use();
-    void setAnimation(Animation anim);
     int getCastTime();
+    void setAnimations(std::vector<Animation> animations);
+    void addAnimation(Animation anim);
     float getCooldown();
     float getCooldownTimer();
     virtual void update(float dt);
@@ -33,8 +34,9 @@ protected:
     float cooldown;
     float cooldownTimer;
     float manaCost;
-    Animation anim;
     bool isAnimated = false;
+    Animation anim;
+    std::vector<Animation> animations;
 };
 
 class Buff {
@@ -88,9 +90,13 @@ public:
     SpriteCollider getCollider();
 
     void setAnimation(Animation anim);
+    void setAnimationAtIndex(int index);
+    void setAnimations(std::vector<Animation> animations);
+    void addAnimation(Animation anim);
     void setTextureSize(sf::IntRect newSize);
 private:
     Animation anim;
+    std::vector<Animation> animations;
     bool isAnimated = false;
     float speed;
     float rotation;

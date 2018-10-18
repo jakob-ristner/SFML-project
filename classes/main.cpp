@@ -74,11 +74,11 @@ int main() {
     FlashHeal flashHeal = FlashHeal(player);
     //Adding spells to player
 
-    player.addSpell(&flashHeal);
+    player.addSpell(&fireball);
     player.addSpell(&explode);
     player.addSpell(&magicMissile);
     player.addSpell(&sprint);
-    player.addSpell(&fireball);
+    player.addSpell(&flashHeal);
 
     // Enemies
     EnemyFactory enemyFactory(player);
