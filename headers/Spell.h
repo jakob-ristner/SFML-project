@@ -61,12 +61,6 @@ public:
                void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos),
                bool (*onCollide)(Enemy &enemy));
-    Projectile(sf::Texture &texture, sf::IntRect textSize, sf::Vector2f vel,
-               float speed, sf::Vector2f pos,
-               float rotation, float scale,
-               void (*callback)(Projectile &projectile,
-               float dt, sf::Vector2f mousePos),
-               bool (*onCollide)(Enemy &enemy));
     ~Projectile();
     Projectile();
     void update(float dt, sf::Vector2f mousePos);

@@ -78,6 +78,7 @@ void Buff::update(Player &player, float dt) {
 }
 
 
+
 Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float speed, sf::Vector2f pos, float rotation,
                        float scale, void (*callback)(Projectile &projectile,
@@ -100,17 +101,6 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
     setPosition(pos);
 }
 
-Projectile::Projectile(sf::Texture &texture, sf::IntRect textSize, 
-                       sf::Vector2f vel,
-                       float speed, sf::Vector2f pos, float rotation,
-                       float scale, void (*callback)(Projectile &projectile,
-                       float dt, sf::Vector2f mousePos),
-                       bool (*onCollide)(Enemy &enemy)) :
-                       Projectile(texture, vel, speed, pos, rotation, scale, callback, onCollide) {
-    
-    setTextureSize(textSize);
-    setPosition(pos);
-}
 
 Projectile::Projectile() {;
 }
@@ -210,7 +200,7 @@ void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
 }
 
 void Fireball::use() {
-    player.addProjectile(Projectile(texture, anim.getTextureRect(),
+    player.addProjectile(Projectile(texture,
                          normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), -cos(player.getMouseAngleRad()))),
                          5,
                          player.getPos(),
