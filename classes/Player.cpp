@@ -115,6 +115,18 @@ void Player::update(float dt) {
         selectedSpell = 2;
         switchedSpells = true;
     }
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.spell4) && selectedSpell != 3) {
+        selectedSpell = 3;
+        switchedSpells = true;
+    }
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.spell5) && selectedSpell != 4) {
+        selectedSpell = 4;
+        switchedSpells = true;
+    }
+    if (sf::Keyboard::isKeyPressed((*settings).keyMap.spell6) && selectedSpell != 5) {
+        selectedSpell = 5;
+        switchedSpells = true;
+    }
     if (sf::Keyboard::isKeyPressed((*settings).keyMap.useSpell)) {
         casting = true;
         castProgress += 0.1 * (dt / (*settings).TIMESCALE);
