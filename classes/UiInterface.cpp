@@ -971,7 +971,6 @@ SettingsMenu::~SettingsMenu() {
 }
 
 bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
-    toggleDebugMode();
     viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
@@ -1081,7 +1080,7 @@ void SettingsMenu::openGraphicsTab() {
 void SettingsMenu::openControlsTab() {
     openTab = "controls";
     sheetTmp.setPosition(background.getPosition() + sf::Vector2f(0, activeTab.getSize().y - 3));
-    sheetTmp.setSize(sf::Vector2f(748, 500));
+    sheetTmp.setSize(sf::Vector2f(748, 550 - activeTab.getSize().y));
     sheetTmp.setShape(2, bindingNames.size());
     sheetTmp.setColumnContents(0, bindingNames);
     sheetTmp.setColumnContents(1, bindingKeyNames);
@@ -1096,7 +1095,7 @@ void SettingsMenu::toggleDebugMode() {
 
 UiSheet::UiSheet() {
     position = sf::Vector2f(0, 0);
-    background.setFillColor(sf::Color(51, 51 ,51));
+    background.setFillColor(sf::Color(31, 31 ,31));
     background.setPosition(sf::Vector2f(0, 0));
 }
 
@@ -1134,7 +1133,7 @@ void UiSheet::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         }
     }
     sf::RectangleShape line;
-    line.setFillColor(sf::Color(31, 31, 31));
+    line.setFillColor(sf::Color(51, 51, 51));
     line.setSize(sf::Vector2f(background.getSize().x, 2));
     for (int y = 0; y * totalSize.y / texts.size() <= size.y; y++) {
         line.setPosition(background.getPosition() + sf::Vector2f(0, 3 + y * totalSize.y / texts.size()));
