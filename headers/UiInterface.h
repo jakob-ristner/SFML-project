@@ -319,6 +319,20 @@ private:
     Settings *settings;
 };
 
+class UiSheet : public UiElement {
+public:
+    UiSheet();
+    ~UiSheet();
+
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+private:
+    UiText tmp;
+    std::vector <std::vector<UiText>> texts;
+};
+
 class SettingsMenu {
 public:
     SettingsMenu(Settings *settings);
@@ -369,4 +383,6 @@ private:
     // Defined in .cpp since it needs settings
     std::vector<std::string> bindingKeyNames;
     UiTable mappingTable;
+    UiSheet sheetTmp;
 };
+

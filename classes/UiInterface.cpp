@@ -598,13 +598,11 @@ UiTable::UiTable(int columns, int rows) {
         tableContents[y].resize(columns);
     }
     background.setFillColor(sf::Color(31, 31, 31));
-    tableText.setFontSize(20);
-    tableText.setFillColor(sf::Color::Red);
+    tableText.setFont(tableText.mainFont);
+    tableText.setFontSize(30);
     tableText.setString("lel");
-    tableText.setPosition(background.getPosition() + sf::Vector2f(100, 100));
-    rs.setSize(sf::Vector2f(100, 100));
-    rs.setFillColor(sf::Color::Red);
-    rs.setPosition(background.getPosition() + sf::Vector2f(1000, 1000));
+    tableText.setFillColor(sf::Color::Red);
+    tableText.setPosition(background.getPosition() + sf::Vector2f(10, 10));
 }
 
 UiTable::~UiTable() {
@@ -612,7 +610,7 @@ UiTable::~UiTable() {
 } 
 
 void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    //target.draw(background);
+    target.draw(background);
     sf::RectangleShape line;
     line.setFillColor(sf::Color(51, 51, 51));
     // Horizontal Lines
@@ -621,16 +619,15 @@ void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
          y < background.getSize().y;
          y += rowHeight) {
         line.setPosition(background.getPosition() + sf::Vector2f(0, y));
-        //target.draw(line);
+        target.draw(line);
     }
     // Vertical Lines
     line.setSize(sf::Vector2f(2, background.getSize().y));
     for (int x = 0; x < background.getSize().x; x += colWidth) {
         line.setPosition(background.getPosition() + sf::Vector2f(x, 0));
-        //target.draw(line);
+        target.draw(line);
     }
     target.draw(tableText);
-    target.draw(rs);
     std::cout << tableText.getString() << std::endl;
     printVec(tableText.getPosition());
 }
@@ -1113,7 +1110,8 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
             window.draw(resolution);
             window.draw(resolutionOptions);
         } else if (openTab == "controls") {
-            window.draw(mappingTable);
+            //window.draw(mappingTable);
+            window.draw(sheetTmp);
         }
         
         window.draw(inactiveTabs);
@@ -1153,12 +1151,55 @@ void SettingsMenu::openGraphicsTab() {
 
 void SettingsMenu::openControlsTab() {
     openTab = "controls";
-    mappingTable.setSize(sf::Vector2f(background.getSize().x, 504));
-    mappingTable.setPosition(background.getPosition() + sf::Vector2f(0, background.getSize().y - 504));
-    activeTab.setPosition(background.getPosition());
+    //mappingTable.setSize(sf::Vector2f(background.getSize().x, 504));
+    //mappingTable.setPosition(background.getPosition() + sf::Vector2f(0, background.getSize().y - 504));
+    sheetTmp.setPosition(background.getPosition() + sf::Vector2f(0, activeTab.getSize().y));
+    activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
 }
 
 void SettingsMenu::toggleDebugMode() {
     debugMode = !debugMode;
+}
+
+UiSheet::UiSheet() {
+    tmp.setFontSize(30);
+    tmp.setFillColor(sf::Color::Red);
+    tmp.setString("kek");
+    tmp.setPosition(position + sf::Vector2f(0, 0));
+    position = sf::Vector2f(0, 0);
+    texts.resize(5);
+    for (int y = 0; y < texts.size(); y++) {
+        texts[y].resize(2);
+    }
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            texts[y][x].setFontSize(30);
+            texts[y][x].setFillColor(sf::Color::Red);
+            texts[y][x].setString("kek");
+            texts[y][x].setPosition(position + sf::Vector2f(x * 20, y * 20));
+        }
+    }
+}
+
+UiSheet::~UiSheet() {
+
+}
+
+void UiSheet::move(sf::Vector2f distance) {
+    position += distance;
+    tmp.move(distance);
+}
+
+void UiSheet::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void UiSheet::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(tmp);
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            target.draw(texts[y][x]);
+        }
+    }
 }
