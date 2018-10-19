@@ -95,8 +95,6 @@ UiText::~UiText() {
 
 void UiText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(text);
-    //std::cout << text.getString().toAnsiString() << std::endl;
-    //std::cout << text.getPosition().x << " " << text.getPosition().y << std::endl;
 }
 
 void UiText::move(sf::Vector2f distance) {
@@ -586,79 +584,6 @@ void DropDownMenu::toggleExpand() {
     }
 }
 
-UiTable::UiTable() {
-
-}
-
-UiTable::UiTable(int columns, int rows) {
-    this->columns = columns;
-    this->rows = rows;
-    tableContents.resize(rows);
-    for (int y = 0; y < tableContents.size(); y++) {
-        tableContents[y].resize(columns);
-    }
-    background.setFillColor(sf::Color(31, 31, 31));
-    tableText.setFont(tableText.mainFont);
-    tableText.setFontSize(30);
-    tableText.setString("lel");
-    tableText.setFillColor(sf::Color::Red);
-    tableText.setPosition(background.getPosition() + sf::Vector2f(10, 10));
-}
-
-UiTable::~UiTable() {
-
-} 
-
-void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(background);
-    sf::RectangleShape line;
-    line.setFillColor(sf::Color(51, 51, 51));
-    // Horizontal Lines
-    line.setSize(sf::Vector2f(background.getSize().x, 2));
-    for (int y = 0 + (scrollOffset % rowHeight); 
-         y < background.getSize().y;
-         y += rowHeight) {
-        line.setPosition(background.getPosition() + sf::Vector2f(0, y));
-        target.draw(line);
-    }
-    // Vertical Lines
-    line.setSize(sf::Vector2f(2, background.getSize().y));
-    for (int x = 0; x < background.getSize().x; x += colWidth) {
-        line.setPosition(background.getPosition() + sf::Vector2f(x, 0));
-        target.draw(line);
-    }
-    target.draw(tableText);
-    std::cout << tableText.getString() << std::endl;
-    printVec(tableText.getPosition());
-}
-
-void UiTable::move(sf::Vector2f distance) {
-    background.move(distance);
-    tableText.move(distance);
-    position += distance;
-}
-
-void UiTable::setPosition(sf::Vector2f pos) {
-    move(pos - position);
-}
-
-void UiTable::setSize(sf::Vector2f dims) {
-    background.setSize(dims);
-    colWidth = background.getSize().x / columns;
-}
-
-void UiTable::setRow(std::vector<std::string> newRow, int y) {
-    for (int x = 0; x < tableContents[y].size(); x++) {
-        tableContents[y][x] = newRow[x];
-    }
-}
-
-void UiTable::setCell(std::string newCell, int x, int y) {
-    tableContents[y][x] = newCell;
-}
-
-
-
 bool isOnTop(sf::Vector2f pos, sf::FloatRect box) {
     if (pos.x >= box.left && pos.x <= box.left + box.width) {
         if (pos.y >= box.top && pos.y <= box.top + box.height) {
@@ -676,6 +601,10 @@ void DropDownMenu::onClickEvent(sf::Vector2f pos) {
         }
         toggleExpand();
     }
+}
+
+void DropDownMenu::setSelectedOption(int index) {
+    selectedOption.setString(options[index]);
 }
 
 std::string DropDownMenu::getSelectedOption() {
@@ -739,7 +668,6 @@ void PauseMenu::moveSelector(int dir) {
     } else if (selectedOption >= nOptions) {
         selectedOption = nOptions - 1;
     }
-    std::cout << ribbonAngle << std::endl;
     selector.setPosition(sf::Vector2f(
                 topLeftPos.x + 120 + cos((ribbonAngle + 90) * PI/180) * selectedOption * 100,
                 topLeftPos.y + 120 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100));
@@ -904,7 +832,6 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
 
     // Play start animation and store wether the window should be closed or not
     shouldClose = playStartAnim(window, clock, viewport);
-    //std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
 
@@ -1044,16 +971,13 @@ SettingsMenu::~SettingsMenu() {
 }
 
 bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
-    mappingTable = UiTable(2, 10);
-    //mappingTable.setRow(std::vector<std::string> {"Left", bindingKeyNames[0]}, 0);
     toggleDebugMode();
     viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
     topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
-    background.setPosition(topLeftPos + sf::Vector2f(25, 25));
-    inactiveTabs.setPosition(topLeftPos + sf::Vector2f(25, 25));
+    background.setPosition(viewCenter - sf::Vector2f(background.getSize().x / 2, background.getSize().y / 2));
+    inactiveTabs.setPosition(background.getPosition());
 
-    std::cout << (*settings).WINDOW_WIDTH << " " << (*settings).WINDOW_HEIGHT << std::endl;
     bgTexture.create((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT);
     bgTexture.update(window);
     bgSprite.setTexture(bgTexture);
@@ -1061,8 +985,8 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
 
     graphicsTitleClickBox = sf::FloatRect(background.getPosition().x, background.getPosition().y, 160, inactiveTabs.getSize().y);
     controlsTitleClickBox = sf::FloatRect(background.getPosition().x + 160, background.getPosition().y, 160, inactiveTabs.getSize().y);
-    graphicsTitle.setPosition(topLeftPos + sf::Vector2f(40, 28));
-    controlsTitle.setPosition(topLeftPos + sf::Vector2f(200, 28));
+    graphicsTitle.setPosition(background.getPosition() + sf::Vector2f(15, 3));
+    controlsTitle.setPosition(background.getPosition() + sf::Vector2f(175, 3));
     openTab = "graphics";
     openGraphicsTab();
 
@@ -1101,6 +1025,11 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
                     } 
                     break;
                 }
+            case sf::Event::MouseWheelScrolled:
+                if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+                    float mouseDeltaY = event.mouseWheelScroll.y * event.mouseWheelScroll.delta * -0.1;
+                    sheetTmp.scroll(mouseDeltaY);
+                }
             }
         }
         
@@ -1110,7 +1039,6 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
             window.draw(resolution);
             window.draw(resolutionOptions);
         } else if (openTab == "controls") {
-            //window.draw(mappingTable);
             window.draw(sheetTmp);
         }
         
@@ -1143,17 +1071,21 @@ bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &vi
 void SettingsMenu::openGraphicsTab() {
     openTab = "graphics";
     resolution.setString("Resolution:");
-    resolution.setPosition(topLeftPos + sf::Vector2f(40, 100));
+    resolution.setPosition(background.getPosition() + sf::Vector2f(15, 75));
     activeTab.setPosition(background.getPosition());
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
     resolutionOptions.setPosition(background.getPosition() + sf::Vector2f(128, 78));
+    resolutionOptions.setSelectedOption((*settings).selectedResolution);
 }
 
 void SettingsMenu::openControlsTab() {
     openTab = "controls";
-    //mappingTable.setSize(sf::Vector2f(background.getSize().x, 504));
-    //mappingTable.setPosition(background.getPosition() + sf::Vector2f(0, background.getSize().y - 504));
-    sheetTmp.setPosition(background.getPosition() + sf::Vector2f(0, activeTab.getSize().y));
+    sheetTmp.setPosition(background.getPosition() + sf::Vector2f(0, activeTab.getSize().y - 3));
+    sheetTmp.setSize(sf::Vector2f(748, 500));
+    sheetTmp.setShape(2, bindingNames.size());
+    sheetTmp.setColumnContents(0, bindingNames);
+    sheetTmp.setColumnContents(1, bindingKeyNames);
+    sheetTmp.update();
     activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
 }
@@ -1163,23 +1095,9 @@ void SettingsMenu::toggleDebugMode() {
 }
 
 UiSheet::UiSheet() {
-    tmp.setFontSize(30);
-    tmp.setFillColor(sf::Color::Red);
-    tmp.setString("kek");
-    tmp.setPosition(position + sf::Vector2f(0, 0));
     position = sf::Vector2f(0, 0);
-    texts.resize(5);
-    for (int y = 0; y < texts.size(); y++) {
-        texts[y].resize(2);
-    }
-    for (int y = 0; y < texts.size(); y++) {
-        for (int x = 0; x < texts[y].size(); x++) {
-            texts[y][x].setFontSize(30);
-            texts[y][x].setFillColor(sf::Color::Red);
-            texts[y][x].setString("kek");
-            texts[y][x].setPosition(position + sf::Vector2f(x * 20, y * 20));
-        }
-    }
+    background.setFillColor(sf::Color(51, 51 ,51));
+    background.setPosition(sf::Vector2f(0, 0));
 }
 
 UiSheet::~UiSheet() {
@@ -1188,18 +1106,95 @@ UiSheet::~UiSheet() {
 
 void UiSheet::move(sf::Vector2f distance) {
     position += distance;
-    tmp.move(distance);
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            texts[y][x].move(distance);
+        }
+    }
+    background.move(distance);
 }
 
 void UiSheet::setPosition(sf::Vector2f pos) {
     move(pos - position);
 }
 
+void UiSheet::setSize(sf::Vector2f newSize) {
+    size = newSize;
+    background.setSize(size);
+}
+
 void UiSheet::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(tmp);
+    target.draw(background);
+    for (int y = 0; y < texts.size(); y++) {
+        if ((y + 1)* totalSize.y / texts.size() + scrollOffset < size.y && 
+            (y + 1) * totalSize.y / texts.size() + scrollOffset > 0) {
+            for (int x = 0; x < texts[y].size(); x++) {
+                target.draw(texts[y][x]);
+            }
+        }
+    }
+    sf::RectangleShape line;
+    line.setFillColor(sf::Color(31, 31, 31));
+    line.setSize(sf::Vector2f(background.getSize().x, 2));
+    for (int y = 0; y * totalSize.y / texts.size() <= size.y; y++) {
+        line.setPosition(background.getPosition() + sf::Vector2f(0, 3 + y * totalSize.y / texts.size()));
+        target.draw(line);
+    }
+    line.setSize(sf::Vector2f(2, background.getSize().y));
+    for (int x = 0; x * totalSize.x / texts[0].size() <= size.x; x++) {
+        line.setPosition(background.getPosition() + sf::Vector2f(x * totalSize.x / texts[0].size(), 0));
+        target.draw(line);
+    }
+}
+
+void UiSheet::update() {
     for (int y = 0; y < texts.size(); y++) {
         for (int x = 0; x < texts[y].size(); x++) {
-            target.draw(texts[y][x]);
+            texts[y][x].setPosition(position + 
+                sf::Vector2f(50 + x * totalSize.x / texts[y].size(), 
+                    2 + y * totalSize.y / texts.size() + scrollOffset));
         }
+    }
+}
+
+void UiSheet::setShape(int width, int height) {
+    texts.resize(height);
+    for (int y = 0; y < texts.size(); y++) {
+        texts[y].resize(width);
+    }
+    setTotalSize(sf::Vector2f(size.x, height * 30));
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            texts[y][x].setFontSize(26);
+            texts[y][x].setFillColor(sf::Color::White);
+            texts[y][x].setString("kek");
+        }
+    }
+}
+
+void UiSheet::setTotalSize(sf::Vector2f newTotalSize) {
+    totalSize = newTotalSize;
+}
+
+void UiSheet::scroll(float amount) {
+    if (amount > 0) {
+        scrollOffset -= totalSize.y / texts.size();
+    } else if (amount < 0) {
+        scrollOffset += totalSize.y / texts.size();
+    }
+    scrollOffset = std::min(scrollOffset, (float) 0.0);
+    float rowHeight = (totalSize.y / texts.size());
+    float total = 0;
+    for (int i = 0; total < totalSize.y - size.y && i < texts.size(); i++, total += rowHeight) {
+    }
+    scrollOffset = std::max(scrollOffset, -total);
+    update();
+}
+
+// Ignores overflow contents if longer than texts
+void UiSheet::setColumnContents(int index, std::vector<std::string> contents) {
+    for (int y = 0; y < texts.size() && y < contents.size(); y++) {
+        UiText &tmp = texts[y][index];
+        tmp.setString(contents[y]);
     }
 }

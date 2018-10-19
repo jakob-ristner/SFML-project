@@ -218,6 +218,7 @@ public:
     void setOptions(std::vector<std::string> options);
     void toggleExpand();
     void onClickEvent(sf::Vector2f pos);
+    void setSelectedOption(int index);
 
     std::string getSelectedOption();
 private:
@@ -228,33 +229,6 @@ private:
     UiText allOptions;
     std::vector<std::string> options;
     std::vector<sf::RectangleShape> debugShapes;
-};
-
-class UiTable: public UiElement {
-public:
-    UiTable();
-    UiTable(int columns, int row);
-    ~UiTable();
-
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-    void draw(sf::RenderTarget &target);
-    void move(sf::Vector2f distance);
-    void setPosition(sf::Vector2f pos);
-    void setSize(sf::Vector2f dims);
-
-    void setRow(std::vector<std::string> newRow, int y);
-    void setCell(std::string newCell, int x, int y);
-private:
-    sf::RectangleShape background;
-    int columns;
-    int rows;
-    int rowHeight = 60;
-    int colWidth = 300;
-    int scrollOffset = 0;
-    std::vector<std::vector<std::string>> tableContents;
-
-    UiText tableText;
-    sf::RectangleShape rs;
 };
 
 class StatusMessage {
@@ -326,11 +300,22 @@ public:
 
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
+    void setSize(sf::Vector2f newSize);
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void update();
+
+    void setShape(int width, int height);
+    void setTotalSize(sf::Vector2f newTotalSize);
+    void scroll(float amount);
+
+    void setColumnContents(int index, std::vector<std::string> contents);
 
 private:
-    UiText tmp;
     std::vector <std::vector<UiText>> texts;
+    sf::Vector2f size;
+    sf::Vector2f totalSize;
+    sf::RectangleShape background;
+    float scrollOffset = 0;
 };
 
 class SettingsMenu {
@@ -382,7 +367,6 @@ private:
     };
     // Defined in .cpp since it needs settings
     std::vector<std::string> bindingKeyNames;
-    UiTable mappingTable;
     UiSheet sheetTmp;
 };
 

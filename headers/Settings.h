@@ -57,8 +57,6 @@ public:
     Settings();
     ~Settings();
 
-    int WINDOW_WIDTH = 1920;
-    int WINDOW_HEIGHT = 1080;
  
     int TIMESCALE = 10;
     int TILESIZE = 32;
@@ -66,6 +64,18 @@ public:
     bool playerColliding = true;
 
     keyMapping keyMap;
+    int resolutions[7][2] = { {800, 600}, 
+                              {1024, 768}, 
+                              {1280, 960}, 
+                              {1366, 768}, 
+                              {1600, 900}, 
+                              {1680, 1050}, 
+                              {1920, 1080} 
+                            };
+
+    int selectedResolution = 4;
+    int WINDOW_WIDTH = resolutions[selectedResolution][0];
+    int WINDOW_HEIGHT = resolutions[selectedResolution][1];
 };
 
 extern Settings settings;
