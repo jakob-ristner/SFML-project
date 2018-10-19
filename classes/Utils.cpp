@@ -260,4 +260,8 @@ const std::string getKeyName( const sf::Keyboard::Key key ) {
         case sf::Keyboard::Pause:
                 return "Pause";
         }
+
+float getDistance(sf::Vector2f vec1, sf::Vector2f vec2) {
+    return std::sqrt(std::pow((vec1.x - vec2.x), 2) + std::pow((vec1.y - vec2.y), 2));
+
 }

@@ -18,6 +18,7 @@
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
 #include "../headers/Animation.h"
+#include "../headers/Explosion.h"
 #pragma endregion
 
 int main() {
@@ -62,6 +63,11 @@ int main() {
     std::vector<Obstacle> obstacles;
     std::vector<CellDoor> cellDoors;
 
+    std::vector<Explosion> explosions;
+
+    Spell::explosions = &explosions;
+    Projectile::explosions = &explosions;
+
     sf::Clock clock;
     
     // This stores and draws the background image of the map
@@ -82,12 +88,21 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
     sf::Event event;
     Collider playerCol = player.getCollider();
+    //Spell initialization
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
+    Explode explode = Explode(player);
     SprintSpell sprint = SprintSpell(player);
+    FlashHeal flashHeal = FlashHeal(player);
+    Firebolt firebolt = Firebolt(player);
+    //Adding spells to player
+
+    player.addSpell(&firebolt);
     player.addSpell(&fireball);
-    player.addSpell(&sprint);
+    player.addSpell(&explode);
     player.addSpell(&magicMissile);
+    player.addSpell(&sprint);
+    player.addSpell(&flashHeal);
 
     // Enemies
     EnemyFactory enemyFactory(player);
@@ -216,7 +231,7 @@ int main() {
                         break;
                 }
             }
-        }
+        }   
 
         mousePos = sf::Mouse::getPosition(window);
 
@@ -257,10 +272,12 @@ int main() {
                 }
             }
         }
+        
         enemyFactory.update(dt);
         enemyFactory.wallCollide(obstacles);
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
+        enemyFactory.explosionCollide(explosions);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
@@ -286,7 +303,13 @@ int main() {
                 // In future the enemyFactory should also be reset and spawn new enemies
             }
         }
-
+        
+        for (int i = 0; i < explosions.size(); i++) {
+            explosions[i].update(dt);
+            if (explosions[i].kill) {
+                explosions.erase(explosions.begin() + i);
+            }
+        }
 
 
         // Drawing
@@ -297,6 +320,10 @@ int main() {
 
         for (int i = 0; i < player.getProjectiles().size(); i++) {
             player.getProjectiles()[i].draw(window);
+        }
+
+        for (int i = 0; i < explosions.size(); i++) {
+            explosions[i].draw(window);
         }
 
         player.draw(window);

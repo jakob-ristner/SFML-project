@@ -4,8 +4,10 @@
 #include "./Npc.h"
 #include "./Collider.h"
 #include "./Animation.h"
+#include "./Explosion.h"
 
 class Player;
+class Explosion;
 class Enemy;
 class Buff;
 class Spell {
@@ -13,26 +15,29 @@ public:
     Spell();
     ~Spell();
     virtual void use();
-    void setParams(std::string name, std::string spellType,
-                   int manaCost);
-    void setAnimation(Animation anim);
-    std::string name;
-    std::string spellType;
-    virtual int getCastTime();
-    virtual float getCooldown();
-    virtual float getCooldownTimer();
+    int getCastTime();
+    void setAnimations(std::vector<Animation> animations);
+    void addAnimation(Animation anim);
+    float getCooldown();
+    float getCooldownTimer();
     virtual void update(float dt);
     bool isReady;
+    std::vector<Animation> getAnimations();
 
+    static  std::vector<Explosion> *explosions;
     float getManaCost();
+private:
 
 protected:
+    std::string spellType;
+    std::string name;
     int castTime;
     float cooldown;
     float cooldownTimer;
     float manaCost;
-    Animation anim;
     bool isAnimated = false;
+    Animation anim;
+    std::vector<Animation> animations;
 };
 
 class Buff {
@@ -47,7 +52,6 @@ public:
 protected:
     float counter;
     float duration;
-
 };
 
 class Projectile: public sf::Sprite{
@@ -56,19 +60,8 @@ public:
                float speed, sf::Vector2f pos,
                float rotation, float scale,
                void (*callback)(Projectile &projectile,
-               float dt, sf::Vector2f mousePos));
-    Projectile(sf::Texture &texture, sf::Vector2f vel,
-               float speed, sf::Vector2f pos,
-               float rotation, float scale,
-               void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos),
-               bool (*onCollide)(Enemy &enemy));
-    Projectile(sf::Texture &texture, sf::IntRect textSize, sf::Vector2f vel,
-               float speed, sf::Vector2f pos,
-               float rotation, float scale,
-               void (*callback)(Projectile &projectile,
-               float dt, sf::Vector2f mousePos),
-               bool (*onCollide)(Enemy &enemy));
+               bool (*onCollide)(Enemy &enemy, Projectile &projectile));
     ~Projectile();
     Projectile();
     void update(float dt, sf::Vector2f mousePos);
@@ -76,20 +69,26 @@ public:
     void onCollision(Enemy &enemy);
     void (*func)(Projectile &projectile, float dt, sf::Vector2f mousePos);
     // Will be overloaded for different types of collisions
-    bool (*onCollide)(Enemy &enemy);
+    bool (*onCollide)(Enemy &enemy, Projectile &projectile);
     bool kill;
 
     float getSpeed();
     float counter;
+    std::vector<Animation> getAnimations();
     
 
     sf::Vector2f vel;
     SpriteCollider getCollider();
 
-    void setAnimation(Animation anim);
+    static std::vector<Explosion> *explosions;
+
+    void setAnimationAtIndex(int index);
+    void setAnimations(std::vector<Animation> animations);
+    void addAnimation(Animation anim);
     void setTextureSize(sf::IntRect newSize);
 private:
     Animation anim;
+    std::vector<Animation> animations;
     bool isAnimated = false;
     float speed;
     float rotation;
@@ -100,13 +99,9 @@ public:
     Fireball(Player &player);
     ~Fireball();
     void use() override;
-    int getCastTime() override;
     void update(float dt) override;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 
 private:
-    int castTime;
     Player &player;
     sf::Texture texture;
 
@@ -117,13 +112,23 @@ public:
     MagicMissile(Player &player);
     ~MagicMissile();
     void use() override;
-    int getCastTime() override;
     void update(float dt) override;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 
 private:
-    int castTime;
+    Player &player;
+    sf::Texture texture;
+};
+
+class Explode: public Spell {
+public:
+    Explode(Player &player);
+    ~Explode();
+    void use() override;
+    void update(float dt) override;
+    Animation animation;
+    sf::Texture text;
+private:
+    int duration;
     Player &player;
     sf::Texture texture;
 };
@@ -151,16 +156,39 @@ public:
     SprintSpell(Player &player);
     ~SprintSpell();
     void use() override;
-    int getCastTime();
     void update(float dt) override;
-    float getCooldownTimer() override;
-    float getCooldown() override;
 
 private:
-    int castTime;
     Player &player;
     SprintBuff temp;
     Buff *buff;
     
 };
+
+class FlashHeal: public Spell {
+public:
+    FlashHeal(Player &player);
+    ~FlashHeal();
+    void use() override;
+    void update(float dt) override;
+
+private:
+    Player &player;
+    float healing;
+};
+// Firebolt Spell Start
+// Firebolt is like fireball except it explodes on collision
+class Firebolt: public Spell {
+public:
+    Firebolt(Player &player);
+    ~Firebolt();
+    void use() override;
+    void update(float dt) override;
+private:
+    Player &player;
+    sf::Texture texture;
+    sf::Texture texture2;
+};
+
+
 

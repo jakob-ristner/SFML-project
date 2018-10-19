@@ -53,6 +53,7 @@ public:
     std::vector<Projectile> &getProjectiles();
     float getMaxHp();
     float getSpeed();
+    float getHp();
     
     float castProgress;
     bool casting;
