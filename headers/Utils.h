@@ -18,4 +18,7 @@ void printVec(sf::Vector2f vec);
 
 std::vector<std::string> strSplit(std::string, char c);
 
+const std::string getKeyName(const sf::Keyboard::Key key);
+
 float getDistance(sf::Vector2f vec1, sf::Vector2f vec2);
+

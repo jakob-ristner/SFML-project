@@ -265,9 +265,9 @@ sf::Vector2i TileMap::getSize() {
 
 sf::IntRect TileMap::getViewportRect(sf::Vector2f viewportPos) {
     float x, y;
-    x = viewportPos.x - (Settings::WINDOW_WIDTH / 2.0f);
-    y = viewportPos.y - (Settings::WINDOW_HEIGHT / 2.0f);
-    return sf::IntRect(x - 10, y - 10, Settings::WINDOW_WIDTH + 20, Settings::WINDOW_HEIGHT + 20);
+    x = viewportPos.x - (settings.WINDOW_WIDTH / 2.0f);
+    y = viewportPos.y - (settings.WINDOW_HEIGHT / 2.0f);
+    return sf::IntRect(x - 10, y - 10, settings.WINDOW_WIDTH + 20, settings.WINDOW_HEIGHT + 20);
 }
 // Prints a vector of ints in a pretty format, used in printData
 void printVec(std::vector< std::vector<int> > vec) {

@@ -127,7 +127,7 @@ void Projectile::onCollision(Enemy &enemy) {
 }
 
 void Projectile::update(float dt, sf::Vector2f mousePos) {
-    counter += 1 * (dt / Settings::TIMESCALE);
+    counter += 1 * (dt / settings.TIMESCALE);
     (*func)(*this, dt, mousePos);
     if (isAnimated) {
         anim.update(dt);
@@ -205,7 +205,7 @@ bool fireballDamage(Enemy &enemy, Projectile &projectile) {
 }
 void fireball(Projectile &projectile, float dt, sf::Vector2f mousePos) {
     // The update function for the projectiles created with the fireball spell
-    projectile.move(projectile.vel * projectile.getSpeed() * (dt / Settings::TIMESCALE));
+    projectile.move(projectile.vel * projectile.getSpeed() * (dt / settings.TIMESCALE));
 }
 
 void Fireball::use() {
@@ -269,7 +269,7 @@ void magicMissile(Projectile &projectile, float dt, sf::Vector2f mousePos) {
 
     projectile.vel = normalizedVec((sf::Vector2f(-sin(angle * (M_PI / 180)), -cos(angle * (M_PI / 180))) / 18.f + projectile.vel) / 0.5f * dt);
     projectile.setRotation(180 - atan2(projectile.vel.x, projectile.vel.y) * (180 / M_PI));
-    projectile.move(projectile.vel * projectile.getSpeed() * (dt / Settings::TIMESCALE));
+    projectile.move(projectile.vel * projectile.getSpeed() * (dt / settings.TIMESCALE));
     // These lines of math basically make the projectile follow the mouse by rotating towards it
 }
 

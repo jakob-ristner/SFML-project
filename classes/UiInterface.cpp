@@ -6,6 +6,8 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Settings.h"
 
+#define PI 3.14159265
+
 UiElement::UiElement() {
     position = sf::Vector2f(0, 0);
     mainFont.loadFromFile("font.ttf");
@@ -27,7 +29,7 @@ CastBar::CastBar() {
     background.setSize(sf::Vector2f(200, 15));
     background.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    background.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
+    background.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2,
                                         600));
     background.setFillColor(sf::Color(31, 31, 31));
     background.setOutlineColor(sf::Color(51, 51, 51));
@@ -36,7 +38,7 @@ CastBar::CastBar() {
     foreground.setSize(sf::Vector2f(0, 15));
     foreground.setOrigin(sf::Vector2f(background.getSize().x / 2,
                                       background.getSize().y / 2));
-    foreground.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2,
+    foreground.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2,
                                         600));
     foreground.setFillColor(sf::Color(0, 200, 255));
     position = background.getPosition();
@@ -67,8 +69,7 @@ void CastBar::setPosition(sf::Vector2f pos) {
 // of the foreground.
 // Args:
 // newProgress - Float representing how many seconds the spell has been
-//               casted for
-// castTime    - Float representing the total casting time of a spell
+//               casted for // castTime    - Float representing the total casting time of a spell
 // isCasting   - Boolean coming from player, tells the bar if the spell
 //               has been canceled or not
 void CastBar::update(float newProgress, float castTime, bool isCasting) {
@@ -94,8 +95,6 @@ UiText::~UiText() {
 
 void UiText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(text);
-    //std::cout << text.getString().toAnsiString() << std::endl;
-    //std::cout << text.getPosition().x << " " << text.getPosition().y << std::endl;
 }
 
 void UiText::move(sf::Vector2f distance) {
@@ -301,13 +300,13 @@ std::vector<SpellBarIcon>* SpellBar::getIcons() {
 
 PlayerStatBar::PlayerStatBar() {
     background.setSize(sf::Vector2f(200.0f, 15.0f));
-    background.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - background.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    background.setPosition(sf::Vector2f((settings.WINDOW_WIDTH - background.getSize().x) / 2, settings.WINDOW_HEIGHT - 44.0f));
     background.setFillColor(sf::Color(31, 31, 31));
     background.setOutlineColor(sf::Color(51, 51, 51));
     background.setOutlineThickness(2);
 
     foreground.setSize(sf::Vector2f(200.0f, 15.0f));
-    foreground.setPosition(sf::Vector2f((Settings::WINDOW_WIDTH - foreground.getSize().x) / 2, Settings::WINDOW_HEIGHT - 44.0f));
+    foreground.setPosition(sf::Vector2f((settings.WINDOW_WIDTH - foreground.getSize().x) / 2, settings.WINDOW_HEIGHT - 44.0f));
     foreground.setFillColor(sf::Color(200, 0, 0));
 
     statText.setFillColor(sf::Color::White);
@@ -393,8 +392,6 @@ PlayerLevelIcon::PlayerLevelIcon() {
     levelText.setFontSize(40);
     levelText.setPosition(sf::Vector2f(-1 + 2, -14 + 5) + position + (sf::Vector2f(background.getRadius(), background.getRadius()) - levelText.getDims()) / 2.0f);
     levelText.setFillColor(sf::Color::White);
-    setPosition(sf::Vector2f(10, (float) Settings::WINDOW_HEIGHT - background.getRadius() - 10));
-
 }
 
 PlayerLevelIcon::~PlayerLevelIcon() {
@@ -423,7 +420,7 @@ void PlayerLevelIcon::update(float newLevel) {
 }
 
 UiGrid::UiGrid() {
-    text.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT, false);
+    text.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT, false);
         visible = false;
     xAmount = 8;
     yAmount = 8;
@@ -467,15 +464,15 @@ void UiGrid::setYLines(int amount) {
 void UiGrid::render() {
     sf::RectangleShape line;
     line.setFillColor(lineColor);
-    line.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, 1));
+    line.setSize(sf::Vector2f(settings.WINDOW_WIDTH, 1));
     text.clear(sf::Color::Transparent);
     for (float y = 0; y < yAmount; y++) {
-        line.setPosition(sf::Vector2f(0, y * Settings::WINDOW_HEIGHT / yAmount));
+        line.setPosition(sf::Vector2f(0, y * settings.WINDOW_HEIGHT / yAmount));
         text.draw(line);
     }
-    line.setSize(sf::Vector2f(1, Settings::WINDOW_HEIGHT));
+    line.setSize(sf::Vector2f(1, settings.WINDOW_HEIGHT));
     for (float x = 0; x < xAmount; x++) {
-        line.setPosition(sf::Vector2f(x * Settings::WINDOW_WIDTH / xAmount, 0));
+        line.setPosition(sf::Vector2f(x * settings.WINDOW_WIDTH / xAmount, 0));
         text.draw(line);
     }
 
@@ -490,6 +487,128 @@ void UiGrid::setColor(sf::Color color) {
 
 bool UiGrid::isVisible() {
     return visible;
+}
+
+DropDownMenu::DropDownMenu() {
+    background.setFillColor(sf::Color(31, 31, 31));
+    background.setOutlineColor(sf::Color::White);
+    background.setOutlineThickness(1);
+
+    downArrow.setString(">");
+    downArrow.setRotation(90);
+    downArrow.setFontSize(20);
+    downArrow.setFillColor(sf::Color::White);
+
+    selectedOption.setString("");
+    selectedOption.setFontSize(19);
+    selectedOption.setFillColor(sf::Color::White);
+    selectedOption.move(sf::Vector2f(5, -2));
+
+    allOptions.setString("");
+    allOptions.setFontSize(19);
+    allOptions.setFillColor(sf::Color::White);
+    allOptions.move(sf::Vector2f(5, -2));
+}
+
+DropDownMenu::~DropDownMenu() {
+
+}
+
+void DropDownMenu::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(background);
+    target.draw(downArrow);
+    if (expanded){
+        target.draw(allOptions);
+    } else {
+        target.draw(selectedOption);
+    }
+    if (debugMode) {
+        for (int i = 0; i < debugShapes.size(); i++) {
+            target.draw(debugShapes[i]);
+        }
+    }
+}
+
+void DropDownMenu::move(sf::Vector2f distance) {
+    background.move(distance);
+    downArrow.move(distance);
+    selectedOption.move(distance);
+    allOptions.move(distance);
+    position += distance;
+}
+
+void DropDownMenu::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void DropDownMenu::setOptions(std::vector<std::string> options) {
+    this->options = options;
+    std::string tmp;
+    UiText tmp1;
+    tmp1.setFontSize(20);
+    float widest = 0;
+    for (int i = 0; i < options.size(); i++) {
+        tmp1.setString(tmp);
+        widest = std::max(widest, tmp1.getDims().x);
+        tmp += options[i];
+        tmp += "\n";
+    }
+    allOptions.setString(tmp);
+    background.setSize(sf::Vector2f(widest + 30, 20));
+    selectedOption.setString(options[0]);
+    downArrow.setPosition(background.getPosition() + sf::Vector2f(widest + 33, 4));
+}
+
+void DropDownMenu::toggleExpand() {
+    float dHeight = 22.3;
+    if (debugMode) {
+        for (int i = 0; i < options.size(); i++) {
+            debugShapes.push_back(sf::RectangleShape());
+            debugShapes[i].setFillColor(sf::Color(0, 0, 0, 0));
+            debugShapes[i].setOutlineColor(sf::Color::Red);
+            debugShapes[i].setOutlineThickness(1);
+            debugShapes[i].setSize(sf::Vector2f(background.getSize().x, dHeight));
+            debugShapes[i].setPosition(background.getPosition() + sf::Vector2f(0, dHeight * i));
+        }
+    }
+    if (!expanded) {
+        expanded = true;
+        background.setSize(sf::Vector2f(background.getSize().x, allOptions.getDims().y - 10));
+        downArrow.setRotation(270);
+        downArrow.move(sf::Vector2f(-27, 10));
+    } else {
+        expanded = false;
+        background.setSize(sf::Vector2f(background.getSize().x, 20));
+        downArrow.setRotation(90);
+        downArrow.move(sf::Vector2f(27, -10));
+    }
+}
+
+bool isOnTop(sf::Vector2f pos, sf::FloatRect box) {
+    if (pos.x >= box.left && pos.x <= box.left + box.width) {
+        if (pos.y >= box.top && pos.y <= box.top + box.height) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void DropDownMenu::onClickEvent(sf::Vector2f pos) {
+    if (isOnTop(pos, sf::FloatRect(position.x, position.y, background.getSize().x, background.getSize().y))) {
+        if (expanded) {
+            int index = std::floor((pos.y - position.y) / 22.3);
+            selectedOption.setString(options[index]);
+        }
+        toggleExpand();
+    }
+}
+
+void DropDownMenu::setSelectedOption(int index) {
+    selectedOption.setString(options[index]);
+}
+
+std::string DropDownMenu::getSelectedOption() {
+    return selectedOption.getString();
 }
 
 StatusMessage::StatusMessage() {
@@ -512,24 +631,27 @@ std::string StatusMessage::getMessage() {
 
 }
 
-PauseMenu::PauseMenu() {
-    title.setFontSize(60);
+PauseMenu::PauseMenu(Settings *settings) {
+    title.setFontSize(40);
     title.setString("Paused");
     title.setFillColor(sf::Color::White);
 
-    titleSeparator.setSize(sf::Vector2f(400, 3));
+    titleSeparator.setSize(sf::Vector2f(270, 3));
     titleSeparator.setFillColor(sf::Color::White);
 
-    menuOptions.resize(3);
+    menuOptions.resize(nOptions);
     for (int i = 0; i < nOptions; i++) {
        menuOptions[i] = UiText();
        menuOptions[i].setFont(menuOptions[i].mainFont);
-       menuOptions[i].setFontSize(50);
+       menuOptions[i].setFontSize(30);
        menuOptions[i].setFillColor(sf::Color::White);
     }
-    menuOptions[0].setString("Inventory");
-    menuOptions[1].setString("Settings");
-    menuOptions[2].setString("Exit");
+    menuOptions[0].setString("Resume");
+    menuOptions[1].setString("Inventory");
+    menuOptions[2].setString("Settings");
+    menuOptions[3].setString("Exit");
+    selector.setFontSize(30);
+    this->settings = settings;
 }
 
 PauseMenu::~PauseMenu() {
@@ -547,8 +669,8 @@ void PauseMenu::moveSelector(int dir) {
         selectedOption = nOptions - 1;
     }
     selector.setPosition(sf::Vector2f(
-                topLeftPos.x + 250 + selectedOption * 100,
-                topLeftPos.y + 120 + selectedOption * 100));
+                topLeftPos.x + 120 + cos((ribbonAngle + 90) * PI/180) * selectedOption * 100,
+                topLeftPos.y + 120 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100));
     selector.setString(">                           <");
     blinkTimer = blinkDuration;
 }
@@ -569,38 +691,39 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
         float startOpacity, float finalOpacity) {
     
     float currentOpacity = startOpacity;
-    //bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    //bgTexture.create(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT);
     //bgTexture.update(window);
     
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
     
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
     
     bgRibbon.setPosition(sf::Vector2f(ribbonPos, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(300, (*settings).WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
-    bgRibbon.setRotation(-45);
+    bgRibbon.setRotation(ribbonAngle);
     
-    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setSize(sf::Vector2f((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, finalOpacity));
     
-    title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
-    titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+    //title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
+    //titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+    title.setPosition(sf::Vector2f(topLeftPos.x + 60, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
     
-    selector.setFontSize(50);
     selector.setString("");
     //selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
     
     for (int i = 0; i < nOptions; i++) {
-        sf::Vector2f dims = menuOptions[i].getDims();
-        menuOptions[i].setPosition(sf::Vector2f(
-                    ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
-                    topLeftPos.y + 120 + i * 100));
-    }
+            sf::Vector2f dims = menuOptions[i].getDims();
+            menuOptions[i].setPosition(sf::Vector2f(
+                        ribbonPos + 130 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                        topLeftPos.y + 120 + sin((ribbonAngle + 90)*PI/180) * i * 100));
+        }
     
     bool isRunning = true;
     bool shouldClose = false;
@@ -630,13 +753,13 @@ bool PauseMenu::playSlideAnim(sf::RenderWindow &window, sf::Clock &clock,
         bgRibbon.move(sf::Vector2f(deltaX, 0));
         ribbonPos += deltaX;
         
-        title.setPosition(sf::Vector2f(ribbonPos + 240, topLeftPos.y + 10));
-        titleSeparator.setPosition(sf::Vector2f(ribbonPos + 150, topLeftPos.y + 80));
+        title.setPosition(sf::Vector2f(ribbonPos + 110, topLeftPos.y + 10));
+        titleSeparator.setPosition(sf::Vector2f(ribbonPos + 50, topLeftPos.y + 80));
         for (int i = 0; i < nOptions; i++) {
             sf::Vector2f dims = menuOptions[i].getDims();
             menuOptions[i].setPosition(sf::Vector2f(
-                        ribbonPos + 130 + i * 100 + (288 - dims.x / 2), 
-                        topLeftPos.y + 120 + i * 100));
+                        ribbonPos + 130 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                        topLeftPos.y + 120 + sin((ribbonAngle + 90)*PI/180) * i * 100));
         }
         
         if (finalOpacity - startOpacity > 0) {
@@ -681,7 +804,7 @@ bool PauseMenu::playStartAnim(sf::RenderWindow &window, sf::Clock &clock,
 bool PauseMenu::playCloseAnim(sf::RenderWindow &window, sf::Clock &clock, 
         sf::View &viewport) {
     return playSlideAnim(window, clock, viewport, topLeftPos.x + 20, 
-                         topLeftPos.x + Settings::WINDOW_WIDTH, 80, 0);
+                         topLeftPos.x + (*settings).WINDOW_WIDTH, 80, 0);
 }
 
 // Opens the pause menu. Handles drawing, updating, window and keyboard events.
@@ -696,7 +819,7 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     // Gets current screen from the window and saves it for drawing every
     // frame. This saves a lot of processing power by not having to draw
     // every entity several times.
-    bgTexture.create(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    bgTexture.create((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT);
     bgTexture.update(window);
 
 
@@ -704,36 +827,36 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     // This is done because the player is not always in the center
     // of the screen and we already have a reference of the window.
     viewCenter = viewport.getCenter();
-    topLeftPos.x = viewCenter.x - Settings::WINDOW_WIDTH / 2;
-    topLeftPos.y = viewCenter.y - Settings::WINDOW_HEIGHT / 2;
+    topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
 
     // Play start animation and store wether the window should be closed or not
     shouldClose = playStartAnim(window, clock, viewport);
-    //std::cout << viewCenter.x << " " << viewCenter.y << std::endl;
     bgSprite.setTexture(bgTexture);
     bgSprite.setPosition(topLeftPos);
 
     bgRibbon.setPosition(sf::Vector2f(topLeftPos.x + 20, topLeftPos.y));
-    bgRibbon.setSize(sf::Vector2f(400, Settings::WINDOW_HEIGHT * 2));
+    bgRibbon.setSize(sf::Vector2f(300, (*settings).WINDOW_HEIGHT * 2));
     bgRibbon.setFillColor(sf::Color(0, 0, 0, 120));
-    bgRibbon.setRotation(-45);
+    bgRibbon.setRotation(ribbonAngle);
 
-    bgDim.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT));
+    bgDim.setSize(sf::Vector2f((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT));
     bgDim.setPosition(topLeftPos);
     bgDim.setFillColor(sf::Color(0, 0, 0, 80));
 
-    title.setPosition(sf::Vector2f(topLeftPos.x + 260, topLeftPos.y + 10));
-    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 170, topLeftPos.y + 80));
+    title.setPosition(sf::Vector2f(topLeftPos.x + 130, topLeftPos.y + 10));
+    titleSeparator.setPosition(sf::Vector2f(topLeftPos.x + 70, topLeftPos.y + 80));
 
-    selector.setFontSize(50);
     selector.setString(">                           <");
-    selector.setPosition(sf::Vector2f(topLeftPos.x + 250 + selectedOption * 100, topLeftPos.y + 120 + selectedOption * 100));
+    selector.setPosition(sf::Vector2f(
+                topLeftPos.x + 120 + cos((ribbonAngle + 90) * PI/180) * selectedOption * 100,
+                topLeftPos.y + 120 + sin((ribbonAngle + 90) * PI/180) * selectedOption * 100));
 
     for (int i = 0; i < nOptions; i++) {
         sf::Vector2f dims = menuOptions[i].getDims();
         menuOptions[i].setPosition(sf::Vector2f(
-                    topLeftPos.x + 150 + i * 100 + (288 - dims.x / 2), 
-                    topLeftPos.y + 120 + i * 100));
+                    topLeftPos.x + 150 + cos((ribbonAngle + 90)*PI/180) * i * 100 + (80 - dims.x / 2), 
+                    topLeftPos.y + 120 + sin((ribbonAngle + 90)*PI/180) * i * 100));
     }
 
     bool isOpen = true;
@@ -751,18 +874,25 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
                 shouldClose = true;
                 break;
             case sf::Event::KeyPressed:
-                switch (event.key.code) {
-                case sf::Keyboard::Key::W:
+                if (event.key.code == (*settings).keyMap.up) {
                     moveSelector(-1);
-                    break;
-                case sf::Keyboard::Key::S:
+                } else if (event.key.code == sf::Keyboard::Key::S) {
                     moveSelector(1);
-                    break;
-                case sf::Keyboard::Key::Escape:
+                } else if (event.key.code == sf::Keyboard::Key::E) {
+                    if (selectedOption == 0) { 
+                        isOpen = false; 
+                        playCloseAnim(window, clock, viewport);
+                    } else if (selectedOption == nOptions - 1) {
+                        isOpen = false; 
+                        shouldClose = true; 
+                    } else if (selectedOption == 2) {
+                        SettingsMenu settingsMenu(settings);
+                        shouldClose = settingsMenu.open(window, clock, viewport);
+                    }
+                } else if (event.key.code == sf::Keyboard::Key::Escape) {
                     isOpen = false;
                     playCloseAnim(window, clock, viewport);
                 }
-                break;
             }
         }
         blinkTimer -= dt;
@@ -790,3 +920,281 @@ bool PauseMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewp
     return shouldClose;
 }
 
+SettingsMenu::SettingsMenu(Settings *settings) {
+    background.setSize(sf::Vector2f(750, 550));
+    background.setFillColor(sf::Color(51, 51, 51));
+    inactiveTabs.setSize(sf::Vector2f(750, 46));
+    inactiveTabs.setFillColor(sf::Color(31, 31, 31));
+    activeTab.setFillColor(background.getFillColor());
+
+    graphicsTitle.setFontSize(30);
+    graphicsTitle.setString("Graphics");
+    graphicsTitle.setFillColor(sf::Color::White);
+
+    controlsTitle.setFontSize(30);
+    controlsTitle.setString("Controls");
+    controlsTitle.setFillColor(sf::Color::White);
+
+    resolution.setFontSize(20);
+    resolution.setFillColor(sf::Color::White);
+    
+    resOptions = {"800x600",
+                  "1024x768",
+                  "1280x960",
+                  "1366x768",
+                  "1600x900",
+                  "1680x1050",
+                  "1920x1080"};
+    resolutionOptions.setOptions(resOptions);
+    this->settings = settings;
+    bindingKeyNames = {
+        getKeyName((*settings).keyMap.left),
+        getKeyName((*settings).keyMap.right),
+        getKeyName((*settings).keyMap.up),
+        getKeyName((*settings).keyMap.down),
+        getKeyName((*settings).keyMap.openConsole),
+        getKeyName((*settings).keyMap.spell1),
+        getKeyName((*settings).keyMap.spell2),
+        getKeyName((*settings).keyMap.spell3),
+        getKeyName((*settings).keyMap.spell4),
+        getKeyName((*settings).keyMap.spell5),
+        getKeyName((*settings).keyMap.spell6),
+        getKeyName((*settings).keyMap.spell7),
+        getKeyName((*settings).keyMap.spell8),
+        getKeyName((*settings).keyMap.spell9),
+        getKeyName((*settings).keyMap.useSpell)
+    };
+}
+
+SettingsMenu::~SettingsMenu() {
+
+}
+
+bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+    toggleDebugMode();
+    viewCenter = viewport.getCenter();
+    topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
+    topLeftPos.y = viewCenter.y - (*settings).WINDOW_HEIGHT / 2;
+    background.setPosition(viewCenter - sf::Vector2f(background.getSize().x / 2, background.getSize().y / 2));
+    inactiveTabs.setPosition(background.getPosition());
+
+    bgTexture.create((*settings).WINDOW_WIDTH, (*settings).WINDOW_HEIGHT);
+    bgTexture.update(window);
+    bgSprite.setTexture(bgTexture);
+    bgSprite.setPosition(topLeftPos);
+
+    graphicsTitleClickBox = sf::FloatRect(background.getPosition().x, background.getPosition().y, 160, inactiveTabs.getSize().y);
+    controlsTitleClickBox = sf::FloatRect(background.getPosition().x + 160, background.getPosition().y, 160, inactiveTabs.getSize().y);
+    graphicsTitle.setPosition(background.getPosition() + sf::Vector2f(15, 3));
+    controlsTitle.setPosition(background.getPosition() + sf::Vector2f(175, 3));
+    openTab = "graphics";
+    openGraphicsTab();
+
+    bool isOpen = true;
+    bool shouldClose = false;
+    sf::Time frameDelta;
+    float dt;
+    sf::Event event;
+    while (isOpen && !shouldClose) {
+        frameDelta = clock.restart();
+        dt = frameDelta.asMilliseconds();
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+            case sf::Event::Closed:
+                isOpen = false;
+                shouldClose = true;
+                break;
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                case sf::Keyboard::Key::Escape:
+                    isOpen = false;
+                    break;
+                }
+                break;
+            case sf::Event::MouseButtonPressed:
+                switch (event.mouseButton.button){
+                case sf::Mouse::Button::Left:
+                    sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                    mousePos += topLeftPos;
+                    resolutionOptions.onClickEvent(mousePos);
+                    std::string newResolution = resolutionOptions.getSelectedOption();
+                    if (isOnTop(mousePos, graphicsTitleClickBox)) {
+                        openGraphicsTab();
+                    } else if (isOnTop(mousePos, controlsTitleClickBox)) {
+                        openControlsTab();
+                    } 
+                    break;
+                }
+            case sf::Event::MouseWheelScrolled:
+                if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+                    float mouseDeltaY = event.mouseWheelScroll.y * event.mouseWheelScroll.delta * -0.1;
+                    sheetTmp.scroll(mouseDeltaY);
+                }
+            }
+        }
+        
+        window.draw(bgSprite);
+        window.draw(background);
+        if (openTab == "graphics") {
+            window.draw(resolution);
+            window.draw(resolutionOptions);
+        } else if (openTab == "controls") {
+            window.draw(sheetTmp);
+        }
+        
+        window.draw(inactiveTabs);
+        window.draw(activeTab);
+        window.draw(graphicsTitle);
+        window.draw(controlsTitle);
+        if (debugMode) {
+            sf::RectangleShape tmp;
+            tmp.setOutlineColor(sf::Color::Red);
+            tmp.setFillColor(sf::Color(0, 0, 0, 0));
+            tmp.setOutlineThickness(1);
+            tmp.setSize(
+                    sf::Vector2f(graphicsTitleClickBox.width, graphicsTitleClickBox.height));
+            tmp.setPosition(
+                    sf::Vector2f(graphicsTitleClickBox.left, graphicsTitleClickBox.top));
+            window.draw(tmp);
+            tmp.setOutlineColor(sf::Color::Green);
+            tmp.setSize(
+                    sf::Vector2f(controlsTitleClickBox.width, controlsTitleClickBox.height));
+            tmp.setPosition(
+                    sf::Vector2f(controlsTitleClickBox.left, controlsTitleClickBox.top));
+            window.draw(tmp);
+        }
+        window.display();
+    }
+    return shouldClose;
+}
+
+void SettingsMenu::openGraphicsTab() {
+    openTab = "graphics";
+    resolution.setString("Resolution:");
+    resolution.setPosition(background.getPosition() + sf::Vector2f(15, 75));
+    activeTab.setPosition(background.getPosition());
+    activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
+    resolutionOptions.setPosition(background.getPosition() + sf::Vector2f(128, 78));
+    resolutionOptions.setSelectedOption((*settings).selectedResolution);
+}
+
+void SettingsMenu::openControlsTab() {
+    openTab = "controls";
+    sheetTmp.setPosition(background.getPosition() + sf::Vector2f(0, activeTab.getSize().y - 3));
+    sheetTmp.setSize(sf::Vector2f(748, 500));
+    sheetTmp.setShape(2, bindingNames.size());
+    sheetTmp.setColumnContents(0, bindingNames);
+    sheetTmp.setColumnContents(1, bindingKeyNames);
+    sheetTmp.update();
+    activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
+    activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
+}
+
+void SettingsMenu::toggleDebugMode() {
+    debugMode = !debugMode;
+}
+
+UiSheet::UiSheet() {
+    position = sf::Vector2f(0, 0);
+    background.setFillColor(sf::Color(51, 51 ,51));
+    background.setPosition(sf::Vector2f(0, 0));
+}
+
+UiSheet::~UiSheet() {
+
+}
+
+void UiSheet::move(sf::Vector2f distance) {
+    position += distance;
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            texts[y][x].move(distance);
+        }
+    }
+    background.move(distance);
+}
+
+void UiSheet::setPosition(sf::Vector2f pos) {
+    move(pos - position);
+}
+
+void UiSheet::setSize(sf::Vector2f newSize) {
+    size = newSize;
+    background.setSize(size);
+}
+
+void UiSheet::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(background);
+    for (int y = 0; y < texts.size(); y++) {
+        if ((y + 1)* totalSize.y / texts.size() + scrollOffset < size.y && 
+            (y + 1) * totalSize.y / texts.size() + scrollOffset > 0) {
+            for (int x = 0; x < texts[y].size(); x++) {
+                target.draw(texts[y][x]);
+            }
+        }
+    }
+    sf::RectangleShape line;
+    line.setFillColor(sf::Color(31, 31, 31));
+    line.setSize(sf::Vector2f(background.getSize().x, 2));
+    for (int y = 0; y * totalSize.y / texts.size() <= size.y; y++) {
+        line.setPosition(background.getPosition() + sf::Vector2f(0, 3 + y * totalSize.y / texts.size()));
+        target.draw(line);
+    }
+    line.setSize(sf::Vector2f(2, background.getSize().y));
+    for (int x = 0; x * totalSize.x / texts[0].size() <= size.x; x++) {
+        line.setPosition(background.getPosition() + sf::Vector2f(x * totalSize.x / texts[0].size(), 0));
+        target.draw(line);
+    }
+}
+
+void UiSheet::update() {
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            texts[y][x].setPosition(position + 
+                sf::Vector2f(50 + x * totalSize.x / texts[y].size(), 
+                    2 + y * totalSize.y / texts.size() + scrollOffset));
+        }
+    }
+}
+
+void UiSheet::setShape(int width, int height) {
+    texts.resize(height);
+    for (int y = 0; y < texts.size(); y++) {
+        texts[y].resize(width);
+    }
+    setTotalSize(sf::Vector2f(size.x, height * 30));
+    for (int y = 0; y < texts.size(); y++) {
+        for (int x = 0; x < texts[y].size(); x++) {
+            texts[y][x].setFontSize(26);
+            texts[y][x].setFillColor(sf::Color::White);
+            texts[y][x].setString("kek");
+        }
+    }
+}
+
+void UiSheet::setTotalSize(sf::Vector2f newTotalSize) {
+    totalSize = newTotalSize;
+}
+
+void UiSheet::scroll(float amount) {
+    if (amount > 0) {
+        scrollOffset -= totalSize.y / texts.size();
+    } else if (amount < 0) {
+        scrollOffset += totalSize.y / texts.size();
+    }
+    scrollOffset = std::min(scrollOffset, (float) 0.0);
+    float rowHeight = (totalSize.y / texts.size());
+    float total = 0;
+    for (int i = 0; total < totalSize.y - size.y && i < texts.size(); i++, total += rowHeight) {
+    }
+    scrollOffset = std::max(scrollOffset, -total);
+    update();
+}
+
+// Ignores overflow contents if longer than texts
+void UiSheet::setColumnContents(int index, std::vector<std::string> contents) {
+    for (int y = 0; y < texts.size() && y < contents.size(); y++) {
+        UiText &tmp = texts[y][index];
+        tmp.setString(contents[y]);
+    }
+}

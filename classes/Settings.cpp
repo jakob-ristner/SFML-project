@@ -9,3 +9,5 @@ Settings::Settings() {
 Settings::~Settings() {
 
 }
+
+Settings settings;

@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "./Settings.h"
 #include "./Animation.h"
-#include <iostream>
+#include "./Utils.h"
 
 // Abstract class representing a ui interface
 class UiElement: public sf::Drawable {
@@ -13,10 +14,10 @@ public:
     virtual void setPosition(sf::Vector2f pos)=0;
     void toggleDebugMode();
     sf::Font mainFont;
+    bool debugMode = false;
 
 protected:
     sf::Vector2f position;
-    bool debugMode = false;
 };
 
 // Class representing and implementing the players spell
@@ -55,11 +56,12 @@ public:
     void setFillColor(sf::Color color);
     void setFont(sf::Font &font);
     void setFontSize(unsigned int size);
+    void setRotation(float angle) { text.setRotation(angle); }
 
     sf::Vector2f getDims();
-    sf::Vector2f getPosition() { return text.getPosition(); }
-    sf::Text getText() {return text;}
-    std::string getString() {return text.getString();}
+    sf::Vector2f getPosition() const { return text.getPosition(); }
+    sf::Text getText() const {return text;}
+    std::string getString() const {return text.getString();}
 
 private:
     sf::Text text;
@@ -205,6 +207,30 @@ private:
     int yAmount;
 };
 
+class DropDownMenu: public UiElement {
+public:
+    DropDownMenu();
+    ~DropDownMenu();
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void setOptions(std::vector<std::string> options);
+    void toggleExpand();
+    void onClickEvent(sf::Vector2f pos);
+    void setSelectedOption(int index);
+
+    std::string getSelectedOption();
+private:
+    bool expanded = false;
+    sf::RectangleShape background;
+    UiText downArrow;
+    UiText selectedOption;
+    UiText allOptions;
+    std::vector<std::string> options;
+    std::vector<sf::RectangleShape> debugShapes;
+};
+
 class StatusMessage {
 public:
     StatusMessage();
@@ -231,7 +257,7 @@ public:
 
 class PauseMenu {
 public:
-    PauseMenu();
+    PauseMenu(Settings *settings);
     ~PauseMenu();
     bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
 
@@ -259,7 +285,88 @@ private:
     std::vector<UiText> menuOptions;
 
     int selectedOption = 0;
-    int nOptions = 3;
+    const int nOptions = 4;
     float blinkDuration = 2000;
     float blinkTimer = blinkDuration;
+    float ribbonAngle = -20;
+
+    Settings *settings;
 };
+
+class UiSheet : public UiElement {
+public:
+    UiSheet();
+    ~UiSheet();
+
+    void move(sf::Vector2f distance);
+    void setPosition(sf::Vector2f pos);
+    void setSize(sf::Vector2f newSize);
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void update();
+
+    void setShape(int width, int height);
+    void setTotalSize(sf::Vector2f newTotalSize);
+    void scroll(float amount);
+
+    void setColumnContents(int index, std::vector<std::string> contents);
+
+private:
+    std::vector <std::vector<UiText>> texts;
+    sf::Vector2f size;
+    sf::Vector2f totalSize;
+    sf::RectangleShape background;
+    float scrollOffset = 0;
+};
+
+class SettingsMenu {
+public:
+    SettingsMenu(Settings *settings);
+    ~SettingsMenu();
+
+    bool open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport);
+    void openGraphicsTab();
+    void openControlsTab();
+    void toggleDebugMode();
+
+private:
+    bool debugMode = false;
+    Settings *settings;
+    std::string openTab;
+    sf::RectangleShape background;
+    sf::RectangleShape inactiveTabs;
+    sf::RectangleShape activeTab;
+    sf::Sprite bgSprite;
+    sf::Texture bgTexture;
+    sf::Vector2f topLeftPos;
+    sf::Vector2f viewCenter;
+    // Tab 1
+    UiText graphicsTitle;
+    UiText resolution;
+    DropDownMenu resolutionOptions;
+    std::vector<std::string> resOptions;
+    sf::FloatRect graphicsTitleClickBox;
+    // Tab 2
+    UiText controlsTitle;
+    sf::FloatRect controlsTitleClickBox;
+    std::vector<std::string> bindingNames = {
+        "Left",
+        "Right",
+        "Up",
+        "Down",
+        "Open Console",
+        "Select Spell 1",
+        "Select Spell 2",
+        "Select Spell 3",
+        "Select Spell 4",
+        "Select Spell 5",
+        "Select Spell 6",
+        "Select Spell 7",
+        "Select Spell 8",
+        "Select Spell 9",
+        "Use Spell"
+    };
+    // Defined in .cpp since it needs settings
+    std::vector<std::string> bindingKeyNames;
+    UiSheet sheetTmp;
+};
+
