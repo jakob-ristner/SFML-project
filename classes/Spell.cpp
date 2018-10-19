@@ -41,6 +41,10 @@ int Spell::getCastTime() {
     return castTime;
 }
 
+std::vector<Animation> Spell::getAnimations() {
+    return animations;
+}
+
 void Spell::update(float dt) {
     
 }
@@ -83,7 +87,7 @@ Projectile::Projectile(sf::Texture &texture, sf::Vector2f vel,
                        float speed, sf::Vector2f pos, float rotation,
                        float scale, void (*callback)(Projectile &projectile,
                        float dt, sf::Vector2f mousePos),
-                       bool (*onCollide)(Enemy &enemy)) {
+                       bool (*onCollide)(Enemy &enemy, Projectile &projectile)) {
     this->vel = vel;
     this->speed = speed;
     this->func = callback; // TODO rename callback to update funcition or something
@@ -108,12 +112,18 @@ Projectile::Projectile() {;
 Projectile::~Projectile() {
 }
 
+std::vector<Explosion> *Projectile::explosions;
+
 float Projectile::getSpeed() {
     return speed;
 }
 
+std::vector<Animation> Projectile::getAnimations() {
+    return animations;
+}
+
 void Projectile::onCollision(Enemy &enemy) {
-    kill = onCollide(enemy);
+    kill = onCollide(enemy, *this);
 }
 
 void Projectile::update(float dt, sf::Vector2f mousePos) {
@@ -162,7 +172,7 @@ SpriteCollider Projectile::getCollider() {
 //Fireball Spell Start//
 Fireball::Fireball(Player &player):
     player(player) {
-      castTime = 10;
+    castTime = 10;
     texture.loadFromFile("./resources/spell_textures/altfire.png");
     texture.setRepeated(true);
     addAnimation(Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0));
@@ -184,13 +194,12 @@ void Fireball::update(float dt) {
     if (cooldownTimer < cooldown) {
         cooldownTimer += dt;
     } else {
-        isReady = true;
-        
+        isReady = true;      
     }
     
 }
 
-bool fireballDamage(Enemy &enemy) {
+bool fireballDamage(Enemy &enemy, Projectile &projectile) {
     enemy.hurt(2);
     return true;
 }
@@ -246,7 +255,7 @@ void MagicMissile::update(float dt) {
     }
 }
 
-bool magicMissileDamage(Enemy &enemy) {
+bool magicMissileDamage(Enemy &enemy, Projectile &projectile) {
     enemy.hurt(0.5);
     return true;
 }
@@ -423,3 +432,76 @@ void FlashHeal::update(float dt) {
     }
 }
 //FlashHeal Spell End//
+//Firebolt Spell Start//
+Firebolt::Firebolt(Player &player):
+player(player){
+
+    this->player = player;
+
+    texture.loadFromFile("./resources/spell_textures/altfire.png");
+    texture2.loadFromFile("./resources/spell_textures/explosion1.png");
+    texture.setRepeated(true);
+    texture2.setRepeated(true);
+
+    //auto tmpanim1 = Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0);
+    //auto tmpanim2 = Animation(texture2, sf::Vector2f(40, 40), 500, 0, 6, 0 );
+    setAnimations(std::vector<Animation> {
+    Animation(texture, sf::Vector2f(32, 32), 400, 0, 7, 0), 
+    Animation(texture2, sf::Vector2f(40, 40), 500, 0, 6, 0 )});  
+    anim = animations[0];
+
+    castTime = 10;
+    cooldown = 10000;
+    manaCost = 40;
+    cooldownTimer = cooldown;
+
+    name = "Firebolt";
+    spellType = "Damage";
+
+    isReady = true; 
+}
+
+Firebolt::~Firebolt() {
+
+}
+
+
+void Firebolt::update(float dt) {
+    if (cooldownTimer < cooldown) {
+        cooldownTimer += dt;
+    } else {
+        isReady = true;      
+    }
+}
+
+bool fireboltDamage(Enemy &enemy, Projectile &projectile) {
+    enemy.hurt(3);
+    //auto anim = projectile.getAnimations()[0];
+    (*projectile.explosions).push_back(Explosion(50, projectile.getPosition(), 
+    2, 500, projectile.getAnimations()[1]));
+    
+    return true;
+    
+}
+
+void firebolt(Projectile &projectile, float dt, sf::Vector2f mousPos) {
+    projectile.move(projectile.vel * projectile.getSpeed() * (dt));
+}
+
+void Firebolt::use() {
+    player.addProjectile(Projectile(texture, 
+    normalizedVec(sf::Vector2f(-sin(player.getMouseAngleRad()), 
+    -cos(player.getMouseAngleRad()))), 5, player.getPos(), 
+    360 - player.getMouseAngle(), 2, &fireball, &fireboltDamage));
+    
+    isReady = false;
+    cooldownTimer = 0;
+
+    Projectile &proj = player.getProjectiles().back();
+    proj.addAnimation(animations[0]);
+    proj.addAnimation(animations[1]);
+    proj.setAnimationAtIndex(0);
+    
+}
+
+

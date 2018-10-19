@@ -45,6 +45,7 @@ int main() {
     std::vector<Explosion> explosions;
 
     Spell::explosions = &explosions;
+    Projectile::explosions = &explosions;
 
     sf::Clock clock;
     
@@ -72,8 +73,10 @@ int main() {
     Explode explode = Explode(player);
     SprintSpell sprint = SprintSpell(player);
     FlashHeal flashHeal = FlashHeal(player);
+    Firebolt firebolt = Firebolt(player);
     //Adding spells to player
 
+    player.addSpell(&firebolt);
     player.addSpell(&fireball);
     player.addSpell(&explode);
     player.addSpell(&magicMissile);

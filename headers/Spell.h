@@ -22,6 +22,7 @@ public:
     float getCooldownTimer();
     virtual void update(float dt);
     bool isReady;
+    std::vector<Animation> getAnimations();
 
     static  std::vector<Explosion> *explosions;
     float getManaCost();
@@ -60,7 +61,7 @@ public:
                float rotation, float scale,
                void (*callback)(Projectile &projectile,
                float dt, sf::Vector2f mousePos),
-               bool (*onCollide)(Enemy &enemy));
+               bool (*onCollide)(Enemy &enemy, Projectile &projectile));
     ~Projectile();
     Projectile();
     void update(float dt, sf::Vector2f mousePos);
@@ -68,15 +69,18 @@ public:
     void onCollision(Enemy &enemy);
     void (*func)(Projectile &projectile, float dt, sf::Vector2f mousePos);
     // Will be overloaded for different types of collisions
-    bool (*onCollide)(Enemy &enemy);
+    bool (*onCollide)(Enemy &enemy, Projectile &projectile);
     bool kill;
 
     float getSpeed();
     float counter;
+    std::vector<Animation> getAnimations();
     
 
     sf::Vector2f vel;
     SpriteCollider getCollider();
+
+    static std::vector<Explosion> *explosions;
 
     void setAnimationAtIndex(int index);
     void setAnimations(std::vector<Animation> animations);
@@ -171,6 +175,19 @@ public:
 private:
     Player &player;
     float healing;
+};
+// Firebolt Spell Start
+// Firebolt is like fireball except it explodes on collision
+class Firebolt: public Spell {
+public:
+    Firebolt(Player &player);
+    ~Firebolt();
+    void use() override;
+    void update(float dt) override;
+private:
+    Player &player;
+    sf::Texture texture;
+    sf::Texture texture2;
 };
 
 
