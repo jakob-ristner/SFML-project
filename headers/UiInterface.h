@@ -59,9 +59,9 @@ public:
     void setRotation(float angle) { text.setRotation(angle); }
 
     sf::Vector2f getDims();
-    sf::Vector2f getPosition() { return text.getPosition(); }
-    sf::Text getText() {return text;}
-    std::string getString() {return text.getString();}
+    sf::Vector2f getPosition() const { return text.getPosition(); }
+    sf::Text getText() const {return text;}
+    std::string getString() const {return text.getString();}
 
 private:
     sf::Text text;
@@ -237,16 +237,24 @@ public:
     ~UiTable();
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    void draw(sf::RenderTarget &target);
     void move(sf::Vector2f distance);
     void setPosition(sf::Vector2f pos);
     void setSize(sf::Vector2f dims);
+
+    void setRow(std::vector<std::string> newRow, int y);
+    void setCell(std::string newCell, int x, int y);
 private:
     sf::RectangleShape background;
     int columns;
     int rows;
-    int rowHeight = 20;
+    int rowHeight = 60;
     int colWidth = 300;
     int scrollOffset = 0;
+    std::vector<std::vector<std::string>> tableContents;
+
+    UiText tableText;
+    sf::RectangleShape rs;
 };
 
 class StatusMessage {

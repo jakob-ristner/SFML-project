@@ -593,33 +593,51 @@ UiTable::UiTable() {
 UiTable::UiTable(int columns, int rows) {
     this->columns = columns;
     this->rows = rows;
+    tableContents.resize(rows);
+    for (int y = 0; y < tableContents.size(); y++) {
+        tableContents[y].resize(columns);
+    }
+    background.setFillColor(sf::Color(31, 31, 31));
+    tableText.setFontSize(20);
+    tableText.setFillColor(sf::Color::Red);
+    tableText.setString("lel");
+    tableText.setPosition(background.getPosition() + sf::Vector2f(100, 100));
+    rs.setSize(sf::Vector2f(100, 100));
+    rs.setFillColor(sf::Color::Red);
+    rs.setPosition(background.getPosition() + sf::Vector2f(1000, 1000));
 }
 
 UiTable::~UiTable() {
 
 } 
+
 void UiTable::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(background);
+    //target.draw(background);
     sf::RectangleShape line;
-    line.setSize(sf::Vector2f(background.getSize().x, 1));
     line.setFillColor(sf::Color(51, 51, 51));
+    // Horizontal Lines
+    line.setSize(sf::Vector2f(background.getSize().x, 2));
     for (int y = 0 + (scrollOffset % rowHeight); 
          y < background.getSize().y;
          y += rowHeight) {
         line.setPosition(background.getPosition() + sf::Vector2f(0, y));
-        std::cout << background.getPosition().y << " " << y << std::endl;
-        std::cout << "Scroll Offset: " << scrollOffset << " " << rowHeight << std::endl;
-        target.draw(line);
+        //target.draw(line);
     }
-
-    for (int x = 0; y < background.getSize().x; y += colWidth) {
-
+    // Vertical Lines
+    line.setSize(sf::Vector2f(2, background.getSize().y));
+    for (int x = 0; x < background.getSize().x; x += colWidth) {
+        line.setPosition(background.getPosition() + sf::Vector2f(x, 0));
+        //target.draw(line);
     }
-    std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;
+    target.draw(tableText);
+    target.draw(rs);
+    std::cout << tableText.getString() << std::endl;
+    printVec(tableText.getPosition());
 }
 
 void UiTable::move(sf::Vector2f distance) {
     background.move(distance);
+    tableText.move(distance);
     position += distance;
 }
 
@@ -630,6 +648,16 @@ void UiTable::setPosition(sf::Vector2f pos) {
 void UiTable::setSize(sf::Vector2f dims) {
     background.setSize(dims);
     colWidth = background.getSize().x / columns;
+}
+
+void UiTable::setRow(std::vector<std::string> newRow, int y) {
+    for (int x = 0; x < tableContents[y].size(); x++) {
+        tableContents[y][x] = newRow[x];
+    }
+}
+
+void UiTable::setCell(std::string newCell, int x, int y) {
+    tableContents[y][x] = newCell;
 }
 
 
@@ -1012,7 +1040,6 @@ SettingsMenu::SettingsMenu(Settings *settings) {
         getKeyName((*settings).keyMap.spell9),
         getKeyName((*settings).keyMap.useSpell)
     };
-    mappingTable = UiTable(2, 10);
 }
 
 SettingsMenu::~SettingsMenu() {
@@ -1020,6 +1047,8 @@ SettingsMenu::~SettingsMenu() {
 }
 
 bool SettingsMenu::open(sf::RenderWindow &window, sf::Clock &clock, sf::View &viewport) {
+    mappingTable = UiTable(2, 10);
+    //mappingTable.setRow(std::vector<std::string> {"Left", bindingKeyNames[0]}, 0);
     toggleDebugMode();
     viewCenter = viewport.getCenter();
     topLeftPos.x = viewCenter.x - (*settings).WINDOW_WIDTH / 2;
@@ -1124,9 +1153,9 @@ void SettingsMenu::openGraphicsTab() {
 
 void SettingsMenu::openControlsTab() {
     openTab = "controls";
-    mappingTable.setPosition(background.getPosition() + sf::Vector2f(50, 50));
-    mappingTable.setSize(sf::Vector2f(400, 400));
-    activeTab.setPosition(background.getPosition() + sf::Vector2f(160, 0));
+    mappingTable.setSize(sf::Vector2f(background.getSize().x, 504));
+    mappingTable.setPosition(background.getPosition() + sf::Vector2f(0, background.getSize().y - 504));
+    activeTab.setPosition(background.getPosition());
     activeTab.setSize(sf::Vector2f(160, inactiveTabs.getSize().y));
 }
 
