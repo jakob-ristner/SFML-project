@@ -45,6 +45,7 @@ int main() {
     std::vector<Explosion> explosions;
 
     Spell::explosions = &explosions;
+    Projectile::explosions = &explosions;
 
     sf::Clock clock;
     
@@ -66,14 +67,21 @@ int main() {
     player.setPos(sf::Vector2f(settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2));
     sf::Event event;
     Collider playerCol = player.getCollider();
+    //Spell initialization
     Fireball fireball = Fireball(player);
     MagicMissile magicMissile = MagicMissile(player);
     Explode explode = Explode(player);
     SprintSpell sprint = SprintSpell(player);
+    FlashHeal flashHeal = FlashHeal(player);
+    Firebolt firebolt = Firebolt(player);
+    //Adding spells to player
+
+    player.addSpell(&firebolt);
     player.addSpell(&fireball);
     player.addSpell(&explode);
     player.addSpell(&magicMissile);
     player.addSpell(&sprint);
+    player.addSpell(&flashHeal);
 
     // Enemies
     EnemyFactory enemyFactory(player);

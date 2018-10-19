@@ -229,6 +229,9 @@ void Player::hurt(float amount) {
 
 void Player::heal(float amount) {
     hitpoints += amount;
+    if (hitpoints > maxHp) {
+        hitpoints = maxHp;
+    }
     (*hpBar).update(hitpoints);
 }
 
@@ -304,6 +307,10 @@ void Player::addBuff(Buff *buff) {
 
 float Player::getSpeed() {
     return playeracc;
+}
+
+float Player::getHp() {
+    return hitpoints;
 }
 
 std::vector<Spell *> Player::getSpells() {
