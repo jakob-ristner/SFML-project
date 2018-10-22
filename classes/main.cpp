@@ -41,6 +41,7 @@ int main() {
     settings.keyMap.spell9 = sf::Keyboard::Key::Num9;
 
     settings.keyMap.useSpell = sf::Keyboard::Key::Space;
+    //settings.showNavData = true;
 
 
     const sf::Color bgColor(51, 51, 51);
@@ -52,7 +53,7 @@ int main() {
     // Initialization of important stuff
 
     sf::RenderWindow window(sf::VideoMode(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT), "SFML Dungeon Crawler", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(120);
+    window.setFramerateLimit(1000);
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
@@ -181,7 +182,7 @@ int main() {
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = false;
+    bool showFPS = true;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
@@ -330,6 +331,20 @@ int main() {
         window.draw(foreGround);
         enemyFactory.draw(window);
         map.drawAnimatedTerrain(window);
+        if (settings.showNavData) {
+            std::vector<std::vector<bool>> navData = map.getNavData();
+            sf::RectangleShape debugNavRect;
+            debugNavRect.setSize(sf::Vector2f(32.0, 32.0));
+            debugNavRect.setFillColor(sf::Color(255, 0, 0, 100));
+            for (int y = 0; y < navData.size(); y++) {
+                for (int x = 0; x < navData[0].size(); x++) {
+                    if (!navData[y][x]) {
+                        debugNavRect.setPosition(sf::Vector2f(x * 32, y * 32));
+                        window.draw(debugNavRect);
+                    }
+                }
+            }
+        }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
         window.display();

@@ -94,6 +94,8 @@ TileMap::TileMap(std::string path, std::vector<Obstacle> &obstacles, std::vector
             animSprites.back().setScale(sf::Vector2f(scale, scale));
         }
     }
+
+    generateNavData(obstacles);
 }
 
 TileMap::~TileMap() {
@@ -282,3 +284,43 @@ void printVec(std::vector< std::vector<int> > vec) {
     }
 }
 
+
+// Generates an approximated version of all non-walkable tiles. Also adds 
+// padding around these to prevent enemies from snagging on corners.
+// Args:
+// obstacles - reference to the obstacles which the navData will be generated from
+void TileMap::generateNavData(std::vector<Obstacle> &obstacles) {
+    navData.resize(getSize().y);
+    for (int y = 0; y < navData.size(); y++) {
+        navData[y].resize(getSize().x);
+    }
+    for (int y = 0; y < navData.size(); y++) {
+        for (int x = 0; x < navData[y].size(); x++) {
+            navData[y][x] = 1;
+        }
+    }
+    for (Obstacle &obstacle: obstacles) {
+        int xOffset, yOffset, oWidth, oHeight;
+        oWidth = std::round(obstacle.getSize().x / 32.0);
+        oHeight = std::round(obstacle.getSize().y / 32.0);
+        // Account for origion being in the middle
+        xOffset = std::round((obstacle.getPos().x - 32 * oWidth / 2) / 32.0);
+        yOffset = std::round((obstacle.getPos().y - 32 * oHeight / 2) / 32.0);
+        //std::cout << obstacle.getPos().x << " " << obstacle.getPos().y << std::endl;
+        //std::cout << oWidth << " " << oHeight << std::endl;
+        //std::cout << xOffset << " " << yOffset << std::endl;
+        //std::cout << navData.size() << " " << navData[0].size() << std::endl;
+        for (int y = 0; y < oHeight; y++) {
+            for (int x = 0; x < oWidth; x++) {
+                navData[y + yOffset][x+ xOffset] = 0;
+            }
+        }
+    }
+    //for (int y = 0; y < navData.size(); y++) {
+        //for (int x = 0; x < navData[y].size(); x++) {
+            //std::cout << navData[y][x] << std::endl;
+        //}
+    //}
+    //std::vector<std::vector<bool>> scaledNavData;
+    //scaledNavData.resize()
+}

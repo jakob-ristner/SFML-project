@@ -12,6 +12,7 @@ public:
 
     Collider getCollider();
     sf::Vector2f getPos();
+    sf::Vector2f getSize() {return body.getSize();};
 
 private:
     sf::RectangleShape body;
