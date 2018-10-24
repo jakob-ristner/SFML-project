@@ -190,6 +190,10 @@ void Player::update(float dt) {
                                                        
     }
     (*spellBar).update();
+
+    if (hitpoints < 0) {
+        hitpoints = 0;
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
