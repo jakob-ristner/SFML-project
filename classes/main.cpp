@@ -19,6 +19,7 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Animation.h"
 #include "../headers/Explosion.h"
+#include "../headers/Pathfinder.h"
 #pragma endregion
 
 int main() {
@@ -41,7 +42,7 @@ int main() {
     settings.keyMap.spell9 = sf::Keyboard::Key::Num9;
 
     settings.keyMap.useSpell = sf::Keyboard::Key::Space;
-    //settings.showNavData = true;
+    settings.showNavData = true;
 
 
     const sf::Color bgColor(51, 51, 51);
@@ -177,12 +178,16 @@ int main() {
 
     PauseMenu pauseMenu(&settings);
 
+    Pathfinder testBrain;
+    testBrain.generateGraph(map.getNavData());
+    testBrain.generateGraphTexture();
+
 
     // Main Game Loop
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = true;
+    bool showFPS = false;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
@@ -347,6 +352,7 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
+        testBrain.draw(window);
         window.display();
     }
 
