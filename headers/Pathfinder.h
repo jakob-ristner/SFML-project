@@ -17,7 +17,7 @@ class Pathfinder {
 public:
     Pathfinder();
     ~Pathfinder();
-    void generateGraph(std::vector<std::vector<bool>> tiles);
+    void generateGraph(std::vector<std::vector<bool>> inpTiles, int resolutionMult);
     void setStartNode(int x, int y);
     void setEndNode(int x, int y);
     void generateGraphTexture();
@@ -34,4 +34,6 @@ private:
 
     sf::RenderTexture graphTexture;
     sf::Sprite graphSprite;
+
+    int vertexDistance;
 };

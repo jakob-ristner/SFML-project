@@ -179,7 +179,7 @@ int main() {
     PauseMenu pauseMenu(&settings);
 
     Pathfinder testBrain;
-    testBrain.generateGraph(map.getNavData());
+    testBrain.generateGraph(map.getNavData(), 1);
     testBrain.generateGraphTexture();
 
 

@@ -8,7 +8,13 @@ Pathfinder::~Pathfinder() {
 
 }
 
-void Pathfinder::generateGraph(std::vector<std::vector<bool>> tiles) {
+void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, int resolutionMult) {
+    std::vector<std::vector<bool>> tiles;
+    tiles.resize(inpTiles.size() * resolutionMult);
+    // FIX SCALING COPY VALUES ETC
+    for (int y = 0; y < tiles.size(); y++) {
+        tiles[y].resize(inpTiles[y].size() * resolutionMult);
+    }
     for (int y = 0; y < tiles.size(); y++) {
         for (int x = 0; x < tiles[y].size(); x++) {
             std::cout << tiles[y][x] << " ";
@@ -197,6 +203,45 @@ void Pathfinder::generateGraph(std::vector<std::vector<bool>> tiles) {
             curr->neighbours.push_back(target);
         }
     }
+
+    for (int y = 1; y < allNodes.size() - 1; y++) {
+        for (int x = 1; x < allNodes[y].size() - 1; x++) {
+            curr = &(allNodes[y][x]);
+            if (!curr->walkable) { continue; }
+            target = &(allNodes[y-1][x-1]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y-1][x]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y-1][x+1]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y][x-1]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y][x+1]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y+1][x-1]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y+1][x]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+            target = &(allNodes[y+1][x+1]);
+            if (target->walkable) {
+                curr->neighbours.push_back(target);
+            }
+        }
+    }
 }
 
 void Pathfinder::setStartNode(int x, int y) {
@@ -215,8 +260,8 @@ void Pathfinder::generateGraphTexture() {
     graphTexture.create(allNodes[0].size() * 32, allNodes.size() * 32);
     graphTexture.clear(sf::Color::Transparent);
     sf::Vertex line[2];
-    line[0].color = sf::Color::Red;
-    line[1].color = sf::Color::Blue;
+    line[0].color = sf::Color::Blue;
+    line[1].color = sf::Color::White;
     for (std::vector<Node> &row: allNodes) {
         for (Node &node: row) {
             for (Node *other: node.neighbours) {
