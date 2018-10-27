@@ -11,24 +11,58 @@ Pathfinder::~Pathfinder() {
 void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, int resolutionMult) {
     std::vector<std::vector<bool>> tiles;
     tiles.resize(inpTiles.size() * resolutionMult);
-    // FIX SCALING COPY VALUES ETC
     for (int y = 0; y < tiles.size(); y++) {
-        tiles[y].resize(inpTiles[y].size() * resolutionMult);
+        tiles[y].resize(inpTiles[y/resolutionMult].size() * resolutionMult);
     }
-    for (int y = 0; y < tiles.size(); y++) {
-        for (int x = 0; x < tiles[y].size(); x++) {
-            std::cout << tiles[y][x] << " ";
+    vertexDistance = 32 / resolutionMult;
+    // Insert values from inpTiles
+    for(int y = 0; y < inpTiles.size(); y++) {
+        for(int x = 0; x < inpTiles[y].size(); x++) {
+            for(int y2 = 0; y2 < resolutionMult; y2++) {
+                for(int x2 = 0; x2 < resolutionMult; x2++) {
+                    tiles[y * resolutionMult + y2][x * resolutionMult + x2] = inpTiles[y][x];
+                }
+            }
         }
-        std::cout << "\n";
     }
-    std::cout << std::endl;
+    std::vector<std::vector<bool>> tmp = tiles;
+    // Padd edges
+    for(int y = 0; y < tiles.size(); y++) {
+        for(int x = 0; x < tiles[y].size(); x++) {
+            if (!tmp[y][x]) {
+                if (y != 0) {
+                    if (x != 0) {
+                        tiles[y-1][x-1] = false;
+                    }
+                    tiles[y-1][x] = false;
+                    if (x != tiles[y].size() - 1) {
+                        tiles[y-1][x+1] = false;
+                    }
+                }
+                if (x != 0) {
+                    tiles[y][x-1] = false;
+                }
+                if (x != tiles[y].size() - 1) {
+                    tiles[y][x+1] = false;
+                }
+                if (y != tiles.size() - 1) {
+                    if (x != 0) {
+                        tiles[y+1][x-1] = false;
+                    }
+                    tiles[y+1][x] = false;
+                    if (x != tiles[y].size() - 1) {
+                        tiles[y+1][x+1] = false;
+                    }
+                }
+            }
+        }
+    }
     int dataWidth = tiles[0].size();
     int dataHeight = tiles.size();
     allNodes.resize(tiles.size());
     for (std::vector<Node> &row: allNodes) {
         row.resize(tiles[0].size());
     }
-    
     // Settings values for nodes
     for (int y = 0; y < tiles.size(); y++) {
         for (int x = 0; x < tiles[y].size(); x++) {
@@ -37,7 +71,6 @@ void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, int reso
             allNodes[y][x].walkable = tiles[y][x];
         }
     }
-
     // Setting neighbours
     Node *curr = &(allNodes[0][0]);
     Node *target = &(allNodes[0][1]);
@@ -265,8 +298,8 @@ void Pathfinder::generateGraphTexture() {
     for (std::vector<Node> &row: allNodes) {
         for (Node &node: row) {
             for (Node *other: node.neighbours) {
-                line[0].position = sf::Vector2f(node.x * 32 + 16, node.y * 32 + 16);
-                line[1].position = sf::Vector2f(other->x * 32 + 16, other->y * 32 + 16);
+                line[0].position = sf::Vector2f(node.x * vertexDistance + vertexDistance / 2, node.y * vertexDistance + vertexDistance / 2);
+                line[1].position = sf::Vector2f(other->x * vertexDistance + vertexDistance / 2, other->y * vertexDistance + vertexDistance / 2);
                 graphTexture.draw(line, 2, sf::LineStrip);
             }
         }
