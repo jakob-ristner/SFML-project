@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <vector>
 #include <iostream>
 #include <cmath>
@@ -8,7 +9,7 @@
 struct Node {
     std::vector<Node*> neighbours;
     float startDistance = std::numeric_limits<float>::infinity(); // G Score
-    float endDistance; // H Score
+    float endDistance = std::numeric_limits<float>::infinity(); // H Score
     int x;
     int y;
 
@@ -24,14 +25,18 @@ public:
     void setStartNode(int x, int y);
     void setEndNode(int x, int y);
     void generateGraphTexture();
+    void generatePathTexture();
     void draw(sf::RenderWindow &window);
     void findPath();
 
 private:
     void calcHValues();
-    void updateFValues(Node *parent);
     void queuePush(Node *node);
+    void reconstuctPath();
     Node *queuePop();
+    float calcHValue(Node *node);
+    bool isNodeClosed(Node *node);
+    bool isNodeOpen(Node *node);
 
     Node *startNode;
     Node *targetNode;
@@ -41,6 +46,10 @@ private:
 
     sf::RenderTexture graphTexture;
     sf::Sprite graphSprite;
+    sf::RenderTexture pathTexture;
+    sf::Sprite pathSprite;
 
     int vertexDistance;
+
+    std::vector<Node*> path;
 };

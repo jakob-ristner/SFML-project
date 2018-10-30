@@ -97,8 +97,7 @@ void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, int reso
         }
         target = &(allNodes[1][dataWidth - 1]);
         if (target->walkable) {
-            curr->neighbours.push_back(target);
-        }
+            curr->neighbours.push_back(target); }
         target = &(allNodes[1][dataWidth - 2]);
         if (target->walkable) {
             curr->neighbours.push_back(target);
@@ -285,26 +284,6 @@ void Pathfinder::setEndNode(int x, int y) {
     targetNode = &(allNodes[y][x]);
 }
 
-void Pathfinder::calcHValues() {
-    int endX = targetNode->x;
-    int endY = targetNode->y;
-    for (Node *node: openNodes) {
-        // Doenst take square root to save time
-        node->endDistance = (std::pow(2, endX - node->x) + std::pow(2, endY - node->y));
-    }
-}
-
-void Pathfinder::updateFValues(Node *parent) {
-    float newFValue;
-    for (Node *child: parent->neighbours) {
-        newFValue = std::pow(2, child->x - parent->x) + std::pow(2, child->y - parent->x);
-        if (newFValue < child->startDistance) {
-            child->startDistance = newFValue;
-            child->cameFrom = parent;
-        }
-    }
-}
-
 void Pathfinder::queuePush(Node *node) {
     int i;
     for (i = 0; i < openNodes.size(); i++) {
@@ -316,10 +295,44 @@ void Pathfinder::queuePush(Node *node) {
     openNodes.insert(openNodes.begin() + i, node);
 }
 
+void Pathfinder::reconstuctPath() {
+    path.clear();
+    Node *curr = targetNode;
+    while (curr != startNode) {
+        path.push_back(curr);
+        curr = curr->cameFrom;
+    }
+    std::reverse(path.begin(), path.end());
+}
+
 Node* Pathfinder::queuePop() {
     Node *tmp = openNodes[0];
     openNodes.erase(openNodes.begin());
     return tmp;
+}
+
+float Pathfinder::calcHValue(Node *node) {
+    float endX = targetNode->x;
+    float endY = targetNode->y;
+    return std::pow(endX - node->x, 2) + std::pow(endY - node->y, 2);
+}
+
+bool Pathfinder::isNodeClosed(Node *node) {
+    for (Node *tmp: closedNodes) {
+        if (tmp == node) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Pathfinder::isNodeOpen(Node *node) {
+    for (Node *tmp: openNodes) {
+        if (tmp == node) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void Pathfinder::generateGraphTexture() {
@@ -342,26 +355,66 @@ void Pathfinder::generateGraphTexture() {
     graphSprite.setTexture(graphTexture.getTexture());
 }
 
+void Pathfinder::generatePathTexture() {
+    pathTexture.create(allNodes[0].size() * 32, allNodes.size() * 32);
+    pathTexture.clear(sf::Color::Transparent);
+    sf::Vertex *line;
+    line = (sf::Vertex*) malloc(sizeof(Node) * path.size());
+    int i = 0;
+    for (Node *node: path) {
+        line[i] = sf::Vertex();
+        line[i].color = sf::Color::Red;
+        line[i].position = sf::Vector2f(node->x * vertexDistance + vertexDistance / 2, node->y * vertexDistance + vertexDistance / 2);
+        i++;
+    }
+    pathTexture.draw(line, path.size(), sf::LineStrip);
+    pathTexture.display();
+    free(line);
+    pathSprite.setPosition(sf::Vector2f(0, 0));
+    pathSprite.setTexture(pathTexture.getTexture());
+}
+
 void Pathfinder::draw(sf::RenderWindow &window) {
     window.draw(graphSprite);
+    window.draw(pathSprite);
 }
 
 void Pathfinder::findPath() {
     // Add start node to open nodes
     queuePush(startNode);
+    startNode->startDistance = 0;
     bool done = false;
     Node *curr;
     while (!done) {
         curr = queuePop();
-        updateFValues(curr);
-        if (curr->x == target->x && curr->y == target->y) {
+        curr->endDistance = calcHValue(curr);
+        if (curr == targetNode) {
             done = true;
             break;
         }
+        closedNodes.push_back(curr);
         // Add neighbours to open nodes
         for (Node *child: curr->neighbours) {
-            queuePush(child);
+            if (isNodeClosed(child)) {
+                continue;
+            }
+            float newStartDistance = std::pow(curr->x - child->x, 2) + std::pow(curr->y - child->y, 2);
+            // Straight connection
+            if (newStartDistance == 1) { newStartDistance = 10; }
+            if (newStartDistance == 2) { newStartDistance = 14; }
+            // Diagonal connection 14 == sqrt(2) * 10
+            newStartDistance += curr->startDistance;
+            if (!isNodeOpen(child)) {
+                queuePush(child);
+            } else if (newStartDistance >= child->startDistance) {
+                // Not better path
+                continue;
+            }
+
+            // Currently on best path
+            child->cameFrom = curr;
+            child->startDistance = newStartDistance;
         }
-        closedNodes.push_back(curr);
     }
+    reconstuctPath();
 }

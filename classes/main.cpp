@@ -181,6 +181,12 @@ int main() {
     Pathfinder testBrain;
     testBrain.generateGraph(map.getNavData(), 2);
     testBrain.generateGraphTexture();
+    testBrain.setStartNode(40, 40);
+    testBrain.setEndNode(126, 104);
+    std::cout << "starting" << std::endl;
+    testBrain.findPath();
+    std::cout << "finished" << std::endl;
+    testBrain.generatePathTexture();
 
 
     // Main Game Loop
