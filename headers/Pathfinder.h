@@ -2,15 +2,18 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <cmath>
+#include <climits>
 
 struct Node {
     std::vector<Node*> neighbours;
-    float startDistance; // G Score
-    float endDistance; // F Score
+    float startDistance = std::numeric_limits<float>::infinity(); // G Score
+    float endDistance; // H Score
     int x;
     int y;
 
     bool walkable = true;
+    Node *cameFrom;
 };
 
 class Pathfinder {
@@ -22,15 +25,19 @@ public:
     void setEndNode(int x, int y);
     void generateGraphTexture();
     void draw(sf::RenderWindow &window);
+    void findPath();
 
 private:
-    void sortQueue();
+    void calcHValues();
+    void updateFValues(Node *parent);
+    void queuePush(Node *node);
+    Node *queuePop();
 
     Node *startNode;
     Node *targetNode;
     std::vector<std::vector<Node>> allNodes;
     std::vector<Node*> closedNodes;
-    std::vector<Node*> openNodes; // Priorityqueue
+    std::vector<Node*> openNodes; // Priorityqueue - lowest f score first
 
     sf::RenderTexture graphTexture;
     sf::Sprite graphSprite;

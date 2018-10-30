@@ -278,15 +278,48 @@ void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, int reso
 }
 
 void Pathfinder::setStartNode(int x, int y) {
-
+    startNode = &(allNodes[y][x]);
 }
 
 void Pathfinder::setEndNode(int x, int y) {
-
+    targetNode = &(allNodes[y][x]);
 }
 
-void Pathfinder::sortQueue() {
+void Pathfinder::calcHValues() {
+    int endX = targetNode->x;
+    int endY = targetNode->y;
+    for (Node *node: openNodes) {
+        // Doenst take square root to save time
+        node->endDistance = (std::pow(2, endX - node->x) + std::pow(2, endY - node->y));
+    }
+}
 
+void Pathfinder::updateFValues(Node *parent) {
+    float newFValue;
+    for (Node *child: parent->neighbours) {
+        newFValue = std::pow(2, child->x - parent->x) + std::pow(2, child->y - parent->x);
+        if (newFValue < child->startDistance) {
+            child->startDistance = newFValue;
+            child->cameFrom = parent;
+        }
+    }
+}
+
+void Pathfinder::queuePush(Node *node) {
+    int i;
+    for (i = 0; i < openNodes.size(); i++) {
+        if (openNodes[i]->startDistance + openNodes[i]->endDistance > 
+                node->startDistance + node->endDistance) {
+            break;
+        }
+    }
+    openNodes.insert(openNodes.begin() + i, node);
+}
+
+Node* Pathfinder::queuePop() {
+    Node *tmp = openNodes[0];
+    openNodes.erase(openNodes.begin());
+    return tmp;
 }
 
 void Pathfinder::generateGraphTexture() {
@@ -311,4 +344,24 @@ void Pathfinder::generateGraphTexture() {
 
 void Pathfinder::draw(sf::RenderWindow &window) {
     window.draw(graphSprite);
+}
+
+void Pathfinder::findPath() {
+    // Add start node to open nodes
+    queuePush(startNode);
+    bool done = false;
+    Node *curr;
+    while (!done) {
+        curr = queuePop();
+        updateFValues(curr);
+        if (curr->x == target->x && curr->y == target->y) {
+            done = true;
+            break;
+        }
+        // Add neighbours to open nodes
+        for (Node *child: curr->neighbours) {
+            queuePush(child);
+        }
+        closedNodes.push_back(curr);
+    }
 }
