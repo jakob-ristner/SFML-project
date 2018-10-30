@@ -179,13 +179,11 @@ int main() {
     PauseMenu pauseMenu(&settings);
 
     Pathfinder testBrain;
-    testBrain.generateGraph(map.getNavData(), 2);
+   testBrain.generateGraph(map.getNavData(), 0.5);
     testBrain.generateGraphTexture();
-    testBrain.setStartNode(40, 40);
-    testBrain.setEndNode(126, 104);
-    std::cout << "starting" << std::endl;
+    testBrain.setStartNode(10, 10);
+    testBrain.setEndNode(40, 40);
     testBrain.findPath();
-    std::cout << "finished" << std::endl;
     testBrain.generatePathTexture();
 
 
@@ -193,7 +191,7 @@ int main() {
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = false;
+    bool showFPS = true;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
@@ -358,6 +356,7 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
+        testBrain.findPath();
         testBrain.draw(window);
         window.display();
     }

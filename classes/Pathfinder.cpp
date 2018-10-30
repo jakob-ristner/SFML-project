@@ -8,7 +8,7 @@ Pathfinder::~Pathfinder() {
 
 }
 
-void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, int resolutionMult) {
+void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, float resolutionMult) {
     std::vector<std::vector<bool>> tiles;
     tiles.resize(inpTiles.size() * resolutionMult);
     for (int y = 0; y < tiles.size(); y++) {
@@ -336,7 +336,7 @@ bool Pathfinder::isNodeOpen(Node *node) {
 }
 
 void Pathfinder::generateGraphTexture() {
-    graphTexture.create(allNodes[0].size() * 32, allNodes.size() * 32);
+    graphTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
     graphTexture.clear(sf::Color::Transparent);
     sf::Vertex line[2];
     line[0].color = sf::Color::Blue;
@@ -356,7 +356,7 @@ void Pathfinder::generateGraphTexture() {
 }
 
 void Pathfinder::generatePathTexture() {
-    pathTexture.create(allNodes[0].size() * 32, allNodes.size() * 32);
+    pathTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
     pathTexture.clear(sf::Color::Transparent);
     sf::Vertex *line;
     line = (sf::Vertex*) malloc(sizeof(Node) * path.size());
@@ -380,6 +380,8 @@ void Pathfinder::draw(sf::RenderWindow &window) {
 }
 
 void Pathfinder::findPath() {
+    closedNodes.clear();
+    openNodes.clear();
     // Add start node to open nodes
     queuePush(startNode);
     startNode->startDistance = 0;

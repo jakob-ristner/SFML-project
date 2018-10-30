@@ -21,7 +21,7 @@ class Pathfinder {
 public:
     Pathfinder();
     ~Pathfinder();
-    void generateGraph(std::vector<std::vector<bool>> inpTiles, int resolutionMult);
+    void generateGraph(std::vector<std::vector<bool>> inpTiles, float resolutionMult);
     void setStartNode(int x, int y);
     void setEndNode(int x, int y);
     void generateGraphTexture();
@@ -49,7 +49,7 @@ private:
     sf::RenderTexture pathTexture;
     sf::Sprite pathSprite;
 
-    int vertexDistance;
+    float vertexDistance;
 
     std::vector<Node*> path;
 };
