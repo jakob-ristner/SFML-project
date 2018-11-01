@@ -1,7 +1,7 @@
 #include "../headers/Pathfinder.h"
 
-Pathfinder::Pathfinder() {
-
+Pathfinder::Pathfinder(float thinkInterval) {
+    this->thinkInterval = thinkInterval;
 }
 
 Pathfinder::~Pathfinder() {
@@ -284,6 +284,69 @@ void Pathfinder::setEndNode(int x, int y) {
     targetNode = &(allNodes[y][x]);
 }
 
+void Pathfinder::generateGraphTexture() {
+    graphTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
+    graphTexture.clear(sf::Color::Transparent);
+    sf::Vertex line[2];
+    line[0].color = sf::Color::Blue;
+    line[1].color = sf::Color::White;
+    for (std::vector<Node> &row: allNodes) {
+        for (Node &node: row) {
+            for (Node *other: node.neighbours) {
+                line[0].position = sf::Vector2f(node.x * vertexDistance + vertexDistance / 2, node.y * vertexDistance + vertexDistance / 2);
+                line[1].position = sf::Vector2f(other->x * vertexDistance + vertexDistance / 2, other->y * vertexDistance + vertexDistance / 2);
+                graphTexture.draw(line, 2, sf::LineStrip);
+            }
+        }
+    }
+    graphTexture.display();
+    graphSprite.setPosition(sf::Vector2f(0, 0));
+    graphSprite.setTexture(graphTexture.getTexture());
+}
+
+void Pathfinder::generatePathTexture() {
+    pathTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
+    pathTexture.clear(sf::Color::Transparent);
+    sf::Vertex *line;
+    line = (sf::Vertex*) malloc(sizeof(Node) * path.size());
+    int i = 0;
+    for (Node *node: path) {
+        line[i] = sf::Vertex();
+        line[i].color = sf::Color::Red;
+        line[i].position = sf::Vector2f(node->x * vertexDistance + vertexDistance / 2, node->y * vertexDistance + vertexDistance / 2);
+        i++;
+    }
+    pathTexture.draw(line, path.size(), sf::LineStrip);
+    pathTexture.display();
+    free(line);
+    pathSprite.setPosition(sf::Vector2f(0, 0));
+    pathSprite.setTexture(pathTexture.getTexture());
+}
+
+void Pathfinder::draw(sf::RenderWindow &window) {
+    window.draw(graphSprite);
+    window.draw(pathSprite);
+}
+
+void Pathfinder::update(float dt) {
+    currTime += dt;
+    if (currTime >= thinkInterval) {
+        currTime -= thinkInterval;
+        findPath();
+    }
+}
+
+std::vector<sf::Vector2f> Pathfinder::getPath() {
+    std::vector<sf::Vector2f> output;
+    output.resize(path.size());
+    Node *node;
+    for (int i = 0; i < path.size(); i++) {
+        node = path[i];
+        output[i] = sf::Vector2f(node->x * vertexDistance, node->y * vertexDistance);
+    }
+    return output;
+}
+
 void Pathfinder::queuePush(Node *node) {
     int i;
     for (i = 0; i < openNodes.size(); i++) {
@@ -335,50 +398,6 @@ bool Pathfinder::isNodeOpen(Node *node) {
     return false;
 }
 
-void Pathfinder::generateGraphTexture() {
-    graphTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
-    graphTexture.clear(sf::Color::Transparent);
-    sf::Vertex line[2];
-    line[0].color = sf::Color::Blue;
-    line[1].color = sf::Color::White;
-    for (std::vector<Node> &row: allNodes) {
-        for (Node &node: row) {
-            for (Node *other: node.neighbours) {
-                line[0].position = sf::Vector2f(node.x * vertexDistance + vertexDistance / 2, node.y * vertexDistance + vertexDistance / 2);
-                line[1].position = sf::Vector2f(other->x * vertexDistance + vertexDistance / 2, other->y * vertexDistance + vertexDistance / 2);
-                graphTexture.draw(line, 2, sf::LineStrip);
-            }
-        }
-    }
-    graphTexture.display();
-    graphSprite.setPosition(sf::Vector2f(0, 0));
-    graphSprite.setTexture(graphTexture.getTexture());
-}
-
-void Pathfinder::generatePathTexture() {
-    pathTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
-    pathTexture.clear(sf::Color::Transparent);
-    sf::Vertex *line;
-    line = (sf::Vertex*) malloc(sizeof(Node) * path.size());
-    int i = 0;
-    for (Node *node: path) {
-        line[i] = sf::Vertex();
-        line[i].color = sf::Color::Red;
-        line[i].position = sf::Vector2f(node->x * vertexDistance + vertexDistance / 2, node->y * vertexDistance + vertexDistance / 2);
-        i++;
-    }
-    pathTexture.draw(line, path.size(), sf::LineStrip);
-    pathTexture.display();
-    free(line);
-    pathSprite.setPosition(sf::Vector2f(0, 0));
-    pathSprite.setTexture(pathTexture.getTexture());
-}
-
-void Pathfinder::draw(sf::RenderWindow &window) {
-    window.draw(graphSprite);
-    window.draw(pathSprite);
-}
-
 void Pathfinder::findPath() {
     closedNodes.clear();
     openNodes.clear();
@@ -419,4 +438,33 @@ void Pathfinder::findPath() {
         }
     }
     reconstuctPath();
+}
+
+EnemyPathfinder::EnemyPathfinder(float thinkInterval) : 
+    Pathfinder(thinkInterval) {
+
+}
+
+EnemyPathfinder::~EnemyPathfinder() {
+
+}
+
+void EnemyPathfinder::update(float dt) {
+    currTime += dt;
+    std::cout << currTime << std::endl;
+    if (currTime >= thinkInterval) {
+        currTime -= thinkInterval;
+        if (std::pow(startNode->x - targetNode->x, 2) + 
+            std::pow(startNode->y - targetNode->y, 2) <= 2) {
+            path = {startNode, targetNode};
+        } else {
+            findPath();
+        }
+        generatePathTexture();
+        std::cout << "Kek" << std::endl;
+    }
+    if (std::pow(startNode->x - targetNode->x, 2) + 
+        std::pow(startNode->y - targetNode->y, 2) <= 2) {
+        path = {targetNode};
+    }
 }

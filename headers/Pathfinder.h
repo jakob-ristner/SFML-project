@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <climits>
+#include "./Player.h"
 
 struct Node {
     std::vector<Node*> neighbours;
@@ -19,7 +20,7 @@ struct Node {
 
 class Pathfinder {
 public:
-    Pathfinder();
+    Pathfinder(float thinkInterval);
     ~Pathfinder();
     void generateGraph(std::vector<std::vector<bool>> inpTiles, float resolutionMult);
     void setStartNode(int x, int y);
@@ -27,16 +28,17 @@ public:
     void generateGraphTexture();
     void generatePathTexture();
     void draw(sf::RenderWindow &window);
-    void findPath();
+    void update(float dt);
+    std::vector<sf::Vector2f> getPath();
 
-private:
-    void calcHValues();
+protected:
     void queuePush(Node *node);
     void reconstuctPath();
     Node *queuePop();
     float calcHValue(Node *node);
     bool isNodeClosed(Node *node);
     bool isNodeOpen(Node *node);
+    void findPath();
 
     Node *startNode;
     Node *targetNode;
@@ -52,4 +54,16 @@ private:
     float vertexDistance;
 
     std::vector<Node*> path;
+
+    // Timer stuff
+    float currTime = 0;
+    float thinkInterval;
+};
+
+class EnemyPathfinder : public Pathfinder {
+public:
+    EnemyPathfinder(float thinkInterval);
+    ~EnemyPathfinder();
+
+    void update(float dt);
 };
