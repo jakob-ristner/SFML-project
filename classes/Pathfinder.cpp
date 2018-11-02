@@ -293,9 +293,11 @@ void Pathfinder::generateGraphTexture() {
     for (std::vector<Node> &row: allNodes) {
         for (Node &node: row) {
             for (Node *other: node.neighbours) {
-                line[0].position = sf::Vector2f(node.x * vertexDistance + vertexDistance / 2, node.y * vertexDistance + vertexDistance / 2);
-                line[1].position = sf::Vector2f(other->x * vertexDistance + vertexDistance / 2, other->y * vertexDistance + vertexDistance / 2);
-                graphTexture.draw(line, 2, sf::LineStrip);
+                if (other->inRange && node.inRange) {
+                    line[0].position = sf::Vector2f(node.x * vertexDistance + vertexDistance / 2, node.y * vertexDistance + vertexDistance / 2);
+                    line[1].position = sf::Vector2f(other->x * vertexDistance + vertexDistance / 2, other->y * vertexDistance + vertexDistance / 2);
+                    graphTexture.draw(line, 2, sf::LineStrip);
+                }
             }
         }
     }
@@ -406,17 +408,16 @@ void Pathfinder::findPath() {
     startNode->startDistance = 0;
     bool done = false;
     Node *curr;
-    while (!done) {
+    while (openNodes.size() > 0) {
         curr = queuePop();
         curr->endDistance = calcHValue(curr);
         if (curr == targetNode) {
             done = true;
-            break;
         }
         closedNodes.push_back(curr);
         // Add neighbours to open nodes
         for (Node *child: curr->neighbours) {
-            if (isNodeClosed(child)) {
+            if (isNodeClosed(child) || (!child->inRange)) {
                 continue;
             }
             float newStartDistance = std::pow(curr->x - child->x, 2) + std::pow(curr->y - child->y, 2);
@@ -426,6 +427,7 @@ void Pathfinder::findPath() {
             // Diagonal connection 14 == sqrt(2) * 10
             newStartDistance += curr->startDistance;
             if (!isNodeOpen(child)) {
+                child->endDistance = calcHValue(child);
                 queuePush(child);
             } else if (newStartDistance >= child->startDistance) {
                 // Not better path
@@ -437,7 +439,9 @@ void Pathfinder::findPath() {
             child->startDistance = newStartDistance;
         }
     }
-    reconstuctPath();
+    if (done) {
+        reconstuctPath();
+    }
 }
 
 EnemyPathfinder::EnemyPathfinder(float thinkInterval) : 
@@ -449,22 +453,46 @@ EnemyPathfinder::~EnemyPathfinder() {
 
 }
 
-void EnemyPathfinder::update(float dt) {
+void EnemyPathfinder::update(float dt, sf::Vector2f playerPos) {
     currTime += dt;
-    std::cout << currTime << std::endl;
+    targetNode = &(allNodes[std::floor(playerPos.y / vertexDistance)][std::floor(playerPos.x / vertexDistance)]);
     if (currTime >= thinkInterval) {
         currTime -= thinkInterval;
-        if (std::pow(startNode->x - targetNode->x, 2) + 
-            std::pow(startNode->y - targetNode->y, 2) <= 2) {
+        if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
+            std::pow(startNode->y - targetNode->y, 2)) <= 4) {
             path = {startNode, targetNode};
         } else {
             findPath();
         }
         generatePathTexture();
-        std::cout << "Kek" << std::endl;
     }
-    if (std::pow(startNode->x - targetNode->x, 2) + 
-        std::pow(startNode->y - targetNode->y, 2) <= 2) {
-        path = {targetNode};
+    if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
+        std::pow(startNode->y - targetNode->y, 2)) <= 4) {
+        path = {startNode, targetNode};
+    }
+    std::cout << std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
+        std::pow(startNode->y - targetNode->y, 2)) << std::endl;
+}
+
+void EnemyPathfinder::setAggroRange(float distance) {
+    aggroRange = distance / vertexDistance;
+    updateRanges();
+}
+
+void EnemyPathfinder::updateRanges() {
+    float deltaXY;
+    Node &node = allNodes[0][0];
+    for (int y = 0; y < allNodes.size(); y++) {
+        for (int x = 0; x < allNodes[y].size(); x++) {
+            node = allNodes[y][x];
+            // Pythagoras
+            deltaXY = std::sqrt(std::pow(node.x - startNode->x, 2) + 
+                                std::pow(node.y - startNode->y, 2));
+            if (deltaXY > aggroRange) {
+                allNodes[y][x].inRange = false;
+            } else {
+                allNodes[y][x].inRange = true;
+            }
+        }
     }
 }

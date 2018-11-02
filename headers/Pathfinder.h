@@ -15,6 +15,7 @@ struct Node {
     int y;
 
     bool walkable = true;
+    bool inRange = true;
     Node *cameFrom;
 };
 
@@ -65,5 +66,13 @@ public:
     EnemyPathfinder(float thinkInterval);
     ~EnemyPathfinder();
 
-    void update(float dt);
+    void update(float dt, sf::Vector2f playerPos);
+    void setAggroRange(float distance);
+    void setMap(std::vector<std::vector<bool>> inpTiles);
+    
+protected:
+    void updateRanges();
+
+    float aggroRange = std::numeric_limits<float>::infinity();
+    sf::Vector2i position;
 };

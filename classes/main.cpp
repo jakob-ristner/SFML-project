@@ -179,17 +179,18 @@ int main() {
     PauseMenu pauseMenu(&settings);
 
     EnemyPathfinder testBrain(500);
-    testBrain.generateGraph(map.getNavData(), 0.5);
-    testBrain.generateGraphTexture();
+    testBrain.generateGraph(map.getNavData(), 1);
     testBrain.setStartNode(10, 10);
     testBrain.setEndNode(10, 20);
+    testBrain.setAggroRange(500);
+    testBrain.generateGraphTexture();
 
 
     // Main Game Loop
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = false;
+    bool showFPS = true;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
@@ -354,7 +355,7 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
-        testBrain.update(dt);
+        testBrain.update(dt, player.getPos());
         testBrain.draw(window);
         window.display();
     }
