@@ -190,7 +190,7 @@ int main() {
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = true;
+    bool showFPS = false;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
@@ -355,11 +355,12 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
-        testBrain.update(dt, player.getPos());
+        testBrain.update(dt, enemyFactory.getEnemy(0) ,player.getPos());
         testBrain.draw(window);
         window.display();
     }
 
     return 0;
 }
+
 

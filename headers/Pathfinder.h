@@ -11,6 +11,7 @@ struct Node {
     std::vector<Node*> neighbours;
     float startDistance = std::numeric_limits<float>::infinity(); // G Score
     float endDistance = std::numeric_limits<float>::infinity(); // H Score
+    float prev = std::numeric_limits<float>::infinity();
     int x;
     int y;
 
@@ -40,6 +41,7 @@ protected:
     bool isNodeClosed(Node *node);
     bool isNodeOpen(Node *node);
     void findPath();
+    void findPath2();
 
     Node *startNode;
     Node *targetNode;
@@ -66,12 +68,13 @@ public:
     EnemyPathfinder(float thinkInterval);
     ~EnemyPathfinder();
 
-    void update(float dt, sf::Vector2f playerPos);
+    void update(float dt, sf::Vector2f enemyPos, sf::Vector2f playerPos);
     void setAggroRange(float distance);
     void setMap(std::vector<std::vector<bool>> inpTiles);
     
 protected:
     void updateRanges();
+    float getTotalCost();
 
     float aggroRange = std::numeric_limits<float>::infinity();
     sf::Vector2i position;

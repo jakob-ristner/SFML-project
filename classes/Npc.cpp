@@ -218,3 +218,7 @@ void EnemyFactory::explosionCollide(std::vector<Explosion> &explosions) {
         }
     }
 }
+
+sf::Vector2f EnemyFactory::getEnemy(int index) {
+    return enemies[index]->getPosition();
+}

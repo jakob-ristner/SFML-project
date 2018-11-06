@@ -367,6 +367,7 @@ void Pathfinder::reconstuctPath() {
         path.push_back(curr);
         curr = curr->cameFrom;
     }
+    path.push_back(curr);
     std::reverse(path.begin(), path.end());
 }
 
@@ -405,9 +406,15 @@ void Pathfinder::findPath() {
     openNodes.clear();
     // Add start node to open nodes
     queuePush(startNode);
-    startNode->startDistance = 0;
     bool done = false;
-    Node *curr;
+    Node *curr = 0;
+    for (int y = 0; y < allNodes.size(); y++) {
+        for (int x = 0; x < allNodes[y].size(); x++) {
+            allNodes[y][x].cameFrom = 0;
+            allNodes[y][x].startDistance = std::numeric_limits<float>::infinity();
+        }
+    }
+    startNode->startDistance = 0;
     while (openNodes.size() > 0) {
         curr = queuePop();
         curr->endDistance = calcHValue(curr);
@@ -423,7 +430,7 @@ void Pathfinder::findPath() {
             float newStartDistance = std::pow(curr->x - child->x, 2) + std::pow(curr->y - child->y, 2);
             // Straight connection
             if (newStartDistance == 1) { newStartDistance = 10; }
-            if (newStartDistance == 2) { newStartDistance = 14; }
+            else if (newStartDistance == 2) { newStartDistance = 14; }
             // Diagonal connection 14 == sqrt(2) * 10
             newStartDistance += curr->startDistance;
             if (!isNodeOpen(child)) {
@@ -438,9 +445,20 @@ void Pathfinder::findPath() {
             child->cameFrom = curr;
             child->startDistance = newStartDistance;
         }
-    }
-    if (done) {
+    } if (done) {
         reconstuctPath();
+    }
+    // Clear cameFrom
+}
+
+void Pathfinder::findPath2() {
+    closedNodes.clear();
+    openNodes.clear();
+    queuePush(startNode);
+    for (int y = 0; y < allNodes.size(); y++) {
+        for (int x = 0; x < allNodes[y].size(); x++) {
+            allNodes[y][x].cameFrom = 0;
+        }
     }
 }
 
@@ -453,11 +471,23 @@ EnemyPathfinder::~EnemyPathfinder() {
 
 }
 
-void EnemyPathfinder::update(float dt, sf::Vector2f playerPos) {
+void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playerPos) {
     currTime += dt;
     targetNode = &(allNodes[std::floor(playerPos.y / vertexDistance)][std::floor(playerPos.x / vertexDistance)]);
+    startNode = &(allNodes[std::floor(enemyPos.y / vertexDistance)][std::floor(enemyPos.x / vertexDistance)]);
+    for (int y = 0; y < allNodes.size(); y++) {
+        for (int x = 0; x < allNodes[y].size(); x++) {
+            allNodes[y][x].endDistance = calcHValue(&(allNodes[y][x]));
+            //if (allNodes[y][x].endDistance != allNodes[y][x].prev) {
+                //std::cout << allNodes[y][x].endDistance << std::endl;
+            //}
+            allNodes[y][x].prev = calcHValue(&(allNodes[y][x]));
+        }
+    }
     if (currTime >= thinkInterval) {
         currTime -= thinkInterval;
+        updateRanges();
+        generateGraphTexture();
         if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
             std::pow(startNode->y - targetNode->y, 2)) <= 4) {
             path = {startNode, targetNode};
@@ -470,8 +500,7 @@ void EnemyPathfinder::update(float dt, sf::Vector2f playerPos) {
         std::pow(startNode->y - targetNode->y, 2)) <= 4) {
         path = {startNode, targetNode};
     }
-    std::cout << std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
-        std::pow(startNode->y - targetNode->y, 2)) << std::endl;
+    //std::cout << "Total cost: "<< getTotalCost() << std::endl;
 }
 
 void EnemyPathfinder::setAggroRange(float distance) {
@@ -495,4 +524,12 @@ void EnemyPathfinder::updateRanges() {
             }
         }
     }
+}
+
+float EnemyPathfinder::getTotalCost() {
+    float total = 0;
+    for (Node *node: path) {
+        total += node->startDistance;
+    }
+    return total;
 }

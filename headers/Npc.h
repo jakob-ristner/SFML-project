@@ -102,6 +102,8 @@ public:
     void playerCollide(Player &player);
     void explosionCollide(std::vector<Explosion> &explosions);
 
+    sf::Vector2f getEnemy(int index);
+
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<sf::Texture> enemyTextures;
