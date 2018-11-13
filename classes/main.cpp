@@ -107,7 +107,7 @@ int main() {
     player.addSpell(&flashHeal);
 
     // Enemies
-    EnemyFactory enemyFactory(player);
+    EnemyFactory enemyFactory(player, map);
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
 
     // Dev Console
@@ -183,7 +183,6 @@ int main() {
     testBrain.setStartNode(10, 10);
     testBrain.setEndNode(10, 20);
     testBrain.setAggroRange(500);
-    testBrain.generateGraphTexture();
 
 
     // Main Game Loop
@@ -356,7 +355,6 @@ int main() {
         window.draw(playerInterfaces);
         window.draw(debugLayer);
         testBrain.update(dt, enemyFactory.getEnemy(0) ,player.getPos());
-        testBrain.draw(window);
         window.display();
     }
 

@@ -1,5 +1,9 @@
 #include "../headers/Pathfinder.h"
 
+Pathfinder::Pathfinder() {
+
+}
+
 Pathfinder::Pathfinder(float thinkInterval) {
     this->thinkInterval = thinkInterval;
 }
@@ -284,7 +288,7 @@ void Pathfinder::setEndNode(int x, int y) {
     targetNode = &(allNodes[y][x]);
 }
 
-void Pathfinder::generateGraphTexture() {
+void Pathfinder::generateGraphTexture(sf::RenderTexture &graphTexture, sf::Sprite graphSprite) {
     graphTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
     graphTexture.clear(sf::Color::Transparent);
     sf::Vertex line[2];
@@ -306,7 +310,7 @@ void Pathfinder::generateGraphTexture() {
     graphSprite.setTexture(graphTexture.getTexture());
 }
 
-void Pathfinder::generatePathTexture() {
+void Pathfinder::generatePathTexture(sf::RenderTexture &pathTexture, sf::Sprite &pathSprite) {
     pathTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
     pathTexture.clear(sf::Color::Transparent);
     sf::Vertex *line;
@@ -323,11 +327,6 @@ void Pathfinder::generatePathTexture() {
     free(line);
     pathSprite.setPosition(sf::Vector2f(0, 0));
     pathSprite.setTexture(pathTexture.getTexture());
-}
-
-void Pathfinder::draw(sf::RenderWindow &window) {
-    window.draw(graphSprite);
-    window.draw(pathSprite);
 }
 
 void Pathfinder::update(float dt) {
@@ -467,6 +466,11 @@ EnemyPathfinder::EnemyPathfinder(float thinkInterval) :
 
 }
 
+EnemyPathfinder::EnemyPathfinder() {
+
+}
+
+
 EnemyPathfinder::~EnemyPathfinder() {
 
 }
@@ -487,14 +491,14 @@ void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playe
     if (currTime >= thinkInterval) {
         currTime -= thinkInterval;
         updateRanges();
-        generateGraphTexture();
+        //generateGraphTexture();
         if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
             std::pow(startNode->y - targetNode->y, 2)) <= 4) {
             path = {startNode, targetNode};
         } else {
             findPath();
         }
-        generatePathTexture();
+        //generatePathTexture();
     }
     if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
         std::pow(startNode->y - targetNode->y, 2)) <= 4) {

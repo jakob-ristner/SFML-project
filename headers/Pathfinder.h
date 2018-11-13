@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cmath>
 #include <climits>
-#include "./Player.h"
 
 struct Node {
     std::vector<Node*> neighbours;
@@ -22,14 +21,14 @@ struct Node {
 
 class Pathfinder {
 public:
+    Pathfinder();
     Pathfinder(float thinkInterval);
     ~Pathfinder();
     void generateGraph(std::vector<std::vector<bool>> inpTiles, float resolutionMult);
     void setStartNode(int x, int y);
     void setEndNode(int x, int y);
-    void generateGraphTexture();
-    void generatePathTexture();
-    void draw(sf::RenderWindow &window);
+    void generateGraphTexture(sf::RenderTexture &graphTexture, sf::Sprite graphSprite);
+    void generatePathTexture(sf::RenderTexture &pathTexture, sf::Sprite &pathSprite);
     void update(float dt);
     std::vector<sf::Vector2f> getPath();
 
@@ -49,11 +48,6 @@ protected:
     std::vector<Node*> closedNodes;
     std::vector<Node*> openNodes; // Priorityqueue - lowest f score first
 
-    sf::RenderTexture graphTexture;
-    sf::Sprite graphSprite;
-    sf::RenderTexture pathTexture;
-    sf::Sprite pathSprite;
-
     float vertexDistance;
 
     std::vector<Node*> path;
@@ -65,6 +59,7 @@ protected:
 
 class EnemyPathfinder : public Pathfinder {
 public:
+    EnemyPathfinder();
     EnemyPathfinder(float thinkInterval);
     ~EnemyPathfinder();
 
