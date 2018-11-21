@@ -68,9 +68,10 @@ void Enemy::resetAttackTimer() {
     timeToAttack = attackSpeed;
 }
 
-void Enemy::setPathfinder(EnemyPathfinder pathfinder) {
-    EnemyPathfinder p(pathfinder);
-    //this->pathfinder = pathfinder;
+void Enemy::setPathfinder(EnemyPathfinder pathfinder, TileMap &map) {
+    this->pathfinder = pathfinder;
+    this->pathfinder.generateGraph(map.getNavData(), 0.5);
+    this->pathfinder.setCurrTime(500);
 }
 
 sf::Vector2f Enemy::getVel() {
@@ -102,7 +103,13 @@ void Slime::update(float dt) {
     acc = sf::Vector2f(0.0f, 0.0f);
 
     // Here some thinking will be executed (TODO)
-    sf::Vector2f direction = player.getPos() - getPosition();
+    sf::Vector2f direction;
+    std::vector<sf::Vector2f> path = pathfinder.getPath();
+    if (path.size() == 0) {
+        direction = player.getPos() - getPosition();
+    } else {
+        direction = path[1] - getPosition();
+    }
     acc = direction;
     // -----------------------------------
 
@@ -131,7 +138,7 @@ void Slime::draw(sf::RenderWindow &window) {
 }
 
 EnemyFactory::EnemyFactory(Player &player, TileMap &map):
-    player(player) {
+    player(player), map(map) {
     sf::Texture slimeTexture;
     slimeTexture.loadFromFile("./resources/enemy_textures/slime.png");
     slimeTexture.setSmooth(true);
@@ -148,7 +155,7 @@ EnemyFactory::~EnemyFactory() {
 void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
     if (enemyType == "slime") {
         enemies.push_back(std::unique_ptr<Enemy>(new Slime(enemyTextures[0], pos, player)));
-        enemies.back()->setPathfinder(enemyPathfinders[0]);
+        enemies.back()->setPathfinder(enemyPathfinders[0], map);
     }
 }
 

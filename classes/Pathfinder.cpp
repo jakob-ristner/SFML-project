@@ -63,6 +63,7 @@ void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, float re
     }
     int dataWidth = tiles[0].size();
     int dataHeight = tiles.size();
+    allNodes.clear();
     allNodes.resize(tiles.size());
     for (std::vector<Node> &row: allNodes) {
         row.resize(tiles[0].size());
@@ -482,34 +483,48 @@ void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playe
     for (int y = 0; y < allNodes.size(); y++) {
         for (int x = 0; x < allNodes[y].size(); x++) {
             allNodes[y][x].endDistance = calcHValue(&(allNodes[y][x]));
-            //if (allNodes[y][x].endDistance != allNodes[y][x].prev) {
-                //std::cout << allNodes[y][x].endDistance << std::endl;
-            //}
             allNodes[y][x].prev = calcHValue(&(allNodes[y][x]));
         }
     }
     if (currTime >= thinkInterval) {
         currTime -= thinkInterval;
+        currentStep = 0;
         updateRanges();
-        //generateGraphTexture();
         if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
             std::pow(startNode->y - targetNode->y, 2)) <= 4) {
             path = {startNode, targetNode};
         } else {
             findPath();
         }
-        //generatePathTexture();
     }
     if (std::sqrt(std::pow(startNode->x - targetNode->x, 2) + 
         std::pow(startNode->y - targetNode->y, 2)) <= 4) {
         path = {startNode, targetNode};
     }
-    //std::cout << "Total cost: "<< getTotalCost() << std::endl;
 }
 
 void EnemyPathfinder::setAggroRange(float distance) {
     aggroRange = distance / vertexDistance;
-    updateRanges();
+}
+
+void EnemyPathfinder::increaseStep() {
+    currentStep++;
+}
+
+void EnemyPathfinder::setCurrTime(float newTime) {
+    currTime = newTime;
+}
+
+std::vector<sf::Vector2f> EnemyPathfinder::getPath() {
+    std::vector<sf::Vector2f> output;
+    output.resize(path.size());
+    Node *node;
+    for (int i = currentStep; i < path.size(); i++) {
+        node = path[i];
+        output[i] = sf::Vector2f(node->x * vertexDistance, node->y * vertexDistance);
+    }
+    return output;
+
 }
 
 void EnemyPathfinder::updateRanges() {
@@ -536,4 +551,65 @@ float EnemyPathfinder::getTotalCost() {
         total += node->startDistance;
     }
     return total;
+}
+
+void EnemyPathfinder::findPath() {
+    closedNodes.clear();
+    openNodes.clear();
+    // Add start node to open nodes
+    queuePush(startNode);
+    bool done = false;
+    Node *curr = 0;
+    int rangeCount = 0;
+    for (int y = 0; y < allNodes.size(); y++) {
+        for (int x = 0; x < allNodes[y].size(); x++) {
+            allNodes[y][x].cameFrom = 0;
+            allNodes[y][x].startDistance = std::numeric_limits<float>::infinity();
+            if (allNodes[y][x].inRange) {
+                rangeCount++;
+            }
+        }
+    }
+
+    startNode->startDistance = 0;
+    int kek = 0;
+    while (openNodes.size() > 0) {
+        kek++;
+        curr = queuePop();
+        curr->endDistance = calcHValue(curr);
+        if (curr->x == targetNode->x) {
+            if (curr->y == targetNode->y) {
+                done = true;
+            }
+        }
+        closedNodes.push_back(curr);
+        // Add neighbours to open nodes
+        for (Node *child: curr->neighbours) {
+            if (isNodeClosed(child) || (!child->inRange)) {
+                continue;
+            }
+            float newStartDistance = std::pow(curr->x - child->x, 2) + std::pow(curr->y - child->y, 2);
+            // Straight connection
+            if (newStartDistance == 1) { newStartDistance = 10; }
+            else if (newStartDistance == 2) { newStartDistance = 14; }
+            // Diagonal connection 14 == sqrt(2) * 10
+            newStartDistance += curr->startDistance;
+            if (!isNodeOpen(child)) {
+                child->endDistance = calcHValue(child);
+                queuePush(child);
+            } else if (newStartDistance >= child->startDistance) {
+                // Not better path
+                continue;
+            }
+
+            // Currently on best path
+            child->cameFrom = curr;
+            child->startDistance = newStartDistance;
+        }
+    } 
+    if (done) {
+        reconstuctPath();
+    }
+    
+    // Clear cameFrom
 }

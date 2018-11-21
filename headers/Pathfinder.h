@@ -66,11 +66,17 @@ public:
     void update(float dt, sf::Vector2f enemyPos, sf::Vector2f playerPos);
     void setAggroRange(float distance);
     void setMap(std::vector<std::vector<bool>> inpTiles);
+    void increaseStep();
+    void setCurrTime(float newTime);
+
+    std::vector<sf::Vector2f> getPath();
     
 protected:
     void updateRanges();
+    void findPath();
     float getTotalCost();
 
     float aggroRange = std::numeric_limits<float>::infinity();
     sf::Vector2i position;
+    int currentStep;
 };

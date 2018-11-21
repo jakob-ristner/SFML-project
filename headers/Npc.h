@@ -50,7 +50,7 @@ public:
     bool canAttack();
 
     void resetAttackTimer();
-    void setPathfinder(EnemyPathfinder pathfinder);
+    void setPathfinder(EnemyPathfinder pathfinder, TileMap &map);
 
     SpriteCollider getCollider();
 
@@ -113,4 +113,5 @@ private:
     std::vector<EnemyPathfinder> enemyPathfinders;
 
     Player &player;
+    TileMap &map;
 };

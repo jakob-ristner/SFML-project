@@ -178,11 +178,11 @@ int main() {
 
     PauseMenu pauseMenu(&settings);
 
-    EnemyPathfinder testBrain(500);
-    testBrain.generateGraph(map.getNavData(), 1);
-    testBrain.setStartNode(10, 10);
-    testBrain.setEndNode(10, 20);
-    testBrain.setAggroRange(500);
+    //EnemyPathfinder testBrain(500);
+    //testBrain.generateGraph(map.getNavData(), 1);
+    //testBrain.setStartNode(10, 10);
+    //testBrain.setEndNode(10, 20);
+    //testBrain.setAggroRange(500);
 
 
     // Main Game Loop
@@ -354,7 +354,7 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
-        testBrain.update(dt, enemyFactory.getEnemy(0) ,player.getPos());
+        //testBrain.update(dt, enemyFactory.getEnemy(0) ,player.getPos());
         window.display();
     }
 
