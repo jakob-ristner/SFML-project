@@ -19,7 +19,10 @@
 #include "../headers/UiInterface.h"
 #include "../headers/Animation.h"
 #include "../headers/Explosion.h"
+#include "../headers/Perks.h"
+#include "../headers/Perks.h"
 #pragma endregion
+
 
 int main() {
     Settings settings = Settings();

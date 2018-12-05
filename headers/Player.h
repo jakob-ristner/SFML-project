@@ -6,6 +6,7 @@
 #include "./Collider.h"
 #include "./Spell.h"
 #include "./UiInterface.h"
+#include "./Perks.h"
 
 class Projectile;
 class Buff;
@@ -68,6 +69,13 @@ public:
 
     std::vector<Spell *> getSpells();
 
+    bool checkPerkAvail(std::string perkName);
+    bool checkPerkUnlocked(std::string perkName);
+    void attemptUnlockPerk(std::string perkName);
+    void forceUnlockPerk(std::string perkName);
+
+    
+
 private:
     sf::Vector2f pos;
     std::vector<Spell *> spellInventory;
@@ -100,4 +108,7 @@ private:
     PlayerHpBar *hpBar;
     PlayerManaBar *manaBar;
     PlayerLevelIcon *levelIcon;
+
+    PerkTree perkTree;
+    
 };
