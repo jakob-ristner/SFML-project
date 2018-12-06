@@ -51,6 +51,7 @@ public:
 
     void resetAttackTimer();
     void setPathfinder(EnemyPathfinder pathfinder, TileMap &map);
+    EnemyPathfinder *getPathfinder();
 
     SpriteCollider getCollider();
 
@@ -106,6 +107,8 @@ public:
     void explosionCollide(std::vector<Explosion> &explosions);
 
     sf::Vector2f getEnemy(int index);
+    void generatePathTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite);
+    void generateGraphTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite);
 
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;

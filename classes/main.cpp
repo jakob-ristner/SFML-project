@@ -183,7 +183,8 @@ int main() {
     //testBrain.setStartNode(10, 10);
     //testBrain.setEndNode(10, 20);
     //testBrain.setAggroRange(500);
-
+    sf::Sprite pathSprite;
+    sf::RenderTexture pathTexture;
 
     // Main Game Loop
     clock.restart();
@@ -286,6 +287,7 @@ int main() {
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
         enemyFactory.explosionCollide(explosions);
+        enemyFactory.generatePathTexture(0, pathTexture, pathSprite);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
@@ -354,6 +356,7 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
+        window.draw(pathSprite);
         //testBrain.update(dt, enemyFactory.getEnemy(0) ,player.getPos());
         window.display();
     }

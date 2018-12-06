@@ -320,7 +320,7 @@ void Pathfinder::generatePathTexture(sf::RenderTexture &pathTexture, sf::Sprite 
     for (Node *node: path) {
         line[i] = sf::Vertex();
         line[i].color = sf::Color::Red;
-        line[i].position = sf::Vector2f(node->x * vertexDistance + vertexDistance / 2, node->y * vertexDistance + vertexDistance / 2);
+        line[i].position = sf::Vector2f(node->x * vertexDistance /*+ vertexDistance / 2*/, node->y * vertexDistance /*+ vertexDistance / 2*/);
         i++;
     }
     pathTexture.draw(line, path.size(), sf::LineStrip);
@@ -332,9 +332,10 @@ void Pathfinder::generatePathTexture(sf::RenderTexture &pathTexture, sf::Sprite 
 
 void Pathfinder::update(float dt) {
     currTime += dt;
-    if (currTime >= thinkInterval) {
+    if (currTime >= thinkInterval && !alreadyFound) {
         currTime -= thinkInterval;
         findPath();
+        alreadyFound = true;
     }
 }
 
@@ -478,15 +479,17 @@ EnemyPathfinder::~EnemyPathfinder() {
 
 void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playerPos) {
     currTime += dt;
-    targetNode = &(allNodes[std::floor(playerPos.y / vertexDistance)][std::floor(playerPos.x / vertexDistance)]);
-    startNode = &(allNodes[std::floor(enemyPos.y / vertexDistance)][std::floor(enemyPos.x / vertexDistance)]);
-    for (int y = 0; y < allNodes.size(); y++) {
-        for (int x = 0; x < allNodes[y].size(); x++) {
-            allNodes[y][x].endDistance = calcHValue(&(allNodes[y][x]));
-            allNodes[y][x].prev = calcHValue(&(allNodes[y][x]));
-        }
-    }
+    targetNode = &(allNodes[std::round(playerPos.y / vertexDistance)][std::round(playerPos.x / vertexDistance)]);
+    startNode = &(allNodes[std::round(enemyPos.y / vertexDistance)][std::round(enemyPos.x / vertexDistance)]);
     if (currTime >= thinkInterval) {
+        alreadyFound = true;
+        std::cout << "RECALCULATING" << std::endl;
+        for (int y = 0; y < allNodes.size(); y++) {
+            for (int x = 0; x < allNodes[y].size(); x++) {
+                allNodes[y][x].endDistance = calcHValue(&(allNodes[y][x]));
+                allNodes[y][x].prev = calcHValue(&(allNodes[y][x]));
+            }
+        }
         currTime -= thinkInterval;
         currentStep = 0;
         updateRanges();
@@ -517,10 +520,10 @@ void EnemyPathfinder::setCurrTime(float newTime) {
 
 std::vector<sf::Vector2f> EnemyPathfinder::getPath() {
     std::vector<sf::Vector2f> output;
-    output.resize(path.size());
+    output.resize(path.size() - currentStep);
     Node *node;
-    for (int i = currentStep; i < path.size(); i++) {
-        node = path[i];
+    for (int i = 0; i < path.size() - currentStep; i++) {
+        node = path[i + currentStep];
         output[i] = sf::Vector2f(node->x * vertexDistance, node->y * vertexDistance);
     }
     return output;

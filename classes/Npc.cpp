@@ -26,7 +26,7 @@ Enemy::Enemy(sf::Texture &texture, sf::Vector2f pos,
     this->level = level;
 
     settings = Settings();
-    fric = 1.2;
+    fric = 0.9;
     acc = sf::Vector2f(0.0f, 0.0f);
 
     setTexture(texture);
@@ -74,6 +74,10 @@ void Enemy::setPathfinder(EnemyPathfinder pathfinder, TileMap &map) {
     this->pathfinder.setCurrTime(500);
 }
 
+EnemyPathfinder *Enemy::getPathfinder() {
+    return &pathfinder;
+}
+
 sf::Vector2f Enemy::getVel() {
     return vel;
 }
@@ -83,11 +87,11 @@ SpriteCollider Enemy::getCollider() {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player) :
-    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 100.0f, 1, player) {
+    Enemy(texture, pos, vel, 1.0f, 10.0f, 10.0f, 2.0f, 100.0f, 1, player) {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, Player &player) :
-    Enemy(texture, pos, sf::Vector2f(0.0f, 0.0f), 0.1f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player){
+    Enemy(texture, pos, sf::Vector2f(0.0f, 0.0f), 1.0f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player){
 
 }
 
@@ -112,16 +116,28 @@ void Slime::update(float dt) {
     }
     acc = direction;
     // -----------------------------------
-
-    if(!(acc.x == 0.0f || acc.y == 0.0f)) {
+    
+    if(!(acc.x == 0.0f && acc.y == 0.0f)) {
         acc = normalizedVec(acc) * moveSpeed;
     }
 
-    acc += vel / fric;
+    acc += vel * (float)(fric * 0.015 * dt);
 
     vel = acc;
+    sf::Vector2f step = vel;
     sf::Vector2f pos = getPosition();
-    pos += vel * (dt / settings.TIMESCALE);
+    if (path.size() > 0) {
+        if(path[1].x - pos.x == 0 && path[1].y - pos.y == 0) {
+            pathfinder.increaseStep();
+        }
+        if (std::abs(path[1].x - pos.x) < std::abs(step.x)) {
+            step.x = path[1].x - pos.x;
+        }
+        if (std::abs(path[1].y - pos.y) < std::abs(step.y)) {
+            step.y = path[1].y - pos.y;
+        }
+    }
+    pos += step;
 
     setPosition(pos);
     if (hurtTime > 0) {
@@ -238,4 +254,12 @@ void EnemyFactory::explosionCollide(std::vector<Explosion> &explosions) {
 
 sf::Vector2f EnemyFactory::getEnemy(int index) {
     return enemies[index]->getPosition();
+}
+
+void EnemyFactory::generatePathTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite) {
+    enemies[index]->getPathfinder()->generatePathTexture(text, sprite);
+}
+
+void EnemyFactory::generateGraphTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite) {
+    enemies[index]->getPathfinder()->generateGraphTexture(text, sprite);
 }

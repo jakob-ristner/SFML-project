@@ -55,6 +55,8 @@ protected:
     // Timer stuff
     float currTime = 0;
     float thinkInterval;
+
+    bool alreadyFound = false;
 };
 
 class EnemyPathfinder : public Pathfinder {
@@ -78,5 +80,5 @@ protected:
 
     float aggroRange = std::numeric_limits<float>::infinity();
     sf::Vector2i position;
-    int currentStep;
+    int currentStep = 0;
 };
