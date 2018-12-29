@@ -54,7 +54,7 @@ int main() {
     // Initialization of important stuff
 
     sf::RenderWindow window(sf::VideoMode(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT), "SFML Dungeon Crawler", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(1000);
+    window.setFramerateLimit(120);
 
     sf::View viewport(sf::Vector2f((float) settings.WINDOW_WIDTH / 2.0f, (float) settings.WINDOW_HEIGHT / 2.0f), sf::Vector2f(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT));
     window.setView(viewport);
@@ -109,6 +109,7 @@ int main() {
     // Enemies
     EnemyFactory enemyFactory(player, map);
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
+    enemyFactory.spawnEnemy("slime", sf::Vector2f(1400.0f, 300.0f));
 
     // Dev Console
     UiGrid interfaceGrid;
@@ -190,7 +191,7 @@ int main() {
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = false;
+    bool showFPS = true;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());
@@ -287,7 +288,7 @@ int main() {
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
         enemyFactory.explosionCollide(explosions);
-        enemyFactory.generatePathTexture(0, pathTexture, pathSprite);
+        //enemyFactory.generatePathTexture(0, pathTexture, pathSprite);
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
@@ -356,8 +357,7 @@ int main() {
         }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
-        window.draw(pathSprite);
-        //testBrain.update(dt, enemyFactory.getEnemy(0) ,player.getPos());
+        //window.draw(pathSprite);
         window.display();
     }
 

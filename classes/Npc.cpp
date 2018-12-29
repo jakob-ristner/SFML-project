@@ -116,14 +116,13 @@ void Slime::update(float dt) {
     }
     acc = direction;
     // -----------------------------------
-    
     if(!(acc.x == 0.0f && acc.y == 0.0f)) {
         acc = normalizedVec(acc) * moveSpeed;
     }
 
-    acc += vel * (float)(fric * 0.015 * dt);
+    //acc += vel * (float)(fric * 0.015 * dt);
 
-    vel = acc;
+    vel = acc * (float)(dt * 0.1);
     sf::Vector2f step = vel;
     sf::Vector2f pos = getPosition();
     if (path.size() > 0) {
@@ -263,3 +262,4 @@ void EnemyFactory::generatePathTexture(int index, sf::RenderTexture &text, sf::S
 void EnemyFactory::generateGraphTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite) {
     enemies[index]->getPathfinder()->generateGraphTexture(text, sprite);
 }
+
