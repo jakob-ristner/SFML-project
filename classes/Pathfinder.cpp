@@ -613,5 +613,4 @@ void EnemyPathfinder::findPath() {
         reconstuctPath();
     }
     
-    // Clear cameFrom
 }
