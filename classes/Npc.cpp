@@ -26,14 +26,13 @@ Enemy::Enemy(sf::Texture &texture, sf::Vector2f pos,
     this->level = level;
 
     settings = Settings();
-    fric = 1.2;
+    fric = 0.9;
     acc = sf::Vector2f(0.0f, 0.0f);
 
     setTexture(texture);
     setOrigin(sf::Vector2f(texture.getSize().x, texture.getSize().y) / 2.0f);
     setPosition(pos);
     hurtTime = 0;
-
 }
 
 Enemy::~Enemy() {
@@ -69,6 +68,16 @@ void Enemy::resetAttackTimer() {
     timeToAttack = attackSpeed;
 }
 
+void Enemy::setPathfinder(EnemyPathfinder pathfinder, TileMap &map) {
+    this->pathfinder = pathfinder;
+    this->pathfinder.generateGraph(map.getNavData(), 0.5);
+    this->pathfinder.setCurrTime(500);
+}
+
+EnemyPathfinder *Enemy::getPathfinder() {
+    return &pathfinder;
+}
+
 sf::Vector2f Enemy::getVel() {
     return vel;
 }
@@ -78,11 +87,11 @@ SpriteCollider Enemy::getCollider() {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player) :
-    Enemy(texture, pos, vel, 0.1f, 10.0f, 10.0f, 2.0f, 100.0f, 1, player) {
+    Enemy(texture, pos, vel, 1.0f, 10.0f, 10.0f, 2.0f, 100.0f, 1, player) {
 }
 
 Slime::Slime(sf::Texture &texture, sf::Vector2f pos, Player &player) :
-    Enemy(texture, pos, sf::Vector2f(0.0f, 0.0f), 0.1f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player){
+    Enemy(texture, pos, sf::Vector2f(0.0f, 0.0f), 1.0f, 10.0f, 10.0f, 2.0f, 500.0f, 1, player){
 
 }
 
@@ -91,25 +100,43 @@ Slime::~Slime() {
 }
 
 void Slime::update(float dt) {
+    pathfinder.update(dt, getPosition(), player.getPos());
     if (timeToAttack > 0) {
         timeToAttack -= dt;
     }
     acc = sf::Vector2f(0.0f, 0.0f);
 
     // Here some thinking will be executed (TODO)
-    sf::Vector2f direction = player.getPos() - getPosition();
+    sf::Vector2f direction;
+    std::vector<sf::Vector2f> path = pathfinder.getPath();
+    if (path.size() == 0) {
+        direction = player.getPos() - getPosition();
+    } else {
+        direction = path[1] - getPosition();
+    }
     acc = direction;
     // -----------------------------------
-
-    if(!(acc.x == 0.0f || acc.y == 0.0f)) {
+    if(!(acc.x == 0.0f && acc.y == 0.0f)) {
         acc = normalizedVec(acc) * moveSpeed;
     }
 
-    acc += vel / fric;
+    //acc += vel * (float)(fric * 0.015 * dt);
 
-    vel = acc;
+    vel = acc * (float)(dt * 0.1);
+    sf::Vector2f step = vel;
     sf::Vector2f pos = getPosition();
-    pos += vel * (dt / settings.TIMESCALE);
+    if (path.size() > 0) {
+        if(path[1].x - pos.x == 0 && path[1].y - pos.y == 0) {
+            pathfinder.increaseStep();
+        }
+        if (std::abs(path[1].x - pos.x) < std::abs(step.x)) {
+            step.x = path[1].x - pos.x;
+        }
+        if (std::abs(path[1].y - pos.y) < std::abs(step.y)) {
+            step.y = path[1].y - pos.y;
+        }
+    }
+    pos += step;
 
     setPosition(pos);
     if (hurtTime > 0) {
@@ -125,12 +152,16 @@ void Slime::draw(sf::RenderWindow &window) {
     window.draw(*this);
 }
 
-EnemyFactory::EnemyFactory(Player &player):
-    player(player) {
+EnemyFactory::EnemyFactory(Player &player, TileMap &map):
+    player(player), map(map) {
     sf::Texture slimeTexture;
     slimeTexture.loadFromFile("./resources/enemy_textures/slime.png");
     slimeTexture.setSmooth(true);
     enemyTextures.push_back(slimeTexture);
+
+    enemyPathfinders.push_back(EnemyPathfinder(1000));
+    enemyPathfinders[0].generateGraph(map.getNavData(), 1);
+    enemyPathfinders[0].setAggroRange(500);
 }
 
 EnemyFactory::~EnemyFactory() {
@@ -139,6 +170,7 @@ EnemyFactory::~EnemyFactory() {
 void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
     if (enemyType == "slime") {
         enemies.push_back(std::unique_ptr<Enemy>(new Slime(enemyTextures[0], pos, player)));
+        enemies.back()->setPathfinder(enemyPathfinders[0], map);
     }
 }
 
@@ -218,3 +250,16 @@ void EnemyFactory::explosionCollide(std::vector<Explosion> &explosions) {
         }
     }
 }
+
+sf::Vector2f EnemyFactory::getEnemy(int index) {
+    return enemies[index]->getPosition();
+}
+
+void EnemyFactory::generatePathTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite) {
+    enemies[index]->getPathfinder()->generatePathTexture(text, sprite);
+}
+
+void EnemyFactory::generateGraphTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite) {
+    enemies[index]->getPathfinder()->generateGraphTexture(text, sprite);
+}
+

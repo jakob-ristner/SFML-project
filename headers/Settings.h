@@ -62,6 +62,7 @@ public:
     int TILESIZE = 32;
   
     bool playerColliding = true;
+    bool showNavData = false;
 
     keyMapping keyMap;
     int resolutions[7][2] = { {800, 600}, 

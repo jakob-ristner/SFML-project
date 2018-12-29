@@ -17,9 +17,9 @@
 #include "../headers/Npc.h"
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
-#include "../headers/Animation.h"
+#include "../headers/Animation.h" 
 #include "../headers/Explosion.h"
-#include "../headers/Perks.h"
+#include "../headers/Pathfinder.h"
 #include "../headers/Perks.h"
 #pragma endregion
 
@@ -44,6 +44,7 @@ int main() {
     settings.keyMap.spell9 = sf::Keyboard::Key::Num9;
 
     settings.keyMap.useSpell = sf::Keyboard::Key::Space;
+    settings.showNavData = true;
 
 
     const sf::Color bgColor(51, 51, 51);
@@ -108,8 +109,9 @@ int main() {
     player.addSpell(&flashHeal);
 
     // Enemies
-    EnemyFactory enemyFactory(player);
+    EnemyFactory enemyFactory(player, map);
     enemyFactory.spawnEnemy("slime", sf::Vector2f(300.0f, 300.0f));
+    enemyFactory.spawnEnemy("slime", sf::Vector2f(1400.0f, 300.0f));
 
     // Dev Console
     UiGrid interfaceGrid;
@@ -123,18 +125,7 @@ int main() {
     layer1.add(&(player.uiCastBar));
     
     // Spellbar setup
-    //SpellBarIcon icon1 = SpellBarIcon(1);
-    //SpellBarIcon icon2 = SpellBarIcon(2);
-    //spellIcons.push_back(icon1);
-    //spellIcons.push_back(icon2);
-    //SpellBar mainSpellBar = SpellBar();
-    //mainSpellBar.setSize(sf::Vector2f(80, 30));
-    //mainSpellBar.setSpellIcons(spellIcons);
-    //mainSpellBar.changeSelection(1);
     std::vector<SpellBarIcon> spellIcons;
-    //for (int i = 0; i < 2; i++) {
-        //spellIcons.push_back(SpellBarIcon(i + 1));
-    //}
     SpellBar mainSpellBar = SpellBar(9);
     mainSpellBar.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2 - (mainSpellBar.getSize().x / 2), settings.WINDOW_HEIGHT - 40));
     //mainSpellBar.setPosition(sf::Vector2f(settings.WINDOW_WIDTH / 2 - 1400, settings.WINDOW_HEIGHT - 100));
@@ -171,14 +162,12 @@ int main() {
     player.setHpBar(&playerHpBar);
     player.setManaBar(&playerManaBar);
     
-    // Jakob wat is dis?
     std::vector<std::string> statusText;
 
     RenderLayer debugLayer;
     debugLayer.add(&interfaceGrid);
 
     PauseMenu pauseMenu(&settings);
-
 
     // Main Game Loop
     clock.restart();
@@ -191,7 +180,6 @@ int main() {
     while (isRunning) {
         sf::Time l = clock.restart();
         dt = l.asMilliseconds();
-        //std::cout << l.asMicroseconds() << std::endl;
         if (showFPS) {
             deltaTimes[frameCount] = dt;
             frameCount++;
@@ -204,10 +192,6 @@ int main() {
             }
             if (frameCount % 10 == 0) {
                 std::cout << 1000.0f / (sum / 10.0f) << std::endl;
-                //for (int i = 0; i < deltaTimes.size(); i++) {
-                    //std::cout << deltaTimes[i] << " ";
-                //}
-                //std::cout << std::endl;
             }
         }
         // Event Loop
@@ -281,6 +265,7 @@ int main() {
         enemyFactory.spellCollide(player.getProjectiles());
         enemyFactory.playerCollide(player);
         enemyFactory.explosionCollide(explosions);
+
         // Moving the ui layer to ensure that it follows the screen
         playerInterfaces.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
         debugLayer.setPosition(viewport.getCenter() - sf::Vector2f((float) settings.WINDOW_WIDTH / 2, (float) settings.WINDOW_HEIGHT / 2));
@@ -303,7 +288,6 @@ int main() {
                 player.setPos(linkedPos);
                 player.setVel(sf::Vector2f(0, 0));
                 player.clearProjectiles();
-                // In future the enemyFactory should also be reset and spawn new enemies
             }
         }
         
@@ -333,6 +317,20 @@ int main() {
         window.draw(foreGround);
         enemyFactory.draw(window);
         map.drawAnimatedTerrain(window);
+        if (settings.showNavData) {
+            std::vector<std::vector<bool>> navData = map.getNavData();
+            sf::RectangleShape debugNavRect;
+            debugNavRect.setSize(sf::Vector2f(32.0, 32.0));
+            debugNavRect.setFillColor(sf::Color(255, 0, 0, 100));
+            for (int y = 0; y < navData.size(); y++) {
+                for (int x = 0; x < navData[0].size(); x++) {
+                    if (!navData[y][x]) {
+                        debugNavRect.setPosition(sf::Vector2f(x * 32, y * 32));
+                        window.draw(debugNavRect);
+                    }
+                }
+            }
+        }
         window.draw(playerInterfaces);
         window.draw(debugLayer);
         window.display();
@@ -340,4 +338,5 @@ int main() {
 
     return 0;
 }
+
 

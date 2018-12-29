@@ -24,6 +24,7 @@ public:
     void printData();
     void update(float dt);
     void drawAnimatedTerrain(sf::RenderWindow &window);
+    void generateNavData(std::vector<Obstacle> &obstacles);
     // Size in tiles, size in pixels can be aquired
     // Through mapTexture.getSize()
     sf::Vector2i getSize();
@@ -33,6 +34,8 @@ public:
     sf::Texture foreGroundTexture;
 
     sf::IntRect getViewportRect(sf::Vector2f viewportPos);
+
+    std::vector<std::vector<bool>> getNavData() {return navData;};
 
 private:
     TMX::Parser tmx;
@@ -56,6 +59,8 @@ private:
 
     int width;
     int height;
+
+    std::vector<std::vector<bool>> navData;
 
 };
 

@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
 
@@ -10,6 +10,8 @@
 #include "./Player.h"
 #include "./Spell.h"
 #include "./Explosion.h"
+#include "./Pathfinder.h"
+#include "./TileMap.h"
 
 class Player;
 class Projectile;
@@ -39,8 +41,7 @@ public:
     sf::Vector2f getVel();
 
     float getHitpoints();
-    float getMaxHitpoints();
-    float hurt(float amount);
+    float getMaxHitpoints(); float hurt(float amount);
     float getAttackStr();
 
     unsigned int getLevel();
@@ -49,6 +50,8 @@ public:
     bool canAttack();
 
     void resetAttackTimer();
+    void setPathfinder(EnemyPathfinder pathfinder, TileMap &map);
+    EnemyPathfinder *getPathfinder();
 
     SpriteCollider getCollider();
 
@@ -73,6 +76,7 @@ protected:
     sf::Vector2f acc;
 
     Player &player;
+    EnemyPathfinder pathfinder;
 };
 
 class Slime: public Enemy {
@@ -89,7 +93,7 @@ public:
 // Handles collision, updating and drawing for all enemies
 class EnemyFactory {
 public:
-    EnemyFactory(Player &player);
+    EnemyFactory(Player &player, TileMap &map);
     ~EnemyFactory();
 
     void spawnEnemy(std::string enemyType, sf::Vector2f pos);
@@ -102,9 +106,15 @@ public:
     void playerCollide(Player &player);
     void explosionCollide(std::vector<Explosion> &explosions);
 
+    sf::Vector2f getEnemy(int index);
+    void generatePathTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite);
+    void generateGraphTexture(int index, sf::RenderTexture &text, sf::Sprite &sprite);
+
 private:
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<sf::Texture> enemyTextures;
+    std::vector<EnemyPathfinder> enemyPathfinders;
 
     Player &player;
+    TileMap &map;
 };
