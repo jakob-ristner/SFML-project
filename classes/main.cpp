@@ -17,9 +17,12 @@
 #include "../headers/Npc.h"
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
-#include "../headers/Animation.h" #include "../headers/Explosion.h"
+#include "../headers/Animation.h" 
+#include "../headers/Explosion.h"
 #include "../headers/Pathfinder.h"
+#include "../headers/Perks.h"
 #pragma endregion
+
 
 int main() {
     Settings settings = Settings();

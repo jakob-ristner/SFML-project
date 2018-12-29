@@ -32,6 +32,10 @@ Player::Player(sf::RectangleShape body, Settings *settings) {
     manaRegen = 5;
     timeSinceHurt = 0;
     level = 1;
+
+    perkTree = PerkTree();
+    attemptUnlockPerk("manaCostOff");
+    std::cout << perkTree.findPerk("manaCostOff")->active << std::endl;
 }
 
 Player::Player() {
@@ -190,6 +194,10 @@ void Player::update(float dt) {
                                                        
     }
     (*spellBar).update();
+
+    if (hitpoints < 0) {
+        hitpoints = 0;
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
@@ -328,3 +336,36 @@ float Player::getHp() {
 std::vector<Spell *> Player::getSpells() {
     return spellInventory;
 }
+
+bool Player::checkPerkAvail(std::string perkName) {
+    if (perkTree.findPerk(perkName)->reqPerk == "") {
+        return true;
+    } else if (checkPerkUnlocked(
+               perkTree.findPerk(perkName)->reqPerk)){
+        return true;
+    }
+    return false;
+}
+
+bool Player::checkPerkUnlocked(std::string perkName) {
+    return perkTree.findPerk(perkName)->active;
+}
+
+void Player::attemptUnlockPerk(std::string perkName) {
+    if (checkPerkAvail(perkName)) {
+        perkTree.findPerk(perkName)->active = true;
+    }
+}
+
+void Player::forceUnlockPerk(std::string perkName) {
+    perkTree.findPerk(perkName)->active = true;
+}
+
+
+
+
+
+
+
+
+
