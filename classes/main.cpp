@@ -17,8 +17,7 @@
 #include "../headers/Npc.h"
 #include "../headers/RenderLayer.h"
 #include "../headers/UiInterface.h"
-#include "../headers/Animation.h"
-#include "../headers/Explosion.h"
+#include "../headers/Animation.h" #include "../headers/Explosion.h"
 #include "../headers/Pathfinder.h"
 #pragma endregion
 
@@ -191,7 +190,7 @@ int main() {
     clock.restart();
     float dt = 0;
     // Frame rate display
-    bool showFPS = true;
+    bool showFPS = false;
     std::array<float, 10> deltaTimes;
     int frameCount = 0;
     sf::IntRect viewPortRect = map.getViewportRect(viewport.getCenter());

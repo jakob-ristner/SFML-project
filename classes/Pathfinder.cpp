@@ -483,7 +483,6 @@ void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playe
     startNode = &(allNodes[std::round(enemyPos.y / vertexDistance)][std::round(enemyPos.x / vertexDistance)]);
     if (currTime >= thinkInterval) {
         alreadyFound = true;
-        std::cout << "RECALCULATING" << std::endl;
         for (int y = 0; y < allNodes.size(); y++) {
             for (int x = 0; x < allNodes[y].size(); x++) {
                 allNodes[y][x].endDistance = calcHValue(&(allNodes[y][x]));
