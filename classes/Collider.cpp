@@ -4,15 +4,20 @@
 #include <iostream>
 #include <cmath>
 
-
+// Abstract
 CollisionBox::CollisionBox() {
 
 }
 
+// Abstract
 CollisionBox::~CollisionBox() {
 
 }
 
+// Returns whether this collider and another is intersecting each other, this 
+// does not however resolve the collision.
+// Args:
+// other - pointer to the other CollisionBox
 bool CollisionBox::isColliding(CollisionBox *other) {
     sf::Vector2f thisPosition = getPosition();
     sf::Vector2f otherPosition = (*other).getPosition();
@@ -153,14 +158,10 @@ bool CollisionCircle::isColliding(CollisionBox *other) {
     
     sf::Vector2f closestPoint = clampVec(getEpicenter(), topleft, bottomright);
 
-    //std::cout << getDistance((*other).getPosition(), getEpicenter()) << std::endl;
-    //printVec(getEpicenter());
-    
     if (getDistance(closestPoint, getEpicenter()) < getRadius()) {
         return true;
         
     } 
-    //printVec(getEpicenter());
     return false;
 }
 

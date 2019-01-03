@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 
 // Abstract superclass for collision
+// CollisionBoxes are not persistent objects. They are created once every tick
+// if an object want's to check any collisions.
 class CollisionBox {
 public:
     CollisionBox();
@@ -17,9 +19,10 @@ public:
     //virtual bool isColliding(CollisionBox *other);
 };
 
-// Objects used for detecting collisions
+// Subclass for generating collisions from RectableShape data
 // Args:
-// body - the body of the object which will have collision detection (will be modified in place)
+// body - the body of the object which will have collision detection 
+//        (will be modified in place)
 // velocity - the velocity of the body bound to the collider
 class Collider: public CollisionBox {
 public:
@@ -37,6 +40,10 @@ private:
     sf::Vector2f velocity;
 };
 
+// Subclass for generating collisions from sprite data
+// Args:
+// sprite - reference to the sprite from which the collider will be generated
+// velocity - the sprites current velocity, used as collision direction
 class SpriteCollider: public CollisionBox {
 public:
     SpriteCollider(sf::Sprite &sprite, sf::Vector2f velocity);
@@ -52,6 +59,10 @@ private:
     sf::Vector2f velocity;
 };
 
+// Circular collider
+// Args:
+// epicenter - coordinates to center of collider
+// radius - radius of collider
 class CollisionCircle {
 public:
     CollisionCircle(sf::Vector2f epicenter, float radius);
