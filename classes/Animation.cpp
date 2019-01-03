@@ -25,6 +25,9 @@ Animation::~Animation() {
 
 }
 
+// Updates internal clock
+// Args:
+// dt - time since last update
 void Animation::update(float dt) {
     currTime += dt;
     if (currTime >= animLength / frames) {
@@ -62,7 +65,6 @@ TerrainAnimation::~TerrainAnimation() {
 }
 
 void TerrainAnimation::update() {
-    sf::IntRect test = (*anim).getTextureRect();
     setTextureRect((*anim).getTextureRect());
 }
 
