@@ -11,6 +11,11 @@
 class Projectile;
 class Buff;
 class Spell;
+
+// The object representing the player
+// Args:
+// body - the rectanlgeshape giving the size of the player
+// settings - pointer to the settings object
 class Player {
 public:
     Player(sf::RectangleShape body, Settings *settings);

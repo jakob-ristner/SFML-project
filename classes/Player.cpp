@@ -88,6 +88,10 @@ void Player::setVel(sf::Vector2f newVel) {
     vel = newVel;
 }
 
+// Updates the internal state of the player, handling keypresses and updating 
+// all owned objects such as graphical interfaces and projectiles
+// Args:
+// dt - time since last update
 void Player::update(float dt) {
     (*hpBar).update(hitpoints);
     (*manaBar).update(mana);
@@ -208,6 +212,9 @@ Collider Player::getCollider() {
     return Collider(body, vel);
 }
 
+// Is called when the player collides with a wall
+// Args:
+// direction - the direction of the collision
 void Player::onCollision(sf::Vector2f direction) {
     if (direction.x != 0.0f) {
         vel.x = 0.0f;
@@ -219,10 +226,10 @@ void Player::onCollision(sf::Vector2f direction) {
 
 
     sf::Vector2f oldPos = body.getPosition();
-    //body.setPosition(std::round(oldPos.x), std::round(oldPos.y));
     body.setPosition(oldPos.x, oldPos.y);
 }
 
+// Not used anymore, used to rotate the player character
 void Player::setMouseAngle(float angle) {
     mouseAngle = angle;
 }
@@ -308,6 +315,9 @@ void Player::setLevel(int newLevel) {
     (*levelIcon).update(level);
 }
 
+// Updates the player interface with players new level
+// Args:
+// icon - pointer to the new icon
 void Player::setLevelIcon(PlayerLevelIcon *icon) {
     levelIcon = icon;
 }
