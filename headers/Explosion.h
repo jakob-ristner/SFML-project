@@ -5,6 +5,14 @@
 #include "./Animation.h"
 #include "./Npc.h"
 class Enemy;
+
+// Object that represents an explosion triggered by a spell
+// Args:
+// rad - radius of explosion
+// pos - position of explosion
+// dmg - damage inflicted by damage
+// maxDuration - maximum duration of explosion
+// animation - the animation of the explosion
 class Explosion {
 public:
     Explosion(float rad, sf::Vector2f pos, float dmg, float maxDuration, Animation animation);

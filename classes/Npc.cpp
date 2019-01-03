@@ -99,6 +99,10 @@ Slime::~Slime() {
 
 }
 
+// Updates the internal state of the slime. This method handles all the 
+// "thinking" a slime has to do. If it attacks, which way to go, etc.
+// Args:
+// dt - time since last update
 void Slime::update(float dt) {
     pathfinder.update(dt, getPosition(), player.getPos());
     if (timeToAttack > 0) {
@@ -106,7 +110,7 @@ void Slime::update(float dt) {
     }
     acc = sf::Vector2f(0.0f, 0.0f);
 
-    // Here some thinking will be executed (TODO)
+    // Asking the pathfinder for directions
     sf::Vector2f direction;
     std::vector<sf::Vector2f> path = pathfinder.getPath();
     if (path.size() == 0) {
@@ -114,13 +118,11 @@ void Slime::update(float dt) {
     } else {
         direction = path[1] - getPosition();
     }
+
     acc = direction;
-    // -----------------------------------
     if(!(acc.x == 0.0f && acc.y == 0.0f)) {
         acc = normalizedVec(acc) * moveSpeed;
     }
-
-    //acc += vel * (float)(fric * 0.015 * dt);
 
     vel = acc * (float)(dt * 0.1);
     sf::Vector2f step = vel;
@@ -138,6 +140,7 @@ void Slime::update(float dt) {
     }
     pos += step;
 
+    // Flash red if hurt
     setPosition(pos);
     if (hurtTime > 0) {
         setColor(sf::Color(255, 0, 0));
@@ -167,6 +170,10 @@ EnemyFactory::EnemyFactory(Player &player, TileMap &map):
 EnemyFactory::~EnemyFactory() {
 }
 
+// Spawns a given enemy at a location
+// Args:
+// enemyType - the name of the enemy to be spawned
+// pos       - the position where the enemy will be spawned
 void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
     if (enemyType == "slime") {
         enemies.push_back(std::unique_ptr<Enemy>(new Slime(enemyTextures[0], pos, player)));
@@ -175,6 +182,8 @@ void EnemyFactory::spawnEnemy(std::string enemyType, sf::Vector2f pos) {
 }
 
 // Updates itself and all belonging enemies
+// Args:
+// dt - time since last update
 void EnemyFactory::update(float dt) {
     std::vector<int> deadEnemies;
     int i = 0;
@@ -190,6 +199,9 @@ void EnemyFactory::update(float dt) {
     }
 }
 
+// Draws all enemies
+// Args:
+// window - reference to the game window
 void EnemyFactory::draw(sf::RenderWindow &window) {
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
         (*itr)->draw(window);
@@ -197,6 +209,8 @@ void EnemyFactory::draw(sf::RenderWindow &window) {
 }
 
 // Checks all containing enemies for collision with walls
+// Args:
+// obstacles - all walls/obstacles on the map
 void EnemyFactory::wallCollide(std::vector<Obstacle> obstacles) {
     sf::Vector2f direction;
     for (Obstacle &obstacle : obstacles) {
@@ -213,6 +227,8 @@ void EnemyFactory::hurtEnemy(int i, int amount) {
 
 // Checks all belonging enemies for collisions with spells
 // and calls the apropriate functions
+// Args:
+// projs - reference to all projectiles that can be collided with
 void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
         SpriteCollider currentSprite = (*itr)->getCollider();
@@ -225,6 +241,9 @@ void EnemyFactory::spellCollide(std::vector<Projectile> &projs) {
     }
 }
 
+// Check all enemies for collision with player
+// Args:
+// player - reference to the player object
 void EnemyFactory::playerCollide(Player &player) {
     sf::Vector2f direction;
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
@@ -239,6 +258,9 @@ void EnemyFactory::playerCollide(Player &player) {
     }
 }
 
+// Check all enemies for collisions with active explosions
+// Args:
+// explosions - references to all active explosions
 void EnemyFactory::explosionCollide(std::vector<Explosion> &explosions) {
     for (auto itr = enemies.begin(); itr != enemies.end(); ++itr) {
         SpriteCollider currentSprite = (*itr)->getCollider();

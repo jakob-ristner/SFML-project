@@ -30,6 +30,9 @@ Explosion::~Explosion() {
 
 }
 
+// Updates the internal state
+// Args:
+// dt - time since last update
 void Explosion::update(float dt) {
     duration += dt;
     animation.update(dt);

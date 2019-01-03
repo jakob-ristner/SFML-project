@@ -11,9 +11,9 @@
 
 // The ingame console used for spawn enemies, teleporting etc.
 // Args:
-// settings - reference to the main Settings object
+// settings     - reference to the main Settings object
 // enemyFactory - reference to the main EnemyFactory object
-// grid - pointer to the grid from the player RenderLayer
+// grid         - pointer to the grid from the player RenderLayer
 class DevConsole {
 public:
     DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid, Player *player);
@@ -41,7 +41,7 @@ private:
     std::string currLine;
     std::vector<std::string> history;
     std::vector<std::string> words;
-    // Must be in alphabetical order in order to work
+    // Must be in alphabetical order in order to work because of binary search
     std::vector<std::string> commands = { 
     "noclip",
     "setcolor",

@@ -79,6 +79,8 @@ protected:
     EnemyPathfinder pathfinder;
 };
 
+// Is created by enemyFactory
+// Just calls Enemy::Enemy() with arguments specific to the slime mob
 class Slime: public Enemy {
 public:
     Slime(sf::Texture &texture, sf::Vector2f pos, sf::Vector2f vel, Player &player);
@@ -91,6 +93,9 @@ public:
 
 // Factory class producing all enemies.
 // Handles collision, updating and drawing for all enemies
+// Args:
+// player - reference to the player
+// map    - reference to the map
 class EnemyFactory {
 public:
     EnemyFactory(Player &player, TileMap &map);
