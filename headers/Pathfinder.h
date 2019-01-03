@@ -6,6 +6,9 @@
 #include <cmath>
 #include <climits>
 
+// A collection of nodes is the graph which will be traversed by the pathfinder.
+// All of the default values are assigned according to what A* needs in order to
+// function
 struct Node {
     std::vector<Node*> neighbours;
     float startDistance = std::numeric_limits<float>::infinity(); // G Score
@@ -19,6 +22,9 @@ struct Node {
     Node *cameFrom;
 };
 
+// An object which can find the shortest path between two nodes in a graph.
+// Args:
+// thinkInterval - how many milliseconds there should be between recalculations
 class Pathfinder {
 public:
     Pathfinder();
@@ -40,7 +46,6 @@ protected:
     bool isNodeClosed(Node *node);
     bool isNodeOpen(Node *node);
     void findPath();
-    void findPath2();
 
     Node *startNode;
     Node *targetNode;
@@ -59,6 +64,10 @@ protected:
     bool alreadyFound = false;
 };
 
+// Subclass of pathfinder which has some improvements specific to concurrent 
+// pathfinding of the likes which is used in enemies that move around.
+// Args:
+// thinkInterval - how many milliseconds there should be between recalculations
 class EnemyPathfinder : public Pathfinder {
 public:
     EnemyPathfinder();

@@ -12,6 +12,13 @@ Pathfinder::~Pathfinder() {
 
 }
 
+// Generates a graph of nodes from the input matrix of walkable/unwalkable tiles
+// and sets it up for use with A*
+// Args:
+// inpTiles       - a matrix of tiles which the graph will be generated from.
+// resolutionMult - scaling factor of the generated graph. For example 2 will 
+//                  result in a graph which is twice as dense as the input 
+//                  matrix. And 0.5 will be twice as sparse
 void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, float resolutionMult) {
     std::vector<std::vector<bool>> tiles;
     tiles.resize(inpTiles.size() * resolutionMult);
@@ -281,14 +288,23 @@ void Pathfinder::generateGraph(std::vector<std::vector<bool>> inpTiles, float re
     }
 }
 
+// Sets the starting point in the graph
+// Coordinates are not pixel values, but indices
 void Pathfinder::setStartNode(int x, int y) {
     startNode = &(allNodes[y][x]);
 }
 
+// Sets the end point in the graph
+// Coordinates are not pixel values, but indices
 void Pathfinder::setEndNode(int x, int y) {
     targetNode = &(allNodes[y][x]);
 }
 
+// Generates and draws a to a texture a visual representation of the internal 
+// graph
+// Args:
+// graphTexture - pointer to a texture which will be drawn on
+// graphSprite  - the sprite which use the texture
 void Pathfinder::generateGraphTexture(sf::RenderTexture &graphTexture, sf::Sprite graphSprite) {
     graphTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
     graphTexture.clear(sf::Color::Transparent);
@@ -311,6 +327,11 @@ void Pathfinder::generateGraphTexture(sf::RenderTexture &graphTexture, sf::Sprit
     graphSprite.setTexture(graphTexture.getTexture());
 }
 
+// Generates and draws a to a texture a visual representation of the internal 
+// path
+// Args:
+// pathTexture - pointer to a texture which will be drawn on
+// pathSprite  - the sprite which use the texture
 void Pathfinder::generatePathTexture(sf::RenderTexture &pathTexture, sf::Sprite &pathSprite) {
     pathTexture.create(allNodes[0].size() * vertexDistance, allNodes.size() * vertexDistance);
     pathTexture.clear(sf::Color::Transparent);
@@ -330,6 +351,9 @@ void Pathfinder::generatePathTexture(sf::RenderTexture &pathTexture, sf::Sprite 
     pathSprite.setTexture(pathTexture.getTexture());
 }
 
+// Updates the internal clock
+// Args:
+// dt - time since last update
 void Pathfinder::update(float dt) {
     currTime += dt;
     if (currTime >= thinkInterval && !alreadyFound) {
@@ -339,6 +363,7 @@ void Pathfinder::update(float dt) {
     }
 }
 
+// Returns the currently calculated path
 std::vector<sf::Vector2f> Pathfinder::getPath() {
     std::vector<sf::Vector2f> output;
     output.resize(path.size());
@@ -350,6 +375,9 @@ std::vector<sf::Vector2f> Pathfinder::getPath() {
     return output;
 }
 
+// Add another node onto the priority queue
+// Args:
+// node - pointer to the node which should be added
 void Pathfinder::queuePush(Node *node) {
     int i;
     for (i = 0; i < openNodes.size(); i++) {
@@ -361,6 +389,8 @@ void Pathfinder::queuePush(Node *node) {
     openNodes.insert(openNodes.begin() + i, node);
 }
 
+// Constructs the path by going backwards from the final node to that starting 
+// node. Then returns the path in the correct order
 void Pathfinder::reconstuctPath() {
     path.clear();
     Node *curr = targetNode;
@@ -372,12 +402,16 @@ void Pathfinder::reconstuctPath() {
     std::reverse(path.begin(), path.end());
 }
 
+// Pops the node with highest priority from the queue and returns a pointer to it
 Node* Pathfinder::queuePop() {
     Node *tmp = openNodes[0];
     openNodes.erase(openNodes.begin());
     return tmp;
 }
 
+// Calculates the H Value of a given node (a value used in A*)
+// Args:
+// node - pointer to the given node
 float Pathfinder::calcHValue(Node *node) {
     float endX = targetNode->x;
     float endY = targetNode->y;
@@ -402,6 +436,8 @@ bool Pathfinder::isNodeOpen(Node *node) {
     return false;
 }
 
+// Finds the shortest path from startNode to endNode using the A* path-finding 
+// algorithm. This is a VERY expensive computation, don't call it often.
 void Pathfinder::findPath() {
     closedNodes.clear();
     openNodes.clear();
@@ -452,17 +488,6 @@ void Pathfinder::findPath() {
     // Clear cameFrom
 }
 
-void Pathfinder::findPath2() {
-    closedNodes.clear();
-    openNodes.clear();
-    queuePush(startNode);
-    for (int y = 0; y < allNodes.size(); y++) {
-        for (int x = 0; x < allNodes[y].size(); x++) {
-            allNodes[y][x].cameFrom = 0;
-        }
-    }
-}
-
 EnemyPathfinder::EnemyPathfinder(float thinkInterval) : 
     Pathfinder(thinkInterval) {
 
@@ -477,6 +502,12 @@ EnemyPathfinder::~EnemyPathfinder() {
 
 }
 
+// Updates the internal state, deciding if the path should be recalculated and 
+// updates according values.
+// Args:
+// dt        - time since last update
+// enemyPos  - the position of the enemy in question (in pixels)
+// playerPos - the position of the player            (in pixels)
 void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playerPos) {
     currTime += dt;
     targetNode = &(allNodes[std::round(playerPos.y / vertexDistance)][std::round(playerPos.x / vertexDistance)]);
@@ -505,10 +536,17 @@ void EnemyPathfinder::update(float dt, sf::Vector2f enemyPos, sf::Vector2f playe
     }
 }
 
+// Sets the aggrorange of the pathfinder. Tiles outside the aggrorange will not 
+// be considered in any calculations.
+// Args:
+// distance - the distance in pixels
 void EnemyPathfinder::setAggroRange(float distance) {
     aggroRange = distance / vertexDistance;
 }
 
+// Increase the starting position of the path when asked for getPath(). This is
+// used when an enemy gets to a node and needs to walk to the next node without 
+// waiting for a recalculation.
 void EnemyPathfinder::increaseStep() {
     currentStep++;
 }
@@ -517,6 +555,7 @@ void EnemyPathfinder::setCurrTime(float newTime) {
     currTime = newTime;
 }
 
+// Returns the current path of the enemy
 std::vector<sf::Vector2f> EnemyPathfinder::getPath() {
     std::vector<sf::Vector2f> output;
     output.resize(path.size() - currentStep);
@@ -529,6 +568,7 @@ std::vector<sf::Vector2f> EnemyPathfinder::getPath() {
 
 }
 
+// Updates all nodes to see wether they are in the aggro range or not
 void EnemyPathfinder::updateRanges() {
     float deltaXY;
     Node &node = allNodes[0][0];
@@ -555,6 +595,8 @@ float EnemyPathfinder::getTotalCost() {
     return total;
 }
 
+// Runs a modified A* search which takes aggro range and other factors into 
+// consideration when searching. A VERY expsensive computation, use with care.
 void EnemyPathfinder::findPath() {
     closedNodes.clear();
     openNodes.clear();
@@ -574,9 +616,7 @@ void EnemyPathfinder::findPath() {
     }
 
     startNode->startDistance = 0;
-    int kek = 0;
     while (openNodes.size() > 0) {
-        kek++;
         curr = queuePop();
         curr->endDistance = calcHValue(curr);
         if (curr->x == targetNode->x) {
