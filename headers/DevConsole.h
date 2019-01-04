@@ -14,6 +14,7 @@
 // settings     - reference to the main Settings object
 // enemyFactory - reference to the main EnemyFactory object
 // grid         - pointer to the grid from the player RenderLayer
+// player       - pointer to the player object
 class DevConsole {
 public:
     DevConsole(Settings &settings, EnemyFactory &enemyFactory, UiGrid *grid, Player *player);

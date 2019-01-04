@@ -10,6 +10,8 @@ class Player;
 class Explosion;
 class Enemy;
 class Buff;
+
+// Abstract base class for all spells
 class Spell {
 public:
     Spell();
@@ -40,6 +42,7 @@ protected:
     std::vector<Animation> animations;
 };
 
+// Abstract base class for all buffs
 class Buff {
 public:
     Buff();
@@ -54,6 +57,16 @@ protected:
     float duration;
 };
 
+// A projectile which can be spawned by spells with a callback for when the 
+// spell collides with an enemy
+// Args:
+// texture  - reference to the projectiles texture
+// vel      - initial velocity of the projectile (direction)
+// speed    - speed of the projectile
+// pos      - initial position of the projectile
+// rotation - initial rotation of the projectiles texture
+// scale    - scale of the projectiles texture
+// callback - callback function for when the projectile collides with an enemy
 class Projectile: public sf::Sprite{
 public:
     Projectile(sf::Texture &texture, sf::Vector2f vel,

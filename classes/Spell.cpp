@@ -19,16 +19,21 @@ Spell::~Spell() {
 
 std::vector<Explosion> *Spell::explosions;
 
+// Sets the animation vector of the spell. This is used for spells which for 
+// example first has an animation while traveling, then an animation when 
+// exploding on impact
 void Spell::setAnimations(std::vector<Animation> animations) {
     this->animations = animations;
     bool isAnimated = true;
 }
 
+// Alias for animations.push_back
 void Spell::addAnimation(Animation anim) {
     animations.push_back(anim);
     bool isAnimated = true;
 }
 
+// Used for debugging purposes
 void printIntRect(sf::IntRect r) {
     std::cout << r.left << r.top << r.width << r.height << std::endl;
 }
@@ -126,6 +131,10 @@ void Projectile::onCollision(Enemy &enemy) {
     kill = onCollide(enemy, *this);
 }
 
+// Updates the internal state of a projectile
+// Args:
+// dt       - time since last update
+// mousePos - the position of the mouse in the game world
 void Projectile::update(float dt, sf::Vector2f mousePos) {
     counter += 1 * (dt / settings.TIMESCALE);
     (*func)(*this, dt, mousePos);
@@ -140,7 +149,7 @@ void Projectile::draw(sf::RenderWindow &window) {
     window.draw(*this);
 }
 
-
+// Switches the projectiles animation to the one at a given index
 void Projectile::setAnimationAtIndex(int index) {
     anim = animations[index];
     isAnimated = true;
