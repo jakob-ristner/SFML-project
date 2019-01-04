@@ -67,6 +67,8 @@ private:
     sf::Text text;
 };
 
+// An icon in the spellbar which shows the number of the spell slot, if its 
+// selected and the cooldown of the spell
 class SpellBarIcon: public UiElement {
 public:
     SpellBarIcon();
@@ -96,6 +98,7 @@ private: // Some of these are temporary
     UiText slotIdText;
 };
 
+// Container for the SpellBarIcons
 class SpellBar: public UiElement {
 public:
     SpellBar();
@@ -123,6 +126,7 @@ private:
     unsigned short int selected;
 };
 
+// Base class for the hp, mana and stamina bar
 class PlayerStatBar: public UiElement {
 public:
     PlayerStatBar();
@@ -162,6 +166,7 @@ public:
     ~PlayerStaminaBar();
 };
 
+// Displays the players current level
 class PlayerLevelIcon: public UiElement {
 public:
     PlayerLevelIcon();
@@ -181,6 +186,7 @@ private:
     UiText levelText;
 };
 
+// A grid which helps to align ui elements during development
 class UiGrid: public UiElement {
 public:
     UiGrid();
@@ -207,6 +213,7 @@ private:
     int yAmount;
 };
 
+// Dropdown menu used in the settings
 class DropDownMenu: public UiElement {
 public:
     DropDownMenu();
@@ -231,6 +238,7 @@ private:
     std::vector<sf::RectangleShape> debugShapes;
 };
 
+// A message at the top left corner of the screen
 class StatusMessage {
 public:
     StatusMessage();
@@ -245,6 +253,7 @@ protected:
 };
 
 
+// A message at the top left corner of the screen
 class CoolDownMessage: public StatusMessage {
 public:
     CoolDownMessage();
@@ -255,6 +264,7 @@ public:
 
 };
 
+// The games pause menu, has its own event loop and handles all updating 
 class PauseMenu {
 public:
     PauseMenu(Settings *settings);
@@ -293,6 +303,7 @@ private:
     Settings *settings;
 };
 
+// A spreadsheet ui element
 class UiSheet : public UiElement {
 public:
     UiSheet();
@@ -318,6 +329,7 @@ private:
     float scrollOffset = 0;
 };
 
+// A tabbed window with all settings
 class SettingsMenu {
 public:
     SettingsMenu(Settings *settings);
